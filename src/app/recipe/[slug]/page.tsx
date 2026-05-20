@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
@@ -13,6 +12,8 @@ import { AppShell } from "@/components/layout/AppShell";
 import { RecipeSteps } from "@/components/recipe/RecipeSteps";
 import { IngredientsList } from "@/components/recipe/IngredientsList";
 import { NutritionCard } from "@/components/recipe/NutritionCard";
+import { ProteinBoostCard } from "@/components/recipe/ProteinBoostCard";
+import { FoodImage } from "@/components/food/FoodImage";
 import { RECIPES, RECIPES_BY_SLUG } from "@/data/recipes";
 import { MEALS } from "@/data/meals";
 import { cn } from "@/lib/utils";
@@ -86,19 +87,12 @@ export default async function RecipePage({
         </Link>
 
         <header className="mb-8 overflow-hidden rounded-3xl border border-border bg-surface shadow-sm">
-          {recipe.imageUrl && (
-            <div className="relative aspect-[16/9] w-full bg-muted">
-              <Image
-                src={recipe.imageUrl}
-                alt=""
-                fill
-                sizes="(max-width: 768px) 100vw, 1024px"
-                className="object-cover"
-                priority
-                unoptimized
-              />
-            </div>
-          )}
+          <FoodImage
+            slug={recipe.slug}
+            slot={recipe.slot}
+            aspect="aspect-[16/9]"
+            emojiSize="text-8xl md:text-9xl"
+          />
           <div className="p-5 md:p-7">
             {recipe.slot && (
               <p className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
@@ -172,6 +166,13 @@ export default async function RecipePage({
 
           <aside className="space-y-6 md:sticky md:top-24 md:self-start">
             {linkedMeal?.nutrition && <NutritionCard nutrition={linkedMeal.nutrition} />}
+
+            {recipe.proteinBoost && (
+              <ProteinBoostCard
+                boost={recipe.proteinBoost}
+                baseNutrition={linkedMeal?.nutrition}
+              />
+            )}
 
             {recipe.equipment && recipe.equipment.length > 0 && (
               <section

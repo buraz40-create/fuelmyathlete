@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Clock, Users } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
+import { FoodImage } from "@/components/food/FoodImage";
 import type { MealSlot, Recipe } from "@/types/domain";
 
 const SLOT_DOT: Record<MealSlot, string> = {
@@ -25,18 +25,14 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
       href={`/recipe/${recipe.slug}`}
       className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-surface shadow-sm transition hover:-translate-y-1 hover:shadow-md"
     >
-      {recipe.imageUrl && (
-        <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-          <Image
-            src={recipe.imageUrl}
-            alt=""
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition duration-500 group-hover:scale-105"
-            unoptimized
-          />
-        </div>
-      )}
+      <FoodImage
+        slug={recipe.slug}
+        slot={recipe.slot}
+        aspect="aspect-[4/3]"
+        emojiSize="text-7xl md:text-8xl"
+        className="transition duration-500 group-hover:scale-[1.03]"
+      />
+
       <div className="flex flex-1 flex-col p-4 md:p-5">
         {slot && (
           <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
