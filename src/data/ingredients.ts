@@ -45,14 +45,24 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "crackers-wg",    name: "Whole-grain crackers",  category: "pantry",  unit: "oz" },
   { slug: "cereal-wg",      name: "Whole-grain cereal",    category: "pantry",  unit: "cup" },
   { slug: "taco-seasoning", name: "Taco seasoning",        category: "pantry",  unit: "tbsp" },
+  { slug: "oats",           name: "Rolled oats",           category: "pantry",  unit: "cup" },
+  { slug: "cocoa-powder",   name: "Unsweetened cocoa powder", category: "pantry", unit: "tbsp" },
+  { slug: "hemp-seeds",     name: "Hemp hearts",           category: "pantry",  unit: "tbsp" },
+  { slug: "vanilla-extract", name: "Pure vanilla extract", category: "pantry",  unit: "tsp" },
+  { slug: "coconut-water",  name: "Coconut water",         category: "beverages", unit: "cup" },
 
   // DAIRY
-  { slug: "milk",   name: "Milk",            category: "dairy", unit: "cup" },
-  { slug: "butter", name: "Unsalted butter", category: "dairy", unit: "tbsp" },
+  { slug: "milk",           name: "Milk",                 category: "dairy", unit: "cup" },
+  { slug: "almond-milk",    name: "Unsweetened almond milk", category: "dairy", unit: "cup" },
+  { slug: "butter",         name: "Unsalted butter",      category: "dairy", unit: "tbsp" },
+  { slug: "cottage-cheese", name: "Low-fat cottage cheese", category: "dairy", unit: "cup" },
 
   // FROZEN
-  { slug: "edamame",     name: "Shelled edamame",   category: "frozen", unit: "cup" },
+  { slug: "edamame",     name: "Shelled edamame",      category: "frozen", unit: "cup" },
   { slug: "mixed-berry", name: "Frozen mixed berries", category: "frozen", unit: "cup" },
+  { slug: "frozen-mango", name: "Frozen mango chunks", category: "frozen", unit: "cup" },
+  { slug: "frozen-pineapple", name: "Frozen pineapple chunks", category: "frozen", unit: "cup" },
+  { slug: "frozen-cherries",  name: "Frozen pitted cherries",  category: "frozen", unit: "cup" },
 
   // BAKERY
   { slug: "english-muffin", name: "Whole-grain English muffins", category: "bakery", unit: "each" },

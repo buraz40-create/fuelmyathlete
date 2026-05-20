@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { Leaf } from "@phosphor-icons/react/dist/ssr";
 import { AppShell } from "@/components/layout/AppShell";
 import { RecipeCard } from "@/components/recipe/RecipeCard";
 import { RECIPES } from "@/data/recipes";
@@ -74,6 +75,25 @@ export default function RecipesPage() {
             );
           })}
         </nav>
+
+        <aside
+          role="note"
+          aria-labelledby="whole-food-title"
+          className="mb-8 rounded-3xl border border-border bg-primary-soft/40 p-5 md:p-6"
+        >
+          <header className="flex items-center gap-2.5">
+            <Leaf size={20} weight="duotone" aria-hidden className="flex-shrink-0 text-primary" />
+            <h2 id="whole-food-title" className="text-base font-semibold text-ink md:text-lg">
+              Whole food only. No protein powders.
+            </h2>
+          </header>
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            Every recipe gets its protein from real food: Greek yogurt, eggs, chicken, cottage
+            cheese, peanut butter, hemp hearts. The AAP does not recommend protein supplements for
+            kids and teens under 18, and frankly an athlete eating well does not need them.
+            Cottage cheese smoothies hit 26g of protein without any powder.
+          </p>
+        </aside>
 
         <AnimatePresence mode="popLayout">
           <motion.ol
