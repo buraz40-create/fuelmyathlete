@@ -1,10 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { Plus, ArrowCounterClockwise } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { MEALS_BY_SLUG } from "@/data/meals";
 import { DAY_TYPES } from "@/data/dayTypes";
-import { FoodImage } from "@/components/food/FoodImage";
 import type { DayType, MealSlot } from "@/types/domain";
 
 const ACCENT: Record<MealSlot, string> = {
@@ -56,13 +56,13 @@ export function MealSlotCard({ slot, dayType, mealSlug, onPick, onClear }: MealS
 
       {meal ? (
         <div className="mt-3 flex items-start gap-3">
-          <FoodImage
-            slug={meal.slug}
-            slot={meal.slot}
-            aspect="aspect-square"
-            emojiSize="text-4xl"
-            rounded="rounded-2xl"
-            className="h-20 w-20 flex-shrink-0"
+          <Image
+            src={meal.imageUrl}
+            alt=""
+            width={88}
+            height={88}
+            className="h-20 w-20 flex-shrink-0 rounded-2xl object-cover"
+            unoptimized
           />
           <div className="min-w-0 flex-1">
             <h3 className="text-base font-semibold leading-snug text-ink">{meal.name}</h3>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
@@ -87,12 +88,26 @@ export default async function RecipePage({
         </Link>
 
         <header className="mb-8 overflow-hidden rounded-3xl border border-border bg-surface shadow-sm">
-          <FoodImage
-            slug={recipe.slug}
-            slot={recipe.slot}
-            aspect="aspect-[16/9]"
-            emojiSize="text-8xl md:text-9xl"
-          />
+          {recipe.imageUrl ? (
+            <div className="relative aspect-[16/9] w-full bg-muted">
+              <Image
+                src={recipe.imageUrl}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 100vw, 1024px"
+                className="object-cover"
+                priority
+                unoptimized
+              />
+            </div>
+          ) : (
+            <FoodImage
+              slug={recipe.slug}
+              slot={recipe.slot}
+              aspect="aspect-[16/9]"
+              emojiSize="text-8xl md:text-9xl"
+            />
+          )}
           <div className="p-5 md:p-7">
             {recipe.slot && (
               <p className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">

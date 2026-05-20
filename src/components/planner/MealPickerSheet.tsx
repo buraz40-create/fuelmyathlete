@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import { Check, Star } from "@phosphor-icons/react/dist/ssr";
-import { FoodImage } from "@/components/food/FoodImage";
 import {
   Sheet,
   SheetContent,
@@ -130,13 +130,13 @@ function MealRow({
           selected ? "border-primary bg-primary-soft" : "border-border"
         )}
       >
-        <FoodImage
-          slug={meal.slug}
-          slot={meal.slot}
-          aspect="aspect-square"
-          emojiSize="text-3xl"
-          rounded="rounded-xl"
-          className="h-16 w-16 flex-shrink-0"
+        <Image
+          src={meal.imageUrl}
+          alt=""
+          width={64}
+          height={64}
+          className="h-16 w-16 flex-shrink-0 rounded-xl object-cover"
+          unoptimized
         />
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
