@@ -32,7 +32,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 8,
     suitableFor: ["school", "training", "match"],
     kidRating: 4,
-    imageUrl: pexels(28406391),
+    imageUrl: pexels(34871730),
     recipeSlug: "eggs-toast",
     nutrition: { kcal: 340, proteinG: 18, carbsG: 28, fatG: 16, fiberG: 4, source: "USDA estimate" },
     ingredients: [
