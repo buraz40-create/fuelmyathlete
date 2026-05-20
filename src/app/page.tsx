@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { LandingShell } from "@/components/layout/LandingShell";
 import { Hero } from "@/components/landing/Hero";
 import { HowItWorks } from "@/components/landing/HowItWorks";
+import { SampleWeek } from "@/components/landing/SampleWeek";
 import { Audiences } from "@/components/landing/Audiences";
 import { Credibility } from "@/components/landing/Credibility";
 import { FounderNote } from "@/components/landing/FounderNote";
@@ -43,6 +44,7 @@ export default async function Home({ searchParams }: HomeProps) {
       <LandingShell>
         <Hero />
         <HowItWorks />
+        <SampleWeek />
         <Audiences />
         <Credibility />
         <FounderNote />
