@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Logo } from "@/components/brand/Logo";
+import { AppFooter } from "@/components/layout/AppFooter";
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
@@ -37,13 +38,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      <footer className="border-t border-border bg-surface/40 px-4 py-6 md:px-8">
-        <p className="mx-auto max-w-6xl text-[11px] leading-relaxed text-muted-foreground">
-          FuelMyAthlete provides general guidance based on AAP, NATA, and ACSM sources. Not medical
-          advice. For personalized sports nutrition plans, especially for children, consult a
-          registered sports dietitian or pediatrician.
-        </p>
-      </footer>
+      <AppFooter />
     </div>
   );
 }
