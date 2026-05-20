@@ -38,7 +38,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 8,
-    imageUrl: pexels(28406391),
+    imageUrl: pexels(34871730),
     whenToEat: "Real morning protein for school days when focus matters. Strong before-practice breakfast too.",
     equipment: ["Non-stick pan", "Toaster", "Rubber spatula", "Mixing bowl"],
     steps: [
