@@ -16,6 +16,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "rest"],
     kidRating: 5,
     imageUrl: pexels(4819353),
+    recipeSlug: "cereal-banana-milk",
     ingredients: [
       { ingredientSlug: "cereal-wg", quantity: 1 },
       { ingredientSlug: "banana",    quantity: 1 },
@@ -31,6 +32,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "training", "match"],
     kidRating: 4,
     imageUrl: pexels(4846309),
+    recipeSlug: "eggs-toast",
     ingredients: [
       { ingredientSlug: "eggs",             quantity: 2 },
       { ingredientSlug: "wholegrain-bread", quantity: 2 },
@@ -46,6 +48,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "training", "match"],
     kidRating: 5,
     imageUrl: pexels(5589043),
+    recipeSlug: "berry-smoothie",
     ingredients: [
       { ingredientSlug: "banana",       quantity: 1 },
       { ingredientSlug: "mixed-berry",  quantity: 1 },
@@ -64,6 +67,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["training", "match"],
     kidRating: 5,
     imageUrl: pexels(4946999),
+    recipeSlug: "english-muffin-pb",
     ingredients: [
       { ingredientSlug: "english-muffin", quantity: 1 },
       { ingredientSlug: "peanut-butter",  quantity: 2 },
@@ -79,6 +83,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "rest"],
     kidRating: 4,
     imageUrl: pexels(5591699),
+    recipeSlug: "yogurt-parfait",
     ingredients: [
       { ingredientSlug: "greek-yogurt", quantity: 1 },
       { ingredientSlug: "blueberry",    quantity: 0.5 },
@@ -117,6 +122,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "rest"],
     kidRating: 4,
     imageUrl: pexels(8964022),
+    recipeSlug: "turkey-wrap",
     ingredients: [
       { ingredientSlug: "wholegrain-tortilla", quantity: 1 },
       { ingredientSlug: "deli-turkey",         quantity: 3 },
@@ -134,6 +140,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "training"],
     kidRating: 4,
     imageUrl: pexels(5602477),
+    recipeSlug: "chicken-pasta-broccoli",
     ingredients: [
       { ingredientSlug: "pasta",          quantity: 3 },
       { ingredientSlug: "chicken-breast", quantity: 0.3 },
@@ -153,6 +160,7 @@ export const MEALS: Meal[] = [
     suitableFor: [...ALL_DAYS],
     kidRating: 5,
     imageUrl: pexels(7440377),
+    recipeSlug: "apple-pb",
     ingredients: [
       { ingredientSlug: "apple",        quantity: 1 },
       { ingredientSlug: "peanut-butter", quantity: 2 },
@@ -167,6 +175,7 @@ export const MEALS: Meal[] = [
     suitableFor: [...ALL_DAYS],
     kidRating: 4,
     imageUrl: pexels(7440380),
+    recipeSlug: "cheese-crackers",
     ingredients: [
       { ingredientSlug: "cheese-stick", quantity: 2 },
       { ingredientSlug: "crackers-wg",  quantity: 1 },
@@ -181,6 +190,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["training", "match"],
     kidRating: 4,
     imageUrl: pexels(5852457),
+    recipeSlug: "yogurt-honey-berries",
     ingredients: [
       { ingredientSlug: "greek-yogurt", quantity: 1 },
       { ingredientSlug: "blueberry",    quantity: 0.5 },
@@ -196,6 +206,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["training", "match"],
     kidRating: 4,
     imageUrl: pexels(8922007),
+    recipeSlug: "banana-almonds",
     ingredients: [
       { ingredientSlug: "banana",  quantity: 1 },
       { ingredientSlug: "almonds", quantity: 0.25 },
@@ -212,6 +223,7 @@ export const MEALS: Meal[] = [
     suitableFor: [...ALL_DAYS],
     kidRating: 4,
     imageUrl: pexels(9893216),
+    recipeSlug: "chicken-rice-broccoli",
     ingredients: [
       { ingredientSlug: "chicken-breast", quantity: 0.4 },
       { ingredientSlug: "jasmine-rice",   quantity: 1 },
@@ -229,6 +241,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["rest", "school"],
     kidRating: 3,
     imageUrl: pexels(33706292),
+    recipeSlug: "salmon-sweet-potato",
     ingredients: [
       { ingredientSlug: "salmon",       quantity: 0.4 },
       { ingredientSlug: "sweet-potato", quantity: 1 },
@@ -246,6 +259,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "rest"],
     kidRating: 5,
     imageUrl: pexels(8448335),
+    recipeSlug: "turkey-tacos",
     ingredients: [
       { ingredientSlug: "ground-turkey",       quantity: 0.4 },
       { ingredientSlug: "wholegrain-tortilla", quantity: 3 },
@@ -264,6 +278,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["training", "match"],
     kidRating: 5,
     imageUrl: pexels(9304081),
+    recipeSlug: "pasta-marinara",
     ingredients: [
       { ingredientSlug: "pasta",         quantity: 4 },
       { ingredientSlug: "ground-turkey", quantity: 0.3 },
@@ -281,7 +296,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "rest", "training"],
     kidRating: 4,
     imageUrl: pexels(7340936),
-    recipeSlug: "hibachi-chicken",
+    recipeSlug: "stirfry-chicken-rice",
     ingredients: [
       { ingredientSlug: "chicken-breast", quantity: 0.4 },
       { ingredientSlug: "jasmine-rice",   quantity: 1 },

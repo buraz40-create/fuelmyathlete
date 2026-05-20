@@ -68,6 +68,9 @@ export interface Recipe {
   totalMinutes: number;
   steps: RecipeStep[];
   notes?: string[];
+  whenToEat?: string;
+  slot?: MealSlot;
+  imageUrl?: string;
 }
 
 export interface DayTypeConfig {

@@ -10,7 +10,7 @@ export function AppFooter() {
           registered sports dietitian or pediatrician.
         </p>
         <nav className="flex items-center gap-4 text-xs font-medium text-muted-foreground">
-          <Link href="/recipe/hibachi-chicken" className="transition hover:text-ink">
+          <Link href="/recipes" className="transition hover:text-ink">
             Recipes
           </Link>
           <Link href="/sign-in" className="transition hover:text-ink">

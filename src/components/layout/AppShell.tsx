@@ -13,7 +13,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           </Link>
           <nav className="flex items-center gap-5 text-sm font-medium text-muted-foreground">
             <Link
-              href="/recipe/hibachi-chicken"
+              href="/recipes"
               className="transition hover:text-ink"
             >
               Recipes

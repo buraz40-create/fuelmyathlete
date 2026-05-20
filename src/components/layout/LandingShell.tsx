@@ -14,6 +14,12 @@ export function LandingShell({ children }: { children: ReactNode }) {
           </Link>
           <nav className="flex items-center gap-3 text-sm font-medium">
             <Link
+              href="/recipes"
+              className="hidden text-muted-foreground transition hover:text-ink sm:inline"
+            >
+              Recipes
+            </Link>
+            <Link
               href="/sign-in"
               className="hidden text-muted-foreground transition hover:text-ink sm:inline"
             >
