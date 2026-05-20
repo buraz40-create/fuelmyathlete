@@ -844,7 +844,7 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 8,
     totalMinutes: 25,
-    imageUrl: pexels(6249398),
+    imageUrl: pexels(12916877),
     whenToEat: "One Sunday cook session feeds 5 school lunches plus 3 dinner reheats. The signature Elvis recipe.",
     equipment: ["Large cast iron or stainless steel skillet (or wok)", "Tongs", "5 meal-prep containers", "Sharp knife"],
     steps: [
