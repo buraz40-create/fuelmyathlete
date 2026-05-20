@@ -23,10 +23,13 @@ export default function SignInPage() {
     setStatus("sending");
     setError(null);
 
-    const origin = window.location.origin;
+    // Prefer the configured site URL so production deploys always land back
+    // at the canonical domain, even if the user submits from a preview URL or
+    // a stale localhost tab. Falls back to the current origin for local dev.
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
     const { error: authError } = await supabase.auth.signInWithOtp({
       email: email.trim(),
-      options: { emailRedirectTo: `${origin}/auth/callback` },
+      options: { emailRedirectTo: `${siteUrl.replace(/\/$/, "")}/auth/callback` },
     });
 
     if (authError) {
