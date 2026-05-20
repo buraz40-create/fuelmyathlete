@@ -15,7 +15,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 3,
     suitableFor: ["school", "rest"],
     kidRating: 5,
-    imageUrl: pexels(4819353),
+    imageUrl: pexels(34292),
     recipeSlug: "cereal-banana-milk",
     nutrition: { kcal: 355, proteinG: 13, carbsG: 70, fatG: 4, fiberG: 7, source: "USDA estimate" },
     ingredients: [
@@ -32,7 +32,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 8,
     suitableFor: ["school", "training", "match"],
     kidRating: 4,
-    imageUrl: pexels(34871730),
+    imageUrl: pexels(32134464),
     recipeSlug: "eggs-toast",
     nutrition: { kcal: 340, proteinG: 18, carbsG: 28, fatG: 16, fiberG: 4, source: "USDA estimate" },
     ingredients: [
@@ -49,7 +49,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match"],
     kidRating: 5,
-    imageUrl: pexels(33549368),
+    imageUrl: pexels(1438080),
     recipeSlug: "berry-smoothie",
     nutrition: { kcal: 295, proteinG: 14, carbsG: 52, fatG: 4, fiberG: 6, source: "USDA estimate" },
     ingredients: [
@@ -69,7 +69,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 4,
     suitableFor: ["training", "match"],
     kidRating: 5,
-    imageUrl: pexels(4946999),
+    imageUrl: pexels(6659878),
     recipeSlug: "english-muffin-pb",
     nutrition: { kcal: 385, proteinG: 13, carbsG: 55, fatG: 14, fiberG: 6, source: "USDA estimate" },
     ingredients: [
@@ -204,7 +204,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 3,
     suitableFor: ["school", "rest"],
     kidRating: 4,
-    imageUrl: pexels(5591699),
+    imageUrl: pexels(1066658),
     recipeSlug: "yogurt-parfait",
     nutrition: { kcal: 305, proteinG: 18, carbsG: 48, fatG: 5, fiberG: 4, source: "USDA estimate" },
     ingredients: [
@@ -224,7 +224,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
-    imageUrl: pexels(6107772),
+    imageUrl: pexels(17308548),
     recipeSlug: "hibachi-chicken",
     nutrition: { kcal: 465, proteinG: 35, carbsG: 55, fatG: 11, fiberG: 3, source: "USDA estimate" },
     ingredients: [
@@ -245,7 +245,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "rest"],
     kidRating: 4,
-    imageUrl: pexels(34644336),
+    imageUrl: pexels(16222105),
     recipeSlug: "turkey-wrap",
     nutrition: { kcal: 365, proteinG: 24, carbsG: 35, fatG: 13, fiberG: 5, source: "USDA estimate" },
     ingredients: [
@@ -264,7 +264,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 15,
     suitableFor: ["school", "training"],
     kidRating: 4,
-    imageUrl: pexels(5602477),
+    imageUrl: pexels(5192427),
     recipeSlug: "chicken-pasta-broccoli",
     nutrition: { kcal: 485, proteinG: 35, carbsG: 60, fatG: 10, fiberG: 7, source: "USDA estimate" },
     ingredients: [
@@ -285,7 +285,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 2,
     suitableFor: [...ALL_DAYS],
     kidRating: 5,
-    imageUrl: pexels(33489594),
+    imageUrl: pexels(33489598),
     recipeSlug: "apple-pb",
     nutrition: { kcal: 260, proteinG: 8, carbsG: 30, fatG: 16, fiberG: 6, source: "USDA estimate" },
     ingredients: [
@@ -301,7 +301,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 1,
     suitableFor: [...ALL_DAYS],
     kidRating: 4,
-    imageUrl: pexels(12058524),
+    imageUrl: pexels(8997908),
     recipeSlug: "cheese-crackers",
     nutrition: { kcal: 245, proteinG: 15, carbsG: 22, fatG: 11, fiberG: 3, source: "USDA estimate" },
     ingredients: [
@@ -317,7 +317,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 2,
     suitableFor: ["training", "match"],
     kidRating: 4,
-    imageUrl: pexels(5852457),
+    imageUrl: pexels(4006362),
     recipeSlug: "yogurt-honey-berries",
     nutrition: { kcal: 245, proteinG: 17, carbsG: 42, fatG: 2, fiberG: 3, source: "USDA estimate" },
     ingredients: [
@@ -352,7 +352,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 25,
     suitableFor: [...ALL_DAYS],
     kidRating: 4,
-    imageUrl: pexels(9893216),
+    imageUrl: pexels(19938618),
     recipeSlug: "chicken-rice-broccoli",
     nutrition: { kcal: 520, proteinG: 38, carbsG: 65, fatG: 9, fiberG: 5, source: "USDA estimate" },
     ingredients: [
@@ -371,7 +371,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 30,
     suitableFor: ["rest", "school"],
     kidRating: 3,
-    imageUrl: pexels(14515103),
+    imageUrl: pexels(5670958),
     recipeSlug: "salmon-sweet-potato",
     nutrition: { kcal: 525, proteinG: 35, carbsG: 50, fatG: 18, fiberG: 8, source: "USDA estimate" },
     ingredients: [
@@ -390,7 +390,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 20,
     suitableFor: ["school", "rest"],
     kidRating: 5,
-    imageUrl: pexels(8448335),
+    imageUrl: pexels(5454019),
     recipeSlug: "turkey-tacos",
     nutrition: { kcal: 485, proteinG: 30, carbsG: 48, fatG: 17, fiberG: 8, source: "USDA estimate" },
     ingredients: [
@@ -410,7 +410,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 25,
     suitableFor: ["training", "match"],
     kidRating: 5,
-    imageUrl: pexels(9304081),
+    imageUrl: pexels(9460447),
     recipeSlug: "pasta-marinara",
     nutrition: { kcal: 585, proteinG: 32, carbsG: 80, fatG: 14, fiberG: 9, source: "USDA estimate" },
     ingredients: [
@@ -429,7 +429,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 20,
     suitableFor: ["school", "rest", "training"],
     kidRating: 4,
-    imageUrl: pexels(7340936),
+    imageUrl: pexels(24738520),
     recipeSlug: "stirfry-chicken-rice",
     nutrition: { kcal: 510, proteinG: 38, carbsG: 60, fatG: 10, fiberG: 5, source: "USDA estimate" },
     ingredients: [

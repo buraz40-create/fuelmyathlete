@@ -11,7 +11,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 3,
-    imageUrl: pexels(4819353),
+    imageUrl: pexels(9788573),
     whenToEat: "Backup breakfast when the night-before plan failed and you have 90 seconds.",
     equipment: ["Cereal bowl", "Spoon", "Knife (for the banana)"],
     steps: [
@@ -38,7 +38,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 8,
-    imageUrl: pexels(34871730),
+    imageUrl: pexels(32134464),
     whenToEat: "Real morning protein for school days when focus matters. Strong before-practice breakfast too.",
     equipment: ["Non-stick pan", "Toaster", "Rubber spatula", "Mixing bowl"],
     steps: [
@@ -77,7 +77,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(33549368),
+    imageUrl: pexels(1438080),
     whenToEat: "Hidden spinach when chewing breakfast feels like a chore. Great pre-practice if eating solid food makes you sluggish.",
     equipment: ["Blender", "Tall glass", "Measuring cup"],
     steps: [
@@ -117,7 +117,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(1346347),
+    imageUrl: pexels(32946783),
     whenToEat: "Heavy breakfast for long training mornings. Oats keep you full past warm-ups.",
     equipment: ["Blender", "Tall glass", "Measuring spoons"],
     steps: [
@@ -157,7 +157,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(3735170),
+    imageUrl: pexels(37283271),
     whenToEat: "When breakfast needs to disguise the vegetables. The mango covers everything.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -196,7 +196,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(2872755),
+    imageUrl: pexels(11136333),
     whenToEat: "Drinkable bowl of oatmeal. Sustained-release energy for school days that start before 7 AM.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -239,7 +239,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    imageUrl: pexels(3735165),
+    imageUrl: pexels(31490093),
     whenToEat: "Most protein you can get from a single smoothie without using powder. Great morning fuel.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -279,7 +279,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 4,
-    imageUrl: pexels(616833),
+    imageUrl: pexels(17612822),
     whenToEat: "30-45 minutes before kickoff or warm-ups. Quick-digesting carbs that don't sit heavy.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -318,7 +318,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(18142621),
+    imageUrl: pexels(6217960),
     whenToEat: "Within 30 minutes of practice or match ending. Tart cherries reduce muscle soreness, real research backs this.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -358,7 +358,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    imageUrl: pexels(4946999),
+    imageUrl: pexels(6659878),
     whenToEat: "Pre-game fuel 1-2 hours before kickoff. Quick-digesting carbs that will not slow you down on the field.",
     equipment: ["Toaster", "Butter knife"],
     steps: [
@@ -390,7 +390,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 3,
-    imageUrl: pexels(5591699),
+    imageUrl: pexels(1066658),
     whenToEat: "Looks fancy, takes three minutes. Good rest-day breakfast or after a Saturday morning run.",
     equipment: ["Tall glass or jar", "Spoon"],
     steps: [
@@ -425,7 +425,7 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(34644336),
+    imageUrl: pexels(16222105),
     whenToEat: "Reliable school lunch. Packs in a thermos, no microwave needed.",
     equipment: ["Cutting board", "Knife", "Lunch container"],
     steps: [
@@ -457,7 +457,7 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 4,
     totalMinutes: 20,
-    imageUrl: pexels(5602477),
+    imageUrl: pexels(5192427),
     whenToEat: "Cooks in 20 min, reheats in a thermos. Pre-portion for the week on Sunday.",
     equipment: ["Large pot", "Skillet or grill pan", "Colander", "Tongs", "4 meal-prep containers"],
     steps: [
@@ -506,7 +506,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 2,
-    imageUrl: pexels(33489594),
+    imageUrl: pexels(33489598),
     whenToEat: "Travel-friendly recovery snack. Natural sugar + protein in 30 seconds.",
     equipment: ["Knife", "Small container (if packing)"],
     steps: [
@@ -532,7 +532,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    imageUrl: pexels(12058524),
+    imageUrl: pexels(8997908),
     whenToEat: "Soccer-bag staple. Does not melt as fast as you would think.",
     equipment: ["Small container or zip bag"],
     steps: [
@@ -553,7 +553,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 2,
-    imageUrl: pexels(5852457),
+    imageUrl: pexels(4006362),
     whenToEat: "Within 30 minutes of practice ends. Recovery window where protein + carbs hit fastest.",
     equipment: ["Bowl or thermos", "Spoon"],
     steps: [
@@ -603,7 +603,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    imageUrl: pexels(9893216),
+    imageUrl: pexels(19938618),
     whenToEat: "The workhorse dinner. Boring on paper, perfect for any day type.",
     equipment: ["Small pot (rice)", "Grill pan or skillet (chicken)", "Steamer or microwave (broccoli)", "Tongs", "Meat thermometer"],
     steps: [
@@ -654,7 +654,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    imageUrl: pexels(14515103),
+    imageUrl: pexels(5670958),
     whenToEat: "Omega-3s for recovery + complex carbs for the next day. Best as a rest-day or post-match dinner.",
     equipment: ["Sheet pan", "Non-stick skillet", "Steamer or microwave", "Fish spatula", "Tongs"],
     steps: [
@@ -705,7 +705,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 20,
-    imageUrl: pexels(8448335),
+    imageUrl: pexels(5454019),
     whenToEat: "Family favorite. Build-your-own bar means less complaining at the table.",
     equipment: ["Large skillet", "Wooden spatula", "Small bowls for toppings"],
     steps: [
@@ -750,7 +750,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 25,
-    imageUrl: pexels(9304081),
+    imageUrl: pexels(9460447),
     whenToEat: "Classic carb-load. Eat the night before a match for sustained next-day energy.",
     equipment: ["Large pot", "Large skillet", "Tongs", "Salad bowl", "Colander"],
     steps: [
@@ -796,7 +796,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 20,
-    imageUrl: pexels(7340936),
+    imageUrl: pexels(24738520),
     whenToEat: "Same hibachi technique, dinner-portioned. Works for any day type.",
     equipment: ["Small pot (rice)", "Wok or large skillet", "Tongs"],
     steps: [
@@ -844,7 +844,7 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 8,
     totalMinutes: 25,
-    imageUrl: pexels(6107772),
+    imageUrl: pexels(35873820),
     whenToEat: "One Sunday cook session feeds 5 school lunches plus 3 dinner reheats. The signature Elvis recipe.",
     equipment: ["Large cast iron or stainless steel skillet (or wok)", "Tongs", "5 meal-prep containers", "Sharp knife"],
     steps: [
