@@ -40,6 +40,15 @@ export interface MealIngredient {
   notes?: string;
 }
 
+export interface NutritionFacts {
+  kcal: number;
+  proteinG: number;
+  carbsG: number;
+  fatG: number;
+  fiberG?: number;
+  source?: string;
+}
+
 export interface Meal {
   slug: string;
   name: string;
@@ -52,6 +61,7 @@ export interface Meal {
   recipeSlug?: string;
   ingredients: MealIngredient[];
   tags?: string[];
+  nutrition?: NutritionFacts;
 }
 
 export interface RecipeStep {
@@ -59,6 +69,7 @@ export interface RecipeStep {
   title: string;
   body: string;
   timerSec?: number;
+  mistake?: string;
 }
 
 export interface Recipe {
@@ -71,6 +82,7 @@ export interface Recipe {
   whenToEat?: string;
   slot?: MealSlot;
   imageUrl?: string;
+  equipment?: string[];
 }
 
 export interface DayTypeConfig {

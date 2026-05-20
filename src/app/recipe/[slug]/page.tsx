@@ -2,10 +2,19 @@ import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ChefHat, Clock, Users } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowLeft,
+  ChefHat,
+  Clock,
+  CookingPot,
+  Users,
+} from "@phosphor-icons/react/dist/ssr";
 import { AppShell } from "@/components/layout/AppShell";
 import { RecipeSteps } from "@/components/recipe/RecipeSteps";
+import { IngredientsList } from "@/components/recipe/IngredientsList";
+import { NutritionCard } from "@/components/recipe/NutritionCard";
 import { RECIPES, RECIPES_BY_SLUG } from "@/data/recipes";
+import { MEALS } from "@/data/meals";
 import { cn } from "@/lib/utils";
 import type { MealSlot } from "@/types/domain";
 
@@ -36,6 +45,9 @@ export default async function RecipePage({
   const recipe = RECIPES_BY_SLUG[slug];
   if (!recipe) notFound();
 
+  // The meal whose ingredients + nutrition belong to this recipe (matched by recipeSlug).
+  const linkedMeal = MEALS.find((m) => m.recipeSlug === recipe.slug);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Recipe",
@@ -44,6 +56,13 @@ export default async function RecipePage({
     recipeYield: `${recipe.servings} servings`,
     totalTime: `PT${recipe.totalMinutes}M`,
     recipeCategory: recipe.slot,
+    nutrition: linkedMeal?.nutrition && {
+      "@type": "NutritionInformation",
+      calories: `${linkedMeal.nutrition.kcal} kcal`,
+      proteinContent: `${linkedMeal.nutrition.proteinG} g`,
+      carbohydrateContent: `${linkedMeal.nutrition.carbsG} g`,
+      fatContent: `${linkedMeal.nutrition.fatG} g`,
+    },
     recipeInstructions: recipe.steps.map((s) => ({
       "@type": "HowToStep",
       name: s.title,
@@ -58,7 +77,7 @@ export default async function RecipePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <article className="mx-auto w-full max-w-3xl px-4 py-6 md:px-8 md:py-10">
+      <article className="mx-auto w-full max-w-5xl px-4 py-6 md:px-8 md:py-10">
         <Link
           href="/recipes"
           className="mb-4 inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition hover:text-ink"
@@ -66,14 +85,14 @@ export default async function RecipePage({
           <ArrowLeft size={16} weight="bold" aria-hidden /> All recipes
         </Link>
 
-        <header className="mb-6 overflow-hidden rounded-3xl border border-border bg-surface shadow-sm">
+        <header className="mb-8 overflow-hidden rounded-3xl border border-border bg-surface shadow-sm">
           {recipe.imageUrl && (
             <div className="relative aspect-[16/9] w-full bg-muted">
               <Image
                 src={recipe.imageUrl}
                 alt=""
                 fill
-                sizes="(max-width: 768px) 100vw, 768px"
+                sizes="(max-width: 768px) 100vw, 1024px"
                 className="object-cover"
                 priority
                 unoptimized
@@ -115,31 +134,68 @@ export default async function RecipePage({
           </div>
         </header>
 
-        <section aria-labelledby="steps-title">
-          <h2 id="steps-title" className="mb-3">
-            Steps
-          </h2>
-          <RecipeSteps recipe={recipe} />
-        </section>
+        <div className="grid gap-6 md:grid-cols-[1fr_320px]">
+          <div className="space-y-6">
+            {linkedMeal?.ingredients && linkedMeal.ingredients.length > 0 && (
+              <IngredientsList
+                baseServings={recipe.servings}
+                ingredients={linkedMeal.ingredients}
+              />
+            )}
 
-        {recipe.notes && recipe.notes.length > 0 && (
-          <section
-            aria-labelledby="notes-title"
-            className="mt-8 rounded-3xl border border-border bg-primary-soft/50 p-5"
-          >
-            <h2 id="notes-title" className="text-lg font-semibold text-ink">
-              Coach&apos;s notes
-            </h2>
-            <ul className="mt-3 flex flex-col gap-2 text-sm text-ink/80">
-              {recipe.notes.map((note, i) => (
-                <li key={i} className="flex gap-2">
-                  <span aria-hidden className="text-primary">•</span>
-                  <span>{note}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
-        )}
+            <section aria-labelledby="steps-title">
+              <h2 id="steps-title" className="mb-3">
+                Steps
+              </h2>
+              <RecipeSteps recipe={recipe} />
+            </section>
+
+            {recipe.notes && recipe.notes.length > 0 && (
+              <section
+                aria-labelledby="notes-title"
+                className="rounded-3xl border border-border bg-primary-soft/50 p-5"
+              >
+                <h2 id="notes-title" className="text-lg font-semibold text-ink">
+                  Coach&apos;s notes
+                </h2>
+                <ul className="mt-3 flex flex-col gap-2 text-sm text-ink/80">
+                  {recipe.notes.map((note, i) => (
+                    <li key={i} className="flex gap-2">
+                      <span aria-hidden className="text-primary">•</span>
+                      <span>{note}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+          </div>
+
+          <aside className="space-y-6 md:sticky md:top-24 md:self-start">
+            {linkedMeal?.nutrition && <NutritionCard nutrition={linkedMeal.nutrition} />}
+
+            {recipe.equipment && recipe.equipment.length > 0 && (
+              <section
+                aria-labelledby="equipment-title"
+                className="rounded-3xl border border-border bg-surface p-5 shadow-sm"
+              >
+                <header className="mb-3 flex items-center gap-2">
+                  <CookingPot size={18} weight="duotone" aria-hidden className="text-primary" />
+                  <h2 id="equipment-title" className="text-base font-semibold text-ink">
+                    Equipment
+                  </h2>
+                </header>
+                <ul className="flex flex-col gap-1.5 text-sm text-muted-foreground">
+                  {recipe.equipment.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span aria-hidden className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+          </aside>
+        </div>
       </article>
     </AppShell>
   );

@@ -13,6 +13,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 3,
     imageUrl: pexels(4819353),
     whenToEat: "Backup breakfast when the night-before plan failed and you have 90 seconds.",
+    equipment: ["Cereal bowl", "Spoon", "Knife (for the banana)"],
     steps: [
       {
         order: 1,
@@ -23,6 +24,7 @@ export const RECIPES: Recipe[] = [
         order: 2,
         title: "Add milk and eat",
         body: "Pour 1 cup cold milk over the top. The whole grain slows the sugar release so the bus ride does not crash blood sugar mid-morning.",
+        mistake: "Buying a sugary cereal disguised as healthy. Read the label. Anything over 10 grams of sugar per serving will crash within an hour.",
       },
     ],
     notes: [
@@ -36,8 +38,9 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 8,
-    imageUrl: pexels(4846309),
+    imageUrl: pexels(28406391),
     whenToEat: "Real morning protein for school days when focus matters. Strong before-practice breakfast too.",
+    equipment: ["Non-stick pan", "Toaster", "Rubber spatula", "Mixing bowl"],
     steps: [
       {
         order: 1,
@@ -55,6 +58,7 @@ export const RECIPES: Recipe[] = [
         title: "Low and slow scramble",
         body: "Melt 1 tsp butter in a non-stick pan over medium-low heat. Pour in the eggs. Stir gently with a rubber spatula for 2 minutes. Pull off the heat while they still look slightly wet, they will finish cooking on the plate.",
         timerSec: 120,
+        mistake: "Cranking the heat. High heat makes rubbery eggs. Low and slow is the only way.",
       },
       {
         order: 4,
@@ -63,7 +67,6 @@ export const RECIPES: Recipe[] = [
       },
     ],
     notes: [
-      "Low heat is the trick. High heat makes rubbery eggs.",
       "Pre-practice breakfast: eat 60-90 min before kickoff so digestion is done.",
       "Two eggs = roughly 12 grams of protein. Enough to last until snack time.",
     ],
@@ -74,8 +77,9 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(5589043),
+    imageUrl: pexels(33549368),
     whenToEat: "Hidden spinach when chewing breakfast feels like a chore. Great pre-practice if eating solid food makes you sluggish.",
+    equipment: ["Blender", "Tall glass", "Measuring cup"],
     steps: [
       {
         order: 1,
@@ -92,6 +96,7 @@ export const RECIPES: Recipe[] = [
         order: 3,
         title: "Pour and drink",
         body: "Pour into a tall glass. Drink within 5 minutes, the texture changes if it sits.",
+        mistake: "Using ice instead of frozen fruit. Ice waters down the flavor. Frozen banana is the trick for thick texture.",
       },
     ],
     notes: [
@@ -108,6 +113,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 4,
     imageUrl: pexels(4946999),
     whenToEat: "Pre-game fuel 1-2 hours before kickoff. Quick-digesting carbs that will not slow you down on the field.",
+    equipment: ["Toaster", "Butter knife"],
     steps: [
       {
         order: 1,
@@ -139,6 +145,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 3,
     imageUrl: pexels(5591699),
     whenToEat: "Looks fancy, takes three minutes. Good rest-day breakfast or after a Saturday morning run.",
+    equipment: ["Tall glass or jar", "Spoon"],
     steps: [
       {
         order: 1,
@@ -154,6 +161,7 @@ export const RECIPES: Recipe[] = [
         order: 3,
         title: "Repeat and finish",
         body: "Add another ½ cup yogurt on top. Finish with another small handful of berries and a few crushed almonds if you have them.",
+        mistake: "Buying flavored yogurt instead of plain. The added sugar in flavored kinds can hit 20+ grams. Plain yogurt + honey gives you control.",
       },
     ],
     notes: [
@@ -170,8 +178,9 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(8964022),
+    imageUrl: pexels(34644336),
     whenToEat: "Reliable school lunch. Packs in a thermos, no microwave needed.",
+    equipment: ["Cutting board", "Knife", "Lunch container"],
     steps: [
       {
         order: 1,
@@ -203,12 +212,14 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 20,
     imageUrl: pexels(5602477),
     whenToEat: "Cooks in 20 min, reheats in a thermos. Pre-portion for the week on Sunday.",
+    equipment: ["Large pot", "Skillet or grill pan", "Colander", "Tongs", "4 meal-prep containers"],
     steps: [
       {
         order: 1,
         title: "Boil the pasta",
         body: "Boil 12 oz whole-grain pasta in heavily salted water until al dente, about 9 minutes. Save ½ cup pasta water before draining.",
         timerSec: 540,
+        mistake: "Forgetting to salt the water. Salt the water like the sea. Unsalted pasta tastes flat no matter how good the sauce is.",
       },
       {
         order: 2,
@@ -231,6 +242,7 @@ export const RECIPES: Recipe[] = [
         order: 5,
         title: "Portion and cool",
         body: "Divide into 4 meal-prep containers. Cool completely on the counter before sealing, otherwise condensation makes everything soggy by Tuesday.",
+        mistake: "Sealing warm food. Steam condenses inside the lid, drips back, makes everything soggy by day two. Always cool first.",
       },
     ],
     notes: [
@@ -247,8 +259,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 2,
-    imageUrl: pexels(7440377),
+    imageUrl: pexels(33489594),
     whenToEat: "Travel-friendly recovery snack. Natural sugar + protein in 30 seconds.",
+    equipment: ["Knife", "Small container (if packing)"],
     steps: [
       {
         order: 1,
@@ -272,8 +285,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    imageUrl: pexels(7440380),
+    imageUrl: pexels(12058524),
     whenToEat: "Soccer-bag staple. Does not melt as fast as you would think.",
+    equipment: ["Small container or zip bag"],
     steps: [
       {
         order: 1,
@@ -294,6 +308,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 2,
     imageUrl: pexels(5852457),
     whenToEat: "Within 30 minutes of practice ends. Recovery window where protein + carbs hit fastest.",
+    equipment: ["Bowl or thermos", "Spoon"],
     steps: [
       {
         order: 1,
@@ -320,6 +335,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 1,
     imageUrl: pexels(8922007),
     whenToEat: "Pre-practice quick energy + slow-release fat. Eat 30-45 min before warm-ups.",
+    equipment: ["Small bag or container"],
     steps: [
       {
         order: 1,
@@ -342,6 +358,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 30,
     imageUrl: pexels(9893216),
     whenToEat: "The workhorse dinner. Boring on paper, perfect for any day type.",
+    equipment: ["Small pot (rice)", "Grill pan or skillet (chicken)", "Steamer or microwave (broccoli)", "Tongs", "Meat thermometer"],
     steps: [
       {
         order: 1,
@@ -359,6 +376,7 @@ export const RECIPES: Recipe[] = [
         title: "Sear the chicken",
         body: "Heat a grill pan or non-stick skillet over medium-high. Cook the chicken 5 minutes per side until golden and 165°F internal. Let rest 5 minutes before slicing.",
         timerSec: 600,
+        mistake: "Slicing immediately. Skipping the 5-min rest makes the meat dry because all the juices run out on the cutting board.",
       },
       {
         order: 4,
@@ -389,8 +407,9 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    imageUrl: pexels(33706292),
+    imageUrl: pexels(14515103),
     whenToEat: "Omega-3s for recovery + complex carbs for the next day. Best as a rest-day or post-match dinner.",
+    equipment: ["Sheet pan", "Non-stick skillet", "Steamer or microwave", "Fish spatula", "Tongs"],
     steps: [
       {
         order: 1,
@@ -414,6 +433,7 @@ export const RECIPES: Recipe[] = [
         title: "Cook the salmon",
         body: "Heat 1 tbsp olive oil in a non-stick pan over medium-high. Place salmon skin-side down. Cook 4 minutes without moving. Flip and cook 2-3 more minutes until just cooked through. The center should still be slightly translucent.",
         timerSec: 360,
+        mistake: "Overcooking the salmon. Pull it just before it looks done in the middle. Carryover heat finishes it. Dry salmon ruins the whole meal.",
       },
       {
         order: 5,
@@ -440,6 +460,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 20,
     imageUrl: pexels(8448335),
     whenToEat: "Family favorite. Build-your-own bar means less complaining at the table.",
+    equipment: ["Large skillet", "Wooden spatula", "Small bowls for toppings"],
     steps: [
       {
         order: 1,
@@ -467,6 +488,7 @@ export const RECIPES: Recipe[] = [
         order: 5,
         title: "Build and eat",
         body: "Each person builds their own tacos. 2-3 tacos per athlete portion. Greek yogurt + lime + cheddar is the combo that wins.",
+        mistake: "Skipping the warm tortilla step. Cold tortillas crack when you fold them. Even 10 seconds in the microwave makes them pliable.",
       },
     ],
     notes: [
@@ -483,6 +505,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 25,
     imageUrl: pexels(9304081),
     whenToEat: "Classic carb-load. Eat the night before a match for sustained next-day energy.",
+    equipment: ["Large pot", "Large skillet", "Tongs", "Salad bowl", "Colander"],
     steps: [
       {
         order: 1,
@@ -506,6 +529,7 @@ export const RECIPES: Recipe[] = [
         order: 4,
         title: "Toss it",
         body: "Add the drained pasta directly to the sauce skillet. Toss with tongs until every noodle is coated. Add more pasta water if it looks dry.",
+        mistake: "Pouring sauce on plated pasta. Wrong way. Always add the PASTA to the SAUCE in the skillet so the starch and oil bind. Otherwise sauce pools at the bottom.",
       },
       {
         order: 5,
@@ -527,6 +551,7 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 20,
     imageUrl: pexels(7340936),
     whenToEat: "Same hibachi technique, dinner-portioned. Works for any day type.",
+    equipment: ["Small pot (rice)", "Wok or large skillet", "Tongs"],
     steps: [
       {
         order: 1,
@@ -544,6 +569,7 @@ export const RECIPES: Recipe[] = [
         title: "Sear screaming hot",
         body: "Heat 1 tbsp avocado oil in a wok or large skillet over HIGH heat for 2 minutes. Add chicken in a single layer. Sear 4 minutes without moving, then flip and cook 2 more minutes.",
         timerSec: 360,
+        mistake: "Cooking on medium. Medium just steams the chicken. HIGH heat is non-negotiable for the char.",
       },
       {
         order: 4,
@@ -564,7 +590,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
 
-  // ────────── EXISTING HIBACHI RECIPE (lunch + dinner via stirfry actually has its own now) ──────────
+  // ────────── HIBACHI (signature recipe) ──────────
   {
     slug: "hibachi-chicken",
     name: "Hibachi Chicken (Sunday meal prep)",
@@ -573,11 +599,13 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 25,
     imageUrl: pexels(6107772),
     whenToEat: "One Sunday cook session feeds 5 school lunches plus 3 dinner reheats. The signature Elvis recipe.",
+    equipment: ["Large cast iron or stainless steel skillet (or wok)", "Tongs", "5 meal-prep containers", "Sharp knife"],
     steps: [
       {
         order: 1,
         title: "Slice the chicken thin",
         body: "Slice 2 lb boneless skinless chicken breast into thin strips, about ½ inch thick. Thin cuts are the secret. They cook fast, stay juicy, and reheat well in school containers without drying out. Pat dry with paper towels for a better sear.",
+        mistake: "Skipping the pat-dry step. Wet chicken steams instead of sears. No char, no flavor.",
       },
       {
         order: 2,
@@ -595,6 +623,7 @@ export const RECIPES: Recipe[] = [
         title: "Sear the chicken",
         body: "Add the chicken in a single layer. Do NOT overcrowd the pan. Cook in 2 batches if needed. Let it sear untouched for 4 minutes, then flip and cook another 2 minutes until golden brown on both sides.",
         timerSec: 240,
+        mistake: "Stirring the chicken constantly. Don't. Leave it alone for the full 4 minutes so it gets the hibachi char.",
       },
       {
         order: 5,
