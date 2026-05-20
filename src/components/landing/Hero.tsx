@@ -1,66 +1,110 @@
+"use client";
+
 import Link from "next/link";
+import { motion } from "motion/react";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
-import { MockMealCard } from "@/components/landing/MockMealCard";
-import { MockWaterTracker } from "@/components/landing/MockWaterTracker";
+import { LiveCalculator } from "@/components/landing/LiveCalculator";
+
+const fadeIn = {
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
+};
 
 export function Hero() {
   return (
     <section
       aria-labelledby="hero-title"
-      className="mx-auto w-full max-w-6xl px-4 pt-10 pb-16 md:px-8 md:pt-16 md:pb-24"
+      className="relative overflow-hidden px-4 pt-10 pb-16 md:px-8 md:pt-16 md:pb-24"
     >
-      <div className="grid items-center gap-10 md:grid-cols-[1.1fr_1fr] md:gap-12">
+      {/* Decorative gradient blobs */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
+        <motion.div
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 0.5, scale: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="absolute -top-32 -right-20 h-80 w-80 rounded-full bg-meal-dinner blur-3xl"
+        />
+        <motion.div
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 0.45, scale: 1 }}
+          transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+          className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-meal-breakfast blur-3xl"
+        />
+      </div>
+
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-10 md:grid-cols-[1.05fr_1fr] md:gap-12">
         <div>
-          <p className="inline-flex items-center rounded-full border border-border bg-surface px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary">
+          <motion.p
+            {...fadeIn}
+            transition={{ duration: 0.45, delay: 0 }}
+            className="inline-flex items-center rounded-full border border-border bg-surface px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary"
+          >
             For athletes 8 and up
-          </p>
-          <h1 id="hero-title" className="mt-4">
+          </motion.p>
+
+          <motion.h1
+            id="hero-title"
+            {...fadeIn}
+            transition={{ duration: 0.55, delay: 0.05 }}
+            className="mt-4"
+          >
             Plan the week. Shop once. Cook smart.
-          </h1>
-          <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
+          </motion.h1>
+
+          <motion.p
+            {...fadeIn}
+            transition={{ duration: 0.55, delay: 0.15 }}
+            className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg"
+          >
             A weekly meal planner built for athletes, from soccer kids to adult lifters. Pick
             what they will eat, get an auto grocery list, and track hydration. No signup needed
             to start.
-          </p>
+          </motion.p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          <motion.div
+            {...fadeIn}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-7 flex flex-wrap items-center gap-3"
+          >
             <Link
               href="/onboarding"
-              className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:opacity-90"
+              className="group inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               Try the planner
-              <ArrowRight size={16} weight="bold" aria-hidden />
+              <ArrowRight
+                size={16}
+                weight="bold"
+                aria-hidden
+                className="transition group-hover:translate-x-0.5"
+              />
             </Link>
             <a
               href="#how"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:border-primary"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-6 py-3 text-sm font-semibold text-ink transition hover:-translate-y-0.5 hover:border-primary"
             >
               See how it works
             </a>
-          </div>
+          </motion.div>
 
-          <p className="mt-5 text-sm text-muted-foreground">
+          <motion.p
+            {...fadeIn}
+            transition={{ duration: 0.55, delay: 0.35 }}
+            className="mt-5 text-sm text-muted-foreground"
+          >
             Built by a parent of a competitive youth soccer player. Free, no ads, no upsell.
-          </p>
+          </motion.p>
         </div>
 
-        <div aria-hidden className="relative flex flex-col gap-3">
-          <MockMealCard
-            slot="lunch"
-            mealName="Hibachi chicken rice bowl"
-            description="Elvis's favorite school lunch. One Sunday cook feeds the week."
-            imageEmoji="🍱"
-            className="md:translate-x-4"
-          />
-          <MockWaterTracker filled={6} total={10} className="md:-translate-x-4" />
-          <MockMealCard
-            slot="dinner"
-            mealName="Salmon + sweet potato"
-            description="Recovery dinner. Omega-3s and slow carbs."
-            imageEmoji="🐟"
-            className="md:translate-x-2"
-          />
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <LiveCalculator />
+        </motion.div>
       </div>
     </section>
   );

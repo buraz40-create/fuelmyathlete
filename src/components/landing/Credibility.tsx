@@ -1,4 +1,5 @@
 import { Books, Heartbeat, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
+import { Reveal } from "./Reveal";
 
 const PILLARS = [
   {
@@ -25,34 +26,37 @@ export function Credibility() {
       className="border-y border-border bg-primary-soft/30 px-4 py-16 md:px-8 md:py-24"
     >
       <div className="mx-auto w-full max-w-6xl">
-        <header className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-            Built on real guidelines
-          </p>
-          <h2 id="credibility-title" className="mt-2">
-            Backed by real sports nutrition science.
-          </h2>
-        </header>
+        <Reveal>
+          <header className="mx-auto max-w-2xl text-center">
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+              Built on real guidelines
+            </p>
+            <h2 id="credibility-title" className="mt-2">
+              Backed by real sports nutrition science.
+            </h2>
+          </header>
+        </Reveal>
 
         <ul className="mt-10 grid gap-4 md:grid-cols-3">
-          {PILLARS.map(({ icon: Icon, title, body }) => (
-            <li
-              key={title}
-              className="rounded-3xl border border-border bg-surface p-5 shadow-sm md:p-6"
-            >
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-background text-primary">
-                <Icon size={24} weight="duotone" aria-hidden />
-              </span>
-              <h3 className="mt-4 text-base">{title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{body}</p>
-            </li>
+          {PILLARS.map(({ icon: Icon, title, body }, i) => (
+            <Reveal key={title} as="li" delay={i * 0.08}>
+              <article className="h-full rounded-3xl border border-border bg-surface p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md md:p-6">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-background text-primary">
+                  <Icon size={24} weight="duotone" aria-hidden />
+                </span>
+                <h3 className="mt-4 text-base">{title}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{body}</p>
+              </article>
+            </Reveal>
           ))}
         </ul>
 
-        <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-muted-foreground">
-          FuelMyAthlete provides general guidance, not medical advice. For personalized sports
-          nutrition plans, consult a registered sports dietitian or pediatrician.
-        </p>
+        <Reveal delay={0.2}>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-xs text-muted-foreground">
+            FuelMyAthlete provides general guidance, not medical advice. For personalized sports
+            nutrition plans, consult a registered sports dietitian or pediatrician.
+          </p>
+        </Reveal>
       </div>
     </section>
   );

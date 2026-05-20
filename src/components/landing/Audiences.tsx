@@ -1,4 +1,5 @@
 import { Baby, PersonSimpleRun, UsersThree } from "@phosphor-icons/react/dist/ssr";
+import { Reveal } from "./Reveal";
 
 const AUDIENCES = [
   {
@@ -24,31 +25,32 @@ export function Audiences() {
       aria-labelledby="audiences-title"
       className="mx-auto w-full max-w-6xl px-4 py-16 md:px-8 md:py-24"
     >
-      <header className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-          Who it is for
-        </p>
-        <h2 id="audiences-title" className="mt-2">
-          One product, every athlete in your house.
-        </h2>
-        <p className="mt-3 text-base text-muted-foreground">
-          Same app adapts by age and body weight, so the calculations are right whether you are
-          planning for an 11-year-old soccer kid or a 30-year-old training for a marathon.
-        </p>
-      </header>
+      <Reveal>
+        <header className="mx-auto max-w-2xl text-center">
+          <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+            Who it is for
+          </p>
+          <h2 id="audiences-title" className="mt-2">
+            One product, every athlete in your house.
+          </h2>
+          <p className="mt-3 text-base text-muted-foreground">
+            Same app adapts by age and body weight, so the calculations are right whether you are
+            planning for an 11-year-old soccer kid or a 30-year-old training for a marathon.
+          </p>
+        </header>
+      </Reveal>
 
       <ul className="mt-10 grid gap-4 md:grid-cols-3">
-        {AUDIENCES.map(({ icon: Icon, title, body }) => (
-          <li
-            key={title}
-            className="rounded-3xl border border-border bg-surface p-5 shadow-sm md:p-6"
-          >
-            <span className="grid h-12 w-12 place-items-center rounded-2xl bg-primary-soft text-primary">
-              <Icon size={26} weight="duotone" aria-hidden />
-            </span>
-            <h3 className="mt-4 text-lg">{title}</h3>
-            <p className="mt-1.5 text-sm text-muted-foreground">{body}</p>
-          </li>
+        {AUDIENCES.map(({ icon: Icon, title, body }, i) => (
+          <Reveal key={title} as="li" delay={i * 0.08}>
+            <article className="h-full rounded-3xl border border-border bg-surface p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md md:p-6">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-primary-soft text-primary">
+                <Icon size={26} weight="duotone" aria-hidden />
+              </span>
+              <h3 className="mt-4 text-lg">{title}</h3>
+              <p className="mt-1.5 text-sm text-muted-foreground">{body}</p>
+            </article>
+          </Reveal>
         ))}
       </ul>
     </section>

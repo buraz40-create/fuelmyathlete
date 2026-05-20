@@ -1,4 +1,5 @@
 import { Plus } from "@phosphor-icons/react/dist/ssr";
+import { Reveal } from "./Reveal";
 
 const QUESTIONS = [
   {
@@ -30,17 +31,19 @@ export function Faq() {
       className="border-y border-border bg-surface/50 px-4 py-16 md:px-8 md:py-24"
     >
       <div className="mx-auto w-full max-w-3xl">
-        <header className="text-center">
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary">FAQ</p>
-          <h2 id="faq-title" className="mt-2">
-            Common questions
-          </h2>
-        </header>
+        <Reveal>
+          <header className="text-center">
+            <p className="text-xs font-semibold uppercase tracking-wider text-primary">FAQ</p>
+            <h2 id="faq-title" className="mt-2">
+              Common questions
+            </h2>
+          </header>
+        </Reveal>
 
         <ul className="mt-8 flex flex-col gap-3">
-          {QUESTIONS.map((item) => (
-            <li key={item.q}>
-              <details className="group rounded-2xl border border-border bg-background p-4 md:p-5">
+          {QUESTIONS.map((item, i) => (
+            <Reveal key={item.q} as="li" delay={i * 0.05} y={16}>
+              <details className="group rounded-2xl border border-border bg-background p-4 transition hover:border-primary/30 md:p-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-ink">
                   {item.q}
                   <Plus
@@ -52,7 +55,7 @@ export function Faq() {
                 </summary>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
               </details>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
+import { Reveal } from "./Reveal";
 
 export function FinalCta() {
   return (
@@ -7,7 +8,7 @@ export function FinalCta() {
       aria-labelledby="final-cta-title"
       className="mx-auto w-full max-w-3xl px-4 py-20 md:px-8 md:py-28"
     >
-      <div className="rounded-3xl bg-primary px-6 py-12 text-center text-primary-foreground shadow-sm md:px-12 md:py-16">
+      <Reveal className="rounded-3xl bg-primary px-6 py-12 text-center text-primary-foreground shadow-sm md:px-12 md:py-16">
         <h2 id="final-cta-title" className="text-3xl md:text-4xl text-primary-foreground">
           Plan your first week in 60 seconds.
         </h2>
@@ -16,12 +17,17 @@ export function FinalCta() {
         </p>
         <Link
           href="/onboarding"
-          className="mt-7 inline-flex items-center gap-2 rounded-full bg-background px-7 py-3.5 text-sm font-semibold text-primary shadow-sm transition hover:opacity-90"
+          className="group mt-7 inline-flex items-center gap-2 rounded-full bg-background px-7 py-3.5 text-sm font-semibold text-primary shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
         >
           Try the planner
-          <ArrowRight size={16} weight="bold" aria-hidden />
+          <ArrowRight
+            size={16}
+            weight="bold"
+            aria-hidden
+            className="transition group-hover:translate-x-0.5"
+          />
         </Link>
-      </div>
+      </Reveal>
     </section>
   );
 }

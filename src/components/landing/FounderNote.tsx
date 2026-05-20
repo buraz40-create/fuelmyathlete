@@ -1,4 +1,5 @@
 import { Quotes } from "@phosphor-icons/react/dist/ssr";
+import { Reveal } from "./Reveal";
 
 export function FounderNote() {
   return (
@@ -6,7 +7,7 @@ export function FounderNote() {
       aria-labelledby="founder-title"
       className="mx-auto w-full max-w-3xl px-4 py-16 md:px-8 md:py-24"
     >
-      <article className="rounded-3xl border border-border bg-surface p-6 shadow-sm md:p-10">
+      <Reveal as="article" className="rounded-3xl border border-border bg-surface p-6 shadow-sm md:p-10">
         <Quotes size={32} weight="duotone" aria-hidden className="text-primary" />
         <h2 id="founder-title" className="mt-4 text-2xl leading-snug md:text-3xl">
           I built this because Elvis was always hungry but my grocery list never matched his
@@ -31,7 +32,7 @@ export function FounderNote() {
           </a>
           .
         </p>
-      </article>
+      </Reveal>
     </section>
   );
 }
