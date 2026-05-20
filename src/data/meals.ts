@@ -15,7 +15,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 3,
     suitableFor: ["school", "rest"],
     kidRating: 5,
-    imageUrl: pexels(34292),
+    imageUrl: pexels(9788573),
     recipeSlug: "cereal-banana-milk",
     nutrition: { kcal: 355, proteinG: 13, carbsG: 70, fatG: 4, fiberG: 7, source: "USDA estimate" },
     ingredients: [
