@@ -2,8 +2,9 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import { SUPABASE_ANON_KEY, SUPABASE_URL, isSupabaseConfigured } from "./config";
 
-const PROTECTED_PREFIXES = ["/planner", "/settings"];
-const AUTH_PATHS = ["/sign-in", "/auth/callback", "/onboarding"];
+// Auth is OPTIONAL in this app. Anyone can use the full planner in localStorage
+// mode without signing in. Sign-in only unlocks cross-device sync.
+// This middleware only refreshes the auth cookie when present; it never gates routes.
 
 export async function updateSession(request: NextRequest): Promise<NextResponse> {
   let supabaseResponse = NextResponse.next({ request });
@@ -26,24 +27,8 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
     },
   });
 
-  // Refresh the session if it exists; returns current user.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  const pathname = request.nextUrl.pathname;
-  const isProtected = PROTECTED_PREFIXES.some((p) => pathname.startsWith(p));
-  const isAuthPath = AUTH_PATHS.some((p) => pathname.startsWith(p));
-
-  if (!user && isProtected) {
-    const redirectUrl = new URL("/sign-in", request.url);
-    redirectUrl.searchParams.set("next", pathname);
-    return NextResponse.redirect(redirectUrl);
-  }
-
-  if (user && isAuthPath && !pathname.startsWith("/auth/callback") && !pathname.startsWith("/onboarding")) {
-    return NextResponse.redirect(new URL("/planner", request.url));
-  }
+  // Refresh session cookie if one exists. Don't redirect anyone.
+  await supabase.auth.getUser();
 
   return supabaseResponse;
 }

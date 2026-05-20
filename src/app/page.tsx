@@ -1,16 +1,17 @@
 import { redirect } from "next/navigation";
-import { isSupabaseConfigured } from "@/lib/supabase/config";
-import { getCurrentUser } from "@/lib/auth";
 
-export default async function Home() {
-  if (!isSupabaseConfigured) {
-    // Local dev / localStorage-only mode: skip auth entirely.
-    redirect("/planner");
-  }
+interface HomeProps {
+  searchParams: Promise<{ code?: string; error?: string }>;
+}
 
-  const user = await getCurrentUser();
-  if (user) {
-    redirect("/planner");
+export default async function Home({ searchParams }: HomeProps) {
+  const params = await searchParams;
+  // If a magic-link landed at the root (because Supabase fell back to Site URL),
+  // forward it to /auth/callback so the session can be exchanged correctly.
+  if (params.code) {
+    redirect(`/auth/callback?code=${encodeURIComponent(params.code)}`);
   }
-  redirect("/sign-in");
+  // Auth is optional. Default everyone to the planner.
+  // ProfileGate handles first-time users by sending them to /onboarding.
+  redirect("/planner");
 }
