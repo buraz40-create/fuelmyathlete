@@ -84,14 +84,15 @@ export default function RecipesPage() {
           <header className="flex items-center gap-2.5">
             <Leaf size={20} weight="duotone" aria-hidden className="flex-shrink-0 text-primary" />
             <h2 id="whole-food-title" className="text-base font-semibold text-ink md:text-lg">
-              Whole food only. No protein powders.
+              Whole-food first
             </h2>
           </header>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Every recipe gets its protein from real food: Greek yogurt, eggs, chicken, cottage
-            cheese, peanut butter, hemp hearts. The AAP does not recommend protein supplements for
-            kids and teens under 18, and frankly an athlete eating well does not need them.
-            Cottage cheese smoothies hit 26g of protein without any powder.
+            Every recipe starts with real food: Greek yogurt, eggs, cottage cheese, peanut
+            butter, hemp hearts. The cottage cheese smoothie alone hits 26g of protein per serving
+            with no powder. For adult athletes who want extra protein on top, smoothie recipes
+            include an optional <strong className="text-ink">Boost it</strong> section with how to
+            add a scoop.
           </p>
         </aside>
 

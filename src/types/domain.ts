@@ -72,6 +72,13 @@ export interface RecipeStep {
   mistake?: string;
 }
 
+export interface ProteinBoost {
+  description: string;
+  addedProteinG: number;
+  addedKcal: number;
+  note?: string;
+}
+
 export interface Recipe {
   slug: string;
   name: string;
@@ -83,6 +90,7 @@ export interface Recipe {
   slot?: MealSlot;
   imageUrl?: string;
   equipment?: string[];
+  proteinBoost?: ProteinBoost;
 }
 
 export interface DayTypeConfig {

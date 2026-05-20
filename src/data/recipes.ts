@@ -104,6 +104,12 @@ export const RECIPES: Recipe[] = [
       "Use frozen fruit, not ice. Better texture, more flavor.",
       "Want it thicker? Add another half banana. Thinner? More milk.",
     ],
+    proteinBoost: {
+      description: "Add 1 scoop (~25-30g) whey or plant-based protein powder before blending. Vanilla works best with berries.",
+      addedProteinG: 25,
+      addedKcal: 110,
+      note: "Pick a third-party tested brand (NSF Certified for Sport or Informed Sport). Protein powders are supplements, not regulated like food.",
+    },
   },
   {
     slug: "pb-banana-power",
@@ -138,6 +144,12 @@ export const RECIPES: Recipe[] = [
       "Freeze the banana the night before. It's the trick for thick, creamy texture.",
       "Sub almond butter for peanut allergies. Same effect.",
     ],
+    proteinBoost: {
+      description: "Add 1 scoop chocolate or vanilla whey/plant protein. Pairs naturally with the PB and banana flavors.",
+      addedProteinG: 25,
+      addedKcal: 110,
+      note: "Already 22g from real food. Boost takes you to ~47g per serving, more than enough for a hard training day.",
+    },
   },
   {
     slug: "green-machine",
@@ -172,6 +184,11 @@ export const RECIPES: Recipe[] = [
       "Hemp hearts add 3 grams of plant protein and omega-3s. Skip if you don't have them.",
       "Frozen mango is the texture trick. Fresh mango makes it watery.",
     ],
+    proteinBoost: {
+      description: "Add 1 scoop vanilla or unflavored protein powder. Skip chocolate, it fights the mango.",
+      addedProteinG: 25,
+      addedKcal: 110,
+    },
   },
   {
     slug: "berry-oat-fuel",
@@ -210,6 +227,11 @@ export const RECIPES: Recipe[] = [
       "Skip the soak if you're rushing. Just blend 20-30 seconds longer.",
       "Berries give you anthocyanins (recovery antioxidants) without needing supplements.",
     ],
+    proteinBoost: {
+      description: "Add 1 scoop vanilla or unflavored protein powder. Goes in with the oats during the soak step.",
+      addedProteinG: 25,
+      addedKcal: 110,
+    },
   },
   {
     slug: "vanilla-protein-punch",
@@ -244,6 +266,12 @@ export const RECIPES: Recipe[] = [
       "If you're skeptical of cottage cheese in a smoothie: don't be. Blended, you cannot taste it.",
       "Add ½ cup frozen berries or peaches to mix it up.",
     ],
+    proteinBoost: {
+      description: "Add 1 scoop vanilla whey or casein. Doubles down on the slow-release protein angle.",
+      addedProteinG: 25,
+      addedKcal: 110,
+      note: "Already 26g from cottage cheese. Boost takes you to ~51g, an unusually high amount for a single serving.",
+    },
   },
   {
     slug: "tropical-pre-game",
@@ -277,6 +305,12 @@ export const RECIPES: Recipe[] = [
       "Light yogurt portion on purpose. Too much protein pre-game slows digestion.",
       "If practice is over 60 min away, add 2 tbsp oats for more sustained carbs.",
     ],
+    proteinBoost: {
+      description: "Generally skip the powder pre-game. Heavy protein slows digestion and can sit badly on the field.",
+      addedProteinG: 25,
+      addedKcal: 110,
+      note: "If you must, use a light dose (½ scoop) and only if you've tested it before. Race-day is not the day to try new things.",
+    },
   },
   {
     slug: "chocolate-cherry-recovery",
@@ -311,6 +345,12 @@ export const RECIPES: Recipe[] = [
       "18 grams of protein from yogurt alone. Adequate for recovery, no powder needed.",
       "Sub regular milk for almond milk if you don't have it.",
     ],
+    proteinBoost: {
+      description: "Add 1 scoop chocolate whey or plant protein. Hides perfectly in the cocoa-cherry flavor.",
+      addedProteinG: 25,
+      addedKcal: 110,
+      note: "Recovery window is real. If you train hard 5+ days a week, the boost is worth it. Casual training, the yogurt is enough.",
+    },
   },
   {
     slug: "english-muffin-pb",
