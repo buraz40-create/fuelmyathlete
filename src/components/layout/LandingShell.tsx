@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { Logo } from "@/components/brand/Logo";
 import { AppFooter } from "@/components/layout/AppFooter";
+import { UserMenu } from "@/components/auth/UserMenu";
 
 export function LandingShell({ children }: { children: ReactNode }) {
   return (
@@ -19,12 +20,7 @@ export function LandingShell({ children }: { children: ReactNode }) {
             >
               Recipes
             </Link>
-            <Link
-              href="/sign-in"
-              className="hidden text-muted-foreground transition hover:text-ink sm:inline"
-            >
-              Sign in
-            </Link>
+            <UserMenu className="hidden sm:inline-flex" />
             <Link
               href="/onboarding"
               className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:opacity-90"

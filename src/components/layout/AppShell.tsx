@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { AppFooter } from "@/components/layout/AppFooter";
+import { UserMenu } from "@/components/auth/UserMenu";
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
@@ -24,12 +25,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             >
               Profile
             </Link>
-            <Link
-              href="/sign-in"
-              className="rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary"
-            >
-              Sign in
-            </Link>
+            <UserMenu />
           </nav>
         </div>
       </header>
