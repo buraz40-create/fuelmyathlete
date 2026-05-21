@@ -7,8 +7,10 @@ import {
   EnvelopeSimple,
   Eye,
   EyeSlash,
+  GoogleLogo,
   LockKey,
 } from "@phosphor-icons/react/dist/ssr";
+import type { Provider } from "@supabase/supabase-js";
 import { Logo } from "@/components/brand/Logo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -112,6 +114,28 @@ export default function SignInPage() {
     setStatus("sent");
   }
 
+  async function handleOAuth(provider: Provider) {
+    const supabase = getBrowserSupabase();
+    if (!supabase) {
+      setError("Sign-in is not available in this environment.");
+      setStatus("error");
+      return;
+    }
+    setStatus("loading");
+    setError(null);
+    const { error: authError } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${siteUrl.replace(/\/$/, "")}/auth/callback`,
+      },
+    });
+    if (authError) {
+      setError(authError.message);
+      setStatus("error");
+    }
+    // On success, Supabase redirects the browser to the provider.
+  }
+
   async function handleMagicLink() {
     const supabase = getBrowserSupabase();
     if (!supabase) return;
@@ -162,7 +186,27 @@ export default function SignInPage() {
           </p>
         </header>
 
-        {mode !== "forgot" && (
+        {mode !== "forgot" && status !== "sent" && (
+          <div className="mb-5 space-y-3">
+            <button
+              type="button"
+              onClick={() => handleOAuth("google")}
+              disabled={status === "loading"}
+              className="flex w-full items-center justify-center gap-2.5 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md disabled:opacity-50"
+            >
+              <GoogleLogo size={18} weight="bold" aria-hidden className="text-[#4285F4]" />
+              Continue with Google
+            </button>
+
+            <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              <span className="h-px flex-1 bg-border" aria-hidden />
+              <span>Or with email</span>
+              <span className="h-px flex-1 bg-border" aria-hidden />
+            </div>
+          </div>
+        )}
+
+        {mode !== "forgot" && status !== "sent" && (
           <nav
             role="tablist"
             aria-label="Sign in or create account"
