@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { ArrowRight, BookOpen, Clock } from "@phosphor-icons/react/dist/ssr";
 import { AppShell } from "@/components/layout/AppShell";
 import { GUIDES } from "@/data/guides";
@@ -24,8 +25,49 @@ const CATEGORY_LABEL: Record<string, string> = {
 };
 
 export default function GuidesIndexPage() {
+  const collectionLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${SITE_URL}/guides#collection`,
+    name: "Athlete Nutrition Guides",
+    description:
+      "Evidence-based guides on pre-workout meals, pre-game fueling, hydration, and recovery for athletes 8 and up.",
+    url: `${SITE_URL}/guides`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: GUIDES.length,
+      itemListElement: GUIDES.map((g, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: `${SITE_URL}/guides/${g.slug}`,
+        name: g.title,
+      })),
+    },
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Guides", item: `${SITE_URL}/guides` },
+    ],
+  };
+
   return (
     <AppShell>
+      <Script
+        id="ld-guides-collection"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
+      />
+      <Script
+        id="ld-guides-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <section
         aria-labelledby="guides-title"
         className="mx-auto w-full max-w-5xl px-4 py-8 md:px-8 md:py-12"

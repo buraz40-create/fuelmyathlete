@@ -1,7 +1,7 @@
 import { Plus } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "./Reveal";
 
-const QUESTIONS = [
+export const LANDING_FAQ = [
   {
     q: "Is it free?",
     a: "Yes, completely free for individual athletes and families. No account required to start, no credit card, no ads.",
@@ -41,7 +41,7 @@ export function Faq() {
         </Reveal>
 
         <ul className="mt-8 flex flex-col gap-3">
-          {QUESTIONS.map((item, i) => (
+          {LANDING_FAQ.map((item, i) => (
             <Reveal key={item.q} as="li" delay={i * 0.05} y={16}>
               <details className="group rounded-2xl border border-border bg-background p-4 transition hover:border-primary/30 md:p-5">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-left font-semibold text-ink">

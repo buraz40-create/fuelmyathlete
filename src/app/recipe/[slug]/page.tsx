@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
@@ -17,11 +18,48 @@ import { ProteinBoostCard } from "@/components/recipe/ProteinBoostCard";
 import { FoodImage } from "@/components/food/FoodImage";
 import { RECIPES, RECIPES_BY_SLUG } from "@/data/recipes";
 import { MEALS } from "@/data/meals";
+import { INGREDIENT_BY_SLUG } from "@/data/ingredients";
 import { cn } from "@/lib/utils";
 import type { MealSlot } from "@/types/domain";
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://fuelmyathlete.com");
+
 export function generateStaticParams() {
   return RECIPES.map((r) => ({ slug: r.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const recipe = RECIPES_BY_SLUG[slug];
+  if (!recipe) return {};
+  const url = `${SITE_URL}/recipe/${recipe.slug}`;
+  const description = recipe.whenToEat
+    ? `${recipe.whenToEat} Step-by-step recipe, athlete portions, full nutrition.`
+    : `${recipe.name}: step-by-step recipe with athlete portions, nutrition, and timing. ${recipe.totalMinutes}-minute prep.`;
+  return {
+    title: `${recipe.name} Recipe`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      title: `${recipe.name} Recipe`,
+      description,
+      url,
+      images: recipe.imageUrl ? [{ url: recipe.imageUrl }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${recipe.name} Recipe`,
+      description,
+      images: recipe.imageUrl ? [recipe.imageUrl] : undefined,
+    },
+  };
 }
 
 const SLOT_LABEL: Record<MealSlot, string> = {
@@ -49,27 +87,72 @@ export default async function RecipePage({
 
   // The meal whose ingredients + nutrition belong to this recipe (matched by recipeSlug).
   const linkedMeal = MEALS.find((m) => m.recipeSlug === recipe.slug);
+  const url = `${SITE_URL}/recipe/${recipe.slug}`;
+  const orgId = `${SITE_URL}/#organization`;
+  const personId = `${SITE_URL}/#editorial-team`;
 
-  const jsonLd = {
+  const recipeIngredientStrings = (linkedMeal?.ingredients ?? []).map((mi) => {
+    const ing = INGREDIENT_BY_SLUG[mi.ingredientSlug];
+    if (!ing) return `${mi.quantity} ${mi.ingredientSlug}`;
+    return `${mi.quantity} ${ing.unit} ${ing.name}${mi.notes ? ` (${mi.notes})` : ""}`;
+  });
+
+  const keywords = [
+    recipe.slot && `${recipe.slot} recipe`,
+    linkedMeal?.tags?.join(", "),
+    "athlete nutrition",
+    "youth athlete meal",
+    recipe.name.toLowerCase(),
+  ]
+    .filter(Boolean)
+    .join(", ");
+
+  const recipeJsonLd = {
     "@context": "https://schema.org",
     "@type": "Recipe",
+    "@id": `${url}#recipe`,
     name: recipe.name,
-    image: recipe.imageUrl,
+    description: recipe.whenToEat ?? `${recipe.name}: step-by-step recipe with athlete portions.`,
+    image: recipe.imageUrl ? [recipe.imageUrl] : undefined,
+    url,
     recipeYield: `${recipe.servings} servings`,
     totalTime: `PT${recipe.totalMinutes}M`,
-    recipeCategory: recipe.slot,
+    prepTime: `PT${Math.max(Math.floor(recipe.totalMinutes / 2), 1)}M`,
+    cookTime: `PT${Math.max(Math.floor(recipe.totalMinutes / 2), 1)}M`,
+    recipeCategory: recipe.slot ?? "meal",
+    recipeCuisine: "American",
+    keywords,
+    recipeIngredient: recipeIngredientStrings,
+    suitableForDiet: ["https://schema.org/LowFatDiet"],
+    author: { "@id": personId },
+    publisher: { "@id": orgId },
+    datePublished: "2026-04-15",
+    dateModified: "2026-05-21",
     nutrition: linkedMeal?.nutrition && {
       "@type": "NutritionInformation",
       calories: `${linkedMeal.nutrition.kcal} kcal`,
       proteinContent: `${linkedMeal.nutrition.proteinG} g`,
       carbohydrateContent: `${linkedMeal.nutrition.carbsG} g`,
       fatContent: `${linkedMeal.nutrition.fatG} g`,
+      fiberContent: linkedMeal.nutrition.fiberG ? `${linkedMeal.nutrition.fiberG} g` : undefined,
+      servingSize: `1 serving (yields ${recipe.servings})`,
     },
     recipeInstructions: recipe.steps.map((s) => ({
       "@type": "HowToStep",
       name: s.title,
       text: s.body,
+      position: s.order,
     })),
+  };
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Recipes", item: `${SITE_URL}/recipes` },
+      { "@type": "ListItem", position: 3, name: recipe.name, item: url },
+    ],
   };
 
   return (
@@ -77,7 +160,12 @@ export default async function RecipePage({
       <Script
         id={`ld-recipe-${recipe.slug}`}
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeJsonLd) }}
+      />
+      <Script
+        id={`ld-breadcrumb-${recipe.slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <article className="mx-auto w-full max-w-5xl px-4 py-6 md:px-8 md:py-10">
         <Link

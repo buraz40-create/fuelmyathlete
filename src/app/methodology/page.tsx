@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { ArrowLeft, BookOpen, Shield } from "@phosphor-icons/react/dist/ssr";
 import { AppShell } from "@/components/layout/AppShell";
 import { CITATIONS } from "@/data/citations";
@@ -18,8 +19,53 @@ export const metadata: Metadata = {
 export default function MethodologyPage() {
   const sources = Object.values(CITATIONS);
 
+  const aboutPageLd = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${SITE_URL}/methodology#aboutpage`,
+    name: "Editorial Methodology and Sources",
+    description:
+      "How FuelMyAthlete writes and reviews nutrition content. Every claim is cited to AAP, NATA, ACSM, ISSN, or peer-reviewed sources.",
+    url: `${SITE_URL}/methodology`,
+    isPartOf: { "@id": `${SITE_URL}/#website` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    about: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: "en-US",
+    mainContentOfPage: {
+      "@type": "WebPageElement",
+      cssSelector: "main",
+    },
+    citation: sources.map((c) => ({
+      "@type": "CreativeWork",
+      name: c.title,
+      author: c.authors,
+      publisher: c.publisher,
+      datePublished: c.year ? `${c.year}` : undefined,
+      url: c.url,
+    })),
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+      { "@type": "ListItem", position: 2, name: "Methodology", item: `${SITE_URL}/methodology` },
+    ],
+  };
+
   return (
     <AppShell>
+      <Script
+        id="ld-methodology-aboutpage"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageLd) }}
+      />
+      <Script
+        id="ld-methodology-breadcrumb"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       <article className="mx-auto w-full max-w-3xl px-4 py-8 md:px-8 md:py-12">
         <Link
           href="/guides"
