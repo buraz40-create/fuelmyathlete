@@ -20,6 +20,12 @@ export function AppShell({ children }: { children: ReactNode }) {
               Recipes
             </Link>
             <Link
+              href="/guides"
+              className="hidden transition hover:text-ink sm:inline"
+            >
+              Guides
+            </Link>
+            <Link
               href="/settings"
               className="transition hover:text-ink"
             >

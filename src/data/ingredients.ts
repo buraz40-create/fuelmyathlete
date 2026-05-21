@@ -49,6 +49,7 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "cocoa-powder",   name: "Unsweetened cocoa powder", category: "pantry", unit: "tbsp" },
   { slug: "hemp-seeds",     name: "Hemp hearts",           category: "pantry",  unit: "tbsp" },
   { slug: "vanilla-extract", name: "Pure vanilla extract", category: "pantry",  unit: "tsp" },
+  { slug: "chia-seeds",     name: "Chia seeds",            category: "pantry",  unit: "tbsp" },
   { slug: "coconut-water",  name: "Coconut water",         category: "beverages", unit: "cup" },
 
   // DAIRY

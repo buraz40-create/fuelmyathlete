@@ -9,9 +9,15 @@ export function AppFooter() {
           advice. For personalized sports nutrition plans, especially for children, consult a
           registered sports dietitian or pediatrician.
         </p>
-        <nav className="flex items-center gap-4 text-xs font-medium text-muted-foreground">
+        <nav className="flex flex-wrap items-center gap-4 text-xs font-medium text-muted-foreground">
           <Link href="/recipes" className="transition hover:text-ink">
             Recipes
+          </Link>
+          <Link href="/guides" className="transition hover:text-ink">
+            Guides
+          </Link>
+          <Link href="/methodology" className="transition hover:text-ink">
+            Methodology
           </Link>
           <Link href="/sign-in" className="transition hover:text-ink">
             Sign in

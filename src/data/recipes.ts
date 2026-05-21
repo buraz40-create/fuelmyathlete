@@ -898,6 +898,55 @@ export const RECIPES: Recipe[] = [
       "The biggest mistake is cooking on medium. You need HIGH heat for the char. Medium just steams.",
     ],
   },
+  // ────────── ATHLETE OVERNIGHT OATS ──────────
+  {
+    slug: "athlete-overnight-oats",
+    name: "Athlete overnight oats",
+    slot: "breakfast",
+    servings: 1,
+    totalMinutes: 5,
+    imageUrl: pexels(216951),
+    whenToEat:
+      "Best pre-workout breakfast. Make it the night before, eat it 1-2 hours before training. Slow-release carbs from rolled oats plus protein keep energy steady through practice.",
+    equipment: ["Mason jar or container with a lid", "Measuring cups", "Spoon"],
+    steps: [
+      {
+        order: 1,
+        title: "Combine in a jar",
+        body: "Add 1/2 cup rolled oats, 1/2 cup milk (cow, almond, or oat), 1/4 cup plain Greek yogurt, 1 tablespoon chia seeds, and 1 teaspoon honey to a mason jar. Stir well.",
+        mistake:
+          "Using instant oats. They turn to mush overnight and digest too fast for sustained energy. Steel-cut is the opposite problem: too chewy. Rolled oats are the pre-workout sweet spot.",
+      },
+      {
+        order: 2,
+        title: "Add fruit and seal",
+        body: "Top with 1/2 sliced banana and a handful of berries. Seal the jar.",
+      },
+      {
+        order: 3,
+        title: "Refrigerate overnight",
+        body: "Stash in the fridge for at least 6 hours. The oats hydrate, the chia seeds gel, the flavors meld.",
+        timerSec: 21600,
+      },
+      {
+        order: 4,
+        title: "Eat 1-2 hours before training",
+        body: "Pull it out cold or stir in 2 tablespoons hot water to warm it. Eat 60-120 minutes before practice for steady energy without GI distress.",
+      },
+    ],
+    notes: [
+      "For athletes 13+ who want more protein, stir in 1 scoop whey or plant protein after the oats hydrate. Adds ~25g protein.",
+      "Avoid steel-cut for pre-workout. They take 25+ minutes to cook and don't soften enough overnight to digest cleanly.",
+      "Beta-glucan in rolled oats is the slow-release fiber that fuels sustained exercise. Per the Tosh & Bordenave review in Nutrition Reviews, it slows gastric emptying so energy releases over 1-2 hours instead of spiking.",
+      "Banana is the right fruit pairing pre-workout: the potassium offsets electrolyte loss from sweat, and the simple sugars top off liver glycogen.",
+    ],
+    proteinBoost: {
+      description: "Add 1 scoop whey or plant protein powder, stirred in after oats hydrate.",
+      addedProteinG: 25,
+      addedKcal: 120,
+      note: "Adult athletes 18+ who train 90+ minutes. Skip for kids under 13. whole-food protein from Greek yogurt is enough at that age.",
+    },
+  },
 ];
 
 export const RECIPES_BY_SLUG: Record<string, Recipe> = Object.fromEntries(

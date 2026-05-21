@@ -6,7 +6,32 @@ const pexels = (id: number) =>
   `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1`;
 
 export const MEALS: Meal[] = [
-  // BREAKFAST (no oatmeal, Elvis hates it)
+  // BREAKFAST
+  {
+    slug: "athlete-overnight-oats",
+    name: "Athlete overnight oats",
+    slot: "breakfast",
+    description:
+      "Slow-release rolled oats + Greek yogurt + banana. Make it the night before, eat 1-2 hours before training.",
+    prepMinutes: 5,
+    suitableFor: ["school", "training", "match"],
+    kidRating: 4,
+    imageUrl:
+      "https://images.pexels.com/photos/216951/pexels-photo-216951.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    recipeSlug: "athlete-overnight-oats",
+    nutrition: { kcal: 410, proteinG: 18, carbsG: 64, fatG: 9, fiberG: 9, source: "USDA estimate" },
+    ingredients: [
+      { ingredientSlug: "oats",         quantity: 0.5 },
+      { ingredientSlug: "milk",         quantity: 0.5 },
+      { ingredientSlug: "greek-yogurt", quantity: 0.25 },
+      { ingredientSlug: "chia-seeds",   quantity: 1 },
+      { ingredientSlug: "honey",        quantity: 1 },
+      { ingredientSlug: "banana",       quantity: 0.5 },
+      { ingredientSlug: "mixed-berry",  quantity: 0.25 },
+    ],
+    tags: ["pre-workout", "make-ahead"],
+  },
+
   {
     slug: "cereal-banana-milk",
     name: "Whole-grain cereal + banana + milk",

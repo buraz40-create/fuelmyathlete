@@ -7,6 +7,61 @@ import "./globals.css";
 
 const GA_MEASUREMENT_ID = "G-7ZJ4GLBXHV";
 
+const SITE_URL_FOR_LD =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://fuelmyathlete.com");
+
+const ORGANIZATION_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": `${SITE_URL_FOR_LD}/#organization`,
+  name: "FuelMyAthlete",
+  url: SITE_URL_FOR_LD,
+  logo: `${SITE_URL_FOR_LD}/images/favicon.png`,
+  description:
+    "Interactive weekly meal planner, recipe library, and hydration tracker for athletes 8 and up.",
+  knowsAbout: [
+    "youth sports nutrition",
+    "pre-workout meals",
+    "post-workout recovery",
+    "pre-game fueling",
+    "carb loading",
+    "hydration for athletes",
+    "AAP pediatric sports nutrition",
+    "NATA fluid replacement guidance",
+    "ACSM nutrition and athletic performance",
+  ],
+  sameAs: ["https://fuelmyathlete.com"],
+};
+
+const PERSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": `${SITE_URL_FOR_LD}/#editorial-team`,
+  name: "FuelMyAthlete Editorial Team",
+  url: `${SITE_URL_FOR_LD}/methodology`,
+  description:
+    "Editorial team behind FuelMyAthlete guides. Content is reviewed against published position stands from the American Academy of Pediatrics, National Athletic Trainers' Association, and American College of Sports Medicine.",
+  knowsAbout: [
+    "youth sports nutrition",
+    "pediatric hydration",
+    "match-day fueling",
+    "pre-workout nutrition",
+    "carb loading protocols",
+  ],
+  worksFor: { "@id": `${SITE_URL_FOR_LD}/#organization` },
+};
+
+const WEBSITE_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${SITE_URL_FOR_LD}/#website`,
+  url: SITE_URL_FOR_LD,
+  name: "FuelMyAthlete",
+  publisher: { "@id": `${SITE_URL_FOR_LD}/#organization` },
+  inLanguage: "en-US",
+};
+
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
@@ -87,6 +142,21 @@ export default function RootLayout({
         </a>
         <IconProvider>{children}</IconProvider>
         <Toaster position="top-center" richColors />
+        <Script
+          id="ld-organization"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_LD) }}
+        />
+        <Script
+          id="ld-person-editorial"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_LD) }}
+        />
+        <Script
+          id="ld-website"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_LD) }}
+        />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"

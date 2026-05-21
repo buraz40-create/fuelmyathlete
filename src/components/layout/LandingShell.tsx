@@ -20,6 +20,12 @@ export function LandingShell({ children }: { children: ReactNode }) {
             >
               Recipes
             </Link>
+            <Link
+              href="/guides"
+              className="hidden text-muted-foreground transition hover:text-ink sm:inline"
+            >
+              Guides
+            </Link>
             <UserMenu className="hidden sm:inline-flex" />
             <Link
               href="/onboarding"

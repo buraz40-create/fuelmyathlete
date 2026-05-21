@@ -133,3 +133,51 @@ export interface GroceryLineItem {
 }
 
 export type GroceryListByCategory = Record<IngredientCategory, GroceryLineItem[]>;
+
+export interface Citation {
+  id: string;
+  authors?: string;
+  title: string;
+  publisher: string;
+  year?: number;
+  url: string;
+}
+
+export interface GuideSection {
+  id: string;
+  heading: string;
+  body: React.ReactNode;
+}
+
+export interface GuideFaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface GuideHowToStep {
+  name: string;
+  text: string;
+}
+
+export interface Guide {
+  slug: string;
+  title: string;
+  metaTitle: string;
+  metaDescription: string;
+  primaryKeyword: string;
+  category: "pre-workout" | "post-workout" | "match-day" | "youth-nutrition" | "hydration";
+  publishedAt: string;
+  updatedAt: string;
+  answer: string;
+  sections: GuideSection[];
+  faq: GuideFaqItem[];
+  howTo?: {
+    name: string;
+    description: string;
+    steps: GuideHowToStep[];
+  };
+  citations: Citation[];
+  relatedRecipes: string[];
+  relatedGuides: string[];
+  readMinutes: number;
+}
