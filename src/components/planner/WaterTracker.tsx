@@ -7,7 +7,7 @@ import { useHydration } from "@/hooks/useHydration";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { hydrationFor } from "@/data/hydration";
 import { ageToCohort } from "@/lib/player/cohort";
-import { DAY_TYPES } from "@/data/dayTypes";
+import { dayTypeLabel } from "@/data/dayTypes";
 import { WaterCup } from "@/components/planner/WaterCup";
 import type { DayType } from "@/types/domain";
 
@@ -24,7 +24,7 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
   const cohort = profile ? ageToCohort(profile.ageYears) : null;
   const pct = Math.min(100, Math.round((oz / goalOz) * 100));
   const reached = oz >= goalOz;
-  const dayMeta = DAY_TYPES[dayType];
+  const dayLabel = dayTypeLabel(dayType, cohort ?? "child");
 
   const slots = useMemo(
     () => Array.from({ length: Math.max(goalCups, cups) }, (_, i) => i < cups),
@@ -47,9 +47,9 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
         </div>
         <span
           className="rounded-full border border-border bg-day-rest/40 px-2.5 py-1 text-[11px] font-medium text-ink"
-          title={dayMeta.label}
+          title={dayLabel}
         >
-          {dayMeta.label} goal
+          {dayLabel} goal
         </span>
       </header>
 

@@ -12,6 +12,8 @@ import { WeekProgress } from "@/components/planner/WeekProgress";
 import { usePlan } from "@/components/planner/PlanProvider";
 import { MEAL_SLOTS, DAYS_OF_WEEK } from "@/data/dayTypes";
 import { formatWeekRange } from "@/lib/planner/isoWeek";
+import { usePlayerProfile } from "@/hooks/usePlayerProfile";
+import { ageToCohort } from "@/lib/player/cohort";
 import type { MealSlot } from "@/types/domain";
 
 export default function PlannerPage() {
@@ -25,12 +27,16 @@ export default function PlannerPage() {
     smartFillWeek,
     resetWeek,
   } = usePlan();
+  const { profile } = usePlayerProfile();
   const [selectedDay, setSelectedDay] = useState<number>(new Date().getDay());
   const [pickerSlot, setPickerSlot] = useState<MealSlot | null>(null);
 
   const dayEntries = plan.entries.filter((e) => e.dayOfWeek === selectedDay);
   const currentDayType = dayEntries[0]?.dayType ?? "school";
   const dayMeta = DAYS_OF_WEEK[selectedDay];
+  const athleteName = profile?.name || "your athlete";
+  const cohort = profile ? ageToCohort(profile.ageYears) : "child";
+  const possessive = cohort === "adult" ? "they" : "he";
 
   function entryFor(slot: MealSlot) {
     return dayEntries.find((e) => e.slot === slot);
@@ -46,11 +52,12 @@ export default function PlannerPage() {
           Week of {formatWeekRange(weekStart)}
         </p>
         <h1 id="planner-title" className="mt-1">
-          Fuel the week for Elvis
+          Fuel the week for {athleteName}
         </h1>
         <p className="mt-2 max-w-prose text-sm text-muted-foreground">
-          A weekly meal planner built for young athletes. Pick what he&apos;ll eat each day,
-          and we&apos;ll do the math on portions, recovery, and the grocery list.
+          {cohort === "adult"
+            ? "Pick what you'll eat each day, and we'll do the math on portions, hydration, and the grocery list."
+            : `Pick what ${possessive}'ll eat each day, and we'll do the math on portions, hydration, and the grocery list.`}
         </p>
       </header>
 

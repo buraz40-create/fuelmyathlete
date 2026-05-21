@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Minus, Plus } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { hydrationFor } from "@/data/hydration";
-import { DAY_TYPES, DAY_TYPE_ORDER } from "@/data/dayTypes";
+import { DAY_TYPE_ORDER, dayTypeShortLabel } from "@/data/dayTypes";
 import { ageToCohort, cohortLabel, portionScale } from "@/lib/player/cohort";
 import { WaterCup } from "@/components/planner/WaterCup";
 import type { DayType, PlayerProfile } from "@/types/domain";
@@ -103,7 +103,7 @@ export function LiveCalculator() {
                   : "border-border bg-surface text-muted-foreground hover:text-ink"
               )}
             >
-              {DAY_TYPES[key].label.replace(" day", "")}
+              {dayTypeShortLabel(key, cohort)}
             </button>
           );
         })}

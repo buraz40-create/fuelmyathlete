@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { DAYS_OF_WEEK, MEAL_SLOTS, DAY_TYPES } from "@/data/dayTypes";
+import { DAYS_OF_WEEK, MEAL_SLOTS, dayTypeLabel } from "@/data/dayTypes";
 import { MEALS_BY_SLUG } from "@/data/meals";
+import { ageToCohort } from "@/lib/player/cohort";
+import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import type { MealPlan, MealSlot } from "@/types/domain";
 
 const SLOT_TINT: Record<MealSlot, string> = {
@@ -14,12 +16,15 @@ const SLOT_TINT: Record<MealSlot, string> = {
 };
 
 export function WeekGrid({ plan }: { plan: MealPlan }) {
+  const { profile } = usePlayerProfile();
+  const cohort = profile ? ageToCohort(profile.ageYears) : "child";
+
   return (
     <ol className="grid gap-3 md:grid-cols-7">
       {DAYS_OF_WEEK.map((day) => {
         const entries = plan.entries.filter((e) => e.dayOfWeek === day.idx);
         const dayType = entries[0]?.dayType ?? "school";
-        const cfg = DAY_TYPES[dayType];
+        const dLabel = dayTypeLabel(dayType, cohort);
 
         return (
           <li
@@ -34,8 +39,8 @@ export function WeekGrid({ plan }: { plan: MealPlan }) {
                 <p className="text-base font-semibold text-ink">{day.long.slice(0, 3)}</p>
               </div>
               <span
-                title={cfg.label}
-                aria-label={cfg.label}
+                title={dLabel}
+                aria-label={dLabel}
                 className="h-2.5 w-2.5 flex-shrink-0 rounded-full ring-1 ring-inset ring-black/10"
                 style={{ background: `var(--day-${dayType})` }}
               />

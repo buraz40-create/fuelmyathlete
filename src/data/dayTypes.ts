@@ -1,4 +1,4 @@
-import type { DayType, DayTypeConfig } from "@/types/domain";
+import type { AgeCohort, DayType, DayTypeConfig } from "@/types/domain";
 
 export const DAY_TYPES: Record<DayType, DayTypeConfig> = {
   school: {
@@ -44,6 +44,39 @@ export const DAY_TYPES: Record<DayType, DayTypeConfig> = {
 };
 
 export const DAY_TYPE_ORDER: DayType[] = ["school", "training", "match", "rest"];
+
+// "School day" and "Match day" sound off for adult athletes. Override the labels
+// when the user's cohort is adult. Kids and teens keep the original sport-school
+// framing. The underlying enum value never changes, just the display label.
+const ADULT_LABEL_OVERRIDES: Partial<Record<DayType, string>> = {
+  school: "Easy day",
+  match: "Big day",
+};
+
+const ADULT_DESCRIPTION_OVERRIDES: Partial<Record<DayType, string>> = {
+  school: "Light activity. Normal portions, low-key.",
+  match: "Competition or event day. Carb-load the night before, hydrate early.",
+};
+
+export function dayTypeLabel(dt: DayType, cohort: AgeCohort = "child"): string {
+  if (cohort === "adult") {
+    const override = ADULT_LABEL_OVERRIDES[dt];
+    if (override) return override;
+  }
+  return DAY_TYPES[dt].label;
+}
+
+export function dayTypeShortLabel(dt: DayType, cohort: AgeCohort = "child"): string {
+  return dayTypeLabel(dt, cohort).replace(/ day$/i, "");
+}
+
+export function dayTypeDescription(dt: DayType, cohort: AgeCohort = "child"): string {
+  if (cohort === "adult") {
+    const override = ADULT_DESCRIPTION_OVERRIDES[dt];
+    if (override) return override;
+  }
+  return DAY_TYPES[dt].description;
+}
 
 export const DAYS_OF_WEEK: { idx: number; short: string; long: string }[] = [
   { idx: 0, short: "Sun", long: "Sunday" },

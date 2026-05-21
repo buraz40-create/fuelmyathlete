@@ -1,7 +1,9 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { DAY_TYPES, DAY_TYPE_ORDER } from "@/data/dayTypes";
+import { DAY_TYPE_ORDER, dayTypeLabel } from "@/data/dayTypes";
+import { ageToCohort } from "@/lib/player/cohort";
+import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import type { DayType } from "@/types/domain";
 
 interface DayTypeSelectorProps {
@@ -24,6 +26,9 @@ const TINT_DOT: Record<DayType, string> = {
 };
 
 export function DayTypeSelector({ value, onChange }: DayTypeSelectorProps) {
+  const { profile } = usePlayerProfile();
+  const cohort = profile ? ageToCohort(profile.ageYears) : "child";
+
   return (
     <div
       role="radiogroup"
@@ -31,8 +36,8 @@ export function DayTypeSelector({ value, onChange }: DayTypeSelectorProps) {
       className="grid grid-cols-2 gap-2 md:grid-cols-4"
     >
       {DAY_TYPE_ORDER.map((key) => {
-        const cfg = DAY_TYPES[key];
         const active = value === key;
+        const label = dayTypeLabel(key, cohort);
         return (
           <button
             key={key}
@@ -54,7 +59,7 @@ export function DayTypeSelector({ value, onChange }: DayTypeSelectorProps) {
                 TINT_DOT[key]
               )}
             />
-            <span>{cfg.label}</span>
+            <span>{label}</span>
           </button>
         );
       })}

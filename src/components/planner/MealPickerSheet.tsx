@@ -11,7 +11,9 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { MEALS_BY_SLOT } from "@/data/meals";
-import { DAY_TYPES } from "@/data/dayTypes";
+import { dayTypeLabel, dayTypeDescription } from "@/data/dayTypes";
+import { ageToCohort } from "@/lib/player/cohort";
+import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import type { DayType, Meal, MealSlot } from "@/types/domain";
 
 interface MealPickerSheetProps {
@@ -39,7 +41,10 @@ export function MealPickerSheet({
   onSelect,
 }: MealPickerSheetProps) {
   const meals: Meal[] = slot ? MEALS_BY_SLOT[slot] : [];
-  const dayMeta = DAY_TYPES[dayType];
+  const { profile } = usePlayerProfile();
+  const cohort = profile ? ageToCohort(profile.ageYears) : "child";
+  const dayLabel = dayTypeLabel(dayType, cohort);
+  const dayDescription = dayTypeDescription(dayType, cohort);
   const filtered = meals.filter((m) => m.suitableFor.includes(dayType));
   const others = meals.filter((m) => !m.suitableFor.includes(dayType));
 
@@ -55,7 +60,7 @@ export function MealPickerSheet({
             <SheetHeader className="px-5 pt-5 pb-2">
               <SheetTitle className="text-xl">{SLOT_TITLE[slot]}</SheetTitle>
               <SheetDescription>
-                <span className="font-medium text-ink">{dayMeta.label}.</span> {dayMeta.description}
+                <span className="font-medium text-ink">{dayLabel}.</span> {dayDescription}
               </SheetDescription>
             </SheetHeader>
 
@@ -162,7 +167,7 @@ function Rating({ value }: { value: number }) {
   return (
     <span
       className="flex items-center gap-0.5 text-[10px] font-medium text-warning"
-      aria-label={`Elvis rating ${value} out of 5`}
+      aria-label={`Kid rating ${value} out of 5`}
     >
       <Star size={12} weight="fill" aria-hidden />
       {value}/5
