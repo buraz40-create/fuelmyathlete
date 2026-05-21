@@ -1,43 +1,145 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { ArrowRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
+import { useRouter } from "next/navigation";
+import {
+  ArrowRight,
+  EnvelopeSimple,
+  Eye,
+  EyeSlash,
+  LockKey,
+} from "@phosphor-icons/react/dist/ssr";
 import { Logo } from "@/components/brand/Logo";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 import { getBrowserSupabase } from "@/lib/supabase/client";
 
-export default function SignInPage() {
-  const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const [error, setError] = useState<string | null>(null);
+type Mode = "signin" | "signup" | "forgot";
 
-  async function handleSubmit(e: FormEvent) {
+export default function SignInPage() {
+  const router = useRouter();
+  const [mode, setMode] = useState<Mode>("signin");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== "undefined" ? window.location.origin : "");
+
+  async function handleSignIn(e: FormEvent) {
     e.preventDefault();
     const supabase = getBrowserSupabase();
     if (!supabase) {
-      setError("Sign-in is not available in this environment. Use localhost dev mode instead.");
+      setError("Sign-in is not available in this environment.");
       setStatus("error");
       return;
     }
-    setStatus("sending");
+    setStatus("loading");
     setError(null);
-
-    // Prefer the configured site URL so production deploys always land back
-    // at the canonical domain, even if the user submits from a preview URL or
-    // a stale localhost tab. Falls back to the current origin for local dev.
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
-    const { error: authError } = await supabase.auth.signInWithOtp({
+    const { error: authError } = await supabase.auth.signInWithPassword({
       email: email.trim(),
-      options: { emailRedirectTo: `${siteUrl.replace(/\/$/, "")}/auth/callback` },
+      password,
     });
-
     if (authError) {
       setError(authError.message);
       setStatus("error");
       return;
     }
+    router.push("/planner");
+    router.refresh();
+  }
+
+  async function handleSignUp(e: FormEvent) {
+    e.preventDefault();
+    const supabase = getBrowserSupabase();
+    if (!supabase) {
+      setError("Sign-up is not available in this environment.");
+      setStatus("error");
+      return;
+    }
+    if (password.length < 8) {
+      setError("Password needs at least 8 characters.");
+      setStatus("error");
+      return;
+    }
+    setStatus("loading");
+    setError(null);
+    const { data, error: authError } = await supabase.auth.signUp({
+      email: email.trim(),
+      password,
+      options: { emailRedirectTo: `${siteUrl.replace(/\/$/, "")}/auth/callback` },
+    });
+    if (authError) {
+      setError(authError.message);
+      setStatus("error");
+      return;
+    }
+    // If session is returned, user is signed in immediately (email confirmation disabled).
+    if (data.session) {
+      router.push("/planner");
+      router.refresh();
+      return;
+    }
+    // Otherwise, email confirmation is on. Show success.
+    setSuccess(
+      `Account created. Check ${email.trim()} for a confirmation link to finish signing in.`
+    );
     setStatus("sent");
+  }
+
+  async function handleForgot(e: FormEvent) {
+    e.preventDefault();
+    const supabase = getBrowserSupabase();
+    if (!supabase) {
+      setError("Password reset is not available in this environment.");
+      setStatus("error");
+      return;
+    }
+    setStatus("loading");
+    setError(null);
+    const { error: authError } = await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${siteUrl.replace(/\/$/, "")}/auth/reset-password`,
+    });
+    if (authError) {
+      setError(authError.message);
+      setStatus("error");
+      return;
+    }
+    setSuccess(`Check ${email.trim()} for a password reset link.`);
+    setStatus("sent");
+  }
+
+  async function handleMagicLink() {
+    const supabase = getBrowserSupabase();
+    if (!supabase) return;
+    if (!email.trim()) {
+      setError("Add your email first.");
+      setStatus("error");
+      return;
+    }
+    setStatus("loading");
+    setError(null);
+    const { error: authError } = await supabase.auth.signInWithOtp({
+      email: email.trim(),
+      options: { emailRedirectTo: `${siteUrl.replace(/\/$/, "")}/auth/callback` },
+    });
+    if (authError) {
+      setError(authError.message);
+      setStatus("error");
+      return;
+    }
+    setSuccess(`Check ${email.trim()} for a one-tap sign-in link.`);
+    setStatus("sent");
+  }
+
+  function switchMode(next: Mode) {
+    setMode(next);
+    setError(null);
+    setSuccess(null);
+    setStatus("idle");
   }
 
   return (
@@ -46,25 +148,80 @@ export default function SignInPage() {
       className="flex min-h-screen items-center justify-center bg-background px-4 py-10"
     >
       <article className="mx-auto w-full max-w-md rounded-3xl border border-border bg-surface p-6 shadow-sm md:p-8">
-        <header className="mb-5 flex flex-col items-center text-center">
-          <Logo width={340} priority />
-          <h1 className="mt-4 text-2xl">Sign in</h1>
+        <header className="mb-6 flex flex-col items-center text-center">
+          <Logo width={200} priority />
+          <h1 className="mt-5 text-2xl">
+            {mode === "signin" && "Welcome back"}
+            {mode === "signup" && "Create your account"}
+            {mode === "forgot" && "Reset password"}
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {mode === "signin" && "Sign in to sync your plan across devices."}
+            {mode === "signup" && "It's free. No credit card. No ads."}
+            {mode === "forgot" && "We'll email you a link to set a new password."}
+          </p>
         </header>
 
-        {status === "sent" ? (
+        {mode !== "forgot" && (
+          <nav
+            role="tablist"
+            aria-label="Sign in or create account"
+            className="mb-5 flex w-full items-center gap-1 rounded-full border border-border bg-muted/30 p-1"
+          >
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mode === "signin"}
+              onClick={() => switchMode("signin")}
+              className={cn(
+                "flex-1 rounded-full px-3 py-2 text-sm font-semibold transition",
+                mode === "signin"
+                  ? "bg-surface text-ink shadow-sm"
+                  : "text-muted-foreground hover:text-ink"
+              )}
+            >
+              Sign in
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={mode === "signup"}
+              onClick={() => switchMode("signup")}
+              className={cn(
+                "flex-1 rounded-full px-3 py-2 text-sm font-semibold transition",
+                mode === "signup"
+                  ? "bg-surface text-ink shadow-sm"
+                  : "text-muted-foreground hover:text-ink"
+              )}
+            >
+              Create account
+            </button>
+          </nav>
+        )}
+
+        {status === "sent" && success ? (
           <div className="rounded-2xl bg-primary-soft/60 p-5 text-sm text-ink">
             <p className="font-semibold">Check your inbox.</p>
-            <p className="mt-1 text-muted-foreground">
-              We sent a sign-in link to <strong className="text-ink">{email}</strong>. Click it
-              from this device to land back on the planner.
-            </p>
+            <p className="mt-1 text-muted-foreground">{success}</p>
+            <button
+              type="button"
+              onClick={() => switchMode("signin")}
+              className="mt-4 text-xs font-medium text-primary underline-offset-2 hover:underline"
+            >
+              Back to sign in
+            </button>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <p className="text-sm text-muted-foreground">
-              No password. Enter your email and we&apos;ll send you a one-tap sign-in link.
-            </p>
-
+          <form
+            onSubmit={
+              mode === "signin"
+                ? handleSignIn
+                : mode === "signup"
+                ? handleSignUp
+                : handleForgot
+            }
+            className="space-y-4"
+          >
             <div className="space-y-1.5">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -78,6 +235,48 @@ export default function SignInPage() {
               />
             </div>
 
+            {mode !== "forgot" && (
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  {mode === "signin" && (
+                    <button
+                      type="button"
+                      onClick={() => switchMode("forgot")}
+                      className="text-xs font-medium text-primary underline-offset-2 hover:underline"
+                    >
+                      Forgot?
+                    </button>
+                  )}
+                </div>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder={mode === "signup" ? "At least 8 characters" : "Your password"}
+                    autoComplete={mode === "signup" ? "new-password" : "current-password"}
+                    minLength={mode === "signup" ? 8 : undefined}
+                    required
+                    className="pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((s) => !s)}
+                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    className="absolute right-2.5 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full text-muted-foreground transition hover:text-ink"
+                  >
+                    {showPassword ? (
+                      <EyeSlash size={16} weight="duotone" aria-hidden />
+                    ) : (
+                      <Eye size={16} weight="duotone" aria-hidden />
+                    )}
+                  </button>
+                </div>
+              </div>
+            )}
+
             {error && (
               <p role="alert" className="text-sm text-danger">
                 {error}
@@ -86,18 +285,47 @@ export default function SignInPage() {
 
             <button
               type="submit"
-              disabled={status === "sending"}
+              disabled={status === "loading"}
               className="flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition hover:opacity-90 disabled:opacity-50"
             >
-              <EnvelopeSimple size={18} weight="duotone" aria-hidden />
-              {status === "sending" ? "Sending link..." : "Send me a sign-in link"}
-              {status !== "sending" && <ArrowRight size={16} weight="bold" aria-hidden />}
+              {mode === "signin" && <LockKey size={18} weight="duotone" aria-hidden />}
+              {mode === "signup" && <ArrowRight size={18} weight="duotone" aria-hidden />}
+              {mode === "forgot" && <EnvelopeSimple size={18} weight="duotone" aria-hidden />}
+              {status === "loading"
+                ? "Working..."
+                : mode === "signin"
+                ? "Sign in"
+                : mode === "signup"
+                ? "Create account"
+                : "Send reset link"}
             </button>
+
+            {mode === "signin" && (
+              <button
+                type="button"
+                onClick={handleMagicLink}
+                disabled={status === "loading"}
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm font-medium text-muted-foreground transition hover:text-ink disabled:opacity-50"
+              >
+                <EnvelopeSimple size={16} weight="duotone" aria-hidden />
+                Email me a one-tap link instead
+              </button>
+            )}
+
+            {mode === "forgot" && (
+              <button
+                type="button"
+                onClick={() => switchMode("signin")}
+                className="block w-full text-center text-xs font-medium text-muted-foreground underline-offset-2 hover:text-ink hover:underline"
+              >
+                Back to sign in
+              </button>
+            )}
           </form>
         )}
 
         <p className="mt-6 text-center text-[11px] leading-relaxed text-muted-foreground">
-          By signing in you agree to our terms. Magic link is valid for 1 hour.
+          By signing in you agree to our terms. Passwords need at least 8 characters.
         </p>
       </article>
     </main>
