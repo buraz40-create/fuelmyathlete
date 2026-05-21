@@ -1,8 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
+import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
 import { IconProvider } from "@/components/IconProvider";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = "G-7ZJ4GLBXHV";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -81,6 +84,18 @@ export default function RootLayout({
         </a>
         <IconProvider>{children}</IconProvider>
         <Toaster position="top-center" richColors />
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );
