@@ -10,10 +10,17 @@ const SITE_URL =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://fuelmyathlete.com");
 
 export const metadata: Metadata = {
-  title: "Editorial Methodology and Sources",
+  title: "Editorial Methodology: How We Cite AAP, NATA, and ACSM Sources",
   description:
-    "How FuelMyAthlete writes and reviews nutrition content. Every claim is cited to AAP, NATA, ACSM, ISSN, or peer-reviewed sources. Pediatric-safe by default.",
+    "How FuelMyAthlete researches and reviews nutrition content. Every claim is cited to AAP, NATA, ACSM, ISSN, NSCA, or peer-reviewed journals. Pediatric-safe by default.",
   alternates: { canonical: `${SITE_URL}/methodology` },
+  openGraph: {
+    type: "website",
+    title: "Editorial Methodology: How We Cite AAP, NATA, and ACSM Sources",
+    description:
+      "Every claim cited to AAP, NATA, ACSM, ISSN, NSCA, or peer-reviewed journals. Pediatric-safe by default.",
+    url: `${SITE_URL}/methodology`,
+  },
 };
 
 export default function MethodologyPage() {

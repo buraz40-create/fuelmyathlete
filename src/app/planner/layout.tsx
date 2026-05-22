@@ -12,9 +12,9 @@ const SITE_URL =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://fuelmyathlete.com");
 
 export const metadata: Metadata = {
-  title: "Planner",
+  title: "Free Weekly Meal Planner for Athletes",
   description:
-    "Plan a week of athlete meals. Auto grocery list, hydration tracking, portions by age and day type.",
+    "Plan breakfast, lunch, snack, and dinner across the week. Auto grocery list, hydration tracker, portions that scale by age and day type. Saves to your browser, no signup.",
   robots: { index: false, follow: false },
 };
 

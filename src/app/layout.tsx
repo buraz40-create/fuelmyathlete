@@ -75,11 +75,11 @@ const SITE_URL =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "FuelMyAthlete: Meal Planning for Athletes",
+    default: "FuelMyAthlete: Free Meal Planner & Recipes for Athletes 8+",
     template: "%s · FuelMyAthlete",
   },
   description:
-    "Plan a week of meals, get an auto grocery list, track hydration. Built for athletes 8 and up, from soccer kids to adult lifters.",
+    "Free weekly meal planner, 24 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up. From youth soccer to adult lifting. No signup.",
   applicationName: "FuelMyAthlete",
   keywords: [
     "meal planner",
@@ -94,17 +94,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "FuelMyAthlete",
-    title: "FuelMyAthlete: Meal Planning for Athletes",
+    title: "FuelMyAthlete: Free Meal Planner & Recipes for Athletes 8+",
     description:
-      "Plan a week of meals, get an auto grocery list, track hydration. Built for athletes 8 and up.",
+      "Free weekly meal planner, 24 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up.",
     url: SITE_URL,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FuelMyAthlete: Meal Planning for Athletes",
+    title: "FuelMyAthlete: Free Meal Planner & Recipes for Athletes 8+",
     description:
-      "Plan a week of meals, get an auto grocery list, track hydration. Built for athletes 8 and up.",
+      "Free weekly meal planner, 24 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up.",
   },
   robots: {
     index: true,

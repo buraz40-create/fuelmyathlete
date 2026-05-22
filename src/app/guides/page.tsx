@@ -10,10 +10,17 @@ const SITE_URL =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://fuelmyathlete.com");
 
 export const metadata: Metadata = {
-  title: "Athlete Nutrition Guides",
+  title: "Athlete Nutrition Guides: Pre-Workout, Pre-Game, Hydration & Carb Loading",
   description:
-    "Evidence-based guides on pre-workout meals, pre-game fueling, hydration, and carb loading for athletes 8 and up. Reviewed against AAP, NATA, and ACSM sources.",
+    "Evidence-based guides on pre-workout meals, pre-game fueling, carb loading, and hydration for athletes 8 and up. Cited to AAP, NATA, ACSM, and ISSN position stands.",
   alternates: { canonical: `${SITE_URL}/guides` },
+  openGraph: {
+    type: "website",
+    title: "Athlete Nutrition Guides: Pre-Workout, Pre-Game, Hydration & Carb Loading",
+    description:
+      "Evidence-based guides on pre-workout meals, pre-game fueling, carb loading, and hydration. Cited to AAP, NATA, ACSM.",
+    url: `${SITE_URL}/guides`,
+  },
 };
 
 const CATEGORY_LABEL: Record<string, string> = {

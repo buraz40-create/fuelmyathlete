@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Profile Settings",
-  description: "Manage your athlete profile, account, and preferences.",
+  title: "Athlete Profile & Account Settings",
+  description:
+    "Update your athlete details, manage your account, sync across devices, or sign out.",
   robots: { index: false, follow: false },
 };
 

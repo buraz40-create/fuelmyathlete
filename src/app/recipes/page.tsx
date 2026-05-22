@@ -9,15 +9,15 @@ const SITE_URL =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://fuelmyathlete.com");
 
 export const metadata: Metadata = {
-  title: "Athlete Recipes",
+  title: "Free Athlete Recipes: 24 Step-by-Step Meals for Youth & Adult Athletes",
   description:
-    "Athlete-tested recipes for breakfast, lunch, snack, and dinner. Every meal has a step-by-step recipe with portions by age and day type. Free, no signup.",
+    "24 athlete-tested recipes: breakfasts, lunches, snacks, dinners. Step-by-step instructions, full nutrition, portions that scale by age and training day. Free, no signup.",
   alternates: { canonical: `${SITE_URL}/recipes` },
   openGraph: {
     type: "website",
-    title: "Athlete Recipes",
+    title: "Free Athlete Recipes: 24 Step-by-Step Meals for Youth & Adult Athletes",
     description:
-      "Athlete-tested recipes for breakfast, lunch, snack, and dinner. Every meal has a step-by-step recipe with portions by age and day type.",
+      "24 athlete-tested recipes with step-by-step instructions, full nutrition, and portions that scale by age and training day.",
     url: `${SITE_URL}/recipes`,
   },
 };

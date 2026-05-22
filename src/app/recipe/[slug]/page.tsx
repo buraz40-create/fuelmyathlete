@@ -39,23 +39,24 @@ export async function generateMetadata({
   const recipe = RECIPES_BY_SLUG[slug];
   if (!recipe) return {};
   const url = `${SITE_URL}/recipe/${recipe.slug}`;
+  const title = `${recipe.name} Recipe: Athlete Portions & Nutrition (${recipe.totalMinutes}-Min)`;
   const description = recipe.whenToEat
-    ? `${recipe.whenToEat} Step-by-step recipe, athlete portions, full nutrition.`
-    : `${recipe.name}: step-by-step recipe with athlete portions, nutrition, and timing. ${recipe.totalMinutes}-minute prep.`;
+    ? `${recipe.whenToEat} Full ingredient list, step-by-step, athlete-scaled portions, complete nutrition facts.`
+    : `${recipe.name} recipe with step-by-step instructions, ingredient list, athlete-scaled portions, and full nutrition. ${recipe.totalMinutes}-minute prep, serves ${recipe.servings}.`;
   return {
-    title: `${recipe.name} Recipe`,
+    title,
     description,
     alternates: { canonical: url },
     openGraph: {
       type: "article",
-      title: `${recipe.name} Recipe`,
+      title,
       description,
       url,
       images: recipe.imageUrl ? [{ url: recipe.imageUrl }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${recipe.name} Recipe`,
+      title,
       description,
       images: recipe.imageUrl ? [recipe.imageUrl] : undefined,
     },

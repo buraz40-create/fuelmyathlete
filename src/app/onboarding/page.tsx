@@ -7,10 +7,17 @@ const SITE_URL =
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "https://fuelmyathlete.com");
 
 export const metadata: Metadata = {
-  title: "Welcome to FuelMyAthlete",
+  title: "Get Started: Free Athlete Profile Setup (30 Seconds)",
   description:
-    "Set up your athlete profile in 30 seconds. Age, weight, and name only. The planner scales every portion and hydration target to fit.",
+    "Set up your free athlete profile in 30 seconds. Age, weight, name. Every portion, hydration goal, and recipe in the planner scales to fit. No signup, no email required.",
   alternates: { canonical: `${SITE_URL}/onboarding` },
+  openGraph: {
+    type: "website",
+    title: "Get Started: Free Athlete Profile Setup (30 Seconds)",
+    description:
+      "Free athlete profile setup. Age, weight, name. Every portion and hydration goal scales to fit.",
+    url: `${SITE_URL}/onboarding`,
+  },
 };
 
 const webPageLd = {

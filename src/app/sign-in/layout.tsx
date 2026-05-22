@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Sign in",
+  title: "Sign In or Create a Free FuelMyAthlete Account",
   description:
-    "Sign in to FuelMyAthlete to sync your meal plan across devices. Magic link, Google, or email and password.",
+    "Sign in to sync your meal plan across devices. Choose Google, email and password, or a one-time magic link. Free, no credit card.",
   robots: { index: false, follow: false },
 };
 
