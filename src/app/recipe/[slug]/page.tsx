@@ -13,12 +13,14 @@ import {
 import { AppShell } from "@/components/layout/AppShell";
 import { RecipeSteps } from "@/components/recipe/RecipeSteps";
 import { IngredientsList } from "@/components/recipe/IngredientsList";
+import { AllergenLine } from "@/components/recipe/AllergenLine";
 import { NutritionCard } from "@/components/recipe/NutritionCard";
 import { ProteinBoostCard } from "@/components/recipe/ProteinBoostCard";
 import { FoodImage } from "@/components/food/FoodImage";
 import { RECIPES, RECIPES_BY_SLUG } from "@/data/recipes";
 import { MEALS } from "@/data/meals";
 import { INGREDIENT_BY_SLUG } from "@/data/ingredients";
+import { allergensForIngredients } from "@/data/allergens";
 import { cn } from "@/lib/utils";
 import type { MealSlot } from "@/types/domain";
 
@@ -235,10 +237,17 @@ export default async function RecipePage({
         <div className="grid gap-6 md:grid-cols-[1fr_320px]">
           <div className="space-y-6">
             {linkedMeal?.ingredients && linkedMeal.ingredients.length > 0 && (
-              <IngredientsList
-                baseServings={recipe.servings}
-                ingredients={linkedMeal.ingredients}
-              />
+              <>
+                <IngredientsList
+                  baseServings={recipe.servings}
+                  ingredients={linkedMeal.ingredients}
+                />
+                <AllergenLine
+                  allergens={allergensForIngredients(
+                    linkedMeal.ingredients.map((i) => i.ingredientSlug)
+                  )}
+                />
+              </>
             )}
 
             <section aria-labelledby="steps-title">

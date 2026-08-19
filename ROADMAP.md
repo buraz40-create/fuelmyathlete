@@ -8,9 +8,21 @@ Every report that fed this was individually good and collectively over-scoped, b
 
 ---
 
+## 0. Constraint added 2026-08-19: no testing with Elvis's team
+
+Haris has ruled out recruiting his son's team. That is a hard constraint, not a preference, and it removes the distribution model this plan was built around.
+
+What it deletes: the two-week concierge test in section 7, the first-fifteen-families choreography in section 6, the team manager and club director path, and Gate 2 and Gate 3 as originally written (both were defined by families and coaches who now will not be asked).
+
+What it changes: search and AI citation become the only way a stranger ever finds this. The content freeze in section 8 was correct when a warm social channel existed to carry the product. Without one, content is no longer a deferred luxury, it is the acquisition channel, and the tier 1 pieces in the research (hydration, hyponatremia, post-game recovery, tournament and between-games fueling, after-school snack) move up rather than down.
+
+What survives unchanged: everything in Gate 0a and 0b, every item in Gate 1 that makes the product work for the household actually using it, and the single metric. W2 retention still measures whether a family who plans comes back, it just gets measured on organic arrivals instead of teammates.
+
+Open question for the next working session, and it is worth answering deliberately rather than drifting: is the goal now (a) a genuinely good tool for one family, built without growth pressure, or (b) a product that grows through search, which implies sustained writing. Those want different work. Until it is answered, build the things true under both, which is what Gate 1 already is.
+
 ## 1. The goal and the number
 
-**90 days:** ten of the roughly fifteen families on Elvis's team build a plan and come back the following week, without Haris standing next to them.
+**90 days, as originally written and now superseded by section 0:** ten of the roughly fifteen families on Elvis's team build a plan and come back the following week. This is no longer the goal, because the team is not being approached. Kept here so the reasoning below stays legible.
 
 **One year:** three teams beyond Elvis's are using it, and at least one arrived without Haris recruiting it. The second clause is the real test. If every team needs a personal pitch, the unit of growth is Haris's evenings and the ceiling is about four teams forever.
 

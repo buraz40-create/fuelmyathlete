@@ -52,6 +52,19 @@ export interface NutritionFacts {
   source?: string;
 }
 
+// The US top-9 plus soy, which is separate here because the food rules already draw a line
+// between processed soy and whole edamame.
+export type Allergen =
+  | "peanut"
+  | "tree-nut"
+  | "dairy"
+  | "egg"
+  | "gluten"
+  | "fish"
+  | "shellfish"
+  | "sesame"
+  | "soy";
+
 export interface Meal {
   slug: string;
   name: string;

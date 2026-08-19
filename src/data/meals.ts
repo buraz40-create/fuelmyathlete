@@ -301,6 +301,116 @@ export const MEALS: Meal[] = [
     ],
   },
 
+  // Everyday snacks. The school and rest slots had exactly two options and one of them was
+  // the cracker plate, which leans on the one thing the food rules push away from. These are
+  // whole food, need no recipe, and survive a lunchbox.
+  {
+    slug: "apple-cheddar-cubes",
+    name: "Apple slices + cheese",
+    slot: "snack",
+    description: "Crunch and protein without a cracker in sight. Squeeze of lemon stops browning.",
+    prepMinutes: 3,
+    suitableFor: [...ALL_DAYS],
+    kidRating: 4,
+    imageUrl: pexels(672101),
+    nutrition: { kcal: 180, proteinG: 8, carbsG: 20, fatG: 8, fiberG: 3, source: "USDA estimate" },
+    ingredients: [
+      { ingredientSlug: "apple",        quantity: 1 },
+      { ingredientSlug: "cheese-slice", quantity: 1 },
+      { ingredientSlug: "lemon",        quantity: 0.1 },
+    ],
+  },
+  {
+    slug: "cottage-berries",
+    name: "Cottage cheese + berries",
+    slot: "snack",
+    description: "High protein with no powder. Small curd and very cold is the version kids eat.",
+    prepMinutes: 2,
+    suitableFor: [...ALL_DAYS],
+    kidRating: 3,
+    imageUrl: pexels(1092730),
+    nutrition: { kcal: 190, proteinG: 16, carbsG: 20, fatG: 4, fiberG: 2, source: "USDA estimate" },
+    ingredients: [
+      { ingredientSlug: "cottage-cheese", quantity: 0.75 },
+      { ingredientSlug: "strawberry",     quantity: 0.5 },
+      { ingredientSlug: "honey",          quantity: 1 },
+    ],
+  },
+  {
+    slug: "edamame-cup",
+    name: "Steamed edamame cup",
+    slot: "snack",
+    description: "Whole soybeans in the pod, nothing processed. Salt lightly, eat warm or cold.",
+    prepMinutes: 5,
+    suitableFor: ["school", "training", "rest"],
+    kidRating: 4,
+    imageUrl: pexels(4149010),
+    nutrition: { kcal: 150, proteinG: 13, carbsG: 12, fatG: 6, fiberG: 6, source: "USDA estimate" },
+    ingredients: [{ ingredientSlug: "edamame", quantity: 1 }],
+  },
+
+  // Match-day lunches. Nothing in the catalog served the lunch slot on a match day, so the
+  // picker had an empty recommended list on the one day that matters most. These are built
+  // for eating 2 to 3 hours before kickoff: carbohydrate forward, lower fat and lower fiber
+  // than the school-day versions so they clear the stomach in time, per NATA pre-activity
+  // guidance. Deliberately plain. Match day is not the day to introduce a new food.
+  {
+    slug: "hibachi-bowl-matchday",
+    name: "Match-day hibachi bowl (light sauce)",
+    slot: "lunch",
+    description:
+      "His favorite meal, tuned for kickoff: less oil, no sesame, extra rice. Eat 2 to 3 hours before.",
+    prepMinutes: 5,
+    suitableFor: ["match", "training"],
+    kidRating: 5,
+    imageUrl: pexels(17308548),
+    recipeSlug: "hibachi-chicken",
+    nutrition: { kcal: 440, proteinG: 30, carbsG: 62, fatG: 6, fiberG: 2, source: "USDA estimate" },
+    ingredients: [
+      { ingredientSlug: "chicken-breast", quantity: 0.3 },
+      { ingredientSlug: "jasmine-rice",   quantity: 1.25 },
+      { ingredientSlug: "edamame",        quantity: 0.25 },
+      { ingredientSlug: "soy-sauce",      quantity: 1 },
+    ],
+  },
+  {
+    slug: "pre-match-plain-plate",
+    name: "Chicken + rice, plain",
+    slot: "lunch",
+    description:
+      "The safety plate. Low fat, low fiber, nothing to surprise a nervous stomach before a match.",
+    prepMinutes: 5,
+    suitableFor: ["match"],
+    kidRating: 4,
+    imageUrl: pexels(5713768),
+    recipeSlug: "chicken-rice-broccoli",
+    nutrition: { kcal: 420, proteinG: 32, carbsG: 58, fatG: 5, fiberG: 2, source: "USDA estimate" },
+    ingredients: [
+      { ingredientSlug: "chicken-breast", quantity: 0.3 },
+      { ingredientSlug: "jasmine-rice",   quantity: 1.25 },
+      { ingredientSlug: "banana",         quantity: 1 },
+    ],
+  },
+  {
+    slug: "tournament-sub",
+    name: "Tournament turkey sub",
+    slot: "lunch",
+    description:
+      "Built for a sideline, not a table. Wraps tight, keeps on ice, eats one-handed between games.",
+    prepMinutes: 6,
+    suitableFor: ["match", "school"],
+    kidRating: 5,
+    imageUrl: pexels(1600711),
+    recipeSlug: "turkey-wrap",
+    nutrition: { kcal: 410, proteinG: 26, carbsG: 52, fatG: 9, fiberG: 4, source: "USDA estimate" },
+    ingredients: [
+      { ingredientSlug: "wholegrain-bread", quantity: 2 },
+      { ingredientSlug: "deli-turkey",      quantity: 3 },
+      { ingredientSlug: "cheese-slice",     quantity: 1 },
+      { ingredientSlug: "romaine",          quantity: 0.5 },
+    ],
+  },
+
   // SNACK
   {
     slug: "apple-pb",
