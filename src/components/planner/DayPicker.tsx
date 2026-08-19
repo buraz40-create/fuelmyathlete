@@ -3,19 +3,27 @@
 import { CheckCircle } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { DAYS_OF_WEEK } from "@/data/dayTypes";
+import { addDays, fromIsoDate } from "@/lib/planner/isoWeek";
 import type { MealPlan } from "@/types/domain";
 
 interface DayPickerProps {
   selected: number;
   onSelect: (day: number) => void;
   plan: MealPlan;
+  weekStart: string;
 }
 
 function plannedSlotsFor(plan: MealPlan, day: number): number {
   return plan.entries.filter((e) => e.dayOfWeek === day && e.mealSlug).length;
 }
 
-export function DayPicker({ selected, onSelect, plan }: DayPickerProps) {
+// The tabs used to read S M T W T F S, which is a poor way to find Thursday and useless once
+// the planner can show a week other than this one.
+function dateFor(weekStart: string, day: number): number {
+  return addDays(fromIsoDate(weekStart), day).getDate();
+}
+
+export function DayPicker({ selected, onSelect, plan, weekStart }: DayPickerProps) {
   return (
     <ol
       role="tablist"
@@ -41,7 +49,7 @@ export function DayPicker({ selected, onSelect, plan }: DayPickerProps) {
               )}
             >
               <span className="text-[11px] uppercase tracking-wider opacity-80">{day.short}</span>
-              <span className="text-base font-semibold">{day.long.slice(0, 1)}</span>
+              <span className="text-base font-semibold">{dateFor(weekStart, day.idx)}</span>
               {planned > 0 && (
                 <span
                   aria-label={`${planned} of 4 meals planned`}

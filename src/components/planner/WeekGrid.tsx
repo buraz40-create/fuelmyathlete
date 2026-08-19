@@ -75,7 +75,8 @@ export function WeekGrid({ plan }: { plan: MealPlan }) {
             </ul>
 
             <Link
-              href="/planner"
+              href={`/planner?day=${day.idx}`}
+              aria-label={`Edit ${day.long}`}
               className="mt-2 block rounded-full bg-primary-soft px-3 py-1.5 text-center text-xs font-medium text-primary transition hover:bg-primary hover:text-primary-foreground"
             >
               Edit

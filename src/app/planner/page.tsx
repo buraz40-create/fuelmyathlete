@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { DayPicker } from "@/components/planner/DayPicker";
 import { DayTypeSelector } from "@/components/planner/DayTypeSelector";
 import { MealSlotCard } from "@/components/planner/MealSlotCard";
@@ -36,7 +37,15 @@ export default function PlannerPage() {
     copyPreviousWeek,
   } = usePlan();
   const { profile } = usePlayerProfile();
-  const [selectedDay, setSelectedDay] = useState<number>(new Date().getDay());
+  // The week view links here with ?day=, so Edit lands on the day you clicked instead of
+  // dumping you on today and making you find it again.
+  const searchParams = useSearchParams();
+  const requestedDay = Number(searchParams.get("day"));
+  const [selectedDay, setSelectedDay] = useState<number>(() =>
+    Number.isInteger(requestedDay) && requestedDay >= 0 && requestedDay <= 6
+      ? requestedDay
+      : new Date().getDay()
+  );
   const [pickerSlot, setPickerSlot] = useState<MealSlot | null>(null);
 
   const dayEntries = plan.entries.filter((e) => e.dayOfWeek === selectedDay);
@@ -99,10 +108,18 @@ export default function PlannerPage() {
           </h2>
         </header>
 
-        <DayPicker selected={selectedDay} onSelect={setSelectedDay} plan={plan} />
+        <DayPicker
+          selected={selectedDay}
+          onSelect={setSelectedDay}
+          plan={plan}
+          weekStart={weekStart}
+        />
 
         <div className="mt-8 grid gap-6 md:grid-cols-[1fr_280px]">
-          <div className="space-y-6">
+          {/* Water sits above the meal cards on a phone and beside them on a desktop. Ordered
+              with CSS rather than rendered twice, so there is one hydration state, not two that
+              drift apart. At practice pickup the tracker is the whole reason the app is open. */}
+          <div className="order-2 space-y-6 md:order-1">
             <section aria-labelledby="daytype-title">
               <header className="mb-3">
                 <h3 id="daytype-title" className="text-xl">
@@ -146,7 +163,7 @@ export default function PlannerPage() {
             </section>
           </div>
 
-          <aside className="space-y-4">
+          <aside className="order-1 space-y-4 md:order-2">
             <WaterTracker dayType={currentDayType} />
             <HydrationHistory goalOz={goalOzForDay} />
             <NutritionTip dayType={currentDayType} />
