@@ -1,17 +1,33 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Basket, MagicWand, Trash } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowRight,
+  ArrowsClockwise,
+  Basket,
+  MagicWand,
+  Trash,
+} from "@phosphor-icons/react/dist/ssr";
 import { Mascot } from "@/components/brand/Mascot";
 
 interface WeekProgressProps {
   plannedCount: number;
   total: number;
+  canCopyPreviousWeek?: boolean;
   onSmartFill: () => void;
+  onCopyPreviousWeek?: () => void | Promise<boolean>;
   onClear: () => void;
 }
 
-export function WeekProgress({ plannedCount, total, onSmartFill, onClear }: WeekProgressProps) {
+export function WeekProgress({
+  plannedCount,
+  total,
+  canCopyPreviousWeek = false,
+  onSmartFill,
+  onCopyPreviousWeek,
+  onClear,
+}: WeekProgressProps) {
+  const showCopy = canCopyPreviousWeek && plannedCount === 0 && Boolean(onCopyPreviousWeek);
   function handleClear() {
     if (plannedCount === 0) return;
     const ok = window.confirm(
@@ -51,7 +67,9 @@ export function WeekProgress({ plannedCount, total, onSmartFill, onClear }: Week
             {complete
               ? "Head to the Grocery tab to start shopping."
               : plannedCount === 0
-              ? "Start by tapping a meal slot below, or let us fill the whole week for you in one click."
+              ? showCopy
+              ? "Start from last week to reuse what worked, or let us fill the whole week for you."
+              : "Start by tapping a meal slot below, or let us fill the whole week for you in one click."
               : `${total - plannedCount} more slot${total - plannedCount === 1 ? "" : "s"} to go.`}
           </p>
 
@@ -78,6 +96,16 @@ export function WeekProgress({ plannedCount, total, onSmartFill, onClear }: Week
             >
               <MagicWand size={18} weight="duotone" aria-hidden />
               {plannedCount === 0 ? "Auto-fill my week" : "Fill the rest"}
+            </button>
+          )}
+          {showCopy && (
+            <button
+              type="button"
+              onClick={() => onCopyPreviousWeek?.()}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-ink transition hover:border-primary/40 hover:bg-primary-soft/30"
+            >
+              <ArrowsClockwise size={17} weight="duotone" aria-hidden />
+              Start from last week
             </button>
           )}
           {complete && (

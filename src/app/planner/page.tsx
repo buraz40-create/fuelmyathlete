@@ -9,9 +9,9 @@ import { NutritionTip } from "@/components/planner/NutritionTip";
 import { WaterTracker } from "@/components/planner/WaterTracker";
 import { HowItWorks } from "@/components/planner/HowItWorks";
 import { WeekProgress } from "@/components/planner/WeekProgress";
+import { WeekSwitcher } from "@/components/planner/WeekSwitcher";
 import { usePlan } from "@/components/planner/PlanProvider";
 import { MEAL_SLOTS, DAYS_OF_WEEK } from "@/data/dayTypes";
-import { formatWeekRange } from "@/lib/planner/isoWeek";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { ageToCohort } from "@/lib/player/cohort";
 import type { MealSlot } from "@/types/domain";
@@ -20,12 +20,18 @@ export default function PlannerPage() {
   const {
     plan,
     weekStart,
+    isCurrentWeek,
+    previousWeekHasPlan,
     hydrated,
     plannedCount,
     updateEntry,
     setDayType,
     smartFillWeek,
     resetWeek,
+    nextWeek,
+    prevWeek,
+    goToCurrentWeek,
+    copyPreviousWeek,
   } = usePlan();
   const { profile } = usePlayerProfile();
   const [selectedDay, setSelectedDay] = useState<number>(new Date().getDay());
@@ -48,9 +54,18 @@ export default function PlannerPage() {
       className="mx-auto w-full max-w-6xl px-4 py-6 md:px-8 md:py-10"
     >
       <header className="mb-6">
-        <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-          Week of {formatWeekRange(weekStart)}
-        </p>
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Your plan
+          </p>
+          <WeekSwitcher
+            weekStart={weekStart}
+            isCurrentWeek={isCurrentWeek}
+            onPrev={prevWeek}
+            onNext={nextWeek}
+            onToday={goToCurrentWeek}
+          />
+        </div>
         <h1 id="planner-title" className="mt-1">
           Fuel the week for {athleteName}
         </h1>
@@ -65,7 +80,9 @@ export default function PlannerPage() {
       <WeekProgress
         plannedCount={plannedCount}
         total={28}
+        canCopyPreviousWeek={previousWeekHasPlan}
         onSmartFill={smartFillWeek}
+        onCopyPreviousWeek={copyPreviousWeek}
         onClear={resetWeek}
       />
 

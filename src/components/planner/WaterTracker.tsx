@@ -113,8 +113,8 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
         <p className="text-xs text-muted-foreground">
           {atCap ? (
             <>
-              That is {capOz}oz, the safe daily maximum. More is not better, so stop here for
-              today.
+              That is as high as this goes. {capOz}oz is the safe daily maximum, and more is not
+              better.
             </>
           ) : reached ? (
             <>Goal hit. Drink to thirst from here.</>

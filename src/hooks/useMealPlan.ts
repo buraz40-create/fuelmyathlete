@@ -1,11 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { DayType, MealPlan, MealSlot } from "@/types/domain";
 import { emptyPlan, planStorage } from "@/lib/planner/storage";
 import { loadPlanRemote, savePlanRemote } from "@/lib/planner/storage-supabase";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
-import { currentWeekStart } from "@/lib/planner/isoWeek";
+import { currentWeekStart, shiftWeek } from "@/lib/planner/isoWeek";
 import { MEALS_BY_SLOT } from "@/data/meals";
 
 const SAVE_DEBOUNCE_MS = 250;
@@ -99,7 +99,58 @@ export function useMealPlan(initialWeekStart?: string) {
     const fresh = emptyPlan(weekStart);
     setPlan(fresh);
     planStorage.clearPlan(weekStart);
+    // Clearing locally only meant the remote copy was restored on next load, silently
+    // undoing the clear for signed-in parents.
+    if (isSupabaseConfigured) {
+      savePlanRemote(fresh).catch(() => {
+        // Local copy is already cleared; remote catches up on the next edit.
+      });
+    }
   }, [weekStart]);
+
+  const goToWeek = useCallback((next: string) => setWeekStart(next), []);
+  const nextWeek = useCallback(() => setWeekStart((w) => shiftWeek(w, 1)), []);
+  const prevWeek = useCallback(() => setWeekStart((w) => shiftWeek(w, -1)), []);
+  const goToCurrentWeek = useCallback(() => setWeekStart(currentWeekStart()), []);
+
+  // A week is disposable work if it vanishes every Saturday. Copying the previous week
+  // makes week two cost one tap instead of twenty-eight.
+  // Gated on `hydrated` so the first client render matches the server HTML before any
+  // localStorage read happens.
+  const previousWeekHasPlan = useMemo(
+    () => (hydrated ? planStorage.hasPlan(shiftWeek(weekStart, -1)) : false),
+    [hydrated, weekStart]
+  );
+
+  const copyPreviousWeek = useCallback(async () => {
+    const prevStart = shiftWeek(weekStart, -1);
+    let source: MealPlan | null = planStorage.hasPlan(prevStart)
+      ? planStorage.loadPlan(prevStart)
+      : null;
+    if (!source && isSupabaseConfigured) {
+      source = await loadPlanRemote(prevStart);
+    }
+    if (!source) return false;
+
+    setPlan((prev) => {
+      const byCell = new Map(
+        source.entries.map((e) => [`${e.dayOfWeek}:${e.slot}`, e] as const)
+      );
+      const next: MealPlan = {
+        ...prev,
+        entries: prev.entries.map((e) => {
+          const from = byCell.get(`${e.dayOfWeek}:${e.slot}`);
+          if (!from) return e;
+          return { ...e, mealSlug: from.mealSlug, dayType: from.dayType };
+        }),
+        // Shopping starts unchecked. Last week's ticks are not this week's cart.
+        groceryChecked: {},
+      };
+      persist(next);
+      return next;
+    });
+    return true;
+  }, [weekStart, persist]);
 
   const smartFillWeek = useCallback(() => {
     setPlan((prev) => {
@@ -127,6 +178,8 @@ export function useMealPlan(initialWeekStart?: string) {
   return {
     weekStart,
     setWeekStart,
+    isCurrentWeek: weekStart === currentWeekStart(),
+    previousWeekHasPlan,
     plan,
     hydrated,
     plannedCount,
@@ -135,6 +188,11 @@ export function useMealPlan(initialWeekStart?: string) {
     toggleGroceryItem,
     smartFillWeek,
     resetWeek,
+    goToWeek,
+    nextWeek,
+    prevWeek,
+    goToCurrentWeek,
+    copyPreviousWeek,
   };
 }
 
