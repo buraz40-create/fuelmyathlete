@@ -10,6 +10,7 @@ import { MEALS_BY_SLOT } from "@/data/meals";
 import { mealPreferences } from "@/lib/player/preferences";
 import { weeklySchedule } from "@/lib/player/schedule";
 import { mergePlans } from "@/lib/planner/merge";
+import { toast } from "sonner";
 
 const SAVE_DEBOUNCE_MS = 250;
 
@@ -18,6 +19,7 @@ export function useMealPlan(initialWeekStart?: string) {
   const [plan, setPlan] = useState<MealPlan>(() => emptyPlan(weekStart));
   const [hydrated, setHydrated] = useState(false);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const syncWarned = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -61,7 +63,16 @@ export function useMealPlan(initialWeekStart?: string) {
       planStorage.savePlan(next);
       if (isSupabaseConfigured) {
         savePlanRemote(next).catch(() => {
-          // Network/auth error: local copy is still saved.
+          // Local is saved either way, so this is not an error the parent must act on. But a
+          // signed-in parent whose sync has been quietly failing for a week deserves to know
+          // before they open the app on another device and find a different plan. Warn once
+          // per session rather than on every debounced save.
+          if (!syncWarned.current) {
+            syncWarned.current = true;
+            toast.warning("Saved on this device, but not synced", {
+              description: "Your plan is safe here. It will sync again when the connection is back.",
+            });
+          }
         });
       }
     }, SAVE_DEBOUNCE_MS);

@@ -197,6 +197,7 @@ export default function SettingsPage() {
             <p className="text-sm text-muted-foreground">Loading…</p>
           ) : (
             <ProfileSetup
+              chrome={false}
               redirectTo="/planner"
               submitLabel="Save changes"
               initial={profile ?? undefined}

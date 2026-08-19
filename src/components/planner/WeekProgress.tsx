@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import {
   ArrowRight,
   ArrowsClockwise,
@@ -28,13 +30,7 @@ export function WeekProgress({
   onClear,
 }: WeekProgressProps) {
   const showCopy = canCopyPreviousWeek && plannedCount === 0 && Boolean(onCopyPreviousWeek);
-  function handleClear() {
-    if (plannedCount === 0) return;
-    const ok = window.confirm(
-      "Clear all picks for this week? Day types stay, only the meals get reset."
-    );
-    if (ok) onClear();
-  }
+  const [confirmClear, setConfirmClear] = useState(false);
   const pct = total === 0 ? 0 : Math.round((plannedCount / total) * 100);
   const complete = plannedCount === total;
 
@@ -130,7 +126,7 @@ export function WeekProgress({
             {plannedCount > 0 && (
               <button
                 type="button"
-                onClick={handleClear}
+                onClick={() => setConfirmClear(true)}
                 className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition hover:text-danger"
               >
                 <Trash size={13} weight="duotone" aria-hidden />
@@ -140,6 +136,16 @@ export function WeekProgress({
           </div>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={confirmClear}
+        onOpenChange={setConfirmClear}
+        title="Clear this week?"
+        description="Every meal pick for the week is removed. Day types stay as they are, and other weeks are untouched."
+        confirmLabel="Clear the week"
+        destructive
+        onConfirm={onClear}
+      />
     </section>
   );
 }

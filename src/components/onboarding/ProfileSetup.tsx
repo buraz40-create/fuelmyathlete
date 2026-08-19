@@ -14,12 +14,16 @@ interface ProfileSetupProps {
   redirectTo?: string;
   submitLabel?: string;
   initial?: { name?: string; ageYears?: number; weightLb?: number };
+  // Settings embeds this form inside its own page, where a second logo, a "Welcome" eyebrow
+  // and a second H1 were all wrong. Onboarding keeps the full card.
+  chrome?: boolean;
 }
 
 export function ProfileSetup({
   redirectTo = "/planner",
   submitLabel = "Start planning",
   initial,
+  chrome = true,
 }: ProfileSetupProps) {
   const router = useRouter();
   const { save } = usePlayerProfile();
@@ -53,20 +57,32 @@ export function ProfileSetup({
     router.push(redirectTo);
   }
 
-  return (
-    <article className="mx-auto w-full max-w-md rounded-3xl border border-border bg-surface p-6 shadow-sm md:p-8">
-      <header className="mb-5 flex flex-col items-center text-center">
-        <Logo width={340} priority />
-        <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-primary">
-          Welcome
-        </p>
-        <h1 className="mt-1 text-2xl">Tell us about the athlete</h1>
-      </header>
+  const Wrapper = chrome ? "article" : "div";
 
-      <p className="mb-5 text-sm text-muted-foreground">
-        We use age to calculate the right hydration, portions, and recommendations. Your
-        data stays on this device until you create an account.
-      </p>
+  return (
+    <Wrapper
+      className={
+        chrome
+          ? "mx-auto w-full max-w-md rounded-3xl border border-border bg-surface p-6 shadow-sm md:p-8"
+          : "w-full"
+      }
+    >
+      {chrome && (
+        <>
+          <header className="mb-5 flex flex-col items-center text-center">
+            <Logo width={340} priority />
+            <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-primary">
+              Welcome
+            </p>
+            <h1 className="mt-1 text-2xl">Tell us about the athlete</h1>
+          </header>
+
+          <p className="mb-5 text-sm text-muted-foreground">
+            We use age to calculate the right hydration, portions, and recommendations. Your
+            data stays on this device until you create an account.
+          </p>
+        </>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-1.5">
@@ -143,6 +159,6 @@ export function ProfileSetup({
           Not medical advice. Talk to a registered sports dietitian for personalized plans.
         </p>
       </form>
-    </article>
+    </Wrapper>
   );
 }

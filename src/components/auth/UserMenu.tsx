@@ -7,11 +7,13 @@ import { SignOut, User as UserIcon } from "@phosphor-icons/react/dist/ssr";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { getBrowserSupabase } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
+import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 
 export function UserMenu({ className }: { className?: string }) {
   const router = useRouter();
   const { user, hydrated } = useAuthUser();
   const [signingOut, setSigningOut] = useState(false);
+  const [confirmSignOut, setConfirmSignOut] = useState(false);
 
   async function signOut() {
     const supabase = getBrowserSupabase();
@@ -42,9 +44,10 @@ export function UserMenu({ className }: { className?: string }) {
   }
 
   return (
+    <>
     <button
       type="button"
-      onClick={signOut}
+      onClick={() => setConfirmSignOut(true)}
       disabled={signingOut}
       title={user.email ?? undefined}
       className={cn(
@@ -55,6 +58,19 @@ export function UserMenu({ className }: { className?: string }) {
       <SignOut size={14} weight="duotone" aria-hidden />
       {signingOut ? "Signing out..." : "Sign out"}
     </button>
+
+    {/* One unguarded tap in the header used to end the session. Cheap to guard, annoying to
+        undo, since signing back in means waiting for a magic link. */}
+    <ConfirmDialog
+      open={confirmSignOut}
+      onOpenChange={setConfirmSignOut}
+      title="Sign out?"
+      description="Your plan stays on this device. Signing back in needs a new magic link from your email."
+      confirmLabel="Sign out"
+      destructive
+      onConfirm={signOut}
+    />
+    </>
   );
 }
 
