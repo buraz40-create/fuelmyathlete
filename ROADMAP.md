@@ -77,11 +77,25 @@ Nothing below a gate is worth an hour until the gate above it passes. The most l
 
 ## 4b. Status, end of 2026-08-19
 
-Shipped today, in order: the three safety fixes; week navigation and copy-last-week; plan repair instead of discard; grocery quantities that read as real amounts plus a pantry-check group; upsert saves replacing delete-then-insert; weight dropped from onboarding for under-13s; error, 404 and loading pages; narrowed positioning; the keep-warm workflow; three match-day lunches and three whole-food snacks; allergen disclosure derived from ingredients; the youth hydration guide; a guide-date bug that had every page showing a day early; `/today`; per-meal hiding so auto-fill stopped serving oatmeal; and the weekly schedule.
+**Gate 0a, 0b and 1 are done, plus most of what was parked in Gate 2.** Deployed and verified on production: `/api/health` green, manifest, `llms.txt`, `/today`, the new guides and the generated icons all serving 200.
 
-Still open and needing Haris specifically: verify email sign-in end to end on production, and add SUPABASE_URL and SUPABASE_ANON_KEY as repository secrets so the keep-warm workflow can run.
+Shipped today, grouped by what it was for.
 
-Still open and buildable: post-game recovery guide, recipe-to-guide backlinks plus llms.txt and the crawler check, hydration history, profile remote sync and the localStorage-to-account migration, per-entry merge for two parents editing one plan, PWA shell.
+*Pediatric safety.* Calorie gate wired to the existing `shouldShowCalories`. Hydration logging capped at the cohort ceiling. `hotWeather` no longer defaults to true. The heat banner labels its numbers as hot-day figures.
+
+*Data loss.* Plans repair instead of being discarded. Remote no longer overwrites local blindly: `updatedAt` is written and load merges per cell, with tests. `resetWeek` clears remote too. Grocery saves upsert instead of delete-then-insert. Anonymous plans and profiles are adopted on first sign-in. Failed syncs warn once per session instead of failing silently.
+
+*The week actually surviving.* Week navigation and copy-last-week. The recurring training schedule is a setting rather than a hardcoded guess.
+
+*The product a parent uses.* Grocery quantities that read as real amounts, a pantry-check group, sticky count, hide-checked, print support. Per-meal servings so the list matches what you cook. Weight dropped from onboarding for under-13s. Match-day lunches and whole-food snacks. Per-meal hiding, which stopped auto-fill serving oatmeal. Allergen disclosure. `/today` for the kid. Hydration history for the parent. Error, 404 and loading pages. Confirm dialogs instead of `window.confirm`.
+
+*Reachability.* PWA manifest, service worker, offline page, install coaching. Narrowed positioning. Recipe-to-guide backlinks, `llms.txt`, the youth hydration guide and the post-game recovery guide.
+
+*Corrections to our own copy.* Three claims the code did not support: portions scaling by body weight, Holliday-Segar weight-based maintenance for kids, and adapting by weight at every age.
+
+**Still open and needing Haris specifically:** verify email sign-in end to end on production, and add SUPABASE_URL and SUPABASE_ANON_KEY as repository secrets so the keep-warm workflow can run.
+
+**Still open and buildable:** exclusions and the weekly schedule are device-local and need a migration plus columns to sync; a second parent still cannot share a family, since `families.owner_id` is a single uuid; the remaining tier-2 content; and `snack2` whenever tournament days justify the persisted-shape change (item 5 made that change safe rather than destructive).
 
 ## 5. The work, in order
 

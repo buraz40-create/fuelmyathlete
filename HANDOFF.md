@@ -181,9 +181,13 @@ He also runs calculatorsandmore.com on the same stack.
 
 Superseded by [ROADMAP.md](ROADMAP.md), which is gate-ordered and has kill criteria. Short version of what is already done and what is next:
 
-Gate 0a (pediatric safety) shipped 2026-08-19: the calorie gate is wired through the existing `shouldShowCalories` so the youth view shows protein and cites AAP, hydration logging is capped at the cohort ceiling instead of being unbounded, and `hotWeather` no longer defaults to true (it was silently adding 10% to every goal year round, putting an 11-year-old at 97oz against the 100oz cap on match days).
+Gates 0a, 0b and 1 shipped 2026-08-19, plus most of Gate 2. See ROADMAP.md section 4b for the full list. The pediatric safety fixes were: the calorie gate is wired through the existing `shouldShowCalories` so the youth view shows protein and cites AAP, hydration logging is capped at the cohort ceiling instead of being unbounded, and `hotWeather` no longer defaults to true (it was silently adding 10% to every goal year round, putting an 11-year-old at 97oz against the 100oz cap on match days).
 
-Next: Gate 0b in ROADMAP.md section 5, starting with the keep-warm cron and making `storage.ts` pad rather than discard plans.
+New surfaces since the handoff was written: `/today` (kid view), `/offline`, `/icons/[size]` (generated PWA icons), `/manifest.webmanifest`, `/llms.txt`, and two new guides. New device-local preferences live in `src/lib/player/preferences.ts` (hidden meals) and `src/lib/player/schedule.ts` (recurring week); both are deliberately off the profile because the profile round-trips through Supabase and `players` has no columns for them.
+
+There is now a test runner: `npm test` runs `node --test` over `src/**/__tests__/*.test.ts`. The first suite covers plan merging, which is pure and whose failure mode is silent data loss.
+
+Next: what only Haris can do, which is verifying sign-in end to end and adding the two GitHub secrets.
 
 ### Original next steps, kept for context
 
