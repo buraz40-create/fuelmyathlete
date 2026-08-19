@@ -94,6 +94,26 @@ export function useMealPlan(initialWeekStart?: string) {
     [persist]
   );
 
+  // Servings is the difference between "what will he eat" and "what do I cook tonight".
+  // The field has been in the type and the schema since the start, pinned at 1, while the
+  // grocery aggregator already multiplied by it.
+  const setServings = useCallback(
+    (dayOfWeek: number, slot: MealSlot, servings: number) => {
+      const clamped = Math.min(12, Math.max(1, Math.round(servings)));
+      setPlan((prev) => {
+        const next: MealPlan = {
+          ...prev,
+          entries: prev.entries.map((e) =>
+            e.dayOfWeek === dayOfWeek && e.slot === slot ? { ...e, servings: clamped } : e
+          ),
+        };
+        persist(next);
+        return next;
+      });
+    },
+    [persist]
+  );
+
   const setDayType = useCallback(
     (dayOfWeek: number, dayType: DayType) => {
       setPlan((prev) => {
@@ -216,6 +236,7 @@ export function useMealPlan(initialWeekStart?: string) {
     hydrated,
     plannedCount,
     updateEntry,
+    setServings,
     setDayType,
     toggleGroceryItem,
     smartFillWeek,

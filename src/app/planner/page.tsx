@@ -28,6 +28,7 @@ export default function PlannerPage() {
     hydrated,
     plannedCount,
     updateEntry,
+    setServings,
     setDayType,
     smartFillWeek,
     resetWeek,
@@ -153,8 +154,10 @@ export default function PlannerPage() {
                         slot={slot}
                         dayType={currentDayType}
                         mealSlug={entry?.mealSlug ?? null}
+                        servings={entry?.servings ?? 1}
                         onPick={() => setPickerSlot(slot)}
                         onClear={() => updateEntry(selectedDay, slot, null)}
+                        onServingsChange={(n) => setServings(selectedDay, slot, n)}
                       />
                     </li>
                   );

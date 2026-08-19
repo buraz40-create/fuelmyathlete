@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Plus, ArrowCounterClockwise } from "@phosphor-icons/react/dist/ssr";
+import { Plus, Minus, ArrowCounterClockwise } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { MEALS_BY_SLUG } from "@/data/meals";
 import { DAY_TYPES } from "@/data/dayTypes";
@@ -25,11 +25,21 @@ interface MealSlotCardProps {
   slot: MealSlot;
   dayType: DayType;
   mealSlug: string | null;
+  servings: number;
   onPick: () => void;
   onClear: () => void;
+  onServingsChange: (servings: number) => void;
 }
 
-export function MealSlotCard({ slot, dayType, mealSlug, onPick, onClear }: MealSlotCardProps) {
+export function MealSlotCard({
+  slot,
+  dayType,
+  mealSlug,
+  servings,
+  onPick,
+  onClear,
+  onServingsChange,
+}: MealSlotCardProps) {
   const meal = mealSlug ? MEALS_BY_SLUG[mealSlug] : null;
   const portion = DAY_TYPES[dayType].portionMultiplier;
   const slotMeta = SLOT_LABEL[slot];
@@ -81,6 +91,33 @@ export function MealSlotCard({ slot, dayType, mealSlug, onPick, onClear }: MealS
                 className="flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium text-muted-foreground transition hover:text-danger"
               >
                 <ArrowCounterClockwise size={12} weight="bold" aria-hidden /> Clear
+              </button>
+            </div>
+
+            <div className="mt-2 flex items-center gap-1.5">
+              <span className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                Cooking for
+              </span>
+              <button
+                type="button"
+                onClick={() => onServingsChange(servings - 1)}
+                disabled={servings <= 1}
+                aria-label={`Fewer servings, currently ${servings}`}
+                className="grid h-6 w-6 place-items-center rounded-full border border-border text-muted-foreground transition hover:text-ink disabled:opacity-40"
+              >
+                <Minus size={11} weight="bold" aria-hidden />
+              </button>
+              <span aria-live="polite" className="min-w-[1.25rem] text-center text-sm font-semibold text-ink">
+                {servings}
+              </span>
+              <button
+                type="button"
+                onClick={() => onServingsChange(servings + 1)}
+                disabled={servings >= 12}
+                aria-label={`More servings, currently ${servings}`}
+                className="grid h-6 w-6 place-items-center rounded-full border border-border text-muted-foreground transition hover:text-ink disabled:opacity-40"
+              >
+                <Plus size={11} weight="bold" aria-hidden />
               </button>
             </div>
           </div>
