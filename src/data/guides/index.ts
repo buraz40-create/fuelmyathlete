@@ -8,6 +8,7 @@ import { guide as preGameMealForKids } from "./pre-game-meal-for-kids";
 import { guide as whatToEatBeforeASoccerGame } from "./what-to-eat-before-a-soccer-game";
 import { guide as carbLoadingMealPlan } from "./carb-loading-meal-plan";
 import { guide as youthHydration } from "./how-much-water-should-a-young-athlete-drink";
+import { guide as postGameRecovery } from "./what-to-eat-after-a-soccer-game";
 
 export const GUIDES: Guide[] = [
   preWorkoutMealOatmeal,
@@ -19,6 +20,7 @@ export const GUIDES: Guide[] = [
   whatToEatBeforeASoccerGame,
   carbLoadingMealPlan,
   youthHydration,
+  postGameRecovery,
 ];
 
 export const GUIDES_BY_SLUG: Record<string, Guide> = Object.fromEntries(
