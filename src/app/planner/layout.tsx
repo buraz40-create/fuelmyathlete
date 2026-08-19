@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
 import { AppShell } from "@/components/layout/AppShell";
+import { InstallPrompt } from "@/components/layout/InstallPrompt";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { TabBar } from "@/components/layout/TabBar";
 import { PlanProvider } from "@/components/planner/PlanProvider";
@@ -52,6 +53,7 @@ export default function PlannerLayout({ children }: { children: ReactNode }) {
             dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppLd) }}
           />
           <TabBar />
+          <InstallPrompt />
           {children}
           <BottomNav />
         </AppShell>

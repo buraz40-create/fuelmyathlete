@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { AppShell } from "@/components/layout/AppShell";
+import { InstallPrompt } from "@/components/layout/InstallPrompt";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { TabBar } from "@/components/layout/TabBar";
 import { PlanProvider } from "@/components/planner/PlanProvider";
@@ -19,6 +20,7 @@ export default function TodayLayout({ children }: { children: ReactNode }) {
       <PlanProvider>
         <ProfileGate>
           <TabBar />
+          <InstallPrompt />
           {children}
           <BottomNav />
         </ProfileGate>

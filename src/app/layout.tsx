@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Manrope } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
+import { ServiceWorker } from "@/components/layout/ServiceWorker";
 import { IconProvider } from "@/components/IconProvider";
 import "./globals.css";
 
@@ -141,6 +142,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <IconProvider>{children}</IconProvider>
+        <ServiceWorker />
         <Toaster position="top-center" richColors />
         <Script
           id="ld-organization"
