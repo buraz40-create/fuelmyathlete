@@ -14,6 +14,7 @@ import {
 import { AppShell } from "@/components/layout/AppShell";
 import { ProfileSetup } from "@/components/onboarding/ProfileSetup";
 import { HiddenMeals } from "@/components/planner/HiddenMeals";
+import { WeeklyScheduleEditor } from "@/components/planner/WeeklyScheduleEditor";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { getBrowserSupabase } from "@/lib/supabase/client";
@@ -144,6 +145,23 @@ export default function SettingsPage() {
             </div>
           </section>
         )}
+
+        {/* Recurring training and match pattern */}
+        <section
+          aria-labelledby="schedule-title"
+          className="mb-6 rounded-3xl border border-border bg-surface p-5 shadow-sm md:p-6"
+        >
+          <header className="mb-4">
+            <h2 id="schedule-title" className="text-base font-semibold text-ink">
+              Weekly schedule
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Which days are training and match days. New weeks start with this pattern instead
+              of a guess.
+            </p>
+          </header>
+          <WeeklyScheduleEditor />
+        </section>
 
         {/* Foods the athlete refuses */}
         <section

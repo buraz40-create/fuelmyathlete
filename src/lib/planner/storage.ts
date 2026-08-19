@@ -77,6 +77,13 @@ export const planStorage = {
     window.localStorage.removeItem(key(weekStart));
   },
 
+  // Distinct from hasPlan: exists() is true for a stored week with no meals picked yet,
+  // which is what tells us whether a week is genuinely untouched.
+  exists(weekStart: string): boolean {
+    if (typeof window === "undefined") return false;
+    return window.localStorage.getItem(key(weekStart)) !== null;
+  },
+
   hasPlan(weekStart: string): boolean {
     if (typeof window === "undefined") return false;
     const raw = window.localStorage.getItem(key(weekStart));

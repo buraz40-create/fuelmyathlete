@@ -8,6 +8,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { currentWeekStart, shiftWeek } from "@/lib/planner/isoWeek";
 import { MEALS_BY_SLOT } from "@/data/meals";
 import { mealPreferences } from "@/lib/player/preferences";
+import { weeklySchedule } from "@/lib/player/schedule";
 
 const SAVE_DEBOUNCE_MS = 250;
 
@@ -21,8 +22,13 @@ export function useMealPlan(initialWeekStart?: string) {
     let cancelled = false;
     async function load() {
       // Always hydrate from local first for instant UI; remote overwrites if newer.
+      const untouched = !planStorage.exists(weekStart);
       const local = planStorage.loadPlan(weekStart);
-      if (!cancelled) setPlan(local);
+      // A week nobody has opened yet gets the family's recurring schedule stamped onto it.
+      // Applied here rather than inside emptyPlan because emptyPlan also runs on the server,
+      // where localStorage does not exist, and a mismatch would break hydration.
+      const seeded = untouched ? applySchedule(local) : local;
+      if (!cancelled) setPlan(seeded);
 
       if (isSupabaseConfigured) {
         const remote = await loadPlanRemote(weekStart);
@@ -198,6 +204,14 @@ export function useMealPlan(initialWeekStart?: string) {
     prevWeek,
     goToCurrentWeek,
     copyPreviousWeek,
+  };
+}
+
+function applySchedule(plan: MealPlan): MealPlan {
+  const schedule = weeklySchedule.load();
+  return {
+    ...plan,
+    entries: plan.entries.map((e) => ({ ...e, dayType: schedule[e.dayOfWeek] ?? e.dayType })),
   };
 }
 
