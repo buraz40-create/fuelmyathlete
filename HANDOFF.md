@@ -126,7 +126,7 @@ All domain types live in [src/types/domain.ts](src/types/domain.ts): `MealSlot`,
 | [api/health/route.ts](src/app/api/health/route.ts) | health check |
 | [sitemap.ts](src/app/sitemap.ts), [robots.ts](src/app/robots.ts), [opengraph-image.tsx](src/app/opengraph-image.tsx), [twitter-image.tsx](src/app/twitter-image.tsx) | SEO |
 
-Most routes have a sibling `layout.tsx` holding per-page metadata. SEO work is done: sitemap, robots, per-page metadata, JSON-LD schema.
+Most routes have a sibling `layout.tsx` holding per-page metadata. SEO surface: sitemap, robots, per-page metadata, JSON-LD schema, and `llms.txt`. The schema was written long before it worked: until 2026-08-19 every block was wrapped in `next/script`, so it was injected after hydration and never appeared in the server HTML. If you add schema anywhere, use a plain `script` tag and confirm it with `curl`, not with a browser devtools inspector, which shows the hydrated DOM and will happily lie to you.
 
 ### Data, `src/data/`
 
