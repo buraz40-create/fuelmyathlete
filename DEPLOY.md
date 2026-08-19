@@ -138,12 +138,13 @@ If 1-5 all pass: you're live. Share the URL with Elvis's team.
 
 ## Rollback / troubleshooting
 
-- **"This site can't be reached" / `ERR_NAME_NOT_RESOLVED` on a `*.supabase.co` URL after clicking a sign-in button**: `NEXT_PUBLIC_SUPABASE_URL` on Vercel points at a project that doesn't exist (mistyped ref, or the project was deleted). Read the hostname off the error page and compare it character-for-character with **Project Settings** → **API** → Project URL in Supabase. Fix the Vercel env var, then **redeploy** (env changes don't apply to existing builds). Verify with `/api/health`.
+- **"This site can't be reached" / `ERR_NAME_NOT_RESOLVED` on a `*.supabase.co` URL after clicking a sign-in button**: **check the Supabase dashboard first.** Free projects pause after about a week of inactivity, and Supabase deprovisions DNS for paused projects, so a paused project looks exactly like a deleted one from the outside. If it says "Project is paused", click **Resume project** and wait about a minute. DNS returns, data is untouched, and no redeploy is needed. This took the site down on 2026-08-18 and cost a day of debugging before anyone opened the dashboard. Only if the project genuinely is not in the dashboard is the cause a bad `NEXT_PUBLIC_SUPABASE_URL` on Vercel (mistyped ref, or a deleted project). Read the hostname off the error page and compare it character-for-character with **Project Settings** → **API** → Project URL in Supabase. Fix the Vercel env var, then **redeploy** (env changes don't apply to existing builds). Verify with `/api/health`.
 - **`redirect_uri_mismatch` from Google**: the Authorized redirect URI in Google Cloud must be `https://YOUR-PROJECT-REF.supabase.co/auth/v1/callback`, not your own domain. See Step 3.
 - **`Unsupported provider: provider is not enabled`**: the Google provider is toggled off in Supabase. See Step 3.
 - **Magic link redirects to localhost in production**: Step 9 was skipped. Add prod URLs to Supabase auth config.
 - **Sign-in works but `/planner` redirects back to sign-in**: cookie not being set. Usually a `Site URL` mismatch in Supabase. Check Step 3 + Step 9.
-- **`/api/health` returns `supabase:false` in production**: env vars not set on Vercel. Step 7 #3.
+- **`/api/health` returns `supabase:false` in production**: read `supabaseDetail` in the response. `Auth endpoint returned 521` means the project is paused or still restoring. Otherwise the env vars are not set on Vercel, Step 7 #3.
+- **Magic link lands on the homepage instead of signing you in**: the Redirect URLs allow list is empty or missing the callback, so Supabase falls back to Site URL and the code exchange never runs. Add `https://fuelmyathlete.com/auth/callback`, the `www` variant, and `http://localhost:3000/auth/callback` under **Authentication** → **URL Configuration**.
 - **Meals don't load**: seed migration didn't run. Step 2 #3.
 - **`Row-level security blocking` errors in console**: RLS migration didn't run. Step 2 #2.
 

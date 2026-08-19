@@ -2,7 +2,7 @@
 
 Orientation for a new Claude Code session on this machine. Everything below is a real path in this repo. Read this before searching.
 
-Last updated: 2026-08-18
+Last updated: 2026-08-19
 
 ---
 
@@ -30,40 +30,44 @@ Live at https://fuelmyathlete.com on Vercel.
 
 Commands: `npm run dev`, `npm run build`, `npm run lint`, `npx tsc --noEmit`.
 
-## 3. Current blocker, read this first
+## 3. Resolved blocker: the project was paused, not missing
 
-**Sign-in is broken in production, and no code change fixes it.**
+**Fixed 2026-08-19. Sign-in works in production again.**
 
-`NEXT_PUBLIC_SUPABASE_URL` in Vercel points at `dtwsyyaalgjiswntpekk.supabase.co`, which does not exist. Verified NXDOMAIN (Status 3) from both Google and Cloudflare public DNS, authoritative from supabase.co's own nameservers. That hostname is compiled into the live production JS bundle.
+The earlier diagnosis in this file was wrong and is preserved here so nobody repeats it. It read the NXDOMAIN on `dtwsyyaalgjiswntpekk.supabase.co` as proof the project had been deleted, and concluded a fresh Supabase project was needed.
 
-Because `signInWithOAuth` navigates the whole browser to `https://<project>.supabase.co/auth/v1/authorize`, the Google button produces a browser-level `ERR_NAME_NOT_RESOLVED` page. Email sign-in is equally dead, it just fails quieter.
+The real cause: **Supabase deprovisions DNS for paused free-tier projects.** The project existed the whole time, sitting paused in the `buraz` org. Free projects pause after roughly a week of inactivity, which this one hit. NXDOMAIN on a `*.supabase.co` host is a symptom of a paused project far more often than a deleted one, so check the dashboard before concluding anything from DNS.
 
-Searched and confirmed **the correct URL exists nowhere on this machine**: not in the working tree, not in `.next`, not in full git history across all branches, not in the memory files, not in any Claude Code transcript in `C:\Users\buraz\.claude\projects\`, and there has never been a `.env.local` here. The Vercel CLI is installed globally but logged out (`vercel whoami` returns `Error: User not found`).
+The fix was one click on **Resume project**. DNS came back within about a minute (Status 3 to Status 0, A records at `104.18.38.10`), and `/api/health` went green at 15:21 local. No new project, no migrations rerun, no env var change, no redeploy. `NEXT_PUBLIC_SUPABASE_URL` in Vercel was correct all along.
 
-**Decision made 2026-08-18:** Haris chose to create a fresh Supabase project rather than switch to Clerk + Neon or ship without accounts. Migrations and seed SQL are already written and unchanged, so this needs zero code changes.
+Verified after the restore, via the SQL Editor:
 
-Remaining steps are in [DEPLOY.md](DEPLOY.md). Short version:
-1. Create project at supabase.com/dashboard, region East US (North Virginia)
-2. Run the three SQL files (section 6 below) in the SQL Editor
-3. Auth providers: enable Email, confirmations, magic link
-4. Auth URL config: Site URL `https://fuelmyathlete.com`, redirect URLs for apex, www, and localhost
-5. Copy Project URL + anon key into Vercel env vars, then **redeploy** (env changes do not apply to existing builds)
-6. Verify at `/api/health`
+| Check | Result |
+|---|---|
+| Public tables | 13 |
+| RLS policies | 13 |
+| `meals` rows | 17 |
+| `ingredients` rows | 46 |
+| `auth.users` rows | 1 |
+
+Also fixed during the same session, both of which were genuinely missing: the Redirect URLs allow list was **empty**, so magic links would have fallen back to Site URL and landed on the homepage instead of `/auth/callback`, skipping the code exchange. Added apex, www, and localhost callbacks. Site URL was already `https://fuelmyathlete.com`, and the Email provider was already enabled with confirmations on.
+
+**This will happen again.** Free projects keep pausing after about a week idle. Two ways out: keep the project warm with real traffic, or move to Pro at $20/mo. Worth deciding before Elvis's team starts using it, because a paused project takes the whole site's auth down and only Haris can resume it.
 
 Google OAuth was deliberately deferred until email sign-in works. Its setup is documented in [DEPLOY.md](DEPLOY.md). The critical detail: the Authorized redirect URI in Google Cloud must be `https://YOUR-REF.supabase.co/auth/v1/callback`, **not** `fuelmyathlete.com/auth/callback`.
 
-Known cost constraint: free Supabase projects pause after 1 week of inactivity and need a manual restore. Vercel Hobby is personal and non-commercial, so monetizing later means $20/mo Pro.
+Other cost constraint: Vercel Hobby is personal and non-commercial, so monetizing later means $20/mo Pro there too.
 
-## 4. Uncommitted changes in the working tree
+## 4. Recent changes, committed
 
-Four modified files, none committed:
+Shipped in `6ce2307` on 2026-08-19, pushed to `main`. All four were written while chasing the outage, and all four still earn their place now that the cause is known:
 
 - [src/app/api/health/route.ts](src/app/api/health/route.ts) - previously reported `supabase: true` whenever the env vars were merely non-empty, which is why a dead host went unnoticed. Now actually fetches `/auth/v1/health` and returns 503 with a `supabaseDetail` message.
 - [src/app/sign-in/page.tsx](src/app/sign-in/page.tsx) - the page never read the `?error=` param that the auth callback redirects failures to, so every failure showed a blank form. Added `describeAuthError` plus a mount effect that surfaces the message and strips the param.
 - [src/lib/supabase/middleware.ts](src/lib/supabase/middleware.ts) - `auth.getUser()` ran unbounded on every request, so an unreachable or paused project stalled every page load. Now capped at 2s via `Promise.race` and serves signed-out.
 - [DEPLOY.md](DEPLOY.md) - added the missing Google OAuth section and troubleshooting for NXDOMAIN, `redirect_uri_mismatch`, and `provider is not enabled`.
 
-Typecheck and build both pass.
+Typecheck and build both pass. The health route is the one that matters long term: it is now the thing that will tell you the project has paused again, instead of reporting green while auth is dead.
 
 ## 5. Architecture
 
@@ -173,11 +177,11 @@ He also runs calculatorsandmore.com on the same stack.
 
 ## 9. Next steps
 
-1. Create the Supabase project and get the real Project URL, section 3
-2. **Verify the hostname resolves in DNS before setting it in Vercel.** Skipping this is exactly how the current outage happened.
-3. Run migrations, verify with `scripts/verify-db.mjs`
-4. Set Vercel env vars, redeploy, confirm `/api/health` returns `supabase: true`
-5. Test email sign-in end to end, then add Google per DEPLOY.md
-6. Commit the four pending changes in section 4
+1. **Test email sign-in end to end on production.** Everything below it is unverified until a real magic link completes. Only Haris can do this, it needs his inbox.
+2. Decide how to stop the free-tier pause from recurring, section 3. This is a product decision, not a technical one.
+3. Add Google OAuth per [DEPLOY.md](DEPLOY.md), now that email works.
+4. If sign-in fails at the callback, check the `?error=` message the sign-in page now surfaces before touching anything else. That page tells you the real reason now.
+
+Whenever `*.supabase.co` stops resolving again: open the dashboard first. Paused, not deleted, is the overwhelmingly likely answer.
 
 Not yet built: hydration log sync to `hydration_logs` (Phase 2), energy/recovery log (Phase 3), parent-mode calorie view. Known gap: localStorage data created before a user's first sign-in is not migrated to their account.
