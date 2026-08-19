@@ -68,13 +68,20 @@ These were checked against the repo directly, not asserted.
 Nothing below a gate is worth an hour until the gate above it passes. The most likely failure mode for this project is working on Gate 3 while Gate 0 is open.
 
 - **Gate 0a. Safety.** Done 2026-08-19.
-- **Gate 0b. It cannot vanish and it does not lie.** Cron, error pages, honest positioning, hydration documented, sign-in verified end to end.
-- **Gate 1. The week survives Saturday, and one door is open.** Week navigation, the cleanup, `/game-day`, the shareable card.
-- **Gate 2. Three non-Haris families hit W2 retention.**
-- **Gate 3. The team manager distributes it.**
-- **Gate 4. One team arrives that Haris did not recruit.**
+- **Gate 0b. It cannot vanish and it does not lie.** Done 2026-08-19 except sign-in, which needs Haris's inbox, and the two GitHub secrets the keep-warm workflow needs.
+- **Gate 1. The week survives Saturday.** Week navigation, copy-last-week, plan repair, grocery rounding, upsert saves, onboarding trimmed, allergens, match-day lunches, hidden meals, weekly schedule: all done 2026-08-19. `/game-day` and the shareable card are deferred, since both existed to serve the team wedge that section 0 removed.
+- **Gate 2 and 3, as originally written, are void.** They were defined by teammate families and a team manager who will not be approached. What replaces them is not yet decided, see section 0.
+- **Gate 4. One team arrives that Haris did not recruit.** Still the honest test of whether this grows at all, and now it would have to come through search.
 
 ---
+
+## 4b. Status, end of 2026-08-19
+
+Shipped today, in order: the three safety fixes; week navigation and copy-last-week; plan repair instead of discard; grocery quantities that read as real amounts plus a pantry-check group; upsert saves replacing delete-then-insert; weight dropped from onboarding for under-13s; error, 404 and loading pages; narrowed positioning; the keep-warm workflow; three match-day lunches and three whole-food snacks; allergen disclosure derived from ingredients; the youth hydration guide; a guide-date bug that had every page showing a day early; `/today`; per-meal hiding so auto-fill stopped serving oatmeal; and the weekly schedule.
+
+Still open and needing Haris specifically: verify email sign-in end to end on production, and add SUPABASE_URL and SUPABASE_ANON_KEY as repository secrets so the keep-warm workflow can run.
+
+Still open and buildable: post-game recovery guide, recipe-to-guide backlinks plus llms.txt and the crawler check, hydration history, profile remote sync and the localStorage-to-account migration, per-entry merge for two parents editing one plan, PWA shell.
 
 ## 5. The work, in order
 
