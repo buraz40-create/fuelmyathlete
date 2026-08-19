@@ -61,7 +61,7 @@ export default async function Image() {
             Plan the week. Shop once. Cook smart.
           </span>
           <span style={{ fontSize: 28, color: MUTED, lineHeight: 1.35 }}>
-            Built for athletes 8 and up, from soccer kids to adult lifters.
+            Built for young athletes, roughly ages 8 to 14.
           </span>
         </div>
 

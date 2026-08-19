@@ -1,0 +1,58 @@
+name: Keep Supabase warm
+
+# Free Supabase projects pause after roughly a week of inactivity, and a paused project has
+# its DNS deprovisioned, which takes sign-in down site-wide until someone resumes it by hand.
+# That already happened once, on 2026-08-18.
+#
+# This is a bridge, not a fix. Scheduled workflows on free repos can be delayed under load and
+# are disabled automatically after long repo inactivity, which looks exactly like a busy
+# stretch with no commits. The real fix is Supabase Pro. See ROADMAP.md section 9.
+#
+# Setup, one time: add repository secrets SUPABASE_URL (https://<ref>.supabase.co) and
+# SUPABASE_ANON_KEY. The anon key is public by design and already ships in the browser bundle.
+# Never put the service role key here.
+
+on:
+  schedule:
+    # Every 2 days at 14:10 UTC. Off the hour, because the top of the hour is the most
+    # contended slot on GitHub's shared scheduler and gets delayed most.
+    - cron: "10 14 */2 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Authenticated read against PostgREST
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+        run: |
+          set -euo pipefail
+          if [ -z "${SUPABASE_URL:-}" ] || [ -z "${SUPABASE_ANON_KEY:-}" ]; then
+            echo "Missing SUPABASE_URL or SUPABASE_ANON_KEY repository secret."
+            exit 1
+          fi
+          # A real table read, not just a health ping. An unauthenticated ping is not
+          # established to count as project activity; a PostgREST query is.
+          code=$(curl -s -o /tmp/body.txt -w "%{http_code}" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}" \
+            "${SUPABASE_URL}/rest/v1/meals?select=slug&limit=1")
+          echo "HTTP ${code}"
+          cat /tmp/body.txt
+          if [ "$code" != "200" ]; then
+            echo "Supabase did not answer with 200. The project may be paused or the keys rotated."
+            exit 1
+          fi
+
+      - name: Public health check
+        run: |
+          set -euo pipefail
+          code=$(curl -s -o /tmp/health.json -w "%{http_code}" https://fuelmyathlete.com/api/health)
+          cat /tmp/health.json
+          echo
+          if [ "$code" != "200" ]; then
+            echo "fuelmyathlete.com/api/health returned ${code}. Sign-in is probably down."
+            exit 1
+          fi

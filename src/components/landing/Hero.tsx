@@ -42,7 +42,7 @@ export function Hero() {
             transition={{ duration: 0.45, delay: 0 }}
             className="inline-flex items-center rounded-full border border-border bg-surface px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-primary"
           >
-            For athletes 8 and up
+            For young athletes, ages 8 to 14
           </motion.p>
 
           <motion.h1
@@ -59,9 +59,10 @@ export function Hero() {
             transition={{ duration: 0.55, delay: 0.15 }}
             className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg"
           >
-            A weekly meal planner built for athletes, from soccer kids to adult lifters. Pick
-            what they will eat, get an auto grocery list, and track hydration. No signup needed
-            to start.
+            A weekly meal planner for young athletes, roughly ages 8 to 14. Pick what they
+            will eat, get an auto grocery list, and track hydration against pediatric
+            guidelines. Calorie counts stay hidden from kids, per AAP guidance. No signup
+            needed to start.
           </motion.p>
 
           <motion.div

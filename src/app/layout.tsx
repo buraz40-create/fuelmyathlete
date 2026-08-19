@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     template: "%s · FuelMyAthlete",
   },
   description:
-    "Free weekly meal planner, 24 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up. From youth soccer to adult lifting. No signup.",
+    "Free weekly meal planner, 24 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up. Built for youth sports families. No signup.",
   applicationName: "FuelMyAthlete",
   keywords: [
     "meal planner",
