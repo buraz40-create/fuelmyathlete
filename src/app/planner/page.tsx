@@ -7,6 +7,7 @@ import { MealSlotCard } from "@/components/planner/MealSlotCard";
 import { MealPickerSheet } from "@/components/planner/MealPickerSheet";
 import { NutritionTip } from "@/components/planner/NutritionTip";
 import { WaterTracker } from "@/components/planner/WaterTracker";
+import { HydrationHistory } from "@/components/planner/HydrationHistory";
 import { HowItWorks } from "@/components/planner/HowItWorks";
 import { WeekProgress } from "@/components/planner/WeekProgress";
 import { WeekSwitcher } from "@/components/planner/WeekSwitcher";
@@ -14,6 +15,7 @@ import { usePlan } from "@/components/planner/PlanProvider";
 import { MEAL_SLOTS, DAYS_OF_WEEK } from "@/data/dayTypes";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { ageToCohort } from "@/lib/player/cohort";
+import { hydrationFor } from "@/data/hydration";
 import type { MealSlot } from "@/types/domain";
 
 export default function PlannerPage() {
@@ -43,6 +45,7 @@ export default function PlannerPage() {
   const athleteName = profile?.name || "your athlete";
   const cohort = profile ? ageToCohort(profile.ageYears) : "child";
   const possessive = cohort === "adult" ? "they" : "he";
+  const goalOzForDay = profile ? hydrationFor(profile, currentDayType, false).goalOz : 64;
 
   function entryFor(slot: MealSlot) {
     return dayEntries.find((e) => e.slot === slot);
@@ -145,6 +148,7 @@ export default function PlannerPage() {
 
           <aside className="space-y-4">
             <WaterTracker dayType={currentDayType} />
+            <HydrationHistory goalOz={goalOzForDay} />
             <NutritionTip dayType={currentDayType} />
             {!hydrated && (
               <p className="text-xs text-muted-foreground">Loading your plan…</p>
