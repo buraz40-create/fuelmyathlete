@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Calendar, CalendarDots, Basket } from "@phosphor-icons/react/dist/ssr";
+import { Calendar, CalendarDots, Basket, Sun } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 
 const TABS = [
+  { href: "/today",           label: "Today",   icon: Sun },
   { href: "/planner",         label: "Planner", icon: Calendar },
   { href: "/planner/week",    label: "Week",    icon: CalendarDots },
   { href: "/planner/grocery", label: "Grocery", icon: Basket },

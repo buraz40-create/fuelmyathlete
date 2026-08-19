@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { AppShell } from "@/components/layout/AppShell";
+import { BottomNav } from "@/components/layout/BottomNav";
+import { TabBar } from "@/components/layout/TabBar";
 import { PlanProvider } from "@/components/planner/PlanProvider";
 import { ProfileGate } from "@/components/planner/ProfileGate";
 
@@ -15,7 +17,11 @@ export default function TodayLayout({ children }: { children: ReactNode }) {
   return (
     <AppShell>
       <PlanProvider>
-        <ProfileGate>{children}</ProfileGate>
+        <ProfileGate>
+          <TabBar />
+          {children}
+          <BottomNav />
+        </ProfileGate>
       </PlanProvider>
     </AppShell>
   );
