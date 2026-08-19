@@ -24,10 +24,23 @@ function dateFor(weekStart: string, day: number): number {
 }
 
 export function DayPicker({ selected, onSelect, plan, weekStart }: DayPickerProps) {
+  function handleKeyDown(event: React.KeyboardEvent<HTMLOListElement>) {
+    const moves: Record<string, number> = { ArrowLeft: -1, ArrowRight: 1 };
+    let next: number | null = null;
+    if (event.key in moves) next = (selected + moves[event.key] + 7) % 7;
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = 6;
+    if (next === null) return;
+    event.preventDefault();
+    onSelect(next);
+    document.getElementById(`day-tab-${next}`)?.focus();
+  }
+
   return (
     <ol
       role="tablist"
       aria-label="Day of week"
+      onKeyDown={handleKeyDown}
       className="flex w-full items-stretch gap-1.5 overflow-x-auto pb-1"
     >
       {DAYS_OF_WEEK.map((day) => {
@@ -39,7 +52,13 @@ export function DayPicker({ selected, onSelect, plan, weekStart }: DayPickerProp
             <button
               type="button"
               role="tab"
+              id={`day-tab-${day.idx}`}
               aria-selected={isActive}
+              aria-controls="day-panel"
+              // Roving tabindex: one stop for the whole strip, then arrows move within it,
+              // which is how a tablist is meant to behave and how a screen reader user
+              // expects to move through seven days.
+              tabIndex={isActive ? 0 : -1}
               onClick={() => onSelect(day.idx)}
               className={cn(
                 "relative flex w-full flex-col items-center gap-1 rounded-2xl border px-2 py-3 text-sm font-medium transition",

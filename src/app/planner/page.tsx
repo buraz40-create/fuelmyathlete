@@ -116,7 +116,12 @@ export default function PlannerPage() {
           weekStart={weekStart}
         />
 
-        <div className="mt-8 grid gap-6 md:grid-cols-[1fr_280px]">
+        <div
+          id="day-panel"
+          role="tabpanel"
+          aria-labelledby={`day-tab-${selectedDay}`}
+          className="mt-8 grid gap-6 md:grid-cols-[1fr_280px]"
+        >
           {/* Water sits above the meal cards on a phone and beside them on a desktop. Ordered
               with CSS rather than rendered twice, so there is one hydration state, not two that
               drift apart. At practice pickup the tracker is the whole reason the app is open. */}

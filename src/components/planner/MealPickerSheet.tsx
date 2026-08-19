@@ -71,6 +71,14 @@ export function MealPickerSheet({
             </SheetHeader>
 
             <ol className="flex-1 overflow-y-auto px-5 pb-8 pt-2">
+              {filtered.length === 0 && (
+                <li className="mb-4 list-none rounded-2xl border border-dashed border-border bg-muted/20 p-4 text-sm text-muted-foreground">
+                  {hidden.length > 0
+                    ? `Nothing recommended for a ${dayLabel.toLowerCase()} once hidden meals are excluded. Anything below still works, or bring one back.`
+                    : `Nothing in the catalog is tagged for a ${dayLabel.toLowerCase()} in this slot yet. Anything below still works.`}
+                </li>
+              )}
+
               {filtered.length > 0 && (
                 <Section title="Recommended for this day">
                   {filtered.map((meal) => (
