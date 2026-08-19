@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { AppShell } from "@/components/layout/AppShell";
 import { RecipesClient } from "./RecipesClient";
 import { RECIPES } from "@/data/recipes";
@@ -55,12 +54,12 @@ export default function RecipesPage() {
 
   return (
     <AppShell>
-      <Script
+      <script
         id="ld-recipes-collection"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
       />
-      <Script
+      <script
         id="ld-recipes-breadcrumb"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}

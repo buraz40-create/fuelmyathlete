@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script";
 import { ArrowLeft, BookOpen, Shield } from "@phosphor-icons/react/dist/ssr";
 import { AppShell } from "@/components/layout/AppShell";
 import { CITATIONS } from "@/data/citations";
@@ -63,12 +62,12 @@ export default function MethodologyPage() {
 
   return (
     <AppShell>
-      <Script
+      <script
         id="ld-methodology-aboutpage"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageLd) }}
       />
-      <Script
+      <script
         id="ld-methodology-breadcrumb"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { ProfileSetup } from "@/components/onboarding/ProfileSetup";
 
 const SITE_URL =
@@ -37,7 +36,7 @@ export default function OnboardingPage() {
       id="main"
       className="flex min-h-screen items-center justify-center bg-background px-4 py-10"
     >
-      <Script
+      <script
         id="ld-onboarding-webpage"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }}

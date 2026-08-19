@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { redirect } from "next/navigation";
 import { LandingShell } from "@/components/layout/LandingShell";
 import { Hero } from "@/components/landing/Hero";
@@ -94,17 +93,17 @@ export default async function Home({ searchParams }: HomeProps) {
 
   return (
     <>
-      <Script
+      <script
         id="ld-webpage-home"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageLd) }}
       />
-      <Script
+      <script
         id="ld-webapp"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webAppLd) }}
       />
-      <Script
+      <script
         id="ld-faq-home"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}

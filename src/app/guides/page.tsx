@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Script from "next/script";
 import { ArrowRight, BookOpen, Clock } from "@phosphor-icons/react/dist/ssr";
 import { AppShell } from "@/components/layout/AppShell";
 import { GUIDES } from "@/data/guides";
@@ -65,12 +64,12 @@ export default function GuidesIndexPage() {
 
   return (
     <AppShell>
-      <Script
+      <script
         id="ld-guides-collection"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionLd) }}
       />
-      <Script
+      <script
         id="ld-guides-breadcrumb"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}

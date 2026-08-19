@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import Script from "next/script";
 import { AppShell } from "@/components/layout/AppShell";
 import { InstallPrompt } from "@/components/layout/InstallPrompt";
 import { BottomNav } from "@/components/layout/BottomNav";
@@ -47,7 +46,7 @@ export default function PlannerLayout({ children }: { children: ReactNode }) {
     <ProfileGate>
       <PlanProvider>
         <AppShell>
-          <Script
+          <script
             id="ld-planner-software"
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppLd) }}

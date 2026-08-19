@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
@@ -162,12 +161,12 @@ export default async function RecipePage({
 
   return (
     <AppShell>
-      <Script
+      <script
         id={`ld-recipe-${recipe.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(recipeJsonLd) }}
       />
-      <Script
+      <script
         id={`ld-breadcrumb-${recipe.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

@@ -144,17 +144,17 @@ export default function RootLayout({
         <IconProvider>{children}</IconProvider>
         <ServiceWorker />
         <Toaster position="top-center" richColors />
-        <Script
+        <script
           id="ld-organization"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_LD) }}
         />
-        <Script
+        <script
           id="ld-person-editorial"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_LD) }}
         />
-        <Script
+        <script
           id="ld-website"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(WEBSITE_LD) }}

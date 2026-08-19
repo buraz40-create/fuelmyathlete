@@ -1,4 +1,3 @@
-import Script from "next/script";
 import type { Guide } from "@/types/domain";
 
 const SITE_URL =
@@ -82,23 +81,23 @@ export function GuideJsonLd({ guide }: { guide: Guide }) {
 
   return (
     <>
-      <Script
+      <script
         id={`ld-article-${guide.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(article) }}
       />
-      <Script
+      <script
         id={`ld-breadcrumb-${guide.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }}
       />
-      <Script
+      <script
         id={`ld-faq-${guide.slug}`}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqPage) }}
       />
       {howTo && (
-        <Script
+        <script
           id={`ld-howto-${guide.slug}`}
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howTo) }}
