@@ -9,7 +9,7 @@ export const profileStorage = {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (!raw) return null;
       const parsed = JSON.parse(raw) as PlayerProfile;
-      if (!parsed.name || !parsed.ageYears || !parsed.weightLb) return null;
+      if (!parsed.name || !parsed.ageYears) return null;
       return parsed;
     } catch {
       return null;
@@ -34,7 +34,7 @@ export const profileStorage = {
 export function newProfile(input: {
   name: string;
   ageYears: number;
-  weightLb: number;
+  weightLb?: number;
 }): PlayerProfile {
   const now = new Date().toISOString();
   return {

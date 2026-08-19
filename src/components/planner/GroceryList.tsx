@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import {
   GROCERY_CATEGORY_LABEL,
   GROCERY_CATEGORY_ORDER,
+  formatShoppingQuantity,
+  isPantryCheck,
   totalGroceryItems,
 } from "@/lib/planner/grocery";
 import type { GroceryListByCategory } from "@/types/domain";
@@ -82,8 +84,15 @@ export function GroceryList({ grouped, checked, onToggle }: GroceryListProps) {
                           )}
                         >
                           <span className="truncate text-ink">{ingredient.name}</span>
-                          <span className="flex-shrink-0 text-muted-foreground">
-                            {totalQuantity} {ingredient.unit}
+                          <span
+                            className={cn(
+                              "flex-shrink-0",
+                              isPantryCheck(ingredient.unit)
+                                ? "text-[11px] uppercase tracking-wider text-muted-foreground/70"
+                                : "text-muted-foreground"
+                            )}
+                          >
+                            {formatShoppingQuantity(totalQuantity, ingredient.unit)}
                           </span>
                         </span>
                         <span className="mt-0.5 block truncate text-[11px] text-muted-foreground">

@@ -23,7 +23,7 @@ export function calorieTarget(profile: PlayerProfile): CalorieTarget | null {
   if (ageToCohort(profile.ageYears) === "child") return null;
   if (profile.sex == null || profile.heightIn == null) return null;
 
-  const kg = profile.weightLb / 2.2046;
+  const kg = (profile.weightLb ?? 88) / 2.2046;
   const cm = profile.heightIn * 2.54;
   const ageBonus = profile.sex === "male" ? 5 : -161;
   const bmr = 10 * kg + 6.25 * cm - 5 * profile.ageYears + ageBonus;

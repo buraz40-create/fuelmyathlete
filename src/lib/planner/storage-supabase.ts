@@ -130,39 +130,39 @@ export async function savePlanRemote(plan: MealPlan): Promise<void> {
     (mealRows ?? []).forEach((m: { id: string; slug: string }) => slugToId.set(m.slug, m.id));
   }
 
-  // Replace entries: simplest correct path for now.
-  await supabase.from("meal_plan_entries").delete().eq("meal_plan_id", planId);
-  const entryRows = plan.entries
-    .filter((e) => e.mealSlug !== null || e.dayType !== "school")
-    .map((e) => ({
-      meal_plan_id: planId,
-      day_of_week: e.dayOfWeek,
-      day_type: e.dayType,
-      slot: e.slot,
-      meal_id: e.mealSlug ? slugToId.get(e.mealSlug) ?? null : null,
-      servings: e.servings,
-    }));
-  if (entryRows.length > 0) {
-    await supabase.from("meal_plan_entries").insert(entryRows);
-  }
+  // Upsert on the (meal_plan_id, day_of_week, slot) unique constraint rather than deleting
+  // the week and re-inserting it. The old path was two unrelated statements with no
+  // transaction around them, so on a weak connection in a store a delete could land while
+  // the insert failed, and the week was gone.
+  const entryRows = plan.entries.map((e) => ({
+    meal_plan_id: planId,
+    day_of_week: e.dayOfWeek,
+    day_type: e.dayType,
+    slot: e.slot,
+    meal_id: e.mealSlug ? slugToId.get(e.mealSlug) ?? null : null,
+    servings: e.servings,
+  }));
+  await supabase
+    .from("meal_plan_entries")
+    .upsert(entryRows, { onConflict: "meal_plan_id,day_of_week,slot" });
 
-  // Grocery check state.
-  await supabase.from("grocery_check_state").delete().eq("meal_plan_id", planId);
-  const checkedSlugs = Object.entries(plan.groceryChecked)
-    .filter(([, v]) => v)
-    .map(([slug]) => slug);
-  if (checkedSlugs.length > 0) {
+  // Same shape for grocery ticks, keyed on the composite primary key. Unchecked items are
+  // written as false rather than deleted, so an unticked box survives a failed round trip.
+  const checkSlugs = Object.keys(plan.groceryChecked);
+  if (checkSlugs.length > 0) {
     const { data: ingRows } = await supabase
       .from("ingredients")
       .select("id, slug")
-      .in("slug", checkedSlugs);
+      .in("slug", checkSlugs);
     const rows = (ingRows ?? []).map((i: { id: string; slug: string }) => ({
       meal_plan_id: planId,
       ingredient_id: i.id,
-      is_checked: true,
+      is_checked: Boolean(plan.groceryChecked[i.slug]),
     }));
     if (rows.length > 0) {
-      await supabase.from("grocery_check_state").insert(rows);
+      await supabase
+        .from("grocery_check_state")
+        .upsert(rows, { onConflict: "meal_plan_id,ingredient_id" });
     }
   }
 }

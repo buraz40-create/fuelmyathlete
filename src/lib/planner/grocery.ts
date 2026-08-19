@@ -2,6 +2,7 @@ import type {
   GroceryLineItem,
   GroceryListByCategory,
   IngredientCategory,
+  IngredientUnit,
   MealPlan,
 } from "@/types/domain";
 import { INGREDIENT_BY_SLUG } from "@/data/ingredients";
@@ -67,6 +68,42 @@ export function aggregateGrocery(plan: MealPlan): GroceryListByCategory {
   }
 
   return grouped;
+}
+
+// Raw totals are fine for math and useless in an aisle. Nobody buys 9.36 garlic cloves
+// or 3.68 lb of chicken, so counts round up to whole units and weights and volumes round
+// to the quarter a package or a measuring cup actually comes in.
+const FRACTIONS: Record<string, string> = {
+  "0.25": "1/4",
+  "0.5": "1/2",
+  "0.75": "3/4",
+};
+
+function toQuarter(n: number): number {
+  return Math.max(0.25, Math.round(n * 4) / 4);
+}
+
+function withFraction(n: number): string {
+  const whole = Math.floor(n);
+  const part = Math.round((n - whole) * 100) / 100;
+  const frac = FRACTIONS[String(part)];
+  if (!frac) return String(whole || n);
+  return whole === 0 ? frac : `${whole} ${frac}`;
+}
+
+// Teaspoons and tablespoons are seasonings and oils. Telling a parent to buy 2.4 tsp of
+// sesame oil every week is noise, so these become a pantry check instead of a quantity.
+export function isPantryCheck(unit: IngredientUnit): boolean {
+  return unit === "tsp" || unit === "tbsp";
+}
+
+export function formatShoppingQuantity(quantity: number, unit: IngredientUnit): string {
+  if (isPantryCheck(unit)) return "check pantry";
+  if (unit === "each") return String(Math.max(1, Math.ceil(quantity)));
+  if (unit === "oz") return `${Math.max(1, Math.round(quantity))} oz`;
+  const rounded = toQuarter(quantity);
+  if (unit === "lb") return `${withFraction(rounded)} lb`;
+  return `${withFraction(rounded)} ${rounded <= 1 ? "cup" : "cups"}`;
 }
 
 export function totalGroceryItems(grouped: GroceryListByCategory): number {

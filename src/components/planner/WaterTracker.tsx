@@ -152,7 +152,8 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
         </summary>
         {calc && profile && (
           <p className="mt-2 leading-relaxed">
-            For {profile.name} ({profile.ageYears}y, {profile.weightLb}lb): {calc.baselineOz}oz baseline
+            For {profile.name} ({profile.ageYears}y
+            {profile.weightLb ? `, ${profile.weightLb}lb` : ""}): {calc.baselineOz}oz baseline
             {calc.exerciseAddOz > 0 && <>, +{calc.exerciseAddOz}oz for {dayType}</>}
             {calc.hotWeatherAddOz > 0 && <>, +{calc.hotWeatherAddOz}oz hot weather</>}
             {calc.capped && <>, capped at {calc.capOz}oz</>}. Formula: {calc.formula}.

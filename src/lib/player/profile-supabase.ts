@@ -23,7 +23,7 @@ function rowToProfile(row: PlayerRow): PlayerProfile | null {
   return {
     name: row.name,
     ageYears: row.age_years,
-    weightLb: Number(row.weight_lb),
+    weightLb: row.weight_lb == null ? undefined : Number(row.weight_lb),
     sex: row.sex ?? undefined,
     heightIn: row.height_in != null ? Number(row.height_in) : undefined,
     sport: row.sport ?? undefined,

@@ -77,10 +77,11 @@ function cohortBaseline(profile: PlayerProfile): number {
   }
   if (cohort === "teen") {
     // Bridge: pediatric minimum, scaled by weight for larger teens.
-    return Math.max(64, profile.weightLb * 0.55);
+    return Math.max(64, (profile.weightLb ?? 0) * 0.55);
   }
   // Adult: ACSM ~0.6 oz per lb body weight as daily baseline.
-  return profile.weightLb * 0.6;
+  // No weight on file falls back to the pediatric floor rather than computing zero.
+  return profile.weightLb ? profile.weightLb * 0.6 : 64;
 }
 
 function formulaName(cohort: "child" | "teen" | "adult"): string {

@@ -8,7 +8,10 @@ export type ActivityLevel = "light" | "moderate" | "heavy";
 export interface PlayerProfile {
   name: string;
   ageYears: number;
-  weightLb: number;
+  // Optional on purpose. Nothing in the child cohort reads it: the hydration baseline is
+  // flat and portionScale returns 1.0, so asking a parent to weigh an 11-year-old buys
+  // nothing and costs the hardest step in onboarding.
+  weightLb?: number;
   sex?: Sex;
   heightIn?: number;
   sport?: string;

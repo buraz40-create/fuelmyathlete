@@ -28,14 +28,25 @@ export function ProfileSetup({
   const [weightLb, setWeightLb] = useState<number | "">(initial?.weightLb ?? "");
   const [error, setError] = useState<string | null>(null);
 
-  const draft = { name, ageYears: Number(ageYears), weightLb: Number(weightLb) };
+  // Weight is only asked for where a formula uses it. Under 13 the hydration baseline is
+  // flat and portions do not scale, so the field would be busywork with a bathroom scale.
+  const needsWeight = ageYears === "" || Number(ageYears) >= 13;
+  const draft = {
+    name,
+    ageYears: Number(ageYears),
+    weightLb: weightLb === "" ? undefined : Number(weightLb),
+  };
   const valid = isValidProfile(draft);
   const cohort = valid ? ageToCohort(draft.ageYears) : null;
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!isValidProfile(draft)) {
-      setError("Add a name, age (5-99), and weight (30-500 lb).");
+      setError(
+        needsWeight
+          ? "Add a name, age (5-99), and weight (30-500 lb)."
+          : "Add a name and an age (5-99)."
+      );
       return;
     }
     await save(newProfile(draft));
@@ -53,8 +64,8 @@ export function ProfileSetup({
       </header>
 
       <p className="mb-5 text-sm text-muted-foreground">
-        We use age and body weight to calculate the right hydration, portions, and
-        recommendations. Your data stays on this device until you create an account.
+        We use age to calculate the right hydration, portions, and recommendations. Your
+        data stays on this device until you create an account.
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -70,7 +81,7 @@ export function ProfileSetup({
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className={needsWeight ? "grid grid-cols-2 gap-3" : "grid grid-cols-1 gap-3"}>
           <div className="space-y-1.5">
             <Label htmlFor="age">Age</Label>
             <Input
@@ -85,26 +96,29 @@ export function ProfileSetup({
               required
             />
           </div>
-          <div className="space-y-1.5">
-            <Label htmlFor="weight">Weight (lb)</Label>
-            <Input
-              id="weight"
-              type="number"
-              inputMode="numeric"
-              min={30}
-              max={500}
-              value={weightLb}
-              onChange={(e) => setWeightLb(e.target.value === "" ? "" : Number(e.target.value))}
-              placeholder="88"
-              required
-            />
-          </div>
+          {needsWeight && (
+            <div className="space-y-1.5">
+              <Label htmlFor="weight">Weight (lb)</Label>
+              <Input
+                id="weight"
+                type="number"
+                inputMode="numeric"
+                min={30}
+                max={500}
+                value={weightLb}
+                onChange={(e) => setWeightLb(e.target.value === "" ? "" : Number(e.target.value))}
+                placeholder="150"
+                required
+              />
+            </div>
+          )}
         </div>
 
         {cohort && (
           <p className="rounded-2xl bg-primary-soft/60 px-3 py-2 text-xs text-primary">
             We&apos;ll set up <strong>{cohortLabel(cohort).toLowerCase()}</strong> guidance.
-            {cohort === "child" && " Calorie counts stay hidden (AAP guidance)."}
+            {cohort === "child" &&
+              " Calorie counts stay hidden (AAP guidance), and we do not need a weight."}
             {cohort === "adult" && " Calorie + macro tracking available."}
           </p>
         )}

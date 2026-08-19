@@ -15,6 +15,7 @@ export function shouldShowCalories(profile: PlayerProfile): boolean {
 
 export function portionScale(profile: PlayerProfile): number {
   if (ageToCohort(profile.ageYears) === "child") return 1.0;
+  if (!profile.weightLb) return 1.0;
   return Math.max(0.6, Math.min(2.5, profile.weightLb / 88));
 }
 
@@ -27,6 +28,8 @@ export function cohortLabel(cohort: AgeCohort): string {
 export function isValidProfile(profile: Partial<PlayerProfile>): profile is PlayerProfile {
   if (!profile.name || profile.name.trim().length === 0) return false;
   if (typeof profile.ageYears !== "number" || profile.ageYears < 5 || profile.ageYears > 99) return false;
+  // Weight only gates validity where a formula actually uses it, which is 13 and up.
+  if (ageToCohort(profile.ageYears) === "child") return true;
   if (typeof profile.weightLb !== "number" || profile.weightLb < 30 || profile.weightLb > 500) return false;
   return true;
 }
