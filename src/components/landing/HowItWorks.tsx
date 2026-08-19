@@ -24,14 +24,14 @@ const STEPS = [
     icon: Basket,
     step: "Step 2",
     title: "Get a grocery list",
-    body: "Quantities scale by day type and body weight. Grouped by produce, protein, pantry, so you can shop in one pass.",
+    body: "Quantities scale by day type and by how many people you are cooking for. Grouped by produce, protein, pantry, so you can shop in one pass.",
     mock: <MockGroceryList className="mt-auto" />,
   },
   {
     icon: Drop,
     step: "Step 3",
     title: "Stay hydrated",
-    body: "Daily water goals adjust for age, training load, and weather. Portions scale by athlete weight, all within pediatric safety guidelines.",
+    body: "Daily water goals adjust for age, training load, and weather, inside pediatric safety limits. Calorie counts stay hidden from kids, per AAP guidance.",
     mock: <MockWaterTracker filled={4} total={10} className="mt-auto" />,
   },
 ];

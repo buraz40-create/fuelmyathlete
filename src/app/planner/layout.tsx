@@ -15,7 +15,7 @@ const SITE_URL =
 export const metadata: Metadata = {
   title: "Free Weekly Meal Planner for Athletes",
   description:
-    "Plan breakfast, lunch, snack, and dinner across the week. Auto grocery list, hydration tracker, portions that scale by age and day type. Saves to your browser, no signup.",
+    "Plan breakfast, lunch, snack, and dinner across the week. Auto grocery list, hydration tracker, portions that scale by day type and servings. Saves to your browser, no signup.",
   robots: { index: false, follow: false },
 };
 
@@ -29,7 +29,7 @@ const softwareAppLd = {
   operatingSystem: "Any (Web)",
   url: `${SITE_URL}/planner`,
   description:
-    "Interactive weekly meal planner for athletes 8 and up. Auto grocery list, day-type aware portions, AAP-aligned hydration tracking.",
+    "Interactive weekly meal planner for young athletes. Auto grocery list, day-type aware portions, AAP-aligned hydration tracking.",
   offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
   publisher: { "@id": `${SITE_URL}/#organization` },
   featureList: [

@@ -5,7 +5,7 @@ const PILLARS = [
   {
     icon: Books,
     title: "Pediatric hydration",
-    body: "Formulas from the American Academy of Pediatrics (AAP) and the National Athletic Trainers' Association (NATA). Holliday-Segar weight-based maintenance for kids 8 to 12.",
+    body: "Formulas from the American Academy of Pediatrics (AAP) and the National Athletic Trainers' Association (NATA). A flat 64 oz baseline for ages 8 to 12, with a hard 100 oz daily ceiling.",
   },
   {
     icon: Heartbeat,

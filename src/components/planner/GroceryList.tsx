@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+import Link from "next/link";
+import { Eye, EyeSlash } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import {
   GROCERY_CATEGORY_LABEL,
@@ -17,25 +20,65 @@ interface GroceryListProps {
 }
 
 export function GroceryList({ grouped, checked, onToggle }: GroceryListProps) {
+  const [hideChecked, setHideChecked] = useState(false);
   const total = totalGroceryItems(grouped);
   const checkedCount = Object.values(checked).filter(Boolean).length;
 
   if (total === 0) {
     return (
-      <p className="rounded-3xl border border-dashed border-border bg-surface/70 p-8 text-center text-sm text-muted-foreground">
-        Your grocery list will appear here once you pick meals on the planner.
-      </p>
+      <div className="rounded-3xl border border-dashed border-border bg-surface/70 p-8 text-center">
+        <p className="text-sm text-muted-foreground">
+          Your grocery list builds itself once you pick meals.
+        </p>
+        <Link
+          href="/planner"
+          className="mt-4 inline-block rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90"
+        >
+          Go pick meals
+        </Link>
+      </div>
     );
   }
 
+  const allChecked = checkedCount >= total;
+
   return (
     <div className="space-y-5">
-      <p className="text-sm text-muted-foreground">
-        <strong className="text-ink">{checkedCount}</strong> of {total} items checked off
-      </p>
+      {/* Sticky, because the count used to scroll away immediately and a 40 row list in an
+          aisle only ever grows. Hiding checked items is the same problem: without it you keep
+          re-reading things already in the trolley. */}
+      <div className="sticky top-14 z-20 -mx-1 flex items-center justify-between gap-3 rounded-2xl border border-border bg-surface/95 px-3 py-2 backdrop-blur">
+        <p className="text-sm text-muted-foreground">
+          <strong className="text-ink">{checkedCount}</strong> of {total} checked
+        </p>
+        <button
+          type="button"
+          onClick={() => setHideChecked((v) => !v)}
+          disabled={checkedCount === 0}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-primary/40 hover:text-ink disabled:opacity-40"
+        >
+          {hideChecked ? (
+            <>
+              <Eye size={13} weight="bold" aria-hidden /> Show checked
+            </>
+          ) : (
+            <>
+              <EyeSlash size={13} weight="bold" aria-hidden /> Hide checked
+            </>
+          )}
+        </button>
+      </div>
+
+      {hideChecked && allChecked && (
+        <p className="rounded-2xl border border-dashed border-border bg-surface/70 p-6 text-center text-sm text-muted-foreground">
+          Everything is checked off. Nice shop.
+        </p>
+      )}
 
       {GROCERY_CATEGORY_ORDER.map((cat) => {
-        const items = grouped[cat];
+        const items = hideChecked
+          ? grouped[cat].filter((line) => !checked[line.ingredient.slug])
+          : grouped[cat];
         if (items.length === 0) return null;
         return (
           <section

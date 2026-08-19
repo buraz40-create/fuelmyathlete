@@ -34,7 +34,7 @@ export function Audiences() {
             One product, every athlete in your house.
           </h2>
           <p className="mt-3 text-base text-muted-foreground">
-            Same app adapts by age and body weight, so the calculations are right whether you are
+            Same app adapts by age, and by body weight from 13 up, so the calculations are right whether you are
             planning for an 11-year-old soccer kid or a 30-year-old training for a marathon.
           </p>
         </header>
