@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 import { Plus, Minus } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { useHydration } from "@/hooks/useHydration";
@@ -161,7 +162,14 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
         )}
         <p className="mt-2 leading-relaxed">
           On a hot day, add roughly 10% more, never 25%. Logging stops at {capOz}oz because that
-          is the safe daily ceiling.
+          is the safe daily ceiling.{" "}
+          <Link
+            href="/guides/how-much-water-should-a-young-athlete-drink"
+            className="font-medium text-ink underline underline-offset-2"
+          >
+            Where these numbers come from
+          </Link>
+          .
         </p>
         <p className="mt-2 leading-relaxed">
           <strong className="text-ink/80">Important:</strong> this is a guide, not a target to force.

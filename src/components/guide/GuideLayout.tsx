@@ -9,10 +9,14 @@ import { RelatedRecipes, RelatedGuides } from "./GuideRelated";
 import type { Guide } from "@/types/domain";
 
 function formatDate(iso: string): string {
+  // A bare "2026-08-19" parses as UTC midnight, so rendering it in any negative offset
+  // (all of the US) shows the previous day. Format in UTC so the date shown matches the
+  // date written.
   return new Date(iso).toLocaleDateString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   });
 }
 
