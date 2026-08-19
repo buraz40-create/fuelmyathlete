@@ -1,5 +1,9 @@
+"use client";
+
 import { Barbell } from "@phosphor-icons/react/dist/ssr";
 import type { NutritionFacts, ProteinBoost } from "@/types/domain";
+import { usePlayerProfile } from "@/hooks/usePlayerProfile";
+import { shouldShowCalories } from "@/lib/player/cohort";
 
 interface ProteinBoostCardProps {
   boost: ProteinBoost;
@@ -7,7 +11,13 @@ interface ProteinBoostCardProps {
 }
 
 export function ProteinBoostCard({ boost, baseNutrition }: ProteinBoostCardProps) {
+  const { profile } = usePlayerProfile();
+  // This card is adult content by its own badge and it quotes kcal, so it stays hidden
+  // from the youth view entirely rather than being partially redacted.
+  const showCalories = profile ? shouldShowCalories(profile) : false;
   const boostedKcal = baseNutrition ? baseNutrition.kcal + boost.addedKcal : null;
+
+  if (!showCalories) return null;
   const boostedProteinG = baseNutrition
     ? baseNutrition.proteinG + boost.addedProteinG
     : null;

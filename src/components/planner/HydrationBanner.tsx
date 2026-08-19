@@ -21,8 +21,9 @@ export function HydrationBanner({ plan }: { plan: MealPlan }) {
 
   if (intenseDays.length === 0) return null;
 
-  const matchOz = profile ? hydrationFor(profile, "match").goalOz : ozGoalForDay("match");
-  const trainOz = profile ? hydrationFor(profile, "training").goalOz : ozGoalForDay("training");
+  // This banner is the heat alert, so the hot-weather addition is intentional here.
+  const matchOz = profile ? hydrationFor(profile, "match", true).goalOz : ozGoalForDay("match", true);
+  const trainOz = profile ? hydrationFor(profile, "training", true).goalOz : ozGoalForDay("training", true);
   const trainLabel = dayTypeLabel("training", cohort);
   const matchLabel = dayTypeLabel("match", cohort);
 

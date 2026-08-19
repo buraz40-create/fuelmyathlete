@@ -16,9 +16,13 @@ interface WaterTrackerProps {
 }
 
 export function WaterTracker({ dayType }: WaterTrackerProps) {
-  const { cups, oz, ozPerCup, increment, decrement } = useHydration();
   const { profile } = usePlayerProfile();
-  const calc = profile ? hydrationFor(profile, dayType) : null;
+  // Hot weather is passed explicitly rather than defaulted, so a January goal is not
+  // silently inflated by 10%. The heat case is surfaced by HydrationBanner instead.
+  const calc = profile ? hydrationFor(profile, dayType, false) : null;
+  const { cups, oz, ozPerCup, capOz, maxCups, atCap, increment, decrement } = useHydration({
+    capOz: calc?.capOz,
+  });
   const goalOz = calc?.goalOz ?? 64;
   const goalCups = Math.ceil(goalOz / ozPerCup);
   const cohort = profile ? ageToCohort(profile.ageYears) : null;
@@ -27,8 +31,8 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
   const dayLabel = dayTypeLabel(dayType, cohort ?? "child");
 
   const slots = useMemo(
-    () => Array.from({ length: Math.max(goalCups, cups) }, (_, i) => i < cups),
-    [cups, goalCups]
+    () => Array.from({ length: Math.min(maxCups, Math.max(goalCups, cups)) }, (_, i) => i < cups),
+    [cups, goalCups, maxCups]
   );
 
   return (
@@ -107,7 +111,12 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
 
       <div className="mt-4 flex items-center justify-between">
         <p className="text-xs text-muted-foreground">
-          {reached ? (
+          {atCap ? (
+            <>
+              That is {capOz}oz, the safe daily maximum. More is not better, so stop here for
+              today.
+            </>
+          ) : reached ? (
             <>Goal hit. Drink to thirst from here.</>
           ) : (
             <>
@@ -128,8 +137,9 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
           <button
             type="button"
             onClick={increment}
-            aria-label="Add a cup"
-            className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground transition hover:opacity-90"
+            disabled={atCap}
+            aria-label={atCap ? `Daily maximum of ${capOz} ounces reached` : "Add a cup"}
+            className="grid h-8 w-8 place-items-center rounded-full bg-primary text-primary-foreground transition hover:opacity-90 disabled:opacity-40 disabled:hover:opacity-40"
           >
             <Plus size={14} weight="bold" aria-hidden />
           </button>
@@ -149,8 +159,14 @@ export function WaterTracker({ dayType }: WaterTrackerProps) {
           </p>
         )}
         <p className="mt-2 leading-relaxed">
+          On a hot day, add roughly 10% more, never 25%. Logging stops at {capOz}oz because that
+          is the safe daily ceiling.
+        </p>
+        <p className="mt-2 leading-relaxed">
           <strong className="text-ink/80">Important:</strong> this is a guide, not a target to force.
-          Stop drinking when full. {cohort === "child" && "Over-hydration is dangerous for kids."}
+          Stop drinking when full.{" "}
+          {cohort === "child" &&
+            "Drinking far past thirst is dangerous for kids, because too much plain water dilutes blood sodium (hyponatremia)."}
         </p>
       </details>
     </section>

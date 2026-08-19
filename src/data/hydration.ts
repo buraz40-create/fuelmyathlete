@@ -41,10 +41,14 @@ export interface HydrationCalc {
   formula: string;
 }
 
+// hotWeather defaults to false so the 10% heat addition is always a decision a
+// caller made, never a silent inflation. Defaulting it to true added 10% to every
+// goal year round, which on a match day put an 11-year-old at 97oz against the
+// 100oz child cap without anyone choosing it.
 export function hydrationFor(
   profile: PlayerProfile,
   dayType: DayType,
-  hotWeather = true
+  hotWeather = false
 ): HydrationCalc {
   const cohort = ageToCohort(profile.ageYears);
   const baseline = cohortBaseline(profile);
@@ -94,7 +98,7 @@ const DEFAULT_ELVIS: PlayerProfile = {
   updatedAt: "1970-01-01T00:00:00.000Z",
 };
 
-export function ozGoalForDay(dayType: DayType, hotWeather = true): number {
+export function ozGoalForDay(dayType: DayType, hotWeather = false): number {
   return hydrationFor(DEFAULT_ELVIS, dayType, hotWeather).goalOz;
 }
 

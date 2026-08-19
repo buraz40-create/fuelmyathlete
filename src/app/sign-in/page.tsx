@@ -32,28 +32,36 @@ function describeAuthError(code: string, description: string | null): string {
   return description?.replace(/\+/g, " ") || code.replace(/_/g, " ");
 }
 
+function initialAuthError(): string | null {
+  if (typeof window === "undefined") return null;
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("error");
+  if (!code) return null;
+  return describeAuthError(code, params.get("error_description"));
+}
+
 export default function SignInPage() {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
-  const [error, setError] = useState<string | null>(null);
+  // The auth callback bounces failures back here as ?error=. Read it during the first
+  // render rather than in an effect, so the message is present on the initial paint and
+  // no cascading render is triggered.
+  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">(() =>
+    initialAuthError() ? "error" : "idle"
+  );
+  const [error, setError] = useState<string | null>(() => initialAuthError());
   const [success, setSuccess] = useState<string | null>(null);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== "undefined" ? window.location.origin : "");
 
-  // The auth callback bounces failures back here as ?error=. Without this the
-  // user lands on a blank form with no idea why sign-in dropped them.
+  // Strip the params once mounted so a later attempt on the same page does not look
+  // pre-failed. The message itself was already read during the first render.
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get("error");
-    if (!code) return;
-    setError(describeAuthError(code, params.get("error_description")));
-    setStatus("error");
-    // Clear it so a later attempt on the same page doesn't look pre-failed.
     const clean = new URL(window.location.href);
+    if (!clean.searchParams.has("error")) return;
     clean.searchParams.delete("error");
     clean.searchParams.delete("error_description");
     clean.searchParams.delete("error_code");

@@ -2,6 +2,8 @@
 
 Orientation for a new Claude Code session on this machine. Everything below is a real path in this repo. Read this before searching.
 
+**What to work on is in [ROADMAP.md](ROADMAP.md).** This file is the map, that one is the plan.
+
 Last updated: 2026-08-19
 
 ---
@@ -176,6 +178,14 @@ Florida-based parent, business-minded, not a deeply experienced developer. Comfo
 He also runs calculatorsandmore.com on the same stack.
 
 ## 9. Next steps
+
+Superseded by [ROADMAP.md](ROADMAP.md), which is gate-ordered and has kill criteria. Short version of what is already done and what is next:
+
+Gate 0a (pediatric safety) shipped 2026-08-19: the calorie gate is wired through the existing `shouldShowCalories` so the youth view shows protein and cites AAP, hydration logging is capped at the cohort ceiling instead of being unbounded, and `hotWeather` no longer defaults to true (it was silently adding 10% to every goal year round, putting an 11-year-old at 97oz against the 100oz cap on match days).
+
+Next: Gate 0b in ROADMAP.md section 5, starting with the keep-warm cron and making `storage.ts` pad rather than discard plans.
+
+### Original next steps, kept for context
 
 1. **Test email sign-in end to end on production.** Everything below it is unverified until a real magic link completes. Only Haris can do this, it needs his inbox.
 2. Decide how to stop the free-tier pause from recurring, section 3. This is a product decision, not a technical one.

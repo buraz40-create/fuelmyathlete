@@ -25,9 +25,21 @@ function save(date: string, cups: number) {
   window.localStorage.setItem(`${STORAGE_PREFIX}${date}`, String(cups));
 }
 
-export function useHydration() {
+// Ceiling on what can be logged, not just on what we suggest. The cohort cap exists
+// because children are more vulnerable to hyponatremia than adults, and a tracker that
+// happily accepts 30 cups undoes the cap it is supposed to enforce. Defaults to the
+// child cap because an unknown drinker on a pediatric product is treated as a child.
+const DEFAULT_CAP_OZ = 100;
+
+interface UseHydrationOptions {
+  capOz?: number;
+}
+
+export function useHydration({ capOz = DEFAULT_CAP_OZ }: UseHydrationOptions = {}) {
   const [date] = useState<string>(() => todayKey());
   const [cups, setCups] = useState<number>(0);
+
+  const maxCups = Math.floor(capOz / OZ_PER_CUP);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only hydration of localStorage; SSR renders empty and the client swaps in persisted state on mount.
@@ -36,11 +48,12 @@ export function useHydration() {
 
   const increment = useCallback(() => {
     setCups((c) => {
+      if (c >= maxCups) return c;
       const next = c + 1;
       save(date, next);
       return next;
     });
-  }, [date]);
+  }, [date, maxCups]);
 
   const decrement = useCallback(() => {
     setCups((c) => {
@@ -52,11 +65,11 @@ export function useHydration() {
 
   const setExact = useCallback(
     (n: number) => {
-      const clamped = Math.max(0, n);
+      const clamped = Math.min(maxCups, Math.max(0, n));
       setCups(clamped);
       save(date, clamped);
     },
-    [date]
+    [date, maxCups]
   );
 
   return {
@@ -64,6 +77,9 @@ export function useHydration() {
     cups,
     oz: cups * OZ_PER_CUP,
     ozPerCup: OZ_PER_CUP,
+    capOz,
+    maxCups,
+    atCap: cups >= maxCups,
     increment,
     decrement,
     setCups: setExact,

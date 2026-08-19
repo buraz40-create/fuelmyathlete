@@ -1,11 +1,24 @@
+"use client";
+
 import type { NutritionFacts } from "@/types/domain";
+import { usePlayerProfile } from "@/hooks/usePlayerProfile";
+import { shouldShowCalories } from "@/lib/player/cohort";
 
 interface NutritionCardProps {
   nutrition: NutritionFacts;
 }
 
 export function NutritionCard({ nutrition }: NutritionCardProps) {
+  const { profile } = usePlayerProfile();
+  // AAP guidance is against calorie counting in pre-teens, so the youth view shows protein
+  // and nothing else. An unknown reader on a pediatric site is treated as a child, which
+  // also means the card stays youth-safe while the profile is still loading.
+  const showCalories = profile ? shouldShowCalories(profile) : false;
   const { kcal, proteinG, carbsG, fatG, fiberG, source } = nutrition;
+
+  if (!showCalories) {
+    return <YouthNutritionCard proteinG={proteinG} source={source} />;
+  }
 
   // Energy distribution for the macro bar (kcal from each macro).
   const proteinKcal = proteinG * 4;
@@ -62,6 +75,39 @@ export function NutritionCard({ nutrition }: NutritionCardProps) {
       <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">
         {source ?? "Estimated"} based on USDA FoodData Central reference values for the listed
         ingredients. Actual values may vary by brand and portion.
+      </p>
+    </section>
+  );
+}
+
+function YouthNutritionCard({
+  proteinG,
+  source,
+}: {
+  proteinG: number;
+  source?: string;
+}) {
+  return (
+    <section
+      aria-labelledby="nutrition-title"
+      className="rounded-3xl border border-border bg-surface p-5 shadow-sm md:p-6"
+    >
+      <header className="mb-4">
+        <p className="text-xs font-semibold uppercase tracking-wider text-primary">Nutrition</p>
+        <h2 id="nutrition-title" className="mt-1 text-xl">
+          Per serving
+        </h2>
+      </header>
+
+      <p className="flex items-baseline gap-1.5">
+        <span className="text-3xl font-bold leading-none text-ink">{proteinG}</span>
+        <span className="text-sm font-medium text-muted-foreground">g protein</span>
+      </p>
+
+      <p className="mt-4 text-[11px] leading-relaxed text-muted-foreground">
+        We show protein and skip calorie counts for young athletes, following American Academy of
+        Pediatrics guidance on weight-control practices in children. Values are estimated from USDA
+        FoodData Central{source ? ` (${source})` : ""} and vary by brand and portion.
       </p>
     </section>
   );
