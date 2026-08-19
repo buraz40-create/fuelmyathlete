@@ -82,7 +82,7 @@ export async function saveProfileRemote(profile: PlayerProfile): Promise<void> {
     family_id: families.id,
     name: profile.name,
     age_years: profile.ageYears,
-    weight_lb: profile.weightLb,
+    weight_lb: profile.weightLb ?? null,
     sex: profile.sex ?? null,
     height_in: profile.heightIn ?? null,
     sport: profile.sport ?? "soccer",

@@ -140,6 +140,9 @@ export interface MealPlan {
   weekStart: string;
   entries: MealPlanEntry[];
   groceryChecked: Record<string, boolean>;
+  // Set on every save. Without it there is no way to tell a stale server copy from a fresh
+  // one, which is why remote used to overwrite local unconditionally.
+  updatedAt?: string;
 }
 
 export interface GroceryLineItem {

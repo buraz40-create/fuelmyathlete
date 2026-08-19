@@ -21,8 +21,18 @@ export function usePlayerProfile() {
           // Mirror to localStorage as a cache so SSR + offline reads work.
           profileStorage.save(remote);
         } else {
-          // Fall back to local cache while user finishes onboarding.
-          setProfile(profileStorage.load());
+          // No remote profile yet. If this device already has one, the parent used the app
+          // anonymously and then signed in, so adopt the local copy rather than leaving the
+          // account empty. Without this, loadProfileRemote keeps returning null forever and a
+          // second device bounces them back to onboarding.
+          const local = profileStorage.load();
+          setProfile(local);
+          if (local) {
+            saveProfileRemote(local).catch(() => {
+              // Offline or not signed in yet. The local copy is intact and this retries on the
+              // next load.
+            });
+          }
         }
       } else {
         setProfile(profileStorage.load());

@@ -9,6 +9,7 @@ import { currentWeekStart, shiftWeek } from "@/lib/planner/isoWeek";
 import { MEALS_BY_SLOT } from "@/data/meals";
 import { mealPreferences } from "@/lib/player/preferences";
 import { weeklySchedule } from "@/lib/player/schedule";
+import { mergePlans } from "@/lib/planner/merge";
 
 const SAVE_DEBOUNCE_MS = 250;
 
@@ -32,9 +33,17 @@ export function useMealPlan(initialWeekStart?: string) {
 
       if (isSupabaseConfigured) {
         const remote = await loadPlanRemote(weekStart);
-        if (!cancelled && remote) {
-          setPlan(remote);
-          planStorage.savePlan(remote);
+        if (cancelled) return;
+        if (remote) {
+          const merged = mergePlans(seeded, remote);
+          setPlan(merged);
+          planStorage.savePlan(merged);
+        } else if (seeded.entries.some((e) => e.mealSlug)) {
+          // Same adoption case as the profile: a week planned before signing in would
+          // otherwise stay stranded on this device and look lost from any other one.
+          savePlanRemote(seeded).catch(() => {
+            // Local copy is authoritative until the next successful save.
+          });
         }
       }
       if (!cancelled) setHydrated(true);
@@ -48,6 +57,7 @@ export function useMealPlan(initialWeekStart?: string) {
   const persist = useCallback((next: MealPlan) => {
     if (saveTimer.current) clearTimeout(saveTimer.current);
     saveTimer.current = setTimeout(() => {
+      next = { ...next, updatedAt: new Date().toISOString() };
       planStorage.savePlan(next);
       if (isSupabaseConfigured) {
         savePlanRemote(next).catch(() => {

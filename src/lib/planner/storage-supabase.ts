@@ -34,7 +34,7 @@ export async function loadPlanRemote(weekStart: string): Promise<MealPlan | null
 
   const { data: planRow } = await supabase
     .from("meal_plans")
-    .select("id, family_id")
+    .select("id, family_id, updated_at")
     .eq("player_id", playerId)
     .eq("week_start", weekStart)
     .maybeSingle();
@@ -78,7 +78,12 @@ export async function loadPlanRemote(weekStart: string): Promise<MealPlan | null
     if (slug) groceryChecked[slug] = c.is_checked;
   });
 
-  return { weekStart, entries, groceryChecked };
+  return {
+    weekStart,
+    entries,
+    groceryChecked,
+    updatedAt: planRow.updated_at ?? undefined,
+  };
 }
 
 export async function savePlanRemote(plan: MealPlan): Promise<void> {
@@ -145,6 +150,13 @@ export async function savePlanRemote(plan: MealPlan): Promise<void> {
   await supabase
     .from("meal_plan_entries")
     .upsert(entryRows, { onConflict: "meal_plan_id,day_of_week,slot" });
+
+  // meal_plans.updated_at existed in the schema from the start and was never written, so the
+  // one column that could resolve a conflict was always stale.
+  await supabase
+    .from("meal_plans")
+    .update({ updated_at: new Date().toISOString() })
+    .eq("id", planId);
 
   // Same shape for grocery ticks, keyed on the composite primary key. Unchecked items are
   // written as false rather than deleted, so an unticked box survives a failed round trip.
