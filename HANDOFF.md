@@ -185,6 +185,8 @@ Gates 0a, 0b and 1 shipped 2026-08-19, plus most of Gate 2. See ROADMAP.md secti
 
 New surfaces since the handoff was written: `/today` (kid view), `/offline`, `/icons/[size]` (generated PWA icons), `/manifest.webmanifest`, `/llms.txt`, and two new guides. New device-local preferences live in `src/lib/player/preferences.ts` (hidden meals) and `src/lib/player/schedule.ts` (recurring week); both are deliberately off the profile because the profile round-trips through Supabase and `players` has no columns for them.
 
+**What is and is not runtime-verified.** There is no `.env.local` in this repo, so local development runs with `isSupabaseConfigured` false, in localStorage-only mode. Everything shipped on 2026-08-19 was verified in a browser in that mode. The Supabase code paths changed that day (per-cell merge on load, adopting anonymous data on first sign-in, entry upserts, writing `meal_plans.updated_at`) are covered by unit tests where the logic is pure, and are otherwise unexercised at runtime, because they need an authenticated session and nobody has completed a sign-in since the outage. Treat them as reviewed, not proven, until sign-in is confirmed.
+
 There is now a test runner: `npm test` runs `node --test` over `src/**/__tests__/*.test.ts`. The first suite covers plan merging, which is pure and whose failure mode is silent data loss.
 
 Next: what only Haris can do, which is verifying sign-in end to end and adding the two GitHub secrets.
