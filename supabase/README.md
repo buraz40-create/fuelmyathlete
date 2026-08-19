@@ -1,12 +1,12 @@
 # Supabase setup (Phase 1B)
 
-These files set up the FuelMyAthlete database. No Supabase CLI required — just paste each file into the SQL Editor in the Supabase dashboard in order.
+These files set up the FuelMyAthlete database. No Supabase CLI required, just paste each file into the SQL Editor in the Supabase dashboard in order.
 
 ## Run order
 
-1. `migrations/0001_init_schema.sql` — tables, enums, auto-bootstrap trigger
-2. `migrations/0002_rls_policies.sql` — row-level security policies (REQUIRED before any user signs in)
-3. `seed-meals.sql` — global meal + recipe + ingredient catalog (idempotent; re-run when `src/data/*.ts` changes)
+1. `migrations/0001_init_schema.sql`: tables, enums, auto-bootstrap trigger
+2. `migrations/0002_rls_policies.sql`: row-level security policies (REQUIRED before any user signs in)
+3. `seed-meals.sql`: global meal + recipe + ingredient catalog (idempotent; re-run when `src/data/*.ts` changes)
 
 ## After running
 

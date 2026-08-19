@@ -28,7 +28,17 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
   });
 
   // Refresh session cookie if one exists. Don't redirect anyone.
-  await supabase.auth.getUser();
+  // Free Supabase projects pause after a week idle, and an unreachable project
+  // would otherwise stall every page load here. Auth is optional, so cap the
+  // wait and serve the page signed-out rather than hanging on a dead host.
+  try {
+    await Promise.race([
+      supabase.auth.getUser(),
+      new Promise((resolve) => setTimeout(resolve, 2000)),
+    ]);
+  } catch {
+    // Signed-out rendering is a valid outcome. Never block the page on auth.
+  }
 
   return supabaseResponse;
 }

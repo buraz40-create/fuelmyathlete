@@ -30,6 +30,26 @@ For each file below: open in VS Code, copy entire contents, paste into a new SQL
    - Redirect URLs: add `http://localhost:3000/auth/callback`
    - (You'll add the production URL in Step 8)
 
+### Google ("Continue with Google")
+
+The sign-in page shows a Google button. It stays broken until both halves below are done.
+
+**Google Cloud side:**
+
+1. https://console.cloud.google.com → create or pick a project
+2. **APIs & Services** → **OAuth consent screen** → External → fill in app name, support email, developer email → add scopes `email`, `profile`, `openid` → publish it (in Testing mode only listed test users can sign in)
+3. **APIs & Services** → **Credentials** → **Create credentials** → **OAuth client ID** → **Web application**
+4. Authorized JavaScript origins: `https://fuelmyathlete.com`
+5. Authorized redirect URIs: `https://YOUR-PROJECT-REF.supabase.co/auth/v1/callback`
+
+   This is the **Supabase** callback, not your own site. Pointing it at `https://fuelmyathlete.com/auth/callback` is the usual mistake and produces `redirect_uri_mismatch`.
+6. Copy the **Client ID** and **Client secret**
+
+**Supabase side:**
+
+7. **Authentication** → **Providers** → **Google** → toggle on, paste the Client ID and Client secret → Save
+8. Confirm the callback URL Supabase displays matches exactly what you pasted into step 5
+
 ## Step 4: Get your API keys + create `.env.local`
 
 1. Left sidebar → **Project Settings** → **API**
@@ -118,6 +138,9 @@ If 1-5 all pass: you're live. Share the URL with Elvis's team.
 
 ## Rollback / troubleshooting
 
+- **"This site can't be reached" / `ERR_NAME_NOT_RESOLVED` on a `*.supabase.co` URL after clicking a sign-in button**: `NEXT_PUBLIC_SUPABASE_URL` on Vercel points at a project that doesn't exist (mistyped ref, or the project was deleted). Read the hostname off the error page and compare it character-for-character with **Project Settings** → **API** → Project URL in Supabase. Fix the Vercel env var, then **redeploy** (env changes don't apply to existing builds). Verify with `/api/health`.
+- **`redirect_uri_mismatch` from Google**: the Authorized redirect URI in Google Cloud must be `https://YOUR-PROJECT-REF.supabase.co/auth/v1/callback`, not your own domain. See Step 3.
+- **`Unsupported provider: provider is not enabled`**: the Google provider is toggled off in Supabase. See Step 3.
 - **Magic link redirects to localhost in production**: Step 9 was skipped. Add prod URLs to Supabase auth config.
 - **Sign-in works but `/planner` redirects back to sign-in**: cookie not being set. Usually a `Site URL` mismatch in Supabase. Check Step 3 + Step 9.
 - **`/api/health` returns `supabase:false` in production**: env vars not set on Vercel. Step 7 #3.

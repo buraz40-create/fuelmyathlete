@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import {
   ArrowRight,
@@ -19,6 +19,19 @@ import { getBrowserSupabase } from "@/lib/supabase/client";
 
 type Mode = "signin" | "signup" | "forgot";
 
+function describeAuthError(code: string, description: string | null): string {
+  if (code === "missing_code") {
+    return "That sign-in link is incomplete. Try again from this page.";
+  }
+  if (code === "not_configured") {
+    return "Sign-in is temporarily unavailable. We're on it.";
+  }
+  if (code === "access_denied") {
+    return "Sign-in was cancelled. No account was created.";
+  }
+  return description?.replace(/\+/g, " ") || code.replace(/_/g, " ");
+}
+
 export default function SignInPage() {
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("signin");
@@ -30,6 +43,22 @@ export default function SignInPage() {
   const [success, setSuccess] = useState<string | null>(null);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || (typeof window !== "undefined" ? window.location.origin : "");
+
+  // The auth callback bounces failures back here as ?error=. Without this the
+  // user lands on a blank form with no idea why sign-in dropped them.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("error");
+    if (!code) return;
+    setError(describeAuthError(code, params.get("error_description")));
+    setStatus("error");
+    // Clear it so a later attempt on the same page doesn't look pre-failed.
+    const clean = new URL(window.location.href);
+    clean.searchParams.delete("error");
+    clean.searchParams.delete("error_description");
+    clean.searchParams.delete("error_code");
+    window.history.replaceState({}, "", clean.toString());
+  }, []);
 
   async function handleSignIn(e: FormEvent) {
     e.preventDefault();
