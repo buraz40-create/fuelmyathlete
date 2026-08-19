@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Check, Star } from "@phosphor-icons/react/dist/ssr";
+import { ArrowCounterClockwise, Check, Prohibit, Star } from "@phosphor-icons/react/dist/ssr";
 import {
   Sheet,
   SheetContent,
@@ -14,6 +14,7 @@ import { MEALS_BY_SLOT } from "@/data/meals";
 import { dayTypeLabel, dayTypeDescription } from "@/data/dayTypes";
 import { ageToCohort } from "@/lib/player/cohort";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
+import { useMealPreferences } from "@/hooks/useMealPreferences";
 import type { DayType, Meal, MealSlot } from "@/types/domain";
 
 interface MealPickerSheetProps {
@@ -45,8 +46,13 @@ export function MealPickerSheet({
   const cohort = profile ? ageToCohort(profile.ageYears) : "child";
   const dayLabel = dayTypeLabel(dayType, cohort);
   const dayDescription = dayTypeDescription(dayType, cohort);
-  const filtered = meals.filter((m) => m.suitableFor.includes(dayType));
-  const others = meals.filter((m) => !m.suitableFor.includes(dayType));
+  const { isExcluded, toggle } = useMealPreferences();
+  // Hidden meals drop out of both lists rather than being greyed in place, so the picker
+  // stops offering food the athlete has already refused.
+  const visible = meals.filter((m) => !isExcluded(m.slug));
+  const filtered = visible.filter((m) => m.suitableFor.includes(dayType));
+  const others = visible.filter((m) => !m.suitableFor.includes(dayType));
+  const hidden = meals.filter((m) => isExcluded(m.slug));
 
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -76,6 +82,7 @@ export function MealPickerSheet({
                         onSelect(meal.slug);
                         onOpenChange(false);
                       }}
+                      onHide={() => toggle(meal.slug)}
                     />
                   ))}
                 </Section>
@@ -92,7 +99,30 @@ export function MealPickerSheet({
                         onSelect(meal.slug);
                         onOpenChange(false);
                       }}
+                      onHide={() => toggle(meal.slug)}
                     />
+                  ))}
+                </Section>
+              )}
+
+              {hidden.length > 0 && (
+                <Section title={`Hidden (${hidden.length})`}>
+                  {hidden.map((meal) => (
+                    <li key={meal.slug}>
+                      <div className="flex items-center justify-between gap-3 rounded-2xl border border-dashed border-border px-3 py-2">
+                        <span className="truncate text-sm text-muted-foreground line-through">
+                          {meal.name}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => toggle(meal.slug)}
+                          className="inline-flex flex-shrink-0 items-center gap-1 text-xs font-medium text-muted-foreground transition hover:text-ink"
+                        >
+                          <ArrowCounterClockwise size={13} weight="bold" aria-hidden />
+                          Bring back
+                        </button>
+                      </div>
+                    </li>
                   ))}
                 </Section>
               )}
@@ -119,13 +149,24 @@ function MealRow({
   meal,
   selected,
   onSelect,
+  onHide,
 }: {
   meal: Meal;
   selected: boolean;
   onSelect: () => void;
+  onHide: () => void;
 }) {
   return (
-    <li>
+    <li className="relative">
+      <button
+        type="button"
+        onClick={onHide}
+        aria-label={`Hide ${meal.name}, he will not eat it`}
+        title="Not for him"
+        className="absolute right-2 top-2 z-10 grid h-7 w-7 place-items-center rounded-full border border-border bg-surface text-muted-foreground transition hover:border-danger/40 hover:text-danger"
+      >
+        <Prohibit size={13} weight="bold" aria-hidden />
+      </button>
       <button
         type="button"
         onClick={onSelect}

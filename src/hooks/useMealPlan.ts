@@ -7,6 +7,7 @@ import { loadPlanRemote, savePlanRemote } from "@/lib/planner/storage-supabase";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { currentWeekStart, shiftWeek } from "@/lib/planner/isoWeek";
 import { MEALS_BY_SLOT } from "@/data/meals";
+import { mealPreferences } from "@/lib/player/preferences";
 
 const SAVE_DEBOUNCE_MS = 250;
 
@@ -153,15 +154,19 @@ export function useMealPlan(initialWeekStart?: string) {
   }, [weekStart, persist]);
 
   const smartFillWeek = useCallback(() => {
+    // Read at click time rather than through a hook, so auto-fill always uses the current
+    // exclusions. Auto-fill was serving foods the athlete refuses, which is worse than an
+    // empty slot: it teaches the parent not to trust the button.
+    const excluded = new Set(mealPreferences.excluded());
     setPlan((prev) => {
       const next: MealPlan = {
         ...prev,
         entries: prev.entries.map((e) => {
           if (e.mealSlug) return e;
-          const candidates = MEALS_BY_SLOT[e.slot].filter((m) =>
-            m.suitableFor.includes(e.dayType)
-          );
-          const pool = candidates.length ? candidates : MEALS_BY_SLOT[e.slot];
+          const allowed = MEALS_BY_SLOT[e.slot].filter((m) => !excluded.has(m.slug));
+          const base = allowed.length ? allowed : MEALS_BY_SLOT[e.slot];
+          const candidates = base.filter((m) => m.suitableFor.includes(e.dayType));
+          const pool = candidates.length ? candidates : base;
           if (pool.length === 0) return e;
           const top = [...pool].sort((a, b) => b.kidRating - a.kidRating);
           const variety = top[(e.dayOfWeek + slotIndex(e.slot)) % top.length];

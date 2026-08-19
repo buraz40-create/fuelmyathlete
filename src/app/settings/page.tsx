@@ -13,6 +13,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { AppShell } from "@/components/layout/AppShell";
 import { ProfileSetup } from "@/components/onboarding/ProfileSetup";
+import { HiddenMeals } from "@/components/planner/HiddenMeals";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { getBrowserSupabase } from "@/lib/supabase/client";
@@ -143,6 +144,22 @@ export default function SettingsPage() {
             </div>
           </section>
         )}
+
+        {/* Foods the athlete refuses */}
+        <section
+          aria-labelledby="hidden-title"
+          className="mb-6 rounded-3xl border border-border bg-surface p-5 shadow-sm md:p-6"
+        >
+          <header className="mb-4">
+            <h2 id="hidden-title" className="text-base font-semibold text-ink">
+              Hidden meals
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Foods kept out of suggestions and auto-fill. Stored on this device.
+            </p>
+          </header>
+          <HiddenMeals />
+        </section>
 
         {/* Athlete profile editor */}
         <section
