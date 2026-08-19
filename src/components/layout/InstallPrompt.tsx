@@ -54,6 +54,7 @@ export function InstallPrompt() {
 
   return (
     <aside
+      data-print-hide
       role="note"
       aria-labelledby="install-title"
       className="mx-auto mb-4 w-full max-w-6xl px-4 md:px-8"

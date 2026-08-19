@@ -15,7 +15,7 @@ export function TabBar() {
   const pathname = usePathname();
 
   return (
-    <nav
+    <nav data-print-hide
       aria-label="Planner sections"
       className="mx-auto hidden w-full max-w-6xl items-center gap-2 px-4 pt-2 md:flex md:px-8"
     >

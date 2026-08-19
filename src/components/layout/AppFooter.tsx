@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export function AppFooter() {
   return (
-    <footer className="border-t border-border bg-surface/40 px-4 py-8 md:px-8">
+    <footer data-print-hide className="border-t border-border bg-surface/40 px-4 py-8 md:px-8">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <p className="max-w-3xl text-[11px] leading-relaxed text-muted-foreground">
           FuelMyAthlete provides general guidance based on AAP, NATA, and ACSM sources. Not medical

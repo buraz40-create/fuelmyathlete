@@ -16,7 +16,7 @@ export function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav
+    <nav data-print-hide
       aria-label="Primary"
       className="fixed inset-x-0 bottom-4 z-40 mx-auto flex w-[min(420px,92vw)] items-center justify-around rounded-full border border-border bg-surface px-2 py-2 shadow-lg md:hidden"
     >

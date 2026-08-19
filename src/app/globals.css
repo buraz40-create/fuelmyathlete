@@ -157,3 +157,39 @@
     @apply text-base md:text-lg;
   }
 }
+
+/* Print. Parents do print the grocery list, and a phone in a trolley is not everyone's
+   preference. Strips the app chrome so the paper carries the list and nothing else. */
+@media print {
+  /* Only the app chrome, never section headers: the grocery page's own header carries the
+     week range and the title, which are the two things you want on paper. */
+  [data-print-hide] {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  /* Sticky positioning repeats the bar on every page in some browsers. */
+  .sticky {
+    position: static !important;
+    border: 0 !important;
+    background: none !important;
+  }
+
+  section,
+  article {
+    border-color: #ddd !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: "";
+  }
+}

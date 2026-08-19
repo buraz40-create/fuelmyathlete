@@ -7,7 +7,7 @@ import { UserMenu } from "@/components/auth/UserMenu";
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
+      <header data-print-hide className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-2 md:px-8">
           <Link href="/planner" aria-label="FuelMyAthlete home" className="flex items-center">
             <Logo width={260} priority />

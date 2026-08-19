@@ -1,5 +1,6 @@
 "use client";
 
+import { Printer } from "@phosphor-icons/react/dist/ssr";
 import { GroceryList } from "@/components/planner/GroceryList";
 import { HydrationBanner } from "@/components/planner/HydrationBanner";
 import { usePlan } from "@/components/planner/PlanProvider";
@@ -27,8 +28,19 @@ export default function GroceryPage() {
         </p>
       </header>
 
-      <div className="mb-6">
+      <div className="mb-6" data-print-hide>
         <HydrationBanner plan={plan} />
+      </div>
+
+      <div className="mb-4 hidden justify-end md:flex" data-print-hide>
+        <button
+          type="button"
+          onClick={() => window.print()}
+          className="inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-primary/40 hover:text-ink"
+        >
+          <Printer size={13} weight="duotone" aria-hidden />
+          Print the list
+        </button>
       </div>
 
       <GroceryList
