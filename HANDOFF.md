@@ -116,7 +116,7 @@ All domain types live in [src/types/domain.ts](src/types/domain.ts): `MealSlot`,
 | [planner/week/page.tsx](src/app/planner/week/page.tsx) | `/planner/week` |
 | [planner/grocery/page.tsx](src/app/planner/grocery/page.tsx) | `/planner/grocery` |
 | [recipes/page.tsx](src/app/recipes/page.tsx) + [RecipesClient.tsx](src/app/recipes/RecipesClient.tsx) | `/recipes` |
-| [recipe/[slug]/page.tsx](src/app/recipe/[slug]/page.tsx) | 24 static recipe pages |
+| [recipe/[slug]/page.tsx](src/app/recipe/[slug]/page.tsx) | 39 static recipe pages |
 | [guides/page.tsx](src/app/guides/page.tsx), [guides/[slug]/page.tsx](src/app/guides/[slug]/page.tsx) | 8 SEO guide pages |
 | [methodology/page.tsx](src/app/methodology/page.tsx) | `/methodology` |
 | [settings/page.tsx](src/app/settings/page.tsx) | `/settings` |
@@ -135,7 +135,7 @@ Most routes have a sibling `layout.tsx` holding per-page metadata. SEO surface: 
 Content lives here as typed TS, not in the database. The Supabase tables mirror it.
 
 - [meals.ts](src/data/meals.ts) - meal catalog, `MEALS_BY_SLOT`, `pexels(id)` photo helper
-- [recipes.ts](src/data/recipes.ts) - largest data file, 24 recipes
+- [recipes.ts](src/data/recipes.ts) - largest data file, 39 recipes. Breakfast 12, lunch 10, dinner 10, snack 7. Every meal in meals.ts has a recipe; if you add a meal, add its recipe in the same change.
 - [ingredients.ts](src/data/ingredients.ts), [calories.ts](src/data/calories.ts), [macros.ts](src/data/macros.ts)
 - [hydration.ts](src/data/hydration.ts) - **safety-critical, see section 7**
 - [dayTypes.ts](src/data/dayTypes.ts), [nutritionCards.ts](src/data/nutritionCards.ts), [citations.ts](src/data/citations.ts), [foodEmoji.ts](src/data/foodEmoji.ts)
@@ -194,6 +194,17 @@ the planner and absent from the grocery list. Everything now goes through
 parent's imports. If you add a call site that resolves a meal or ingredient slug, use the
 resolver. `SampleWeek` is the deliberate exception: it is marketing and shows a fixed week.
 
+**The preps-ahead label.** `Recipe.prepAhead` marks the dishes worth cooking once for the week:
+what one session yields, fridge days, freezer days, how to reheat. Sixteen recipes carry it, it
+shows as a badge on the card and a panel on the recipe page. `keepsDays` is a food-safety number
+rather than a serving suggestion, so keep it inside USDA's 3 to 4 days for cooked leftovers.
+
+**Adding an ingredient means editing two files.** A new entry in
+[ingredients.ts](src/data/ingredients.ts) must also be mapped in
+[allergens.ts](src/data/allergens.ts) if it carries one. An unmapped grain or dairy item makes
+the allergen line silently under-report, which reads as "no allergens" on food that has one.
+That is the single most dangerous edit in this repo.
+
 Files: [parse.ts](src/lib/import/parse.ts) (text to structure), [match.ts](src/lib/import/match.ts)
 (name to catalog slug), [jsonld.ts](src/lib/import/jsonld.ts) (schema.org extraction),
 [storage.ts](src/lib/import/storage.ts) (device-local store),
@@ -204,8 +215,11 @@ Arthur, Tasty, RecipeTin Eats, BBC Good Food and Food.com succeed. AllRecipes, S
 and Simply Recipes refuse: all Dotdash Meredith, one anti-bot stack. `curl` succeeds on those
 same URLs where the server's `fetch` gets a 403, so it is TLS fingerprinting rather than IP
 reputation and it will not improve by retrying. Every failure falls back to the paste box.
-This was measured from a residential IP; a Vercel function may do worse, and that is worth
-re-checking on production before trusting the number.
+Re-measured against production on 2026-08-20, and the datacenter-IP worry did not
+materialise: all six sites that work locally also work from the Vercel function. AllRecipes
+and Serious Eats fail from both, returning 402 from Vercel where they return 403 locally.
+Same block, different response from their bot vendor. There is no reason to expect this path
+to behave worse in production than in development.
 
 **Not lawful, do not build:** transcript extraction from YouTube, TikTok or Instagram videos
 the user does not own. `captions.download` requires edit permission on the video, TikTok's
@@ -243,15 +257,73 @@ New surfaces since the handoff was written: `/today` (kid view), `/offline`, `/i
 
 **Do not put a `loading.tsx` at the app root.** One was added and reverted on 2026-08-19. It wraps every route in a Suspense boundary, and on this app statically prerendered routes (`/recipe/[slug]`, `/guides/[slug]`, `/recipes`, `/guides`) then never hydrated: no client component ran, so the calorie gate silently served its youth fallback to everyone and nothing interactive worked. Dynamic routes like `/planner` were fine, which is exactly why it went unnoticed. Route-segment loading files are fine; there is one at `src/app/planner/loading.tsx`.
 
+**Animate position, never visibility.** Third time this bit the project: guide reveals that
+held prose at opacity 0, FAQ answers unmounted while collapsed, and on 2026-08-20 the whole
+recipe grid, which faded in from opacity 0 with a per-card delay of `i * 0.04`. With 24 cards
+the last one did not start for nearly a second, and an interrupted run left the list stuck
+translucent, which a real visitor reported as "the images are not there". These routes are
+statically prerendered, so content that is invisible until an animation finishes is sometimes
+just invisible. Slide it, do not fade it.
+
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
-**What is and is not runtime-verified.** There is no `.env.local` in this repo, so local development runs with `isSupabaseConfigured` false, in localStorage-only mode. Everything shipped on 2026-08-19 was verified in a browser in that mode. The Supabase code paths changed that day (per-cell merge on load, adopting anonymous data on first sign-in, entry upserts, writing `meal_plans.updated_at`) are covered by unit tests where the logic is pure, and are otherwise unexercised at runtime, because they need an authenticated session and nobody has completed a sign-in since the outage. Treat them as reviewed, not proven, until sign-in is confirmed.
+**Sync is proven now, and what proving it found.** There is still no `.env.local`, so local
+development runs with `isSupabaseConfigured` false in localStorage-only mode. The remote paths
+were exercised against production on 2026-08-20, and the previous note that they were "reviewed,
+not proven" was hiding a real bug.
+
+Sign-in had always worked. Everything behind it never had. Production reported **1 user, 0
+families, 0 players, 0 plans, 0 entries.** A trigger on `auth.users` creates a family and a
+player at signup, and it exists, but the account was created 2026-05-20, before the migration
+that added it. No family means no player; no player means `loadPlanRemote` returns null and
+`savePlanRemote` returns early, and the profile save bailed at the same check. Sign-in
+succeeded, the UI said nothing, and every write went to the device only.
+
+The fix is [src/lib/supabase/family.ts](src/lib/supabase/family.ts), which provisions the family
+and player on demand rather than trusting the trigger, so the existing account repaired itself
+on next load and any future account the trigger misses self-heals. RLS already allowed it:
+`families_owner_all` is `for all` with check `owner_id = auth.uid()`. Verified end to end: a
+planner load created the family and player, and one day-type change wrote 1 plan and 28 entries.
+
+**The lesson worth keeping:** a signup trigger is not a guarantee. Anything that depends on a
+row existing should be able to create it. And "covered by unit tests, unexercised at runtime"
+was doing a lot of work in the old note; the pure logic was all correct and the feature was
+still completely broken.
+
+Two things found while proving it. The plan store and the profile store each resolved the
+family independently on every call, so one planner load fired the `families` query ten times;
+it is resolved once per tab now and shared. And the deployed `NEXT_PUBLIC_SUPABASE_URL` ends
+with a newline from a paste, which `new URL()` normalises so nothing breaks today;
+[config.ts](src/lib/supabase/config.ts) trims its env vars so no future consumer inherits it,
+but the Vercel value is still worth cleaning up.
 
 There is now a test runner: `npm test` runs `node --test` over `src/**/__tests__/*.test.ts`. 55 tests: plan merging, whose failure mode is silent data loss, and the recipe import parser, matcher and JSON-LD extractor, whose failure mode is a wrong number or a wrong food on a shopping list. Note that `node --test` resolves ESM specifiers literally: it reads neither tsconfig `paths` nor extensionless files, so a module a test imports at runtime needs a relative specifier with the `.ts` extension. `allowImportingTsExtensions` is set for exactly this reason.
 
 Photos: 18 meal and 13 recipe images were deleted on 2026-08-20 because they showed the wrong food. They had been picked by searching Pexels and verifying only that the URL returned HTTP 200, never by looking at them, and included a bulk lentil dispenser for a green smoothie and a tray of fried taquitos for a turkey wrap. `Meal.imageUrl` is optional so `FoodImage` can render its emoji tile instead. **If you add an image, look at it.**
 
-Next: what only Haris can do, which is verifying sign-in end to end and adding the two GitHub secrets.
+**Known gaps, in the order they will bite.**
+
+1. `smartFillWeek` in [useMealPlan.ts](src/hooks/useMealPlan.ts) auto-fills from the curated
+   catalog only, so a parent's imported recipes are never chosen by auto-fill. Defensible for
+   now, since auto-fill is picking from meals we vetted, but say it in the UI rather than
+   leaving it a silent surprise.
+2. Imported recipes do not sync. `meal_plan_entries.meal_id` is a foreign key into the curated
+   `meals` table, so [storage-supabase.ts](src/lib/planner/storage-supabase.ts) writes null for
+   a custom slug and the slot is empty on a second device. The migration sketch for a
+   `custom_meal_slug` column is in the recipe-import research; it needs the DMCA decision below
+   made first.
+3. Imports are device-local, which is what keeps DMCA 512(c) irrelevant. **The moment they sync
+   or become shareable you are hosting user-submitted content and need a designated agent
+   registered.** Decide that deliberately rather than discovering it.
+4. Image and YouTube import are not built. YouTube can legitimately read the description via
+   the Data API; there is no lawful path to a transcript for a video the user does not own.
+5. The Vercel `NEXT_PUBLIC_SUPABASE_URL` still has a trailing newline. Harmless now that
+   config.ts trims, worth tidying.
+6. Supabase free tier still pauses. The keep-warm workflow is a bridge, not a fix; its secrets
+   are set and a manual run passed on 2026-08-20.
+
+Nothing on this list is blocked on Haris any more. Sign-in is verified, sync is verified, and
+the GitHub secrets are set.
 
 ### Original next steps, kept for context
 
