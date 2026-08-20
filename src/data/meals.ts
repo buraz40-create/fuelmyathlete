@@ -132,9 +132,11 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 4,
-    // Verified by opening it at full size: a tall glass of green smoothie.
+    // Verified at card size, not just full size: an opaque green smoothie thick enough to
+    // read as blended. The previous pick was translucent and looked like green water, which
+    // is exactly what a real visitor called it.
     imageUrl:
-      "https://images.pexels.com/photos/33526960/pexels-photo-33526960.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+      "https://images.pexels.com/photos/28909422/pexels-photo-28909422.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     recipeSlug: "green-machine",
     nutrition: { kcal: 285, proteinG: 12, carbsG: 50, fatG: 6, fiberG: 7, source: "USDA estimate" },
     ingredients: [

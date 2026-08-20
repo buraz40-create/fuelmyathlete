@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { Leaf, Plus } from "@phosphor-icons/react/dist/ssr";
 import { RecipeCard } from "@/components/recipe/RecipeCard";
@@ -22,6 +22,7 @@ const FILTERS: { key: Filter; label: string }[] = [
 
 export function RecipesClient() {
   const [filter, setFilter] = useState<Filter>("all");
+  const reduced = useReducedMotion();
 
   const filtered = useMemo(
     () =>
@@ -107,26 +108,29 @@ export function RecipesClient() {
         </p>
       </aside>
 
-      <AnimatePresence mode="popLayout">
-        <motion.ol
-          key={filter}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.25 }}
-          className="grid gap-4 md:grid-cols-2 lg:grid-cols-3"
-        >
-          {filtered.map((recipe, i) => (
-            <motion.li
-              key={recipe.slug}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: i * 0.04 }}
-            >
-              <RecipeCard recipe={recipe} />
-            </motion.li>
-          ))}
-        </motion.ol>
-      </AnimatePresence>
+      {/* Movement only, never opacity.
+          This grid used to fade in: the ol from opacity 0, and each card from opacity 0 with a
+          delay of i * 0.04. With 24 recipes the last card did not start until nearly a second
+          in, and anything that interrupted the run left the whole list translucent, which is
+          what a real visitor reported. Recipes are the page. They are readable from the first
+          paint now, and the animation only slides them a few pixels.
+
+          This is the same mistake as the guide reveals that hid prose at opacity 0. Third time
+          on this project, so the rule is written down in HANDOFF: on content that has to be
+          read, animate position, not visibility. */}
+      <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        {filtered.map((recipe, i) => (
+          <motion.li
+            key={recipe.slug}
+            initial={reduced ? false : { y: 10 }}
+            animate={{ y: 0 }}
+            // Capped so a long list does not queue up a second of staggered waiting.
+            transition={{ duration: 0.25, delay: Math.min(i, 6) * 0.03 }}
+          >
+            <RecipeCard recipe={recipe} />
+          </motion.li>
+        ))}
+      </ol>
 
       {filtered.length === 0 && (
         <p className="mt-8 text-center text-sm text-muted-foreground">
