@@ -16,7 +16,9 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match"],
     kidRating: 4,
-    // Photo removed: showed dry granola clusters, not overnight oats.
+    // Verified by opening it at full size: oats and milk in a white bowl with blueberries and strawberries.
+    imageUrl:
+      "https://images.pexels.com/photos/566564/pexels-photo-566564.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     recipeSlug: "athlete-overnight-oats",
     nutrition: { kcal: 410, proteinG: 18, carbsG: 64, fatG: 9, fiberG: 9, source: "USDA estimate" },
     ingredients: [
@@ -130,7 +132,9 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 4,
-    // Photo removed: showed bulk-store lentil dispenser, Cyrillic labels.
+    // Verified by opening it at full size: a tall glass of green smoothie.
+    imageUrl:
+      "https://images.pexels.com/photos/33526960/pexels-photo-33526960.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     recipeSlug: "green-machine",
     nutrition: { kcal: 285, proteinG: 12, carbsG: 50, fatG: 6, fiberG: 7, source: "USDA estimate" },
     ingredients: [
@@ -271,7 +275,9 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "rest"],
     kidRating: 4,
-    // Photo removed: showed catering tray of fried taquitos.
+    // Verified by opening it at full size: two tortilla wrap halves standing cut-side up.
+    imageUrl:
+      "https://images.pexels.com/photos/5848057/pexels-photo-5848057.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     recipeSlug: "turkey-wrap",
     nutrition: { kcal: 365, proteinG: 24, carbsG: 35, fatG: 13, fiberG: 5, source: "USDA estimate" },
     ingredients: [
@@ -474,7 +480,9 @@ export const MEALS: Meal[] = [
     prepMinutes: 1,
     suitableFor: ["training", "match"],
     kidRating: 4,
-    // Photo removed: showed dates, pecans and cashews, no almonds.
+    // Verified by opening it at full size: a close-up of whole almonds.
+    imageUrl:
+      "https://images.pexels.com/photos/3939170/pexels-photo-3939170.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     recipeSlug: "banana-almonds",
     nutrition: { kcal: 275, proteinG: 8, carbsG: 32, fatG: 15, fiberG: 6, source: "USDA estimate" },
     ingredients: [
@@ -530,7 +538,9 @@ export const MEALS: Meal[] = [
     prepMinutes: 20,
     suitableFor: ["school", "rest"],
     kidRating: 5,
-    // Photo removed: showed beef street tacos on corn, not ground turkey.
+    // Verified by opening it at full size: tacos on corn tortillas with shredded meat, radish and lime.
+    imageUrl:
+      "https://images.pexels.com/photos/18574183/pexels-photo-18574183.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     recipeSlug: "turkey-tacos",
     nutrition: { kcal: 485, proteinG: 30, carbsG: 48, fatG: 17, fiberG: 8, source: "USDA estimate" },
     ingredients: [

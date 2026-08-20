@@ -157,7 +157,9 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    // Photo removed: showed bulk-store lentil dispenser, Cyrillic labels.
+    // Verified by opening it at full size: a tall glass of green smoothie.
+    imageUrl:
+      "https://images.pexels.com/photos/33526960/pexels-photo-33526960.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     whenToEat: "When breakfast needs to disguise the vegetables. The mango covers everything.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -425,7 +427,9 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 1,
     totalMinutes: 5,
-    // Photo removed: showed catering tray of fried taquitos.
+    // Verified by opening it at full size: two tortilla wrap halves standing cut-side up.
+    imageUrl:
+      "https://images.pexels.com/photos/5848057/pexels-photo-5848057.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     whenToEat: "Reliable school lunch. Packs in a thermos, no microwave needed.",
     equipment: ["Cutting board", "Knife", "Lunch container"],
     steps: [
@@ -580,7 +584,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    // Photo removed: showed dates, pecans and cashews, no almonds.
+    // Verified by opening it at full size: a close-up of whole almonds.
+    imageUrl:
+      "https://images.pexels.com/photos/3939170/pexels-photo-3939170.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     whenToEat: "Pre-practice quick energy + slow-release fat. Eat 30-45 min before warm-ups.",
     equipment: ["Small bag or container"],
     steps: [
@@ -705,7 +711,9 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 20,
-    // Photo removed: showed beef street tacos on corn, not ground turkey.
+    // Verified by opening it at full size: tacos on corn tortillas with shredded meat, radish and lime.
+    imageUrl:
+      "https://images.pexels.com/photos/18574183/pexels-photo-18574183.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     whenToEat: "Family favorite. Build-your-own bar means less complaining at the table.",
     equipment: ["Large skillet", "Wooden spatula", "Small bowls for toppings"],
     steps: [
@@ -905,7 +913,9 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    // Photo removed: showed dry granola clusters, not overnight oats.
+    // Verified by opening it at full size: oats and milk in a white bowl with blueberries and strawberries.
+    imageUrl:
+      "https://images.pexels.com/photos/566564/pexels-photo-566564.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
     whenToEat:
       "Best pre-workout breakfast. Make it the night before, eat it 1-2 hours before training. Slow-release carbs from rolled oats plus protein keep energy steady through practice.",
     equipment: ["Mason jar or container with a lid", "Measuring cups", "Spoon"],
