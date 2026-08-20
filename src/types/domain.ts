@@ -73,7 +73,9 @@ export interface Meal {
   prepMinutes: number;
   suitableFor: DayType[];
   kidRating: number;
-  imageUrl: string;
+  // Optional on purpose. A wrong photo is worse than no photo on a site whose pitch is that
+  // someone checked this for your kid, and FoodImage renders a slot-coloured tile instead.
+  imageUrl?: string;
   recipeSlug?: string;
   ingredients: MealIngredient[];
   tags?: string[];

@@ -11,7 +11,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 3,
-    imageUrl: pexels(9788573),
+    // Photo removed: showed sliced banana and yogurt, no cereal.
     whenToEat: "Backup breakfast when the night-before plan failed and you have 90 seconds.",
     equipment: ["Cereal bowl", "Spoon", "Knife (for the banana)"],
     steps: [
@@ -117,7 +117,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(32946783),
+    // Photo removed: showed green kale smoothie, not peanut butter.
     whenToEat: "Heavy breakfast for long training mornings. Oats keep you full past warm-ups.",
     equipment: ["Blender", "Tall glass", "Measuring spoons"],
     steps: [
@@ -157,7 +157,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(37283271),
+    // Photo removed: showed bulk-store lentil dispenser, Cyrillic labels.
     whenToEat: "When breakfast needs to disguise the vegetables. The mango covers everything.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -196,7 +196,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(11136333),
+    // Photo removed: showed two bananas on a flat background.
     whenToEat: "Drinkable bowl of oatmeal. Sustained-release energy for school days that start before 7 AM.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -239,7 +239,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    imageUrl: pexels(31490093),
+    // Photo removed: showed hand holding a jar of red lentils.
     whenToEat: "Most protein you can get from a single smoothie without using powder. Great morning fuel.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -279,7 +279,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 4,
-    imageUrl: pexels(17612822),
+    // Photo removed: showed cucumber and apple juice in mason jars.
     whenToEat: "30-45 minutes before kickoff or warm-ups. Quick-digesting carbs that don't sit heavy.",
     equipment: ["Blender", "Tall glass"],
     steps: [
@@ -358,7 +358,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    imageUrl: pexels(6659878),
+    // Photo removed: showed white sandwich bread, no english muffin.
     whenToEat: "Pre-game fuel 1-2 hours before kickoff. Quick-digesting carbs that will not slow you down on the field.",
     equipment: ["Toaster", "Butter knife"],
     steps: [
@@ -425,7 +425,7 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(16222105),
+    // Photo removed: showed catering tray of fried taquitos.
     whenToEat: "Reliable school lunch. Packs in a thermos, no microwave needed.",
     equipment: ["Cutting board", "Knife", "Lunch container"],
     steps: [
@@ -442,12 +442,12 @@ export const RECIPES: Recipe[] = [
       {
         order: 3,
         title: "Roll tight",
-        body: "Fold in the short ends, then roll from the bottom tightly. Cut diagonally in half. Pack with a side of fruit.",
+        body: "Fold in the short ends, then roll from the bottom tightly. Cut diagonally in half. Pack an apple alongside it.",
       },
     ],
     notes: [
       "Whole-grain tortilla matters. White flour wraps disappear from the body in an hour.",
-      "Cold turkey is fine in a lunchbox until lunch with a small ice pack.",
+      "Deli turkey is perishable. USDA guidance is to keep it at or below 40F, so pack an ice pack or a frozen drink and eat it by lunch.",
       "Skip the mustard if it makes the tortilla soggy by lunchtime.",
     ],
   },
@@ -506,7 +506,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 2,
-    imageUrl: pexels(33489598),
+    // Photo removed: showed scrabble tiles spelling BREAKFAST on a snack card.
     whenToEat: "Travel-friendly recovery snack. Natural sugar + protein in 30 seconds.",
     equipment: ["Knife", "Small container (if packing)"],
     steps: [
@@ -518,7 +518,7 @@ export const RECIPES: Recipe[] = [
       {
         order: 2,
         title: "Pack for the bag",
-        body: "If packing for the soccer bag: squeeze the lemon over the slices to prevent browning, then seal in a container with the peanut butter on the side.",
+        body: "If packing for the soccer bag: squeeze a lemon wedge over the slices to keep them from browning, then seal in a container with the peanut butter on the side.",
       },
     ],
     notes: [
@@ -532,7 +532,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    imageUrl: pexels(8997908),
+    // Photo removed: showed crackers with pepperoni and salsa.
     whenToEat: "Soccer-bag staple. Does not melt as fast as you would think.",
     equipment: ["Small container or zip bag"],
     steps: [
@@ -543,7 +543,7 @@ export const RECIPES: Recipe[] = [
       },
     ],
     notes: [
-      "Cheese stays edible at room temp for ~3 hours in an insulated bag.",
+      "USDA says perishable food should not sit out more than 2 hours, and only 1 hour above 90F. In a Florida soccer bag, treat 1 hour as the limit and pack a cold source.",
       "Whole-grain crackers > white. The fiber slows the carb hit.",
     ],
   },
@@ -580,7 +580,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    imageUrl: pexels(8922007),
+    // Photo removed: showed dates, pecans and cashews, no almonds.
     whenToEat: "Pre-practice quick energy + slow-release fat. Eat 30-45 min before warm-ups.",
     equipment: ["Small bag or container"],
     steps: [
@@ -705,7 +705,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 20,
-    imageUrl: pexels(5454019),
+    // Photo removed: showed beef street tacos on corn, not ground turkey.
     whenToEat: "Family favorite. Build-your-own bar means less complaining at the table.",
     equipment: ["Large skillet", "Wooden spatula", "Small bowls for toppings"],
     steps: [
@@ -905,7 +905,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(216951),
+    // Photo removed: showed dry granola clusters, not overnight oats.
     whenToEat:
       "Best pre-workout breakfast. Make it the night before, eat it 1-2 hours before training. Slow-release carbs from rolled oats plus protein keep energy steady through practice.",
     equipment: ["Mason jar or container with a lid", "Measuring cups", "Spoon"],

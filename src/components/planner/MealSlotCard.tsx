@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Plus, Minus, ArrowCounterClockwise } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
+import { FoodImage } from "@/components/food/FoodImage";
 import { MEALS_BY_SLUG } from "@/data/meals";
 import { DAY_TYPES } from "@/data/dayTypes";
 import type { DayType, MealSlot } from "@/types/domain";
@@ -66,14 +67,25 @@ export function MealSlotCard({
 
       {meal ? (
         <div className="mt-3 flex items-start gap-3">
-          <Image
-            src={meal.imageUrl}
-            alt=""
-            width={88}
-            height={88}
-            className="h-20 w-20 flex-shrink-0 rounded-2xl object-cover"
-            unoptimized
-          />
+          {meal.imageUrl ? (
+            <Image
+              src={meal.imageUrl}
+              alt=""
+              width={88}
+              height={88}
+              className="h-20 w-20 flex-shrink-0 rounded-2xl object-cover"
+              unoptimized
+            />
+          ) : (
+            <FoodImage
+              slug={meal.slug}
+              slot={meal.slot}
+              aspect="aspect-square"
+              emojiSize="text-3xl"
+              rounded="rounded-2xl"
+              className="h-20 w-20 flex-shrink-0"
+            />
+          )}
           <div className="min-w-0 flex-1">
             <h3 className="text-base font-semibold leading-snug text-ink">{meal.name}</h3>
             <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{meal.description}</p>

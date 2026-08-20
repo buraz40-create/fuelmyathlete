@@ -16,8 +16,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match"],
     kidRating: 4,
-    imageUrl:
-      "https://images.pexels.com/photos/216951/pexels-photo-216951.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Photo removed: showed dry granola clusters, not overnight oats.
     recipeSlug: "athlete-overnight-oats",
     nutrition: { kcal: 410, proteinG: 18, carbsG: 64, fatG: 9, fiberG: 9, source: "USDA estimate" },
     ingredients: [
@@ -40,7 +39,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 3,
     suitableFor: ["school", "rest"],
     kidRating: 5,
-    imageUrl: pexels(9788573),
+    // Photo removed: showed sliced banana and yogurt, no cereal.
     recipeSlug: "cereal-banana-milk",
     nutrition: { kcal: 355, proteinG: 13, carbsG: 70, fatG: 4, fiberG: 7, source: "USDA estimate" },
     ingredients: [
@@ -94,7 +93,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 4,
     suitableFor: ["training", "match"],
     kidRating: 5,
-    imageUrl: pexels(6659878),
+    // Photo removed: showed white sandwich bread, no english muffin.
     recipeSlug: "english-muffin-pb",
     nutrition: { kcal: 385, proteinG: 13, carbsG: 55, fatG: 14, fiberG: 6, source: "USDA estimate" },
     ingredients: [
@@ -111,7 +110,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
-    imageUrl: "https://images.pexels.com/photos/1346347/pexels-photo-1346347.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Photo removed: showed green kale smoothie, not peanut butter.
     recipeSlug: "pb-banana-power",
     nutrition: { kcal: 415, proteinG: 22, carbsG: 48, fatG: 16, fiberG: 5, source: "USDA estimate" },
     ingredients: [
@@ -131,7 +130,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 4,
-    imageUrl: "https://images.pexels.com/photos/3735170/pexels-photo-3735170.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Photo removed: showed bulk-store lentil dispenser, Cyrillic labels.
     recipeSlug: "green-machine",
     nutrition: { kcal: 285, proteinG: 12, carbsG: 50, fatG: 6, fiberG: 7, source: "USDA estimate" },
     ingredients: [
@@ -151,7 +150,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match"],
     kidRating: 4,
-    imageUrl: "https://images.pexels.com/photos/2872755/pexels-photo-2872755.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Photo removed: showed two bananas on a flat background.
     recipeSlug: "berry-oat-fuel",
     nutrition: { kcal: 365, proteinG: 16, carbsG: 62, fatG: 6, fiberG: 8, source: "USDA estimate" },
     ingredients: [
@@ -171,7 +170,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 4,
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
-    imageUrl: "https://images.pexels.com/photos/3735165/pexels-photo-3735165.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Photo removed: showed hand holding a jar of red lentils.
     recipeSlug: "vanilla-protein-punch",
     nutrition: { kcal: 320, proteinG: 26, carbsG: 38, fatG: 5, fiberG: 3, source: "USDA estimate" },
     ingredients: [
@@ -190,7 +189,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 4,
     suitableFor: ["training", "match"],
     kidRating: 5,
-    imageUrl: "https://images.pexels.com/photos/616833/pexels-photo-616833.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Photo removed: showed cucumber and apple juice in mason jars.
     recipeSlug: "tropical-pre-game",
     nutrition: { kcal: 260, proteinG: 9, carbsG: 55, fatG: 1, fiberG: 4, source: "USDA estimate" },
     ingredients: [
@@ -253,7 +252,9 @@ export const MEALS: Meal[] = [
     recipeSlug: "hibachi-chicken",
     nutrition: { kcal: 465, proteinG: 35, carbsG: 55, fatG: 11, fiberG: 3, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "chicken-breast", quantity: 0.4 },
+      // 0.25 lb per serving, matching the recipe's 2 lb across 8 servings. It was 0.4,
+      // which over-bought the week's main protein by about 60% on every grocery list.
+      { ingredientSlug: "chicken-breast", quantity: 0.25 },
       { ingredientSlug: "jasmine-rice",   quantity: 1 },
       { ingredientSlug: "broccoli",       quantity: 0.5 },
       { ingredientSlug: "carrot",         quantity: 0.25 },
@@ -270,7 +271,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "rest"],
     kidRating: 4,
-    imageUrl: pexels(16222105),
+    // Photo removed: showed catering tray of fried taquitos.
     recipeSlug: "turkey-wrap",
     nutrition: { kcal: 365, proteinG: 24, carbsG: 35, fatG: 13, fiberG: 5, source: "USDA estimate" },
     ingredients: [
@@ -279,6 +280,7 @@ export const MEALS: Meal[] = [
       { ingredientSlug: "cheese-slice",        quantity: 1 },
       { ingredientSlug: "romaine",             quantity: 0.5 },
       { ingredientSlug: "carrot",              quantity: 0.5 },
+      { ingredientSlug: "apple",               quantity: 1 },
     ],
   },
   {
@@ -312,7 +314,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 3,
     suitableFor: [...ALL_DAYS],
     kidRating: 4,
-    imageUrl: pexels(672101),
+    // Photo removed: showed whole apples, no cheese.
     nutrition: { kcal: 180, proteinG: 8, carbsG: 20, fatG: 8, fiberG: 3, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "apple",        quantity: 1 },
@@ -328,7 +330,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 2,
     suitableFor: [...ALL_DAYS],
     kidRating: 3,
-    imageUrl: pexels(1092730),
+    // Photo removed: showed dragon fruit smoothie bowl ringed with muffins.
     nutrition: { kcal: 190, proteinG: 16, carbsG: 20, fatG: 4, fiberG: 2, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "cottage-cheese", quantity: 0.75 },
@@ -344,7 +346,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
-    imageUrl: pexels(4149010),
+    // Photo removed: showed mother and daughter holding orange halves.
     nutrition: { kcal: 150, proteinG: 13, carbsG: 12, fatG: 6, fiberG: 6, source: "USDA estimate" },
     ingredients: [{ ingredientSlug: "edamame", quantity: 1 }],
   },
@@ -382,7 +384,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["match"],
     kidRating: 4,
-    imageUrl: pexels(5713768),
+    // Photo removed: showed restaurant chicken in cream sauce, no rice.
     recipeSlug: "chicken-rice-broccoli",
     nutrition: { kcal: 420, proteinG: 32, carbsG: 58, fatG: 5, fiberG: 2, source: "USDA estimate" },
     ingredients: [
@@ -400,7 +402,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 6,
     suitableFor: ["match", "school"],
     kidRating: 5,
-    imageUrl: pexels(1600711),
+    // Photo removed: showed club sandwiches piled with french fries.
     recipeSlug: "turkey-wrap",
     nutrition: { kcal: 410, proteinG: 26, carbsG: 52, fatG: 9, fiberG: 4, source: "USDA estimate" },
     ingredients: [
@@ -420,12 +422,15 @@ export const MEALS: Meal[] = [
     prepMinutes: 2,
     suitableFor: [...ALL_DAYS],
     kidRating: 5,
-    imageUrl: pexels(33489598),
+    // Photo removed: showed scrabble tiles spelling BREAKFAST on a snack card.
     recipeSlug: "apple-pb",
     nutrition: { kcal: 260, proteinG: 8, carbsG: 30, fatG: 16, fiberG: 6, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "apple",        quantity: 1 },
       { ingredientSlug: "peanut-butter", quantity: 2 },
+      // The recipe tells you to squeeze lemon over the slices so they do not brown in the bag.
+      // A quarter of a lemon per snack, so the list buys one when the week uses this a few times.
+      { ingredientSlug: "lemon",        quantity: 0.25 },
     ],
   },
   {
@@ -436,7 +441,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 1,
     suitableFor: [...ALL_DAYS],
     kidRating: 4,
-    imageUrl: pexels(8997908),
+    // Photo removed: showed crackers with pepperoni and salsa.
     recipeSlug: "cheese-crackers",
     nutrition: { kcal: 245, proteinG: 15, carbsG: 22, fatG: 11, fiberG: 3, source: "USDA estimate" },
     ingredients: [
@@ -469,7 +474,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 1,
     suitableFor: ["training", "match"],
     kidRating: 4,
-    imageUrl: pexels(8922007),
+    // Photo removed: showed dates, pecans and cashews, no almonds.
     recipeSlug: "banana-almonds",
     nutrition: { kcal: 275, proteinG: 8, carbsG: 32, fatG: 15, fiberG: 6, source: "USDA estimate" },
     ingredients: [
@@ -525,7 +530,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 20,
     suitableFor: ["school", "rest"],
     kidRating: 5,
-    imageUrl: pexels(5454019),
+    // Photo removed: showed beef street tacos on corn, not ground turkey.
     recipeSlug: "turkey-tacos",
     nutrition: { kcal: 485, proteinG: 30, carbsG: 48, fatG: 17, fiberG: 8, source: "USDA estimate" },
     ingredients: [

@@ -10,6 +10,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { FoodImage } from "@/components/food/FoodImage";
 import { MEALS_BY_SLOT } from "@/data/meals";
 import { dayTypeLabel, dayTypeDescription } from "@/data/dayTypes";
 import { ageToCohort } from "@/lib/player/cohort";
@@ -184,14 +185,25 @@ function MealRow({
           selected ? "border-primary bg-primary-soft" : "border-border"
         )}
       >
-        <Image
-          src={meal.imageUrl}
-          alt=""
-          width={64}
-          height={64}
-          className="h-16 w-16 flex-shrink-0 rounded-xl object-cover"
-          unoptimized
-        />
+        {meal.imageUrl ? (
+          <Image
+            src={meal.imageUrl}
+            alt=""
+            width={64}
+            height={64}
+            className="h-16 w-16 flex-shrink-0 rounded-xl object-cover"
+            unoptimized
+          />
+        ) : (
+          <FoodImage
+            slug={meal.slug}
+            slot={meal.slot}
+            aspect="aspect-square"
+            emojiSize="text-2xl"
+            rounded="rounded-xl"
+            className="h-16 w-16 flex-shrink-0"
+          />
+        )}
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
             <h5 className="truncate text-sm font-semibold text-ink">{meal.name}</h5>
