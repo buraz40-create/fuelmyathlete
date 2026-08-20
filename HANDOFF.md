@@ -301,6 +301,9 @@ There is now a test runner: `npm test` runs `node --test` over `src/**/__tests__
 
 Photos: 18 meal and 13 recipe images were deleted on 2026-08-20 because they showed the wrong food. They had been picked by searching Pexels and verifying only that the URL returned HTTP 200, never by looking at them, and included a bulk lentil dispenser for a green smoothie and a tray of fried taquitos for a turkey wrap. `Meal.imageUrl` is optional so `FoodImage` can render its emoji tile instead. **If you add an image, look at it.**
 
+Anything that needs Haris rather than a session is in [ACTIONS.md](ACTIONS.md), with cost,
+effort and what each one unlocks. Do not re-derive that list; update it.
+
 **Known gaps, in the order they will bite.**
 
 1. `smartFillWeek` in [useMealPlan.ts](src/hooks/useMealPlan.ts) auto-fills from the curated
