@@ -5,9 +5,17 @@ import { motion } from "motion/react";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { LiveCalculator } from "@/components/landing/LiveCalculator";
 
+// Movement only. The name is kept because it reads well at the call sites, but nothing here
+// touches opacity any more.
+//
+// The headline, the subheading, the call to action and the calculator all used to start at
+// opacity 0. This is the landing page: statically prerendered, the first thing a visitor sees,
+// and the page Google indexes. Content that is invisible until an animation finishes is
+// content that is sometimes just invisible, and that has now bitten this project three times.
+// The rule is in HANDOFF: on anything that has to be read, animate position, never visibility.
 const fadeIn = {
-  initial: { opacity: 0, y: 18 },
-  animate: { opacity: 1, y: 0 },
+  initial: { y: 18 },
+  animate: { y: 0 },
 };
 
 export function Hero() {
@@ -16,7 +24,8 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="relative overflow-hidden px-4 pt-10 pb-16 md:px-8 md:pt-16 md:pb-24"
     >
-      {/* Decorative gradient blobs */}
+      {/* Decorative gradient blobs. These DO fade, and that is fine: they are aria-hidden
+          decoration, so a blob that never appears costs a visitor nothing. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
@@ -100,8 +109,10 @@ export function Hero() {
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
+          // Same rule. The calculator is the interactive proof this site works, so it must not
+          // depend on an animation completing to be visible.
+          initial={{ y: 30 }}
+          animate={{ y: 0 }}
           transition={{ duration: 0.7, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
         >
           <LiveCalculator />

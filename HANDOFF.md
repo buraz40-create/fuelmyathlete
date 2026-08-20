@@ -257,13 +257,25 @@ New surfaces since the handoff was written: `/today` (kid view), `/offline`, `/i
 
 **Do not put a `loading.tsx` at the app root.** One was added and reverted on 2026-08-19. It wraps every route in a Suspense boundary, and on this app statically prerendered routes (`/recipe/[slug]`, `/guides/[slug]`, `/recipes`, `/guides`) then never hydrated: no client component ran, so the calorie gate silently served its youth fallback to everyone and nothing interactive worked. Dynamic routes like `/planner` were fine, which is exactly why it went unnoticed. Route-segment loading files are fine; there is one at `src/app/planner/loading.tsx`.
 
-**Animate position, never visibility.** Third time this bit the project: guide reveals that
-held prose at opacity 0, FAQ answers unmounted while collapsed, and on 2026-08-20 the whole
-recipe grid, which faded in from opacity 0 with a per-card delay of `i * 0.04`. With 24 cards
-the last one did not start for nearly a second, and an interrupted run left the list stuck
-translucent, which a real visitor reported as "the images are not there". These routes are
-statically prerendered, so content that is invisible until an animation finishes is sometimes
-just invisible. Slide it, do not fade it.
+**Animate position, never visibility.** Five instances so far: guide reveals that held prose
+at opacity 0, FAQ answers unmounted while collapsed, the whole recipe grid fading in with a
+per-card delay of `i * 0.04`, and on 2026-08-20 the landing page itself, where the H1,
+subheading, call to action and calculator all started at opacity 0 on the one route Google
+indexes and every first-time visitor lands on. With 24 recipe cards the last one did not start
+for nearly a second, and an interrupted run left the list stuck translucent, which a real
+visitor reported as "the images are not there". These routes are statically prerendered, so
+content that is invisible until an animation finishes is sometimes just invisible. Slide it,
+do not fade it.
+
+This is now enforced rather than remembered. `src/components/__tests__/no-opacity-reveals.test.ts`
+walks every `.tsx` under `src/components` and `src/app` and fails on `initial` props that start
+at opacity 0, and it found the fifth instance the first time it ran. Two exemptions, both
+structural rather than a list of blessed filenames: children of `<AnimatePresence initial={false}>`
+skip their entry animation on mount so they are painted immediately, and anything whose
+`animate` target is below opacity 1 is a background wash rather than something meant to be read.
+The landing page water cups are the first case, the Hero gradient blobs are the second. The
+guard was checked by reintroducing the Reveal bug and confirming it failed with the right file
+and line.
 
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
