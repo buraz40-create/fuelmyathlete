@@ -6,7 +6,8 @@ import { emptyPlan, planStorage } from "@/lib/planner/storage";
 import { loadPlanRemote, savePlanRemote } from "@/lib/planner/storage-supabase";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { currentWeekStart, shiftWeek } from "@/lib/planner/isoWeek";
-import { MEALS_BY_SLOT } from "@/data/meals";
+import { buildCustomCatalog, mealsForSlot } from "@/lib/catalog";
+import { importedRecipes } from "@/lib/import/storage";
 import { mealPreferences } from "@/lib/player/preferences";
 import { weeklySchedule } from "@/lib/player/schedule";
 import { mergePlans } from "@/lib/planner/merge";
@@ -202,16 +203,22 @@ export function useMealPlan(initialWeekStart?: string) {
 
   const smartFillWeek = useCallback(() => {
     // Read at click time rather than through a hook, so auto-fill always uses the current
-    // exclusions. Auto-fill was serving foods the athlete refuses, which is worse than an
-    // empty slot: it teaches the parent not to trust the button.
+    // exclusions AND the recipes imported since the page loaded. Auto-fill was serving foods
+    // the athlete refuses, which is worse than an empty slot: it teaches the parent not to
+    // trust the button.
     const excluded = new Set(mealPreferences.excluded());
+    // A parent who typed a recipe in by hand meant it. Filling the week from the curated
+    // catalog only, and never once choosing their own, is the same class of surprise as
+    // serving a food the athlete refuses.
+    const custom = buildCustomCatalog(importedRecipes.all());
     setPlan((prev) => {
       const next: MealPlan = {
         ...prev,
         entries: prev.entries.map((e) => {
           if (e.mealSlug) return e;
-          const allowed = MEALS_BY_SLOT[e.slot].filter((m) => !excluded.has(m.slug));
-          const base = allowed.length ? allowed : MEALS_BY_SLOT[e.slot];
+          const forSlot = mealsForSlot(e.slot, custom);
+          const allowed = forSlot.filter((m) => !excluded.has(m.slug));
+          const base = allowed.length ? allowed : forSlot;
           const candidates = base.filter((m) => m.suitableFor.includes(e.dayType));
           const pool = candidates.length ? candidates : base;
           if (pool.length === 0) return e;
