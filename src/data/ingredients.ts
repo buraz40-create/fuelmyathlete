@@ -67,6 +67,7 @@ export const INGREDIENTS: Ingredient[] = [
 
   // BAKERY
   { slug: "english-muffin", name: "Whole-grain English muffins", category: "bakery", unit: "each" },
+  { slug: "wholegrain-bun",  name: "Whole-grain burger buns", category: "bakery", unit: "each" },
 
   // BEVERAGES
   { slug: "orange-juice", name: "Orange juice",      category: "beverages", unit: "cup" },

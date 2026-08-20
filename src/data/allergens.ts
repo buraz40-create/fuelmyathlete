@@ -20,6 +20,7 @@ const INGREDIENT_ALLERGENS: Record<string, Allergen[]> = {
   "wholegrain-bread": ["gluten"],
   "wholegrain-tortilla": ["gluten"],
   "english-muffin": ["gluten"],
+  "wholegrain-bun": ["gluten"],
   pasta: ["gluten"],
   "crackers-wg": ["gluten"],
   "cereal-wg": ["gluten"],
