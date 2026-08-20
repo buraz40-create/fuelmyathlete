@@ -19,6 +19,7 @@ import { WeeklyScheduleEditor } from "@/components/planner/WeeklyScheduleEditor"
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { getBrowserSupabase } from "@/lib/supabase/client";
+import { resetActivePlayerCache } from "@/lib/supabase/family";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 export default function SettingsPage() {
@@ -32,6 +33,7 @@ export default function SettingsPage() {
     if (!supabase) return;
     setSigningOut(true);
     await supabase.auth.signOut();
+    resetActivePlayerCache();
     router.push("/");
     router.refresh();
   }

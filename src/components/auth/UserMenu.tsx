@@ -6,6 +6,7 @@ import { useState } from "react";
 import { SignOut, User as UserIcon } from "@phosphor-icons/react/dist/ssr";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { getBrowserSupabase } from "@/lib/supabase/client";
+import { resetActivePlayerCache } from "@/lib/supabase/family";
 import { cn } from "@/lib/utils";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 
@@ -20,6 +21,7 @@ export function UserMenu({ className }: { className?: string }) {
     if (!supabase) return;
     setSigningOut(true);
     await supabase.auth.signOut();
+    resetActivePlayerCache();
     router.push("/");
     router.refresh();
   }

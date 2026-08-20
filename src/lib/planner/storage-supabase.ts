@@ -3,27 +3,7 @@
 import type { MealPlan, MealPlanEntry } from "@/types/domain";
 import { getBrowserSupabase } from "@/lib/supabase/client";
 import { emptyPlan } from "./empty-plan";
-
-async function getActivePlayerId(): Promise<string | null> {
-  const supabase = getBrowserSupabase();
-  if (!supabase) return null;
-
-  const { data: family } = await supabase
-    .from("families")
-    .select("id")
-    .limit(1)
-    .maybeSingle();
-  if (!family) return null;
-
-  const { data: player } = await supabase
-    .from("players")
-    .select("id")
-    .eq("family_id", family.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
-    .maybeSingle();
-  return player?.id ?? null;
-}
+import { getActivePlayerId } from "@/lib/supabase/family";
 
 export async function loadPlanRemote(weekStart: string): Promise<MealPlan | null> {
   const supabase = getBrowserSupabase();

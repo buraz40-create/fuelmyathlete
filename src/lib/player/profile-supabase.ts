@@ -2,6 +2,7 @@
 
 import type { PlayerProfile } from "@/types/domain";
 import { getBrowserSupabase } from "@/lib/supabase/client";
+import { getActivePlayerId } from "@/lib/supabase/family";
 
 interface PlayerRow {
   id: string;
@@ -62,21 +63,21 @@ export async function saveProfileRemote(profile: PlayerProfile): Promise<void> {
   const supabase = getBrowserSupabase();
   if (!supabase) return;
 
-  const { data: families } = await supabase
-    .from("families")
-    .select("id")
-    .limit(1)
-    .maybeSingle();
+  // Through the shared resolver, which creates the family and player when the signup trigger
+  // never ran for this account. This used to bail out here, which is why a signed-in profile
+  // saved to the device and never to the server.
+  const playerId = await getActivePlayerId();
+  if (!playerId) return;
 
-  if (!families) return;
-
-  const { data: existing } = await supabase
+  const { data: player } = await supabase
     .from("players")
-    .select("id")
-    .eq("family_id", families.id)
-    .order("created_at", { ascending: true })
-    .limit(1)
+    .select("id, family_id")
+    .eq("id", playerId)
     .maybeSingle();
+  if (!player) return;
+
+  const families = { id: player.family_id as string };
+  const existing = { id: player.id as string };
 
   const row = {
     family_id: families.id,
