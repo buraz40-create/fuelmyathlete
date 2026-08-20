@@ -123,7 +123,9 @@ All domain types live in [src/types/domain.ts](src/types/domain.ts): `MealSlot`,
 | [sign-in/page.tsx](src/app/sign-in/page.tsx) | `/sign-in` |
 | [auth/callback/route.ts](src/app/auth/callback/route.ts) | OAuth + magic link exchange |
 | [auth/reset-password/page.tsx](src/app/auth/reset-password/page.tsx) | password reset |
+| [import/page.tsx](src/app/import/page.tsx) + [ImportClient.tsx](src/app/import/ImportClient.tsx) | `/import` add your own recipe |
 | [api/health/route.ts](src/app/api/health/route.ts) | health check |
+| [api/import/url/route.ts](src/app/api/import/url/route.ts) | reads schema.org JSON-LD off a recipe URL |
 | [sitemap.ts](src/app/sitemap.ts), [robots.ts](src/app/robots.ts), [opengraph-image.tsx](src/app/opengraph-image.tsx), [twitter-image.tsx](src/app/twitter-image.tsx) | SEO |
 
 Most routes have a sibling `layout.tsx` holding per-page metadata. SEO surface: sitemap, robots, per-page metadata, JSON-LD schema, and `llms.txt`. The schema was written long before it worked: until 2026-08-19 every block was wrapped in `next/script`, so it was injected after hydration and never appeared in the server HTML. If you add schema anywhere, use a plain `script` tag and confirm it with `curl`, not with a browser devtools inspector, which shows the hydrated DOM and will happily lie to you.
@@ -156,6 +158,60 @@ Content lives here as typed TS, not in the database. The Supabase tables mirror 
 - [curate-photos.mjs](scripts/curate-photos.mjs), [recurate-weak.mjs](scripts/recurate-weak.mjs), [apply-photo-curation.mjs](scripts/apply-photo-curation.mjs), [photo-curation-results.json](scripts/photo-curation-results.json) - Pexels photo tooling
 
 Never paste the database password into chat. It gets written to the session transcript on disk. Prefer the Supabase SQL Editor.
+
+## 6b. Recipe import
+
+Added 2026-08-20. Lets a parent add their own recipe by pasting text or a link. Four rules
+shape every file in it, and none of them are stylistic.
+
+**It never invents a number.** This is the safety property, not a nicety. The competitor
+failure mode documented in App Store reviews is not a missed ingredient, it is a substituted
+recipe: one Flavorish review is titled "Literally makes up recipes", and an independent test
+had three of four apps drop the step where you add the potatoes. So parsing is rules, never a
+model. Rules can fail to parse; they cannot hallucinate. Anything the source did not state
+stays `null`, the review screen asks for it, and the save button is disabled until it is
+filled in.
+
+**A wrong match is worse than no match.** An unmatched ingredient can be recovered by the
+parent; a confidently wrong one puts the wrong food in the cart. Real bugs of this kind, all
+caught by the review screen on real imports and all now regression-tested: "freshly cracked
+pepper" matching Whole-grain crackers, "gochujang" matching Frozen mango chunks, chicken
+thighs aliased to chicken breast, and a stated "5 chicken thighs" rendered as "5 lb" because
+the catalog's unit was adopted when the source gave none.
+
+**Imports are device-local, and that is a legal decision rather than a shortcut.** Ingredient
+lists, amounts, times and yields are facts and are not copyrightable. A blogger's prose is,
+and photographs are the largest exposure of the three, with an industrialised enforcement
+business behind them. So we store the parent's structured facts on the parent's own device,
+never a copy of anyone's prose or photograph, and always the source URL, displayed. Nothing
+reaches our servers, which is why DMCA 512(c) has nothing to operate on. **If imports ever
+sync or become shareable, that changes and a designated agent must be registered first.**
+
+**The catalog is resolved, not static.** `MEALS_BY_SLUG` used to be imported directly at seven
+call sites, each treating an unknown slug as nothing, so an imported recipe was invisible to
+the planner and absent from the grocery list. Everything now goes through
+[src/lib/catalog](src/lib/catalog/index.ts), which merges the curated catalog with the
+parent's imports. If you add a call site that resolves a meal or ingredient slug, use the
+resolver. `SampleWeek` is the deliberate exception: it is marketing and shows a fixed week.
+
+Files: [parse.ts](src/lib/import/parse.ts) (text to structure), [match.ts](src/lib/import/match.ts)
+(name to catalog slug), [jsonld.ts](src/lib/import/jsonld.ts) (schema.org extraction),
+[storage.ts](src/lib/import/storage.ts) (device-local store),
+[useCustomMeals.ts](src/hooks/useCustomMeals.ts), [YourRecipes.tsx](src/components/recipe/YourRecipes.tsx).
+
+**URL import works on about half of real sites, measured not assumed.** Budget Bytes, King
+Arthur, Tasty, RecipeTin Eats, BBC Good Food and Food.com succeed. AllRecipes, Serious Eats
+and Simply Recipes refuse: all Dotdash Meredith, one anti-bot stack. `curl` succeeds on those
+same URLs where the server's `fetch` gets a 403, so it is TLS fingerprinting rather than IP
+reputation and it will not improve by retrying. Every failure falls back to the paste box.
+This was measured from a residential IP; a Vercel function may do worse, and that is worth
+re-checking on production before trusting the number.
+
+**Not lawful, do not build:** transcript extraction from YouTube, TikTok or Instagram videos
+the user does not own. `captions.download` requires edit permission on the video, TikTok's
+Display API returns only the authorising user's own videos, and the scraper libraries that
+route around this are blocked on cloud IPs and are the conduct in the live DMCA 1201 suits.
+Social URLs are refused with a message pointing at the paste box.
 
 ## 7. Hard constraints
 
@@ -191,7 +247,9 @@ New surfaces since the handoff was written: `/today` (kid view), `/offline`, `/i
 
 **What is and is not runtime-verified.** There is no `.env.local` in this repo, so local development runs with `isSupabaseConfigured` false, in localStorage-only mode. Everything shipped on 2026-08-19 was verified in a browser in that mode. The Supabase code paths changed that day (per-cell merge on load, adopting anonymous data on first sign-in, entry upserts, writing `meal_plans.updated_at`) are covered by unit tests where the logic is pure, and are otherwise unexercised at runtime, because they need an authenticated session and nobody has completed a sign-in since the outage. Treat them as reviewed, not proven, until sign-in is confirmed.
 
-There is now a test runner: `npm test` runs `node --test` over `src/**/__tests__/*.test.ts`. The first suite covers plan merging, which is pure and whose failure mode is silent data loss.
+There is now a test runner: `npm test` runs `node --test` over `src/**/__tests__/*.test.ts`. 55 tests: plan merging, whose failure mode is silent data loss, and the recipe import parser, matcher and JSON-LD extractor, whose failure mode is a wrong number or a wrong food on a shopping list. Note that `node --test` resolves ESM specifiers literally: it reads neither tsconfig `paths` nor extensionless files, so a module a test imports at runtime needs a relative specifier with the `.ts` extension. `allowImportingTsExtensions` is set for exactly this reason.
+
+Photos: 18 meal and 13 recipe images were deleted on 2026-08-20 because they showed the wrong food. They had been picked by searching Pexels and verifying only that the URL returned HTTP 200, never by looking at them, and included a bulk lentil dispenser for a green smoothie and a tray of fried taquitos for a turkey wrap. `Meal.imageUrl` is optional so `FoodImage` can render its emoji tile instead. **If you add an image, look at it.**
 
 Next: what only Haris can do, which is verifying sign-in end to end and adding the two GitHub secrets.
 
