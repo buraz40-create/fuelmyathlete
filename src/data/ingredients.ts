@@ -1,5 +1,11 @@
 import type { Ingredient } from "@/types/domain";
 
+// Quantities everywhere are AS PURCHASED, not as served.
+//
+// This list is what you hand to someone in a shop, so rice is dry rice and pasta is the weight
+// on the box. Rice was briefly entered as cooked volume, and since jasmine roughly triples
+// when cooked, a week asked for about three times the rice it needed. If an ingredient can be
+// bought in one state and eaten in another, say which in the name.
 export const INGREDIENTS: Ingredient[] = [
   // PRODUCE
   { slug: "banana",        name: "Bananas",         category: "produce",   unit: "each" },
@@ -30,7 +36,7 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "almonds",        name: "Raw almonds",           category: "protein", unit: "cup" },
 
   // PANTRY
-  { slug: "jasmine-rice",   name: "Jasmine rice",          category: "pantry",  unit: "cup" },
+  { slug: "jasmine-rice",   name: "Jasmine rice (dry)",          category: "pantry",  unit: "cup" },
   { slug: "wholegrain-bread", name: "Whole-grain bread",   category: "pantry",  unit: "each" },
   { slug: "wholegrain-tortilla", name: "Whole-grain tortillas", category: "pantry", unit: "each" },
   { slug: "pasta",          name: "Whole-grain pasta",     category: "pantry",  unit: "oz" },

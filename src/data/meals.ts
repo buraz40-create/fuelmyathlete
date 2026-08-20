@@ -297,7 +297,7 @@ export const MEALS: Meal[] = [
       // 0.25 lb per serving, matching the recipe's 2 lb across 8 servings. It was 0.4,
       // which over-bought the week's main protein by about 60% on every grocery list.
       { ingredientSlug: "chicken-breast", quantity: 0.25 },
-      { ingredientSlug: "jasmine-rice",   quantity: 1 },
+      { ingredientSlug: "jasmine-rice",   quantity: 0.33 },
       { ingredientSlug: "broccoli",       quantity: 0.5 },
       { ingredientSlug: "carrot",         quantity: 0.25 },
       { ingredientSlug: "soy-sauce",      quantity: 1 },
@@ -432,7 +432,7 @@ export const MEALS: Meal[] = [
     nutrition: { kcal: 440, proteinG: 30, carbsG: 62, fatG: 6, fiberG: 2, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "chicken-breast", quantity: 0.3 },
-      { ingredientSlug: "jasmine-rice",   quantity: 1.25 },
+      { ingredientSlug: "jasmine-rice",   quantity: 0.42 },
       { ingredientSlug: "edamame",        quantity: 0.25 },
       { ingredientSlug: "soy-sauce",      quantity: 1 },
     ],
@@ -455,7 +455,7 @@ export const MEALS: Meal[] = [
     nutrition: { kcal: 420, proteinG: 32, carbsG: 58, fatG: 5, fiberG: 2, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "chicken-breast", quantity: 0.3 },
-      { ingredientSlug: "jasmine-rice",   quantity: 1.25 },
+      { ingredientSlug: "jasmine-rice",   quantity: 0.42 },
       { ingredientSlug: "banana",         quantity: 1 },
     ],
   },
@@ -581,7 +581,7 @@ export const MEALS: Meal[] = [
     nutrition: { kcal: 520, proteinG: 38, carbsG: 65, fatG: 9, fiberG: 5, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "chicken-breast", quantity: 0.375 },
-      { ingredientSlug: "jasmine-rice",   quantity: 1 },
+      { ingredientSlug: "jasmine-rice",   quantity: 0.375 },
       { ingredientSlug: "broccoli",       quantity: 1 },
       { ingredientSlug: "olive-oil",      quantity: 1 },
       { ingredientSlug: "garlic",         quantity: 1 },
@@ -666,7 +666,7 @@ export const MEALS: Meal[] = [
     nutrition: { kcal: 510, proteinG: 38, carbsG: 60, fatG: 10, fiberG: 5, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "chicken-breast", quantity: 0.375 },
-      { ingredientSlug: "jasmine-rice",   quantity: 1 },
+      { ingredientSlug: "jasmine-rice",   quantity: 0.375 },
       { ingredientSlug: "edamame",        quantity: 0.5 },
       { ingredientSlug: "soy-sauce",      quantity: 1 },
       { ingredientSlug: "sesame-oil",     quantity: 0.5 },
@@ -809,7 +809,7 @@ export const MEALS: Meal[] = [
     recipeSlug: "chicken-egg-fried-rice",
     nutrition: { kcal: 490, proteinG: 34, carbsG: 58, fatG: 13, fiberG: 4, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "jasmine-rice",   quantity: 1 },
+      { ingredientSlug: "jasmine-rice",   quantity: 0.33 },
       { ingredientSlug: "chicken-breast", quantity: 0.1875 },
       { ingredientSlug: "eggs",           quantity: 0.75 },
       { ingredientSlug: "carrot",         quantity: 0.125 },
