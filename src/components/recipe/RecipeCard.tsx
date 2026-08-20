@@ -19,8 +19,22 @@ const SLOT_LABEL: Record<MealSlot, string> = {
   dinner: "Dinner",
 };
 
-export function RecipeCard({ recipe }: { recipe: Recipe }) {
+export function RecipeCard({
+  recipe,
+  /**
+   * Position in the grid. The first row loads eagerly.
+   *
+   * Every card was lazy, and this grid starts about 650px down the page behind a header and a
+   * callout, so a visitor landed on a screen of empty boxes and had to scroll before anything
+   * appeared. Lazy loading is right for card 40; it is wrong for the ones already on screen.
+   */
+  index = 0,
+}: {
+  recipe: Recipe;
+  index?: number;
+}) {
   const slot = recipe.slot;
+  const aboveTheFold = index < 6;
   return (
     <Link
       href={`/recipe/${recipe.slug}`}
@@ -34,6 +48,8 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition duration-500 group-hover:scale-105"
+            priority={aboveTheFold}
+            loading={aboveTheFold ? "eager" : "lazy"}
             // Deliberately NOT unoptimized here, unlike the other image call sites. This grid
             // shows two dozen cards at once, and the images it now serves are locally hosted
             // 800px files rather than Pexels URLs that arrive pre-sized. Letting Next resize

@@ -127,7 +127,7 @@ export function RecipesClient() {
             // Capped so a long list does not queue up a second of staggered waiting.
             transition={{ duration: 0.25, delay: Math.min(i, 6) * 0.03 }}
           >
-            <RecipeCard recipe={recipe} />
+            <RecipeCard recipe={recipe} index={i} />
           </motion.li>
         ))}
       </ol>
