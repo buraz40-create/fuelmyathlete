@@ -2,6 +2,8 @@ import type { Guide } from "@/types/domain";
 import Link from "next/link";
 import { citationsList } from "@/data/citations";
 import { Cite } from "@/components/guide/GuideCitations";
+import { HydrationCalculator } from "@/components/guide/HydrationCalculator";
+import { GuideCallout, GuideStat } from "@/components/guide/GuideCallout";
 
 export const guide: Guide = {
   slug: "how-much-water-should-a-young-athlete-drink",
@@ -47,6 +49,8 @@ export const guide: Guide = {
       heading: "Daily targets by day type",
       body: (
         <>
+          <HydrationCalculator />
+
           <div className="overflow-x-auto rounded-2xl border border-border">
             <table className="w-full text-sm">
               <thead className="bg-primary-soft/40 text-ink">
@@ -117,6 +121,15 @@ export const guide: Guide = {
       heading: "Can a kid drink too much water?",
       body: (
         <>
+          <div className="mb-5 grid gap-3 sm:grid-cols-[160px_1fr] sm:items-center">
+            <GuideStat value={100} unit="oz" caption="Hard daily ceiling for ages 8 to 12" />
+            <GuideCallout kind="safety" title="Why there is a ceiling at all">
+              Almost every other page tells a parent to drink more. Children carry a smaller
+              blood volume for the same amount of fluid, so the same over-drinking that an adult
+              shrugs off can dilute a child&apos;s blood sodium.
+            </GuideCallout>
+          </div>
+
           <p>
             Yes, and this is the part almost nobody tells parents. Drinking far past thirst
             dilutes the sodium in the blood, a condition called exercise-associated hyponatremia.
