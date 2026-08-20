@@ -125,25 +125,26 @@ These were blocked on you and are now done:
 - **Whether URL import survives on Vercel.** It does. All six sites that work locally work
   from production.
 
-## Three recipes still have no photograph
+## Three recipes need generated photographs, and the account is 3 credits short
 
-`apple-nachos`, `cheese-fruit-plate` and `cheese-quesadilla-snack` show the emoji tile instead of
-a picture. Every other recipe on the site now has one. This is not an oversight, it is three
-searches that came back with nothing honest:
+`apple-nachos`, `cheese-fruit-plate` and `cheese-quesadilla-snack`. I searched the free stock
+libraries hard for these, several phrasings each and two pages deep, and there is nothing honest:
 
-- **apple nachos**: the stock libraries have apple tart and apple juice. Nothing that is sliced
-  apple with a nut butter drizzle.
-- **cheese and fruit plate**: every cheeseboard photograph is covered in crackers and crostini,
-  and this recipe exists specifically to replace the cracker plate. Using one would contradict
-  the recipe on the page next to it.
-- **cheese quesadilla**: the recipe calls for a whole-grain tortilla. The good cheese-pull
-  photographs are all pale white flour tortillas, which is the same thing you caught on the
-  turkey and cheese wrap. The browner ones have meat and vegetables inside, so they are wrong a
-  different way.
+- **apple nachos**: apple tart, apple juice, apples on a tree, a child eating a whole apple.
+  Nothing that is sliced apple with a nut butter drizzle.
+- **cheese and fruit plate**: every cheeseboard is buried in crackers and crostini, and this
+  recipe exists specifically to replace the cracker plate. Using one would argue with the recipe
+  printed beside it.
+- **cheese quesadilla**: the recipe calls for a whole-grain tortilla. The best cheese-pull
+  photograph turned out, zoomed in, to be a white flour tortilla with ham inside and a fried
+  tortilla chip on top. Wrong twice over.
 
-The fix is generated images, the way the other 22 were done. That spends credits on the image
-service, and the account currently shows no free allowance, so it is your call rather than mine.
-Say the word and it is about ten minutes of work.
+Generating them is the fix, the way the other 22 were done. **It costs 1.25 credits per image and
+the account currently holds 1 credit**, with no free-trial allowance. Three images need about 4
+credits, so nothing can be generated until you top up. Once you have, it is ten minutes of work.
+
+In the meantime those three cards no longer show the generic plate-and-cutlery icon. They show
+their own ingredients instead, so the card looks like a decision rather than a broken image.
 
 ## One photograph is close but not exact
 
@@ -153,3 +154,14 @@ libraries are bare pods, which would misrepresent a chicken and rice dish just a
 hibachi recipe did find a proper edamame plate, which is why that one is right. Same fix, same
 question about credits.
 
+
+## A cracker recipe is still on the site
+
+`cheese-crackers`, "String cheese + whole-grain crackers", is still a snack in both `meals.ts`
+and `recipes.ts`. You have been clear that cracker plates are not what this site is for, and I
+just rejected a cheeseboard photograph specifically because it had crackers in it. Those two
+positions do not sit together.
+
+I have not touched the recipe, because removing food from the plan is your call and it is a
+whole-grain cracker rather than a beige snack aisle one. Tell me to cut it, or tell me it stays
+and I will stop treating crackers as disqualifying when I pick photographs.

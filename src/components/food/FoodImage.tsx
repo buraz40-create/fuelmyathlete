@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { emojiForSlug } from "@/data/foodEmoji";
+import { emojiClusterForSlug, emojiForSlug } from "@/data/foodEmoji";
 import type { MealSlot } from "@/types/domain";
 
 const SLOT_BG: Record<MealSlot, string> = {
@@ -31,6 +31,7 @@ export function FoodImage({
   className,
 }: FoodImageProps) {
   const emoji = emojiForSlug(slug);
+  const cluster = emojiClusterForSlug(slug);
   const bg = slot ? SLOT_BG[slot] : FALLBACK_BG;
 
   return (
@@ -44,12 +45,39 @@ export function FoodImage({
         className
       )}
     >
+      {/* A soft wash so the tile has some depth instead of reading as one flat swatch. */}
       <span
-        className={cn("select-none leading-none", emojiSize)}
-        style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.08))" }}
-      >
-        {emoji}
-      </span>
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/45 via-transparent to-black/5"
+      />
+      {cluster.length > 1 ? (
+        // The recipes with no photograph. Their own ingredients, largest first, overlapped
+        // slightly so it looks composed rather than like three icons in a row.
+        <span className="relative flex items-end justify-center gap-0">
+          {cluster.map((item, i) => (
+            <span
+              key={item}
+              className={cn(
+                "select-none leading-none",
+                i === 0 ? emojiSize : "text-3xl md:text-4xl",
+                i > 0 && "-ml-2 md:-ml-3 pb-1 md:pb-2"
+              )}
+              style={{
+                filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.08))",
+                transform: i === 0 ? "rotate(-4deg)" : `rotate(${i * 6}deg)`,
+              }}
+            >
+              {item}
+            </span>
+          ))}
+        </span>
+      ) : (
+        <span
+          className={cn("relative select-none leading-none", emojiSize)}
+          style={{ filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.08))" }}
+        >
+          {emoji}
+        </span>
+      )}
     </div>
   );
 }
