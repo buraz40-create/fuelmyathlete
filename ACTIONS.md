@@ -124,3 +124,32 @@ These were blocked on you and are now done:
   provisions it, and a day-type change wrote 1 plan and 28 entries.
 - **Whether URL import survives on Vercel.** It does. All six sites that work locally work
   from production.
+
+## Three recipes still have no photograph
+
+`apple-nachos`, `cheese-fruit-plate` and `cheese-quesadilla-snack` show the emoji tile instead of
+a picture. Every other recipe on the site now has one. This is not an oversight, it is three
+searches that came back with nothing honest:
+
+- **apple nachos**: the stock libraries have apple tart and apple juice. Nothing that is sliced
+  apple with a nut butter drizzle.
+- **cheese and fruit plate**: every cheeseboard photograph is covered in crackers and crostini,
+  and this recipe exists specifically to replace the cracker plate. Using one would contradict
+  the recipe on the page next to it.
+- **cheese quesadilla**: the recipe calls for a whole-grain tortilla. The good cheese-pull
+  photographs are all pale white flour tortillas, which is the same thing you caught on the
+  turkey and cheese wrap. The browner ones have meat and vegetables inside, so they are wrong a
+  different way.
+
+The fix is generated images, the way the other 22 were done. That spends credits on the image
+service, and the account currently shows no free allowance, so it is your call rather than mine.
+Say the word and it is about ten minutes of work.
+
+## One photograph is close but not exact
+
+`stirfry-chicken-rice` is "chicken + rice + edamame" and its picture shows chicken, rice and
+mushrooms with greens. No edamame. I looked; the only true edamame photographs on the free
+libraries are bare pods, which would misrepresent a chicken and rice dish just as badly. The
+hibachi recipe did find a proper edamame plate, which is why that one is right. Same fix, same
+question about credits.
+

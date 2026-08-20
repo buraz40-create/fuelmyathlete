@@ -1,8 +1,5 @@
 import type { Recipe } from "@/types/domain";
 
-const pexels = (id: number) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1`;
-
 export const RECIPES: Recipe[] = [
   // ────────── BREAKFAST ──────────
   {
@@ -11,12 +8,6 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 3,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/cereal-banana-milk.jpg",
@@ -54,12 +45,6 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 8,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/eggs-toast.jpg",
@@ -101,12 +86,6 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/berry-smoothie.jpg",
@@ -158,12 +137,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 5,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/pb-banana-power.jpg",
     whenToEat: "The one for a long practice or a growth spurt. Heaviest smoothie here, so give it 60 to 90 minutes.",
     equipment: ["Blender"],
@@ -213,8 +186,7 @@ export const RECIPES: Recipe[] = [
     // Verified at card size, not just full size: an opaque green smoothie thick enough to
     // read as blended. The previous pick was translucent and looked like green water, which
     // is exactly what a real visitor called it.
-    imageUrl:
-      "https://images.pexels.com/photos/28909422/pexels-photo-28909422.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    imageUrl: "/images/recipes/green-machine.jpg",
     whenToEat: "Any morning. The one to make when the week has been light on vegetables.",
     equipment: ["Blender"],
     steps: [
@@ -255,12 +227,6 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/berry-oat-fuel.jpg",
@@ -304,12 +270,6 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/vanilla-protein-punch.jpg",
@@ -356,12 +316,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 4,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/tropical-pre-game.jpg",
     whenToEat: "30 to 45 minutes before kickoff or warm-ups. Built deliberately light so it does not sit.",
     equipment: ["Blender"],
@@ -403,12 +357,6 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chocolate-cherry-recovery.jpg",
@@ -454,12 +402,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 4,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/english-muffin-pb.jpg",
     whenToEat: "Two hours before kickoff, not one. It is the pre-game breakfast that has already been tested on a normal Tuesday.",
     equipment: ["Toaster", "Butter knife"],
@@ -501,7 +443,7 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 3,
-    imageUrl: pexels(1066658),
+    imageUrl: "/images/recipes/yogurt-parfait.jpg",
     whenToEat: "Rest-day breakfast, or after a Saturday morning run. Looks like effort, takes three minutes.",
     equipment: ["Tall glass or a jar with a lid", "Spoon"],
     steps: [
@@ -537,12 +479,6 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 1,
     totalMinutes: 5,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/turkey-wrap.jpg",
@@ -586,12 +522,6 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 4,
     totalMinutes: 20,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-pasta-broccoli.jpg",
@@ -650,12 +580,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 2,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/apple-pb.jpg",
     whenToEat: "After school, before practice. Enough to stop the 4pm crash without spoiling dinner.",
     equipment: ["Knife", "Small container with two compartments, or two containers"],
@@ -690,12 +614,6 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/cheese-crackers.jpg",
@@ -733,7 +651,7 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 2,
-    imageUrl: pexels(4006362),
+    imageUrl: "/images/recipes/yogurt-honey-berries.jpg",
     whenToEat: "After practice, on the drive home. Protein and carbohydrate while he is still hungry and will actually eat.",
     equipment: ["Bowl, or an insulated jar if it is travelling", "Spoon"],
     steps: [
@@ -767,10 +685,6 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/banana-almonds.jpg",
@@ -809,12 +723,6 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-rice-broccoli.jpg",
@@ -875,12 +783,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 30,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/salmon-sweet-potato.jpg",
     whenToEat: "Omega-3s for recovery + complex carbs for the next day. Best as a rest-day or post-match dinner.",
     equipment: ["Sheet pan", "Non-stick skillet", "Steamer or microwave", "Fish spatula", "Tongs"],
@@ -934,12 +836,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 20,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/turkey-tacos.jpg",
     whenToEat: "Family favorite. Build-your-own bar means less complaining at the table.",
     equipment: ["Large skillet", "Wooden spatula", "Small bowls for toppings"],
@@ -991,7 +887,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 25,
-    imageUrl: pexels(9460447),
+    imageUrl: "/images/recipes/pasta-marinara.jpg",
     whenToEat: "Classic carb-load. Eat the night before a match for sustained next-day energy.",
     equipment: ["Large pot", "Large skillet", "Tongs", "Salad bowl", "Colander"],
     steps: [
@@ -1043,7 +939,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 20,
-    imageUrl: pexels(24738520),
+    imageUrl: "/images/recipes/stirfry-chicken-rice.jpg",
     whenToEat: "Same hibachi technique, dinner-portioned. Works for any day type.",
     equipment: ["Small pot (rice)", "Wok or large skillet", "Tongs"],
     steps: [
@@ -1096,7 +992,7 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 8,
     totalMinutes: 25,
-    imageUrl: pexels(1860207),
+    imageUrl: "/images/recipes/hibachi-chicken.jpg",
     whenToEat: "One Sunday cook session feeds 5 school lunches plus 3 dinner reheats. The signature Elvis recipe.",
     equipment: ["Large cast iron or stainless steel skillet (or wok)", "Tongs", "5 meal-prep containers", "Sharp knife"],
     steps: [
@@ -1164,8 +1060,7 @@ export const RECIPES: Recipe[] = [
     servings: 1,
     totalMinutes: 5,
     // Verified by opening it at full size: oats and milk in a white bowl with blueberries and strawberries.
-    imageUrl:
-      "https://images.pexels.com/photos/566564/pexels-photo-566564.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    imageUrl: "/images/recipes/athlete-overnight-oats.jpg",
     whenToEat:
       "Best pre-workout breakfast. Make it the night before, eat it 1-2 hours before training. Slow-release carbs from rolled oats plus protein keep energy steady through practice.",
     equipment: ["Mason jar or container with a lid", "Measuring cups", "Spoon"],
@@ -1220,8 +1115,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 5,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/hibachi-chicken-bowl.jpg",
     whenToEat: "The school lunch this whole system is built around. Five minutes on Sunday per box, nothing on a weekday.",
     equipment: ["Meal-prep container with a lid", "Small sauce cup"],
@@ -1268,8 +1161,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 5,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/hibachi-bowl-matchday.jpg",
     whenToEat: "2 to 3 hours before kickoff. His favourite meal, retuned so it does not sit in his stomach.",
     equipment: ["Meal-prep container with a lid"],
@@ -1311,8 +1202,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 15,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/pre-match-plain-plate.jpg",
     whenToEat: "3 hours before kickoff, on a day where the stomach is already nervous. Deliberately boring.",
     equipment: ["Small saucepan", "Skillet"],
@@ -1348,8 +1237,6 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 1,
     totalMinutes: 6,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/tournament-sub.jpg",
@@ -1391,8 +1278,6 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 2,
     totalMinutes: 10,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-quesadilla.jpg",
@@ -1440,8 +1325,6 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 4,
     totalMinutes: 20,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/cold-pasta-salad-chicken.jpg",
@@ -1497,8 +1380,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 15,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/egg-cheese-burrito.jpg",
     whenToEat: "For the kid who would eat breakfast at every meal. Wrap four, freeze three.",
     equipment: ["Non-stick skillet", "Spatula", "Foil"],
@@ -1544,8 +1425,6 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 35,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/sheetpan-chicken-sweet-potato.jpg",
@@ -1594,8 +1473,6 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/turkey-meatballs-pasta.jpg",
@@ -1652,8 +1529,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 30,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-parm-bake.jpg",
     whenToEat: "Post-match Saturday, or the night before a big day. Feels like a treat, is mostly protein.",
     equipment: ["Baking dish", "Large pot", "Meat mallet or heavy pan"],
@@ -1702,8 +1577,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 15,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-egg-fried-rice.jpg",
     whenToEat: "Fifteen minutes, and it exists to use up Sunday's rice and chicken. Late practice night.",
     equipment: ["Wok or large skillet", "Spatula"],
@@ -1749,8 +1622,6 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/turkey-burgers-sweet-potato.jpg",
@@ -1808,8 +1679,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 3,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/apple-cheddar-cubes.jpg",
     whenToEat: "After school, before homework. Crunch and protein with no cracker in sight.",
     equipment: ["Knife", "Small container"],
@@ -1844,8 +1713,6 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 2,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/cottage-berries.jpg",
@@ -1884,8 +1751,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 5,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/edamame-cup.jpg",
     whenToEat: "Between school and practice. Whole soybeans in the pod, nothing processed about them.",
     equipment: ["Saucepan or microwave-safe bowl", "Colander"],
@@ -1921,8 +1786,6 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/pb-banana-toast.jpg",
@@ -1996,8 +1859,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 15,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/banana-oat-pancakes.jpg",
     whenToEat: "Saturday morning before a match, or a big batch for the freezer.",
     equipment: ["Blender", "Non-stick skillet", "Spatula"],
@@ -2047,6 +1908,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 6,
     totalMinutes: 10,
+    // Stock photograph, checked at card size against this recipe's own ingredient list
+    // rather than against its name.
+    imageUrl: "/images/recipes/yogurt-bark.jpg",
     whenToEat: "Hot afternoon after school. Made once, eaten all week.",
     equipment: ["Sheet pan", "Parchment paper", "Spatula"],
     prepAhead: {
@@ -2091,6 +1955,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 8,
     totalMinutes: 5,
+    // Stock photograph, checked at card size against this recipe's own ingredient list
+    // rather than against its name.
+    imageUrl: "/images/recipes/trail-mix-jar.jpg",
     whenToEat: "The bag snack you make once a month. Portioned, not eaten from the tub.",
     equipment: ["Large jar or container", "Small bags or containers"],
     prepAhead: {
@@ -2124,6 +1991,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 4,
+    // Stock photograph, checked at card size against this recipe's own ingredient list
+    // rather than against its name.
+    imageUrl: "/images/recipes/hummus-veg-cup.jpg",
     whenToEat: "After school. The one that puts a vegetable into a day that had none.",
     equipment: ["Knife", "Container with two compartments"],
     steps: [
@@ -2157,6 +2027,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 6,
     totalMinutes: 15,
+    // Stock photograph, checked at card size against this recipe's own ingredient list
+    // rather than against its name.
+    imageUrl: "/images/recipes/boiled-eggs-batch.jpg",
     whenToEat: "The Sunday job that makes six snacks. Grab one on the way out the door.",
     equipment: ["Saucepan", "Slotted spoon", "Bowl of ice water"],
     prepAhead: {
@@ -2252,8 +2125,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 5,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/overnight-oats-chocolate.jpg",
     whenToEat: "For the kid who says he does not like oats. Made the night before.",
     equipment: ["Jar with a lid", "Spoon"],
@@ -2333,8 +2204,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 20,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/slow-cooker-chicken-rice-soup.jpg",
     whenToEat: "Twenty minutes in the morning, dinner waiting when you get back from practice at seven.",
     equipment: ["Slow cooker", "Knife"],
@@ -2383,8 +2252,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 25,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/baked-salmon-rice-broccoli.jpg",
     whenToEat: "The second salmon night of the week, different from the sheet pan one.",
     equipment: ["Baking dish", "Saucepan", "Steamer or second pan"],
@@ -2427,8 +2294,6 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 20,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/beef-veg-stirfry.jpg",
@@ -2479,8 +2344,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 25,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-fajita-bowls.jpg",
     whenToEat: "The dinner everyone builds themselves, which is how you get a picky eater to eat vegetables.",
     equipment: ["Large skillet", "Knife", "Bowls for the toppings"],
@@ -2522,8 +2385,6 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/tuna-pasta-bake.jpg",
@@ -2569,8 +2430,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 5,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/rice-bowl-leftovers.jpg",
     whenToEat: "Thursday, when the Sunday cook has run out and there are three half-portions in the fridge.",
     equipment: ["Meal-prep container"],
@@ -2605,8 +2464,6 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 4,
     totalMinutes: 10,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-salad-pita.jpg",
@@ -2655,8 +2512,6 @@ export const RECIPES: Recipe[] = [
     totalMinutes: 5,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/bagel-cream-cheese-turkey.jpg",
     whenToEat: "The lunch for a kid who has decided sandwiches are boring. Same food, different shape.",
     equipment: ["Knife", "Container"],
@@ -2691,8 +2546,6 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 4,
     totalMinutes: 15,
-    // Generated to match this recipe's own ingredients, checked at card size. Stock
-    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/mason-jar-salad.jpg",
@@ -2739,6 +2592,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 12,
     totalMinutes: 15,
+    // Stock photograph, checked at card size against this recipe's own ingredient list
+    // rather than against its name.
+    imageUrl: "/images/recipes/peanut-butter-oat-balls.jpg",
     whenToEat: "The bag snack you make on Sunday. Twelve of them, no oven.",
     equipment: ["Mixing bowl", "Sheet pan", "Parchment"],
     prepAhead: {
@@ -2817,6 +2673,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 2,
+    // Stock photograph, checked at card size against this recipe's own ingredient list
+    // rather than against its name.
+    imageUrl: "/images/recipes/chocolate-milk-recovery.jpg",
     whenToEat: "In the car after a hard session. The recovery drink that has been studied for years.",
     equipment: ["Glass or bottle", "Spoon"],
     steps: [
@@ -2877,6 +2736,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 4,
     totalMinutes: 5,
+    // Stock photograph, checked at card size against this recipe's own ingredient list
+    // rather than against its name.
+    imageUrl: "/images/recipes/frozen-grapes.jpg",
     whenToEat: "August, after practice, when nothing warm is going to get eaten.",
     equipment: ["Sheet pan or bag", "Colander"],
     prepAhead: {

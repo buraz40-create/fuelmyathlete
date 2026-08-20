@@ -2,9 +2,6 @@ import type { Meal } from "@/types/domain";
 
 const ALL_DAYS = ["school", "training", "match", "rest"] as const;
 
-const pexels = (id: number) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1`;
-
 export const MEALS: Meal[] = [
   // BREAKFAST
   {
@@ -17,8 +14,7 @@ export const MEALS: Meal[] = [
     suitableFor: ["school", "training", "match"],
     kidRating: 4,
     // Verified by opening it at full size: oats and milk in a white bowl with blueberries and strawberries.
-    imageUrl:
-      "https://images.pexels.com/photos/566564/pexels-photo-566564.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    imageUrl: "/images/recipes/athlete-overnight-oats.jpg",
     recipeSlug: "athlete-overnight-oats",
     nutrition: { kcal: 410, proteinG: 18, carbsG: 64, fatG: 9, fiberG: 9, source: "USDA estimate" },
     ingredients: [
@@ -175,8 +171,7 @@ export const MEALS: Meal[] = [
     // Verified at card size, not just full size: an opaque green smoothie thick enough to
     // read as blended. The previous pick was translucent and looked like green water, which
     // is exactly what a real visitor called it.
-    imageUrl:
-      "https://images.pexels.com/photos/28909422/pexels-photo-28909422.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    imageUrl: "/images/recipes/green-machine.jpg",
     recipeSlug: "green-machine",
     nutrition: { kcal: 285, proteinG: 12, carbsG: 50, fatG: 6, fiberG: 7, source: "USDA estimate" },
     ingredients: [
@@ -306,7 +301,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 3,
     suitableFor: ["school", "rest"],
     kidRating: 4,
-    imageUrl: pexels(1066658),
+    imageUrl: "/images/recipes/yogurt-parfait.jpg",
     recipeSlug: "yogurt-parfait",
     nutrition: { kcal: 305, proteinG: 18, carbsG: 48, fatG: 5, fiberG: 4, source: "USDA estimate" },
     ingredients: [
@@ -615,7 +610,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 2,
     suitableFor: ["training", "match"],
     kidRating: 4,
-    imageUrl: pexels(4006362),
+    imageUrl: "/images/recipes/yogurt-honey-berries.jpg",
     recipeSlug: "yogurt-honey-berries",
     nutrition: { kcal: 245, proteinG: 17, carbsG: 42, fatG: 2, fiberG: 3, source: "USDA estimate" },
     ingredients: [
@@ -738,7 +733,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 25,
     suitableFor: ["training", "match"],
     kidRating: 5,
-    imageUrl: pexels(9460447),
+    imageUrl: "/images/recipes/pasta-marinara.jpg",
     recipeSlug: "pasta-marinara",
     nutrition: { kcal: 585, proteinG: 32, carbsG: 80, fatG: 14, fiberG: 9, source: "USDA estimate" },
     ingredients: [
@@ -757,7 +752,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 20,
     suitableFor: ["school", "rest", "training"],
     kidRating: 4,
-    imageUrl: pexels(24738520),
+    imageUrl: "/images/recipes/stirfry-chicken-rice.jpg",
     recipeSlug: "stirfry-chicken-rice",
     nutrition: { kcal: 510, proteinG: 38, carbsG: 60, fatG: 10, fiberG: 5, source: "USDA estimate" },
     ingredients: [
@@ -1091,6 +1086,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 10,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
+    imageUrl: "/images/recipes/yogurt-bark.jpg",
     recipeSlug: "yogurt-bark",
     nutrition: { kcal: 120, proteinG: 8, carbsG: 18, fatG: 2, fiberG: 2, source: "USDA estimate" },
     ingredients: [
@@ -1108,6 +1104,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
+    imageUrl: "/images/recipes/trail-mix-jar.jpg",
     recipeSlug: "trail-mix-jar",
     nutrition: { kcal: 205, proteinG: 6, carbsG: 20, fatG: 12, fiberG: 3, source: "USDA estimate" },
     ingredients: [
@@ -1125,6 +1122,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 4,
     suitableFor: ["school", "training", "rest"],
     kidRating: 3,
+    imageUrl: "/images/recipes/hummus-veg-cup.jpg",
     recipeSlug: "hummus-veg-cup",
     nutrition: { kcal: 175, proteinG: 6, carbsG: 20, fatG: 8, fiberG: 5, source: "USDA estimate" },
     ingredients: [
@@ -1142,6 +1140,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 15,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 4,
+    imageUrl: "/images/recipes/boiled-eggs-batch.jpg",
     recipeSlug: "boiled-eggs-batch",
     nutrition: { kcal: 140, proteinG: 12, carbsG: 1, fatG: 10, fiberG: 0, source: "USDA estimate" },
     ingredients: [
@@ -1395,6 +1394,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 15,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
+    imageUrl: "/images/recipes/peanut-butter-oat-balls.jpg",
     recipeSlug: "peanut-butter-oat-balls",
     nutrition: { kcal: 150, proteinG: 5, carbsG: 17, fatG: 8, fiberG: 2, source: "USDA estimate" },
     ingredients: [
@@ -1429,6 +1429,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 2,
     suitableFor: ["training", "match"],
     kidRating: 5,
+    imageUrl: "/images/recipes/chocolate-milk-recovery.jpg",
     recipeSlug: "chocolate-milk-recovery",
     nutrition: { kcal: 250, proteinG: 12, carbsG: 38, fatG: 6, fiberG: 2, source: "USDA estimate" },
     ingredients: [
@@ -1463,6 +1464,7 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
+    imageUrl: "/images/recipes/frozen-grapes.jpg",
     recipeSlug: "frozen-grapes",
     nutrition: { kcal: 105, proteinG: 1, carbsG: 27, fatG: 0, fiberG: 1, source: "USDA estimate" },
     ingredients: [
