@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { Plus, Minus, ArrowCounterClockwise } from "@phosphor-icons/react/dist/ssr";
+import { ArrowCounterClockwise, DeviceMobile, Minus, Plus } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { FoodImage } from "@/components/food/FoodImage";
-import { resolveMeal } from "@/lib/catalog";
+import { isCustomMeal, resolveMeal } from "@/lib/catalog";
 import { usePlan } from "@/components/planner/PlanProvider";
 import { DAY_TYPES } from "@/data/dayTypes";
 import type { DayType, MealSlot } from "@/types/domain";
@@ -90,6 +90,16 @@ export function MealSlotCard({
           )}
           <div className="min-w-0 flex-1">
             <h3 className="text-base font-semibold leading-snug text-ink">{meal.name}</h3>
+            {/* Imported recipes cannot sync yet: meal_plan_entries.meal_id is a foreign key
+                into the curated meals table, so storage-supabase writes null for a custom slug
+                and the slot is empty on a second device. Saying so beats a parent opening the
+                planner on their phone and finding a hole where Tuesday's dinner was. */}
+            {isCustomMeal(meal.slug, custom) && (
+              <p className="mt-1 inline-flex items-center gap-1 rounded-full bg-muted px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                <DeviceMobile size={10} weight="bold" aria-hidden />
+                Yours, this device only
+              </p>
+            )}
             <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{meal.description}</p>
             <div className="mt-2 flex items-center gap-2">
               <button
