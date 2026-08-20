@@ -77,3 +77,25 @@ test("alternatives never include the top pick twice", () => {
     assert.ok(!m.alternatives.some((a) => a.slug === m.ingredient?.slug));
   }
 });
+
+test("a shared stem is not a shared word", () => {
+  // Regression from a real Budget Bytes import: "freshly cracked pepper" matched
+  // "Whole-grain crackers", because "cracked" and "crackers" share most of their letters.
+  // Pepper is not crackers, and putting crackers in the cart is the wrong-food failure.
+  const m = matchIngredient("pepper");
+  assert.notEqual(m.ingredient?.slug, "crackers-wg");
+});
+
+test("staple seasonings do not match a different food", () => {
+  // The catalog carries no salt or pepper on purpose, they are assumed staples. Left to the
+  // matcher, "pepper" landed on Bell pepper, which is not the same food.
+  for (const s of ["salt", "pepper", "black pepper", "water"]) {
+    assert.equal(matchIngredient(s).confidence, "none", `${s} should not match`);
+  }
+});
+
+test("a different cut is not silently swapped for the one we stock", () => {
+  // Thighs and breast cook differently and are not interchangeable on a shopping list.
+  const m = matchIngredient("chicken thighs");
+  assert.notEqual(m.confidence, "strong");
+});

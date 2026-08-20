@@ -3,10 +3,15 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { ClipboardText, Warning, CheckCircle, Trash, Question } from "@phosphor-icons/react/dist/ssr";
+import { ClipboardText, Warning, CheckCircle, Trash, Question, Link as LinkIcon, CircleNotch } from "@phosphor-icons/react/dist/ssr";
 import { parseRecipeText, type ParsedIngredient } from "@/lib/import/parse";
 import { matchIngredient, customIngredient } from "@/lib/import/match";
-import { importedRecipes, newImportId, type ImportedRecipe } from "@/lib/import/storage";
+import {
+  importedRecipes,
+  newImportId,
+  type ImportedRecipe,
+  type ImportSource,
+} from "@/lib/import/storage";
 import { cn } from "@/lib/utils";
 import type { DayType, Ingredient, IngredientCategory, IngredientUnit, MealSlot } from "@/types/domain";
 
@@ -71,9 +76,59 @@ export function ImportClient() {
   const [sourceUrl, setSourceUrl] = useState("");
   const [saved, setSaved] = useState<string | null>(null);
   const [saveFailed, setSaveFailed] = useState(false);
+  const [mode, setMode] = useState<"paste" | "link">("paste");
+  const [fetching, setFetching] = useState(false);
+  const [fetchError, setFetchError] = useState<string | null>(null);
+  // How this recipe actually arrived, recorded on the saved record. Set when a fetch
+  // succeeds, so a link import is not filed as if someone typed it out.
+  const [sourceKind, setSourceKind] = useState<ImportSource>("text");
+  const [siteName, setSiteName] = useState<string | undefined>(undefined);
   const reduced = useReducedMotion();
 
   const parsed = useMemo(() => (text.trim() ? parseRecipeText(text) : null), [text]);
+
+  /**
+   * Reads a recipe off a link.
+   *
+   * Everything it returns goes into the same review screen as a paste, and every failure ends
+   * in the paste box with an explanation rather than a dead end. Some publishers turn away
+   * anything that is not a person in a browser, and that is their call to make.
+   */
+  async function fetchFromUrl() {
+    const url = sourceUrl.trim();
+    if (!url) return;
+    setFetching(true);
+    setFetchError(null);
+    try {
+      const res = await fetch("/api/import/url", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+      const data = await res.json();
+      if (!data.ok) {
+        setFetchError(data.message ?? "We could not read that page.");
+        setMode("paste");
+        return;
+      }
+      // Reuse the paste path wholesale: same parser, same review screen, one code path to
+      // trust rather than two that can disagree.
+      const lines = [
+        data.recipe.name ?? "",
+        data.recipe.servings ? `Serves ${data.recipe.servings}` : "",
+        "Ingredients",
+        ...data.recipe.ingredientLines,
+        "Instructions",
+        ...data.recipe.steps,
+      ].filter(Boolean);
+      setText(lines.join("\n"));
+    } catch {
+      setFetchError("Something went wrong reading that link. Pasting the text always works.");
+      setMode("paste");
+    } finally {
+      setFetching(false);
+    }
+  }
 
   function beginReview() {
     if (!parsed) return;
@@ -92,7 +147,10 @@ export function ImportClient() {
             confidence: m.confidence,
             quantity: p.quantity,
             category: guessCategory(p.name),
-            unit: p.unit ?? m.ingredient?.unit ?? "each",
+            // Only the unit the source actually wrote. Falling back to the catalog's unit
+            // reads "5 chicken thighs" as "5 lb chicken breast", which is a number nobody
+            // stated landing on a shopping list. "each" is the honest default.
+            unit: p.unit ?? "each",
             include: true,
           };
         })
@@ -134,8 +192,9 @@ export function ImportClient() {
       steps,
       customIngredients: customs,
       source: {
-        kind: "text",
+        kind: sourceKind,
         url: sourceUrl.trim() || undefined,
+        siteName,
         importedAt: new Date().toISOString(),
       },
       unresolved: [],
@@ -157,6 +216,9 @@ export function ImportClient() {
     setSteps([]);
     setServings(null);
     setSourceUrl("");
+    setSourceKind("text");
+    setSiteName(undefined);
+    setFetchError(null);
     setSaved(null);
     setSaveFailed(false);
     setStage("paste");
@@ -207,10 +269,94 @@ export function ImportClient() {
         </div>
       ) : stage === "paste" ? (
         <div className="flex flex-col gap-4">
+          <div role="radiogroup" aria-label="How to add it" className="flex flex-wrap gap-1.5">
+            {([
+              { key: "paste", label: "Paste the text", icon: ClipboardText },
+              { key: "link", label: "From a link", icon: LinkIcon },
+            ] as const).map(({ key, label, icon: Icon }) => {
+              const active = mode === key;
+              return (
+                <button
+                  key={key}
+                  type="button"
+                  role="radio"
+                  aria-checked={active}
+                  onClick={() => setMode(key)}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-medium transition",
+                    active
+                      ? "border-transparent bg-primary text-primary-foreground"
+                      : "border-border text-muted-foreground hover:text-ink"
+                  )}
+                >
+                  <Icon size={13} weight="bold" aria-hidden />
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+
+          {mode === "link" && (
+            <div className="rounded-2xl border border-border bg-surface p-4">
+              <label className="block">
+                <span className="text-sm font-medium text-ink">Recipe link</span>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  <input
+                    type="url"
+                    value={sourceUrl}
+                    onChange={(e) => setSourceUrl(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        void fetchFromUrl();
+                      }
+                    }}
+                    placeholder="https://www.budgetbytes.com/..."
+                    className="min-w-0 flex-1 rounded-2xl border border-border bg-background px-4 py-2.5 text-sm text-ink focus:border-primary focus:outline-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => void fetchFromUrl()}
+                    disabled={fetching || !sourceUrl.trim()}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+                  >
+                    {fetching && (
+                      <motion.span
+                        aria-hidden
+                        animate={reduced ? undefined : { rotate: 360 }}
+                        transition={{ duration: 0.9, repeat: Infinity, ease: "linear" }}
+                        className="inline-flex"
+                      >
+                        <CircleNotch size={14} weight="bold" />
+                      </motion.span>
+                    )}
+                    {fetching ? "Reading" : "Read it"}
+                  </button>
+                </div>
+              </label>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Works on most recipe sites, which publish their ingredients in a form built for
+                search engines. Some publishers turn away anything that is not a person in a
+                browser, and a few videos and social posts have nothing readable at all. When
+                that happens we say so and you can paste the text instead.
+              </p>
+            </div>
+          )}
+
+          {fetchError && (
+            <p
+              role="alert"
+              className="flex items-start gap-2 rounded-2xl border border-day-match/60 bg-day-match/20 px-4 py-3 text-sm text-ink"
+            >
+              <Warning size={16} weight="duotone" aria-hidden className="mt-0.5 flex-shrink-0" />
+              <span>{fetchError}</span>
+            </p>
+          )}
+
           <label className="block">
             <span className="flex items-center gap-2 text-sm font-medium text-ink">
               <ClipboardText size={16} weight="duotone" aria-hidden className="text-primary" />
-              Paste the recipe
+              {mode === "link" ? "What we read (edit anything)" : "Paste the recipe"}
             </span>
             <textarea
               value={text}
@@ -223,6 +369,7 @@ export function ImportClient() {
             />
           </label>
 
+          {mode === "paste" && (
           <label className="block">
             <span className="text-sm font-medium text-ink">Where it came from (optional)</span>
             <input
@@ -237,6 +384,7 @@ export function ImportClient() {
               the credit.
             </span>
           </label>
+          )}
 
           {parsed && (
             <p className="text-sm text-muted-foreground">

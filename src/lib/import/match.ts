@@ -33,7 +33,10 @@ const ALIASES: Record<string, string> = {
   "chicken breast": "chicken-breast",
   "chicken breasts": "chicken-breast",
   "boneless skinless chicken breast": "chicken-breast",
-  "chicken thighs": "chicken-breast",
+  // Deliberately NOT aliasing thighs to breast. They are different cuts with different
+  // cooking times and different fat, and quietly swapping one for the other on a shopping
+  // list is the same class of error as matching pepper to crackers. Thighs become a custom
+  // ingredient the parent labels, which is honest.
   "turkey": "ground-turkey",
   "ground turkey": "ground-turkey",
   "lean ground turkey": "ground-turkey",
@@ -155,6 +158,14 @@ const ALIASES: Record<string, string> = {
 
 const BY_SLUG = new Map(INGREDIENTS.map((i) => [i.slug, i]));
 
+// Seasonings the catalog deliberately does not carry, because they are assumed staples rather
+// than things to shop for. Left to the matcher, "freshly cracked pepper" lands on Bell pepper,
+// which is a different food entirely.
+const NEVER_MATCH = new Set([
+  "salt", "pepper", "black pepper", "sea salt", "kosher salt", "salt and pepper",
+  "water", "ice", "cooking spray", "oil for frying",
+]);
+
 function normalise(text: string): string {
   return text
     .toLowerCase()
@@ -185,9 +196,12 @@ function dice(a: string, b: string): number {
 const STRONG = 0.75;
 // Below this, we do not guess at all and the parent gets an unmatched row.
 const FLOOR = 0.45;
-// How close two single words must be to count as the same word. "chees" and "cheese" pass,
-// "gochujang" and "chunks" do not.
-const WORD_MATCH = 0.6;
+// How close two single words must be to count as the same word. Set from real failures rather
+// than taste: "chees" against "cheese" scores 0.89 and must pass, while "cracked" against
+// "crackers" scores 0.77 and must NOT, because a Budget Bytes import turned freshly cracked
+// pepper into whole-grain crackers. 0.8 separates them. This tolerates a typo inside a word,
+// not a different word that happens to share a stem.
+const WORD_MATCH = 0.8;
 
 /**
  * Does the query share a real word with the candidate?
@@ -213,6 +227,8 @@ function sharesWord(query: string, candidate: string): boolean {
 export function matchIngredient(name: string): IngredientMatch {
   const key = normalise(name);
   if (!key) return { confidence: "none", alternatives: [], score: 0 };
+
+  if (NEVER_MATCH.has(key)) return { confidence: "none", alternatives: [], score: 0 };
 
   const aliased = ALIASES[key];
   if (aliased) {

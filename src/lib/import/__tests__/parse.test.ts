@@ -168,3 +168,22 @@ test("a first word is only a unit when an amount came before it", () => {
   assert.equal(r.unitAsWritten, undefined);
   assert.equal(r.name, "olive oil");
 });
+
+test("a comma between adjectives does not eat the food", () => {
+  // "5 boneless, skinless chicken thighs" used to cut at the comma, leaving only "boneless",
+  // which is a prep word, so the name collapsed to nothing and fell back to the raw line.
+  const r = parseIngredientLine("5 boneless, skinless chicken thighs (about 1.25 lbs.) ($4.36)");
+  assert.equal(r.quantity, 5);
+  assert.equal(r.name, "chicken thighs");
+});
+
+test("a trailing prep clause is still dropped", () => {
+  const r = parseIngredientLine("2 lb chicken breast, diced and seasoned");
+  assert.equal(r.name, "chicken breast");
+});
+
+test("inline prices are not part of the ingredient name", () => {
+  const r = parseIngredientLine("4 Tbsp butter ($0.40)");
+  assert.equal(r.name, "butter");
+  assert.equal(r.unit, "tbsp");
+});

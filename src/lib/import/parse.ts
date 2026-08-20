@@ -92,6 +92,8 @@ const PREP_WORDS = new Set([
   "cooked", "uncooked", "raw", "frozen", "canned", "packed", "softened", "melted",
   "beaten", "peeled", "halved", "quartered", "cubed", "crushed", "ground", "optional",
   "roughly", "finely", "thinly", "lightly", "warm", "cold", "room", "temperature",
+  // "freshly cracked pepper" was matching Whole-grain crackers on "cracked" alone.
+  "cracked", "toasted", "roasted", "smoked", "dried", "extra", "virgin", "plain",
 ]);
 
 // Yield and timing lines sit loose above the ingredient heading on almost every recipe, and
@@ -151,14 +153,25 @@ function readUnit(text: string): {
   return { unit: null, factor: 1, rest: text.trim() };
 }
 
+function isPrep(word: string): boolean {
+  return PREP_WORDS.has(word.toLowerCase().replace(/[^a-z]/g, ""));
+}
+
 function cleanName(text: string): string {
-  return text
-    // Drop a trailing prep clause: "chicken breast, diced and seasoned".
-    .replace(/,.*$/, "")
-    // Drop parentheticals: "2 (14.5 oz) cans diced tomatoes".
+  // A trailing comma usually opens a prep clause: "chicken breast, diced and seasoned". But
+  // sometimes it just separates adjectives: "5 boneless, skinless chicken thighs", where
+  // cutting at the comma leaves "boneless" and the food is gone. So only cut when what
+  // survives still names something.
+  const beforeComma = text.replace(/,.*$/, "");
+  const survives = beforeComma.split(/\s+/).some((w) => w && !isPrep(w));
+  const base = survives ? beforeComma : text.replace(/,/g, " ");
+
+  return base
+    // Drop parentheticals: "2 (14.5 oz) cans diced tomatoes", and the per-item prices some
+    // sites put inline, like "4 Tbsp butter ($0.40)".
     .replace(/\([^)]*\)/g, " ")
     .split(/\s+/)
-    .filter((w) => w && !PREP_WORDS.has(w.toLowerCase().replace(/[^a-z]/g, "")))
+    .filter((w) => w && !isPrep(w))
     .join(" ")
     .replace(/\s+/g, " ")
     .trim();
