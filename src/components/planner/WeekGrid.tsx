@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { DAYS_OF_WEEK, MEAL_SLOTS, dayTypeLabel } from "@/data/dayTypes";
-import { MEALS_BY_SLUG } from "@/data/meals";
+import { resolveMeal } from "@/lib/catalog";
+import { usePlan } from "@/components/planner/PlanProvider";
 import { ageToCohort } from "@/lib/player/cohort";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import type { MealPlan, MealSlot } from "@/types/domain";
@@ -16,6 +17,7 @@ const SLOT_TINT: Record<MealSlot, string> = {
 };
 
 export function WeekGrid({ plan }: { plan: MealPlan }) {
+  const { custom } = usePlan();
   const { profile } = usePlayerProfile();
   const cohort = profile ? ageToCohort(profile.ageYears) : "child";
 
@@ -49,7 +51,7 @@ export function WeekGrid({ plan }: { plan: MealPlan }) {
             <ul className="flex flex-col gap-1.5">
               {MEAL_SLOTS.map(({ slot, label }) => {
                 const entry = entries.find((e) => e.slot === slot);
-                const meal = entry?.mealSlug ? MEALS_BY_SLUG[entry.mealSlug] : null;
+                const meal = (entry?.mealSlug ? resolveMeal(entry.mealSlug, custom) : null) ?? null;
                 return (
                   <li
                     key={slot}

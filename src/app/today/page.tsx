@@ -7,7 +7,7 @@ import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { useHydration } from "@/hooks/useHydration";
 import { Mascot } from "@/components/brand/Mascot";
 import { WaterCup } from "@/components/planner/WaterCup";
-import { MEALS_BY_SLUG } from "@/data/meals";
+import { resolveMeal } from "@/lib/catalog";
 import { MEAL_SLOTS, DAY_TYPES, DAYS_OF_WEEK } from "@/data/dayTypes";
 import { hydrationFor } from "@/data/hydration";
 import { ageToCohort } from "@/lib/player/cohort";
@@ -17,7 +17,7 @@ import { cn } from "@/lib/utils";
 // multipliers, and per AAP guidance on calorie counting in pre-teens, no calories or macro
 // split. Protein grams and water only, which is what the constraints allow a child to see.
 export default function TodayPage() {
-  const { plan } = usePlan();
+  const { plan, custom } = usePlan();
   const { profile } = usePlayerProfile();
 
   const today = new Date().getDay();
@@ -36,7 +36,7 @@ export default function TodayPage() {
   const hitGoal = oz >= goalOz;
 
   const planned = entries
-    .map((e) => ({ slot: e.slot, meal: e.mealSlug ? MEALS_BY_SLUG[e.mealSlug] : undefined }))
+    .map((e) => ({ slot: e.slot, meal: e.mealSlug ? resolveMeal(e.mealSlug, custom) : undefined }))
     .filter((x) => x.meal);
 
   const proteinG = planned.reduce((sum, x) => sum + (x.meal?.nutrition?.proteinG ?? 0), 0);

@@ -11,7 +11,8 @@ import {
 } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { FoodImage } from "@/components/food/FoodImage";
-import { MEALS_BY_SLOT } from "@/data/meals";
+import { mealsForSlot } from "@/lib/catalog";
+import { usePlan } from "@/components/planner/PlanProvider";
 import { dayTypeLabel, dayTypeDescription } from "@/data/dayTypes";
 import { ageToCohort } from "@/lib/player/cohort";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
@@ -42,7 +43,8 @@ export function MealPickerSheet({
   selectedSlug,
   onSelect,
 }: MealPickerSheetProps) {
-  const meals: Meal[] = slot ? MEALS_BY_SLOT[slot] : [];
+  const { custom } = usePlan();
+  const meals: Meal[] = slot ? mealsForSlot(slot, custom) : [];
   const { profile } = usePlayerProfile();
   const cohort = profile ? ageToCohort(profile.ageYears) : "child";
   const dayLabel = dayTypeLabel(dayType, cohort);

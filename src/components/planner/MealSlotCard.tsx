@@ -4,7 +4,8 @@ import Image from "next/image";
 import { Plus, Minus, ArrowCounterClockwise } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { FoodImage } from "@/components/food/FoodImage";
-import { MEALS_BY_SLUG } from "@/data/meals";
+import { resolveMeal } from "@/lib/catalog";
+import { usePlan } from "@/components/planner/PlanProvider";
 import { DAY_TYPES } from "@/data/dayTypes";
 import type { DayType, MealSlot } from "@/types/domain";
 
@@ -41,7 +42,8 @@ export function MealSlotCard({
   onClear,
   onServingsChange,
 }: MealSlotCardProps) {
-  const meal = mealSlug ? MEALS_BY_SLUG[mealSlug] : null;
+  const { custom } = usePlan();
+  const meal = (mealSlug ? resolveMeal(mealSlug, custom) : null) ?? null;
   const portion = DAY_TYPES[dayType].portionMultiplier;
   const slotMeta = SLOT_LABEL[slot];
 

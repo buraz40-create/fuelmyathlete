@@ -2,11 +2,13 @@
 
 import { ArrowCounterClockwise } from "@phosphor-icons/react/dist/ssr";
 import { useMealPreferences } from "@/hooks/useMealPreferences";
-import { MEALS_BY_SLUG } from "@/data/meals";
+import { resolveMeal } from "@/lib/catalog";
+import { useCustomMeals } from "@/hooks/useCustomMeals";
 
 // Hiding a meal happens in the picker, one tap, mid-flow. Undoing it should not require
 // remembering which slot it lived in, so the full list lives here.
 export function HiddenMeals() {
+  const { catalog: custom } = useCustomMeals();
   const { excluded, hydrated, restore } = useMealPreferences();
 
   if (!hydrated) return <p className="text-sm text-muted-foreground">Loading…</p>;
@@ -23,7 +25,7 @@ export function HiddenMeals() {
   return (
     <ul className="flex flex-col gap-2">
       {excluded.map((slug) => {
-        const meal = MEALS_BY_SLUG[slug];
+        const meal = resolveMeal(slug, custom);
         return (
           <li
             key={slug}

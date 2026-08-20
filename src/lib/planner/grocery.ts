@@ -5,9 +5,8 @@ import type {
   IngredientUnit,
   MealPlan,
 } from "@/types/domain";
-import { INGREDIENT_BY_SLUG } from "@/data/ingredients";
-import { MEALS_BY_SLUG } from "@/data/meals";
 import { DAY_TYPES } from "@/data/dayTypes";
+import { EMPTY_CATALOG, resolveIngredient, resolveMeal, type CustomCatalog } from "@/lib/catalog";
 
 const CATEGORY_ORDER: IngredientCategory[] = [
   "produce",
@@ -22,7 +21,14 @@ const CATEGORY_ORDER: IngredientCategory[] = [
 // athleteScale comes from portionScale(profile): 1.0 for children, and weight-based from 13
 // up. It was computed and shown on the landing page while the real grocery math ignored it,
 // which is how the site ended up claiming portions scale by body weight when they did not.
-export function aggregateGrocery(plan: MealPlan, athleteScale = 1): GroceryListByCategory {
+export function aggregateGrocery(
+  plan: MealPlan,
+  athleteScale = 1,
+  // The parent's imported recipes. Without this the two `continue` guards below silently drop
+  // an imported meal and every ingredient the catalog does not carry, so the parent shops
+  // from a list missing the thing they added the recipe for.
+  custom: CustomCatalog = EMPTY_CATALOG
+): GroceryListByCategory {
   const totals = new Map<
     string,
     { quantity: number; fromMeals: Set<string> }
@@ -30,7 +36,7 @@ export function aggregateGrocery(plan: MealPlan, athleteScale = 1): GroceryListB
 
   for (const entry of plan.entries) {
     if (!entry.mealSlug) continue;
-    const meal = MEALS_BY_SLUG[entry.mealSlug];
+    const meal = resolveMeal(entry.mealSlug, custom);
     if (!meal) continue;
     const portion = DAY_TYPES[entry.dayType].portionMultiplier * entry.servings * athleteScale;
 
@@ -56,7 +62,7 @@ export function aggregateGrocery(plan: MealPlan, athleteScale = 1): GroceryListB
   };
 
   for (const [slug, { quantity, fromMeals }] of totals.entries()) {
-    const ingredient = INGREDIENT_BY_SLUG[slug];
+    const ingredient = resolveIngredient(slug, custom);
     if (!ingredient) continue;
     const line: GroceryLineItem = {
       ingredient,
