@@ -194,6 +194,17 @@ export default function MethodologyPage() {
             registered sports dietitian or pediatrician.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-ink/80">
+            <strong className="text-ink">About the recipe photographs.</strong> Most of them are
+            generated images rather than photographs of the finished dish, and we would rather
+            say so than let you assume otherwise. They exist because stock libraries had nothing
+            honest for meals like apple slices with peanut butter, and because the earlier stock
+            photos were wrong: a green smoothie illustrated with a lentil dispenser, a turkey
+            wrap illustrated with fried taquitos. Each image is now checked against that
+            recipe&apos;s own ingredient list at the size it actually appears, so a whole-grain
+            wrap looks like a whole-grain wrap. They show what the food should look like. They
+            are not photographs of a specific meal anyone ate.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-ink/80">
             Questions, corrections, or research suggestions? Email{" "}
             <a
               href="mailto:hi@fuelmyathlete.com"

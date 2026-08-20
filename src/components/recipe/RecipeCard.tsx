@@ -34,7 +34,11 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover transition duration-500 group-hover:scale-105"
-            unoptimized
+            // Deliberately NOT unoptimized here, unlike the other image call sites. This grid
+            // shows two dozen cards at once, and the images it now serves are locally hosted
+            // 800px files rather than Pexels URLs that arrive pre-sized. Letting Next resize
+            // and serve webp turns roughly 2 MB of index page into a fraction of it, which
+            // matters most on a phone in a car park before practice.
           />
         </div>
       ) : (

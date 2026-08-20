@@ -11,7 +11,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 3,
-    // Photo removed: showed sliced banana and yogurt, no cereal.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/cereal-banana-milk.jpg",
     whenToEat: "The backup breakfast for the morning the night-before plan did not happen. Ninety seconds, no pan.",
     equipment: ["Cereal bowl", "Spoon", "Knife"],
     steps: [
@@ -46,7 +50,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 8,
-    imageUrl: pexels(32134464),
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/eggs-toast.jpg",
     whenToEat: "Real morning protein for school days when focus matters. Strong before-practice breakfast too.",
     equipment: ["Non-stick pan", "Toaster", "Rubber spatula", "Mixing bowl"],
     steps: [
@@ -85,7 +93,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(1438080),
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/berry-smoothie.jpg",
     whenToEat: "School morning when chewing a breakfast is too much to ask. Also fine 60 minutes before training.",
     equipment: ["Blender"],
     steps: [
@@ -132,7 +144,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    // Photo removed: showed green kale smoothie, not peanut butter.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/pb-banana-power.jpg",
     whenToEat: "The one for a long practice or a growth spurt. Heaviest smoothie here, so give it 60 to 90 minutes.",
     equipment: ["Blender"],
     steps: [
@@ -223,7 +239,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    // Photo removed: showed two bananas on a flat background.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/berry-oat-fuel.jpg",
     whenToEat: "Before a long morning session. The oats are what make this last past warm-ups.",
     equipment: ["Blender"],
     steps: [
@@ -264,7 +284,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    // Photo removed: showed hand holding a jar of red lentils.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/vanilla-protein-punch.jpg",
     whenToEat: "The highest-protein drink here with no powder in it. Good breakfast, good after a hard session.",
     equipment: ["Blender"],
     steps: [
@@ -306,7 +330,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    // Photo removed: showed cucumber and apple juice in mason jars.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/tropical-pre-game.jpg",
     whenToEat: "30 to 45 minutes before kickoff or warm-ups. Built deliberately light so it does not sit.",
     equipment: ["Blender"],
     steps: [
@@ -347,7 +375,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 5,
-    imageUrl: pexels(6217960),
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/chocolate-cherry-recovery.jpg",
     whenToEat: "After a hard session or a match. This is the one that tastes like a treat, which is most of why it works.",
     equipment: ["Blender"],
     steps: [
@@ -388,7 +420,11 @@ export const RECIPES: Recipe[] = [
     slot: "breakfast",
     servings: 1,
     totalMinutes: 4,
-    // Photo removed: showed white sandwich bread, no english muffin.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/english-muffin-pb.jpg",
     whenToEat: "Two hours before kickoff, not one. It is the pre-game breakfast that has already been tested on a normal Tuesday.",
     equipment: ["Toaster", "Butter knife"],
     steps: [
@@ -465,9 +501,11 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 1,
     totalMinutes: 5,
-    // Verified by opening it at full size: two tortilla wrap halves standing cut-side up.
-    imageUrl:
-      "https://images.pexels.com/photos/5848057/pexels-photo-5848057.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/turkey-wrap.jpg",
     whenToEat: "School lunch. No microwave, no reheat, eaten cold five hours after you made it.",
     equipment: ["Cutting board", "Knife", "Lunch container", "Ice pack"],
     steps: [
@@ -508,7 +546,11 @@ export const RECIPES: Recipe[] = [
     slot: "lunch",
     servings: 4,
     totalMinutes: 20,
-    imageUrl: pexels(5192427),
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/chicken-pasta-broccoli.jpg",
     whenToEat: "Cooks in 20 min, reheats in a thermos. Pre-portion for the week on Sunday.",
     equipment: ["Large pot", "Skillet or grill pan", "Colander", "Tongs", "4 meal-prep containers"],
     steps: [
@@ -557,7 +599,11 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 2,
-    // Photo removed: showed scrabble tiles spelling BREAKFAST on a snack card.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/apple-pb.jpg",
     whenToEat: "After school, before practice. Enough to stop the 4pm crash without spoiling dinner.",
     equipment: ["Knife", "Small container with two compartments, or two containers"],
     steps: [
@@ -591,7 +637,11 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    // Photo removed: showed crackers with pepperoni and salsa.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/cheese-crackers.jpg",
     whenToEat: "The bag snack for the gap between school and a 6pm practice. Eat it in the car, not on the field.",
     equipment: ["Small hard-sided container", "Ice pack or a frozen water bottle"],
     steps: [
@@ -660,9 +710,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 1,
-    // Verified by opening it at full size: a close-up of whole almonds.
-    imageUrl:
-      "https://images.pexels.com/photos/3939170/pexels-photo-3939170.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/banana-almonds.jpg",
     whenToEat: "45 to 60 minutes before warm-ups. Not 10 minutes before, the almonds need the time.",
     equipment: ["Small container"],
     steps: [
@@ -698,7 +748,11 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    imageUrl: pexels(19938618),
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/chicken-rice-broccoli.jpg",
     whenToEat: "The workhorse dinner. Boring on paper, perfect for any day type.",
     equipment: ["Small pot (rice)", "Grill pan or skillet (chicken)", "Steamer or microwave (broccoli)", "Tongs", "Meat thermometer"],
     steps: [
@@ -749,7 +803,11 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 30,
-    imageUrl: pexels(5670958),
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/salmon-sweet-potato.jpg",
     whenToEat: "Omega-3s for recovery + complex carbs for the next day. Best as a rest-day or post-match dinner.",
     equipment: ["Sheet pan", "Non-stick skillet", "Steamer or microwave", "Fish spatula", "Tongs"],
     steps: [
@@ -800,9 +858,11 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 20,
-    // Verified by opening it at full size: tacos on corn tortillas with shredded meat, radish and lime.
-    imageUrl:
-      "https://images.pexels.com/photos/18574183/pexels-photo-18574183.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&dpr=1",
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/turkey-tacos.jpg",
     whenToEat: "Family favorite. Build-your-own bar means less complaining at the table.",
     equipment: ["Large skillet", "Wooden spatula", "Small bowls for toppings"],
     steps: [
