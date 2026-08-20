@@ -1000,6 +1000,9 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredient list, checked at card size and
+    // again zoomed in. Stock libraries had nothing honest for this one.
+    imageUrl: "/images/recipes/apple-nachos.jpg",
     recipeSlug: "apple-nachos",
     nutrition: { kcal: 340, proteinG: 12, carbsG: 40, fatG: 17, fiberG: 6, source: "USDA estimate" },
     ingredients: [
@@ -1239,6 +1242,9 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredient list, checked at card size and
+    // again zoomed in. Stock libraries had nothing honest for this one.
+    imageUrl: "/images/recipes/cheese-quesadilla-snack.jpg",
     recipeSlug: "cheese-quesadilla-snack",
     nutrition: { kcal: 285, proteinG: 15, carbsG: 26, fatG: 13, fiberG: 4, source: "USDA estimate" },
     ingredients: [
@@ -1273,6 +1279,9 @@ export const MEALS: Meal[] = [
     prepMinutes: 4,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 4,
+    // Generated to match this recipe's own ingredient list, checked at card size and
+    // again zoomed in. Stock libraries had nothing honest for this one.
+    imageUrl: "/images/recipes/cheese-fruit-plate.jpg",
     recipeSlug: "cheese-fruit-plate",
     nutrition: { kcal: 215, proteinG: 8, carbsG: 24, fatG: 10, fiberG: 4, source: "USDA estimate" },
     ingredients: [

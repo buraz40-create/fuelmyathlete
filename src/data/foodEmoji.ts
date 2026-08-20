@@ -39,26 +39,7 @@ export const FOOD_EMOJI: Record<string, string> = {
   "hibachi-chicken": "🍱",
 };
 
-// A handful of recipes have no photograph, because the honest stock libraries had nothing that
-// matched their ingredients and we would rather show no picture than the wrong food. Those cards
-// used to fall through to a single plate-and-cutlery emoji on a flat colour, which reads as a
-// broken image rather than a decision.
-//
-// These are the ingredients each of those recipes actually calls for. Showing two or three of
-// them, arranged deliberately, says "this is the food" instead of "the picture failed to load".
-export const FOOD_EMOJI_CLUSTER: Record<string, readonly string[]> = {
-  "apple-nachos": ["🍎", "🥜", "🍫"],
-  "cheese-fruit-plate": ["🧀", "🍎"],
-  "cheese-quesadilla-snack": ["🫓", "🧀"],
-};
-
 export function emojiForSlug(slug?: string): string {
   if (!slug) return "🍽️";
-  const cluster = slug ? FOOD_EMOJI_CLUSTER[slug] : undefined;
-  return FOOD_EMOJI[slug!] ?? cluster?.[0] ?? "🍽️";
-}
-
-export function emojiClusterForSlug(slug?: string): readonly string[] {
-  if (!slug) return [];
-  return FOOD_EMOJI_CLUSTER[slug] ?? [];
+  return FOOD_EMOJI[slug] ?? "🍽️";
 }

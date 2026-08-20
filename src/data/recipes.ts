@@ -2169,6 +2169,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 5,
+    // Generated to match this recipe's own ingredient list, checked at card size and
+    // again zoomed in. Stock libraries had nothing honest for this one.
+    imageUrl: "/images/recipes/apple-nachos.jpg",
     whenToEat: "After school when he wants something that feels like a treat.",
     equipment: ["Knife", "Plate", "Small microwave-safe bowl"],
     steps: [
@@ -2640,6 +2643,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 5,
+    // Generated to match this recipe's own ingredient list, checked at card size and
+    // again zoomed in. Stock libraries had nothing honest for this one.
+    imageUrl: "/images/recipes/cheese-quesadilla-snack.jpg",
     whenToEat: "Five minutes between school and leaving for practice. Hot food when there is no time for hot food.",
     equipment: ["Skillet", "Spatula"],
     steps: [
@@ -2704,6 +2710,9 @@ export const RECIPES: Recipe[] = [
     slot: "snack",
     servings: 1,
     totalMinutes: 4,
+    // Generated to match this recipe's own ingredient list, checked at card size and
+    // again zoomed in. Stock libraries had nothing honest for this one.
+    imageUrl: "/images/recipes/cheese-fruit-plate.jpg",
     whenToEat: "The plate that replaces the cracker plate. Sits on the counter and gets picked at.",
     equipment: ["Knife", "Plate"],
     steps: [

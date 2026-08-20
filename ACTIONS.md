@@ -125,35 +125,25 @@ These were blocked on you and are now done:
 - **Whether URL import survives on Vercel.** It does. All six sites that work locally work
   from production.
 
-## Three recipes need generated photographs, and the account is 3 credits short
+## Image credits, and what they cost
 
-`apple-nachos`, `cheese-fruit-plate` and `cheese-quesadilla-snack`. I searched the free stock
-libraries hard for these, several phrasings each and two pages deep, and there is nothing honest:
+Done: all 64 recipes have a photograph. The last three were generated on 2026-08-20 after you
+topped up.
 
-- **apple nachos**: apple tart, apple juice, apples on a tree, a child eating a whole apple.
-  Nothing that is sliced apple with a nut butter drizzle.
-- **cheese and fruit plate**: every cheeseboard is buried in crackers and crostini, and this
-  recipe exists specifically to replace the cracker plate. Using one would argue with the recipe
-  printed beside it.
-- **cheese quesadilla**: the recipe calls for a whole-grain tortilla. The best cheese-pull
-  photograph turned out, zoomed in, to be a white flour tortilla with ham inside and a fried
-  tortilla chip on top. Wrong twice over.
+Worth knowing for next time, because half a month of credits went on images today:
 
-Generating them is the fix, the way the other 22 were done. **It costs 1.25 credits per image and
-the account currently holds 1 credit**, with no free-trial allowance. Three images need about 4
-credits, so nothing can be generated until you top up. Once you have, it is ten minutes of work.
+- The plan grants **200 credits on the 8th of each month**, and the reset **wipes whatever is
+  left over** rather than rolling it forward. It took 149 credits back in July and 35.5 in
+  August. There is no saving them up, so spending near the end of a cycle is free money and
+  hoarding is not.
+- Model prices differ far more than the output does. **Recraft V4.1 is 1.25 credits, Nano Banana
+  Pro is 2, GPT Image 2.0 is 7.** The July batch got 18 images for 22.5 credits on Recraft; a
+  comparable batch on GPT Image would have been 126.
+- One-time top-up credits expire after 90 days, so the ones you just bought are good until about
+  2026-11-18.
 
-In the meantime those three cards no longer show the generic plate-and-cutlery icon. They show
-their own ingredients instead, so the card looks like a decision rather than a broken image.
-
-## One photograph is close but not exact
-
-`stirfry-chicken-rice` is "chicken + rice + edamame" and its picture shows chicken, rice and
-mushrooms with greens. No edamame. I looked; the only true edamame photographs on the free
-libraries are bare pods, which would misrepresent a chicken and rice dish just as badly. The
-hibachi recipe did find a proper edamame plate, which is why that one is right. Same fix, same
-question about credits.
-
+If you want a bigger image pass, a consistent set across the guides or an Open Graph share card,
+say so and I will do it in one batch on the cheaper model rather than a few at a time.
 
 ## A cracker recipe is still on the site
 
