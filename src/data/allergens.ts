@@ -23,6 +23,10 @@ const INGREDIENT_ALLERGENS: Record<string, Allergen[]> = {
   "wholegrain-bun": ["gluten"],
   // Hummus is made with tahini. Sesame is a major allergen and one this site already treats
   // as a named constraint, so this mapping is not optional.
+  "tuna-canned": ["fish"],
+  "pita-wg": ["gluten"],
+  "bagel-wg": ["gluten"],
+  "cream-cheese": ["dairy"],
   hummus: ["sesame"],
   granola: ["gluten"],
   // Most supermarket chocolate chips carry a milk and/or soy lecithin declaration. Labelling
