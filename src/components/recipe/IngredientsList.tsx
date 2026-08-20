@@ -43,6 +43,27 @@ export function IngredientsList({ baseServings, ingredients }: IngredientsListPr
     [ingredients, multiplier]
   );
 
+  // A radiogroup promises arrow keys, and this one had a tab stop on every preset and no
+  // arrow handling at all. Same fix as the day tabs and the star rating.
+  function handlePresetKeys(event: React.KeyboardEvent<HTMLDivElement>) {
+    const moves: Record<string, number> = {
+      ArrowLeft: -1,
+      ArrowUp: -1,
+      ArrowRight: 1,
+      ArrowDown: 1,
+    };
+    const at = PRESETS.indexOf(targetServings);
+    let next: number | null = null;
+    if (event.key in moves) next = (at === -1 ? 0 : at) + moves[event.key];
+    if (event.key === "Home") next = 0;
+    if (event.key === "End") next = PRESETS.length - 1;
+    if (next === null) return;
+    event.preventDefault();
+    const value = PRESETS[Math.min(PRESETS.length - 1, Math.max(0, next))];
+    setTargetServings(value);
+    document.getElementById(`servings-preset-${value}`)?.focus();
+  }
+
   return (
     <section
       aria-labelledby="ingredients-title"
@@ -87,7 +108,12 @@ export function IngredientsList({ baseServings, ingredients }: IngredientsListPr
         </div>
       </header>
 
-      <div role="radiogroup" aria-label="Quick serving presets" className="mb-4 flex flex-wrap gap-1.5">
+      <div
+        role="radiogroup"
+        aria-label="Quick serving presets"
+        onKeyDown={handlePresetKeys}
+        className="mb-4 flex flex-wrap gap-1.5"
+      >
         {PRESETS.map((n) => {
           const active = targetServings === n;
           return (
@@ -95,7 +121,15 @@ export function IngredientsList({ baseServings, ingredients }: IngredientsListPr
               key={n}
               type="button"
               role="radio"
+              id={`servings-preset-${n}`}
               aria-checked={active}
+              // The visible text is "4x", which a screen reader reads as a multiplication sign.
+              // The number is the same in both so voice control still works on it.
+              aria-label={`${n} serving${n === 1 ? "" : "s"}`}
+              // Roving tabindex, matching the day tabs. When the count is a custom number none
+              // of the presets is active, so the first one holds the tab stop and the group
+              // stays reachable.
+              tabIndex={active || (!PRESETS.includes(targetServings) && n === PRESETS[0]) ? 0 : -1}
               onClick={() => setTargetServings(n)}
               className={cn(
                 "rounded-full border px-3 py-1.5 text-xs font-semibold transition",

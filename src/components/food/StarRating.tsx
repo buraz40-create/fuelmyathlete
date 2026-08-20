@@ -62,6 +62,37 @@ export function StarRating({
     onChange?.(next);
   }
 
+  // A radiogroup promises arrow keys. Ours had five tab stops and no arrow handling, so a
+  // keyboard user tabbed through every star one at a time and could not actually move the
+  // selection, which is the same shape as the day tabs fix in DayPicker.
+  //
+  // Arrows select as they move, which is what the pattern specifies for radios, and Home and
+  // End jump to one and five. Nothing here clears the rating: that would make an arrow key
+  // destructive, and clearing already has its own gesture in tapping the current star again.
+  function handleKeyDown(event: React.KeyboardEvent<HTMLSpanElement>) {
+    const moves: Record<string, number> = {
+      ArrowLeft: -1,
+      ArrowUp: -1,
+      ArrowRight: 1,
+      ArrowDown: 1,
+    };
+    const current = mine ?? (Math.round(fallback) as Stars);
+    let next: number | null = null;
+    if (event.key in moves) next = current + moves[event.key];
+    if (event.key === "Home") next = 1;
+    if (event.key === "End") next = 5;
+    if (next === null) return;
+    event.preventDefault();
+    const clamped = Math.min(5, Math.max(1, next)) as Stars;
+    mealRatings.set(slug, clamped);
+    onChange?.(clamped);
+    document.getElementById(`star-${slug}-${clamped}`)?.focus();
+  }
+
+  // Roving tabindex: one stop for the whole group. With nothing rated yet the first star takes
+  // it, so the group is always reachable.
+  const tabStop: Stars = mine ?? 1;
+
   if (readOnly) {
     return (
       <span
@@ -89,6 +120,7 @@ export function StarRating({
         className="inline-flex items-center gap-0.5"
         role="radiogroup"
         aria-label="Rate this meal"
+        onKeyDown={handleKeyDown}
         onMouseLeave={() => setHover(undefined)}
       >
         {STARS.map((s) => (
@@ -96,8 +128,10 @@ export function StarRating({
             key={s}
             type="button"
             role="radio"
+            id={`star-${slug}-${s}`}
             aria-checked={mine === s}
             aria-label={`${s} star${s === 1 ? "" : "s"}`}
+            tabIndex={s === tabStop ? 0 : -1}
             onClick={() => choose(s)}
             onMouseEnter={() => setHover(s)}
             onFocus={() => setHover(s)}

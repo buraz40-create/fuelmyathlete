@@ -7,6 +7,7 @@ import { DAYS_OF_WEEK, DAY_TYPE_ORDER, dayTypeLabel } from "@/data/dayTypes";
 import { weeklySchedule, defaultSchedule, type WeeklySchedule } from "@/lib/player/schedule";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { ageToCohort } from "@/lib/player/cohort";
+import { useRovingGroup } from "@/hooks/useRovingGroup";
 import type { DayType } from "@/types/domain";
 
 const TINT: Record<DayType, string> = {
@@ -15,6 +16,64 @@ const TINT: Record<DayType, string> = {
   match: "bg-day-match",
   rest: "bg-day-rest",
 };
+
+// One day's row. This exists as a component purely so the roving-tabindex hook can be called
+// once per row: the seven rows are a map, and hooks cannot be called in a loop.
+function ScheduleRow({
+  idx,
+  long,
+  value,
+  cohort,
+  onSelect,
+}: {
+  idx: number;
+  long: string;
+  value: DayType;
+  cohort: ReturnType<typeof ageToCohort>;
+  onSelect: (day: number, type: DayType) => void;
+}) {
+  const keys = useRovingGroup({
+    items: DAY_TYPE_ORDER,
+    selected: value,
+    onSelect: (type) => onSelect(idx, type),
+    idFor: (type) => `schedule-${idx}-${type}`,
+  });
+
+  return (
+    <li className="flex flex-wrap items-center gap-2">
+      <span className="w-24 flex-shrink-0 text-sm font-medium text-ink">{long}</span>
+      <div
+        role="radiogroup"
+        aria-label={`${long} day type`}
+        onKeyDown={keys.onKeyDown}
+        className="flex flex-wrap gap-1.5"
+      >
+        {DAY_TYPE_ORDER.map((type) => {
+          const active = value === type;
+          return (
+            <button
+              key={type}
+              type="button"
+              role="radio"
+              id={`schedule-${idx}-${type}`}
+              aria-checked={active}
+              tabIndex={keys.tabIndexFor(type)}
+              onClick={() => onSelect(idx, type)}
+              className={cn(
+                "rounded-full border px-3 py-1.5 text-xs font-medium transition",
+                active
+                  ? cn("border-transparent text-ink", TINT[type])
+                  : "border-border text-muted-foreground hover:border-primary/40 hover:text-ink"
+              )}
+            >
+              {dayTypeLabel(type, cohort)}
+            </button>
+          );
+        })}
+      </div>
+    </li>
+  );
+}
 
 export function WeeklyScheduleEditor() {
   const { profile } = usePlayerProfile();
@@ -53,35 +112,14 @@ export function WeeklyScheduleEditor() {
     <div>
       <ul className="flex flex-col gap-2">
         {DAYS_OF_WEEK.map(({ idx, long }) => (
-          <li key={idx} className="flex flex-wrap items-center gap-2">
-            <span className="w-24 flex-shrink-0 text-sm font-medium text-ink">{long}</span>
-            <div
-              role="radiogroup"
-              aria-label={`${long} day type`}
-              className="flex flex-wrap gap-1.5"
-            >
-              {DAY_TYPE_ORDER.map((type) => {
-                const active = schedule[idx] === type;
-                return (
-                  <button
-                    key={type}
-                    type="button"
-                    role="radio"
-                    aria-checked={active}
-                    onClick={() => set(idx, type)}
-                    className={cn(
-                      "rounded-full border px-3 py-1.5 text-xs font-medium transition",
-                      active
-                        ? cn("border-transparent text-ink", TINT[type])
-                        : "border-border text-muted-foreground hover:border-primary/40 hover:text-ink"
-                    )}
-                  >
-                    {dayTypeLabel(type, cohort)}
-                  </button>
-                );
-              })}
-            </div>
-          </li>
+          <ScheduleRow
+            key={idx}
+            idx={idx}
+            long={long}
+            value={schedule[idx]}
+            cohort={cohort}
+            onSelect={set}
+          />
         ))}
       </ul>
 

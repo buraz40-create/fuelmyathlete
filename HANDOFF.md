@@ -295,6 +295,26 @@ It is covered by `src/lib/__tests__/service-worker.test.ts`, which loads the rea
 of the logic. Three of its five tests fail against the previous worker, which is the point. Note
 that the worker does not register outside production, so a dev server tells you nothing about it.
 
+**A radiogroup promises arrow keys.** Nine of them shipped without any: the star rating, the
+serving presets, the day-type chips in three places, both import pickers, the recipes filter and
+the sign-in tabs. Each put a tab stop on every option and listened for no keys, so a keyboard
+user tabbed through five stars one at a time and still could not move the selection. With a
+mouse they all looked finished, which is why it went unnoticed. The day tabs in `DayPicker` had
+the same bug and were fixed earlier, alone.
+
+The shared behaviour now lives in `src/hooks/useRovingGroup.ts`: a roving tabindex so the group
+is one tab stop, and arrows that move the selection and take focus with them. Focus has to
+follow, or the next arrow press lands on an element the user has already left. Wrapping is the
+default and is right for a ring of choices; the star rating passes `wrap: false`, because going
+left from one star should stop rather than jump to five.
+
+`WeeklyScheduleEditor` needed one row extracted into `ScheduleRow`, since its seven radiogroups
+are a map and a hook cannot be called in a loop.
+
+Enforced by `src/components/__tests__/radiogroup-keyboard.test.ts`, which fails on any
+`role="radiogroup"` or `role="tablist"` with no `onKeyDown`, and any `role="radio"` or
+`role="tab"` with no `tabIndex`. It found seven of the nine on its first run.
+
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
 **Sync is proven now, and what proving it found.** There is still no `.env.local`, so local

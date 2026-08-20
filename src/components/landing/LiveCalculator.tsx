@@ -8,6 +8,7 @@ import { hydrationFor } from "@/data/hydration";
 import { DAY_TYPE_ORDER, dayTypeShortLabel } from "@/data/dayTypes";
 import { ageToCohort, cohortLabel, portionScale } from "@/lib/player/cohort";
 import { WaterCup } from "@/components/planner/WaterCup";
+import { useRovingGroup } from "@/hooks/useRovingGroup";
 import type { DayType, PlayerProfile } from "@/types/domain";
 
 const TINT_BG: Record<DayType, string> = {
@@ -21,6 +22,13 @@ export function LiveCalculator() {
   const [age, setAge] = useState(11);
   const [weight, setWeight] = useState(88);
   const [dayType, setDayType] = useState<DayType>("training");
+
+  const dayTypeKeys = useRovingGroup({
+    items: DAY_TYPE_ORDER,
+    selected: dayType,
+    onSelect: setDayType,
+    idFor: (key) => `calc-day-${key}`,
+  });
 
   const { goalOz, cohort, scale, calc } = useMemo(() => {
     const profile: PlayerProfile = {
@@ -86,7 +94,12 @@ export function LiveCalculator() {
         />
       </div>
 
-      <div role="radiogroup" aria-label="Day type" className="mt-5 grid grid-cols-4 gap-2">
+      <div
+        role="radiogroup"
+        aria-label="Day type"
+        onKeyDown={dayTypeKeys.onKeyDown}
+        className="mt-5 grid grid-cols-4 gap-2"
+      >
         {DAY_TYPE_ORDER.map((key) => {
           const active = dayType === key;
           return (
@@ -94,7 +107,9 @@ export function LiveCalculator() {
               key={key}
               type="button"
               role="radio"
+              id={`calc-day-${key}`}
               aria-checked={active}
+              tabIndex={dayTypeKeys.tabIndexFor(key)}
               onClick={() => setDayType(key)}
               className={cn(
                 "rounded-full border px-2 py-2 text-xs font-semibold capitalize transition",

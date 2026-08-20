@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { useRovingGroup } from "@/hooks/useRovingGroup";
 import { DAY_TYPE_ORDER, dayTypeLabel } from "@/data/dayTypes";
 import { ageToCohort } from "@/lib/player/cohort";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
@@ -29,10 +30,18 @@ export function DayTypeSelector({ value, onChange }: DayTypeSelectorProps) {
   const { profile } = usePlayerProfile();
   const cohort = profile ? ageToCohort(profile.ageYears) : "child";
 
+  const dayKeys = useRovingGroup({
+    items: DAY_TYPE_ORDER,
+    selected: value,
+    onSelect: onChange,
+    idFor: (key) => `day-type-${key}`,
+  });
+
   return (
     <div
       role="radiogroup"
       aria-label="What kind of day is this?"
+      onKeyDown={dayKeys.onKeyDown}
       className="grid grid-cols-2 gap-2 md:grid-cols-4"
     >
       {DAY_TYPE_ORDER.map((key) => {
@@ -43,7 +52,9 @@ export function DayTypeSelector({ value, onChange }: DayTypeSelectorProps) {
             key={key}
             type="button"
             role="radio"
+            id={`day-type-${key}`}
             aria-checked={active}
+            tabIndex={dayKeys.tabIndexFor(key)}
             onClick={() => onChange(key)}
             className={cn(
               "flex items-center gap-2.5 rounded-full border px-4 py-2 text-sm font-medium transition",

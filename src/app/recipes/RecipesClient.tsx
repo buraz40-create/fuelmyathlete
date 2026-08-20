@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRovingGroup } from "@/hooks/useRovingGroup";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { Leaf, Plus } from "@phosphor-icons/react/dist/ssr";
@@ -31,6 +32,13 @@ export function RecipesClient() {
         : RECIPES.filter((r) => r.slot === filter),
     [filter]
   );
+
+  const filterKeys = useRovingGroup({
+    items: FILTERS.map((f) => f.key),
+    selected: filter,
+    onSelect: setFilter,
+    idFor: (key) => `recipe-filter-${key}`,
+  });
 
   return (
     <section
@@ -64,6 +72,7 @@ export function RecipesClient() {
       <nav
         role="tablist"
         aria-label="Filter recipes by meal type"
+        onKeyDown={filterKeys.onKeyDown}
         className="sticky top-[68px] z-10 mb-8 flex flex-wrap justify-center gap-2 rounded-full border border-border bg-background/85 p-1.5 backdrop-blur md:top-[76px]"
       >
         {FILTERS.map(({ key, label }) => {
@@ -73,7 +82,9 @@ export function RecipesClient() {
               key={key}
               type="button"
               role="tab"
+              id={`recipe-filter-${key}`}
               aria-selected={active}
+              tabIndex={filterKeys.tabIndexFor(key)}
               onClick={() => setFilter(key)}
               className={cn(
                 "rounded-full px-4 py-2 text-sm font-semibold transition",

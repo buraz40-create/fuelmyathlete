@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useRovingGroup } from "@/hooks/useRovingGroup";
 import { motion, useReducedMotion } from "motion/react";
 import { Drop, Warning } from "@phosphor-icons/react/dist/ssr";
 import { hydrationFor } from "@/data/hydration";
@@ -23,6 +24,13 @@ export function HydrationCalculator() {
   const [weight, setWeight] = useState(88);
   const [dayType, setDayType] = useState<DayType>("training");
   const [hot, setHot] = useState(false);
+
+  const dayKeys = useRovingGroup({
+    items: DAYS.map((d) => d.key),
+    selected: dayType,
+    onSelect: setDayType,
+    idFor: (key) => `hydration-day-${key}`,
+  });
   const reduced = useReducedMotion();
 
   const calc = useMemo(() => {
@@ -83,7 +91,12 @@ export function HydrationCalculator() {
             </label>
           )}
 
-          <div role="radiogroup" aria-label="Day type" className="flex flex-wrap gap-1.5">
+          <div
+            role="radiogroup"
+            aria-label="Day type"
+            onKeyDown={dayKeys.onKeyDown}
+            className="flex flex-wrap gap-1.5"
+          >
             {DAYS.map((d) => {
               const active = dayType === d.key;
               return (
@@ -91,7 +104,9 @@ export function HydrationCalculator() {
                   key={d.key}
                   type="button"
                   role="radio"
+                  id={`hydration-day-${d.key}`}
                   aria-checked={active}
+                  tabIndex={dayKeys.tabIndexFor(d.key)}
                   onClick={() => setDayType(d.key)}
                   className={cn(
                     "rounded-full border px-3 py-1.5 text-xs font-medium transition",

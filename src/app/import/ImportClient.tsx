@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useRovingGroup } from "@/hooks/useRovingGroup";
 import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { ClipboardText, Warning, CheckCircle, Trash, Question, Link as LinkIcon, CircleNotch } from "@phosphor-icons/react/dist/ssr";
@@ -322,6 +323,19 @@ export function ImportClient({ sharedTitle, sharedText, sharedUrl, editId }: Imp
     setStage("paste");
   }
 
+  const modeKeys = useRovingGroup({
+    items: ["paste", "link"] as const,
+    selected: mode,
+    onSelect: setMode,
+    idFor: (key) => `import-mode-${key}`,
+  });
+  const slotKeys = useRovingGroup({
+    items: SLOTS.map((s) => s.key),
+    selected: slot,
+    onSelect: setSlot,
+    idFor: (key) => `import-slot-${key}`,
+  });
+
   return (
     <section
       aria-labelledby="import-title"
@@ -394,7 +408,12 @@ export function ImportClient({ sharedTitle, sharedText, sharedUrl, editId }: Imp
             </p>
           )}
 
-          <div role="radiogroup" aria-label="How to add it" className="flex flex-wrap gap-1.5">
+          <div
+            role="radiogroup"
+            aria-label="How to add it"
+            onKeyDown={modeKeys.onKeyDown}
+            className="flex flex-wrap gap-1.5"
+          >
             {([
               { key: "paste", label: "Paste the text", icon: ClipboardText },
               { key: "link", label: "From a link", icon: LinkIcon },
@@ -405,7 +424,9 @@ export function ImportClient({ sharedTitle, sharedText, sharedUrl, editId }: Imp
                   key={key}
                   type="button"
                   role="radio"
+                  id={`import-mode-${key}`}
                   aria-checked={active}
+                  tabIndex={modeKeys.tabIndexFor(key)}
                   onClick={() => setMode(key)}
                   className={cn(
                     "inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-medium transition",
@@ -542,7 +563,12 @@ export function ImportClient({ sharedTitle, sharedText, sharedUrl, editId }: Imp
               />
             </label>
 
-            <div role="radiogroup" aria-label="Meal slot" className="mt-4 flex flex-wrap gap-1.5">
+            <div
+              role="radiogroup"
+              aria-label="Meal slot"
+              onKeyDown={slotKeys.onKeyDown}
+              className="mt-4 flex flex-wrap gap-1.5"
+            >
               {SLOTS.map((s) => {
                 const active = slot === s.key;
                 return (
@@ -550,7 +576,9 @@ export function ImportClient({ sharedTitle, sharedText, sharedUrl, editId }: Imp
                     key={s.key}
                     type="button"
                     role="radio"
+                    id={`import-slot-${s.key}`}
                     aria-checked={active}
+                    tabIndex={slotKeys.tabIndexFor(s.key)}
                     onClick={() => setSlot(s.key)}
                     className={cn(
                       "rounded-full border px-3 py-1.5 text-xs font-medium transition",

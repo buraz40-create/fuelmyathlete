@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import { useRovingGroup } from "@/hooks/useRovingGroup";
 import { useRouter } from "next/navigation";
 import {
   ArrowRight,
@@ -203,6 +204,13 @@ export default function SignInPage() {
     setStatus("idle");
   }
 
+  const modeKeys = useRovingGroup({
+    items: ["signin", "signup"] as const,
+    selected: mode,
+    onSelect: switchMode,
+    idFor: (key) => `auth-tab-${key}`,
+  });
+
   return (
     <main
       id="main"
@@ -247,12 +255,15 @@ export default function SignInPage() {
           <nav
             role="tablist"
             aria-label="Sign in or create account"
+            onKeyDown={modeKeys.onKeyDown}
             className="mb-5 flex w-full items-center gap-1 rounded-full border border-border bg-muted/30 p-1"
           >
             <button
               type="button"
               role="tab"
+              id={`auth-tab-signin`}
               aria-selected={mode === "signin"}
+              tabIndex={modeKeys.tabIndexFor("signin")}
               onClick={() => switchMode("signin")}
               className={cn(
                 "flex-1 rounded-full px-3 py-2 text-sm font-semibold transition",
@@ -266,7 +277,9 @@ export default function SignInPage() {
             <button
               type="button"
               role="tab"
+              id={`auth-tab-signup`}
               aria-selected={mode === "signup"}
+              tabIndex={modeKeys.tabIndexFor("signup")}
               onClick={() => switchMode("signup")}
               className={cn(
                 "flex-1 rounded-full px-3 py-2 text-sm font-semibold transition",
