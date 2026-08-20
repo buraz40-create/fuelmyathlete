@@ -6,7 +6,7 @@
 // The case this exists for: a parent standing in a grocery aisle with one bar of signal,
 // opening the app fresh rather than resuming an already-open tab.
 
-const VERSION = "v1";
+const VERSION = "v2";
 const SHELL_CACHE = `fma-shell-${VERSION}`;
 const RUNTIME_CACHE = `fma-runtime-${VERSION}`;
 
@@ -51,9 +51,43 @@ function isCacheable(request) {
   return true;
 }
 
+// Next fingerprints everything under /_next/static, so the URL changes whenever the bytes do
+// and a cache hit can never be stale. Nothing else on this origin has that guarantee.
+function isFingerprinted(url) {
+  return url.pathname.startsWith("/_next/static/");
+}
+
+// Keep the runtime cache from growing without limit. A parent's phone is not a good place to
+// quietly store fifty megabytes, and on iOS an origin that leans on its storage budget risks
+// eviction of everything it owns, which here would include the meal plan in localStorage.
+// Oldest first, because Cache.keys() returns insertion order.
+const RUNTIME_MAX_ENTRIES = 80;
+
+async function trimRuntimeCache() {
+  const cache = await caches.open(RUNTIME_CACHE);
+  const keys = await cache.keys();
+  if (keys.length <= RUNTIME_MAX_ENTRIES) return;
+  await Promise.all(
+    keys.slice(0, keys.length - RUNTIME_MAX_ENTRIES).map((key) => cache.delete(key))
+  );
+}
+
+// A failed write is not worth failing the response over. Quota errors in particular are
+// expected on a phone that is nearly full, and the fetch already succeeded.
+async function cachePut(request, response) {
+  try {
+    const cache = await caches.open(RUNTIME_CACHE);
+    await cache.put(request, response);
+    await trimRuntimeCache();
+  } catch {
+    // Serving the response matters more than storing it.
+  }
+}
+
 self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (!isCacheable(request)) return;
+  const url = new URL(request.url);
 
   // Navigations: network first, so a parent on a good connection always gets fresh content,
   // falling back to cache and then to the offline page.
@@ -61,8 +95,7 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
       fetch(request)
         .then((response) => {
-          const copy = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
+          event.waitUntil(cachePut(request, response.clone()));
           return response;
         })
         .catch(async () => {
@@ -73,19 +106,45 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Static assets: cache first, since Next fingerprints them and a hit is always correct.
+  // Fingerprinted build output: cache first. A hit is always correct by construction, and this
+  // is the traffic where cache first actually pays for itself.
+  if (isFingerprinted(url)) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        if (cached) return cached;
+        return fetch(request)
+          .then((response) => {
+            if (response.ok && response.type === "basic") {
+              event.waitUntil(cachePut(request, response.clone()));
+            }
+            return response;
+          })
+          .catch(() => Response.error());
+      })
+    );
+    return;
+  }
+
+  // Everything else, which in practice means the recipe photographs in /images/recipes:
+  // stale while revalidate. Serve the cached copy instantly, then refresh it in the background
+  // so the next load is current.
+  //
+  // These filenames are stable, not fingerprinted. turkey-tacos.jpg stays turkey-tacos.jpg when
+  // the picture behind it is replaced, and the pictures on this site do get replaced: two of
+  // them were corrected for showing the wrong food, a corn tortilla on a whole-grain recipe and
+  // a white wrap on a whole-grain one. Under cache first, a visitor who had already loaded the
+  // wrong photograph would keep it permanently and no correction would ever reach them.
   event.respondWith(
     caches.match(request).then((cached) => {
-      if (cached) return cached;
-      return fetch(request)
+      const network = fetch(request)
         .then((response) => {
           if (response.ok && response.type === "basic") {
-            const copy = response.clone();
-            caches.open(RUNTIME_CACHE).then((cache) => cache.put(request, copy));
+            event.waitUntil(cachePut(request, response.clone()));
           }
           return response;
         })
         .catch(() => cached || Response.error());
+      return cached || network;
     })
   );
 });

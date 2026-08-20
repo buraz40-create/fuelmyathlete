@@ -277,6 +277,24 @@ The landing page water cups are the first case, the Hero gradient blobs are the 
 guard was checked by reintroducing the Reveal bug and confirming it failed with the right file
 and line.
 
+**The service worker must not outlive a correction.** `public/sw.js` is hand written, is never
+type checked, and is the one thing here that can keep showing a visitor something already fixed.
+It used to serve everything except navigations cache first, on the stated grounds that "Next
+fingerprints them and a hit is always correct". That is true of `/_next/static`, and of nothing
+else. The 47 recipe photographs in `public/images/recipes` have stable filenames, so replacing
+the picture behind `turkey-tacos.jpg` would never have reached anyone who already loaded the
+wrong one, permanently, and wrong photographs have been reported twice already.
+
+Now: `/_next/static` stays cache first because a fingerprinted hit genuinely cannot be stale,
+everything else is stale while revalidate, the runtime cache is capped at 80 entries and evicted
+oldest first, and a failed `cache.put` no longer rejects into nothing. `VERSION` went to `v2`,
+and `activate` already deletes caches that do not match, so returning visitors drop the old one.
+
+It is covered by `src/lib/__tests__/service-worker.test.ts`, which loads the real `sw.js` into a
+`node:vm` sandbox with a mock Cache API and drives its fetch handler, rather than testing a copy
+of the logic. Three of its five tests fail against the previous worker, which is the point. Note
+that the worker does not register outside production, so a dev server tells you nothing about it.
+
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
 **Sync is proven now, and what proving it found.** There is still no `.env.local`, so local
