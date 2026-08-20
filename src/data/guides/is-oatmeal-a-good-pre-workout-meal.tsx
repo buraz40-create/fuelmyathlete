@@ -6,7 +6,7 @@ import { Cite } from "@/components/guide/GuideCitations";
 export const guide: Guide = {
   slug: "is-oatmeal-a-good-pre-workout-meal",
   title: "Is Oatmeal a Good Pre-Workout Meal? A Sports Nutrition Breakdown",
-  metaTitle: "Is Oatmeal a Good Pre-Workout Meal? Yes â€” Here's Why",
+  metaTitle: "Is Oatmeal a Good Pre-Workout Meal? Yes, Here's Why",
   metaDescription:
     "Yes, oatmeal is one of the best pre-workout meals. Here's the science (beta-glucan, complex carbs), the timing window, the right oat type, and when to skip it.",
   primaryKeyword: "is oatmeal a good pre workout meal",
@@ -19,7 +19,7 @@ export const guide: Guide = {
   sections: [
     {
       id: "short-answer",
-      heading: "Short answer: yes â€” with the right type and timing",
+      heading: "Short answer: yes, with the right type and timing",
       body: (
         <>
           <p>
@@ -27,7 +27,7 @@ export const guide: Guide = {
             American College of Sports Medicine joint position stand on nutrition and athletic
             performance recommends 1-4 grams of carbohydrate per kilogram of body weight 1-4 hours
             before exercise<Cite id="ACSM-2016" />, and oats are one of the cleanest complex-carb
-            sources available. The hedge cases â€” when oatmeal is the wrong choice â€” come down to
+            sources available. The hedge cases, when oatmeal is the wrong choice, come down to
             timing (under 30 minutes), oat type (steel-cut, high-fiber), and stacked toppings
             (too much fiber or fat at once).
           </p>
@@ -125,10 +125,10 @@ export const guide: Guide = {
             additions:
           </p>
           <ul className="mt-3 ml-5 flex list-disc flex-col gap-2">
-            <li>Greek yogurt â€” 12 g protein per 1/2 cup, easy on the gut</li>
-            <li>1 whole egg or 2 egg whites â€” 7 g, classic pairing</li>
-            <li>1 scoop whey protein â€” 25 g, adults 18+ only</li>
-            <li>1 tbsp peanut butter â€” 4 g + healthy fats (cap at one fat source)</li>
+            <li>Greek yogurt: 12 g protein per 1/2 cup, easy on the gut</li>
+            <li>1 whole egg or 2 egg whites: 7 g, classic pairing</li>
+            <li>1 scoop whey protein: 25 g, adults 18+ only</li>
+            <li>1 tbsp peanut butter: 4 g + healthy fats (cap at one fat source)</li>
           </ul>
           <p className="mt-3">
             For an athlete who finds dairy unsettling within an hour of training, plant-based
@@ -209,7 +209,7 @@ export const guide: Guide = {
             </table>
           </div>
           <p className="mt-4">
-            Oatmeal&apos;s edge is the timing tolerance â€” it works across a wider window than
+            Oatmeal&apos;s edge is the timing tolerance, it works across a wider window than
             anything else on this list. If you train 90 minutes after waking, oats are the answer.
           </p>
         </>
@@ -227,7 +227,7 @@ export const guide: Guide = {
           </p>
           <ul className="mt-3 ml-5 flex list-disc flex-col gap-2">
             <li>Smaller portion: 1/2 cup cooked rolled oats with banana</li>
-            <li>Whole-food protein only: Greek yogurt, milk, or egg â€” no protein powder</li>
+            <li>Whole-food protein only: Greek yogurt, milk, or egg, no protein powder</li>
             <li>Hydrate alongside: 8-12 oz water with the bowl per NATA<Cite id="NATA-Fluid" /></li>
             <li>Skip caffeinated add-ins (cocoa nibs, coffee toppings)</li>
           </ul>

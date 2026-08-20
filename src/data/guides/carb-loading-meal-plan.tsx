@@ -31,8 +31,8 @@ export const guide: Guide = {
             <Cite id="Burke-Carb" />.
           </p>
           <p className="mt-3">
-            For events under 90 minutes â€” a standard youth soccer game, a 5K, most strength
-            sessions â€” carb loading is overkill. A standard pre-game meal is sufficient. See our{" "}
+            For events under 90 minutes, a standard youth soccer game, a 5K, most strength
+            sessions, carb loading is overkill. A standard pre-game meal is sufficient. See our{" "}
             <Link href="/guides/what-to-eat-before-a-soccer-game" className="text-primary underline">
               soccer pre-game guide
             </Link>{" "}
@@ -173,8 +173,8 @@ export const guide: Guide = {
       body: (
         <>
           <p>
-            For events at the 60-90 minute mark â€” a longer soccer match, a 10K, a tournament-day
-            schedule â€” a single high-carb day the day before is often sufficient. The protocol:
+            For events at the 60-90 minute mark, a longer soccer match, a 10K, a tournament-day
+            schedule, a single high-carb day the day before is often sufficient. The protocol:
             target 8-10 g/kg the day before, then a normal pre-event meal 3-4 hours before
             kickoff. Lower fiber, lower fat, familiar foods.
           </p>
@@ -213,7 +213,7 @@ export const guide: Guide = {
           <ul className="ml-5 flex list-disc flex-col gap-2">
             <li>
               <strong>High-fiber foods.</strong> Lentils, beans, raw cruciferous vegetables,
-              whole-grain bread with seeds, popcorn â€” fiber bulks the gut and risks event-day GI
+              whole-grain bread with seeds, popcorn, fiber bulks the gut and risks event-day GI
               distress.
             </li>
             <li>
@@ -326,7 +326,7 @@ export const guide: Guide = {
     {
       question: "How many days before a race should I carb load?",
       answer:
-        "For marathons and triathlons, 3 days. For events at 60-90 minutes (10Ks, longer soccer matches), a single high-carb day before is enough. For events under 60 minutes, no carb loading is needed â€” a standard pre-event meal is sufficient.",
+        "For marathons and triathlons, 3 days. For events at 60-90 minutes (10Ks, longer soccer matches), a single high-carb day before is enough. For events under 60 minutes, no carb loading is needed, a standard pre-event meal is sufficient.",
     },
     {
       question: "What foods should I avoid when carb loading?",

@@ -27,7 +27,7 @@ export const guide: Guide = {
             primes amino acid availability for muscle protein synthesis during and after the
             workout, and it leaves the stomach in time so blood can flow to working muscle. The
             American College of Sports Medicine joint position stand spells out the macronutrient
-            targets â€” 1-4 g of carbohydrate per kg body weight 1-4 hours before exercise, plus
+            targets: 1-4 g of carbohydrate per kg body weight 1-4 hours before exercise, plus
             0.3 g/kg of protein<Cite id="ACSM-2016" />.
           </p>
           <p className="mt-3">
@@ -116,34 +116,34 @@ export const guide: Guide = {
           <p>The evidence-backed pre-workout food list:</p>
           <ul className="mt-3 ml-5 flex list-disc flex-col gap-2">
             <li>
-              <strong>Oats</strong> (rolled or overnight) â€” slow-release complex carbs + beta-glucan
+              <strong>Oats</strong> (rolled or overnight), slow-release complex carbs + beta-glucan
             </li>
             <li>
-              <strong>Bananas</strong> â€” fast carbs + potassium, perfect 30-60 min out
+              <strong>Bananas</strong>, fast carbs + potassium, perfect 30-60 min out
             </li>
             <li>
-              <strong>White rice</strong> â€” clean energy source for 2-3 hour windows
+              <strong>White rice</strong>, clean energy source for 2-3 hour windows
             </li>
             <li>
-              <strong>Whole-grain bread</strong> â€” versatile carb base (sandwiches, toast)
+              <strong>Whole-grain bread</strong>, versatile carb base (sandwiches, toast)
             </li>
             <li>
-              <strong>Greek yogurt</strong> â€” high protein, easy to digest
+              <strong>Greek yogurt</strong>, high protein, easy to digest
             </li>
             <li>
-              <strong>Eggs</strong> â€” complete protein, low fiber
+              <strong>Eggs</strong>, complete protein, low fiber
             </li>
             <li>
-              <strong>Chicken breast</strong> â€” lean protein for the 2+ hour meal
+              <strong>Chicken breast</strong>, lean protein for the 2+ hour meal
             </li>
             <li>
-              <strong>Sweet potato</strong> â€” complex carbs + potassium
+              <strong>Sweet potato</strong>, complex carbs + potassium
             </li>
             <li>
-              <strong>Berries</strong> â€” antioxidants, light on the stomach
+              <strong>Berries</strong>, antioxidants, light on the stomach
             </li>
             <li>
-              <strong>Pasta</strong> â€” sustained-release carbs for endurance work
+              <strong>Pasta</strong>, sustained-release carbs for endurance work
             </li>
           </ul>
         </>
@@ -189,7 +189,7 @@ export const guide: Guide = {
         <>
           <ul className="ml-5 flex list-disc flex-col gap-2">
             <li>
-              <strong>Performance:</strong> the standard ACSM-aligned plate â€” 60-70% carbs, 15-25%
+              <strong>Performance:</strong> the standard ACSM-aligned plate: 60-70% carbs, 15-25%
               protein, 10-15% fat. Maximize glycogen.
             </li>
             <li>
@@ -198,7 +198,7 @@ export const guide: Guide = {
             </li>
             <li>
               <strong>Fat loss:</strong> keep carbs in the lower half of the 1-4 g/kg range; do
-              not drop them to zero â€” performance suffers and the workout produces less of the
+              not drop them to zero, performance suffers and the workout produces less of the
               very stimulus you&apos;re training for.
             </li>
             <li>
@@ -217,21 +217,21 @@ export const guide: Guide = {
         <>
           <ul className="ml-5 flex list-disc flex-col gap-2">
             <li>
-              <strong>Heavy / fried foods</strong> within 2 hours â€” sit in the stomach, divert
+              <strong>Heavy / fried foods</strong> within 2 hours, sit in the stomach, divert
               blood from muscle
             </li>
             <li>
-              <strong>Very high-fiber foods</strong> within 60 minutes â€” beans, broccoli, raw
+              <strong>Very high-fiber foods</strong> within 60 minutes, beans, broccoli, raw
               cruciferous vegetables, multiple high-fiber sources stacked
             </li>
             <li>
-              <strong>Anything new</strong> on race or game day â€” try every meal at practice first
+              <strong>Anything new</strong> on race or game day, try every meal at practice first
             </li>
             <li>
-              <strong>Sugar bombs</strong> like donuts or sweet pastries â€” spike-and-crash
+              <strong>Sugar bombs</strong> like donuts or sweet pastries, spike-and-crash
             </li>
             <li>
-              <strong>Alcohol</strong> â€” impairs glycogen synthesis and rehydration
+              <strong>Alcohol</strong>, impairs glycogen synthesis and rehydration
             </li>
             <li>
               <strong>Very spicy foods</strong> if you&apos;re prone to reflux during exertion
@@ -299,33 +299,28 @@ export const guide: Guide = {
               <Link href="/recipe/athlete-overnight-oats" className="text-primary underline hover:text-ink"
               >
                 Athlete overnight oats
-              </Link>{" "}
-              â€” make-ahead, 1-2 hours out
+              </Link>: make-ahead, 1-2 hours out
             </li>
             <li>
               <Link href="/recipe/english-muffin-pb" className="text-primary underline hover:text-ink">
                 English muffin + PB + banana
-              </Link>{" "}
-              â€” 1-2 hours out, packable
+              </Link>: 1-2 hours out, packable
             </li>
             <li>
               <Link href="/recipe/chicken-rice-broccoli" className="text-primary underline hover:text-ink"
               >
                 Chicken rice broccoli
-              </Link>{" "}
-              â€” 2-3 hour pre-game meal
+              </Link>: 2-3 hour pre-game meal
             </li>
             <li>
               <Link href="/recipe/banana-almonds" className="text-primary underline hover:text-ink">
                 Banana + almonds
-              </Link>{" "}
-              â€” 30-60 minute snack
+              </Link>: 30-60 minute snack
             </li>
             <li>
               <Link href="/recipe/yogurt-parfait" className="text-primary underline hover:text-ink">
                 Greek yogurt parfait
-              </Link>{" "}
-              â€” light, 60-90 min out
+              </Link>, light, 60-90 min out
             </li>
           </ul>
         </>
@@ -336,7 +331,7 @@ export const guide: Guide = {
     {
       question: "What should I eat 30 minutes before a workout?",
       answer:
-        "A small fast-acting carb: a banana, a piece of toast with honey, an applesauce pouch, or a handful of dates. Skip fat, protein, and fiber in this window â€” they slow digestion and can cause GI distress.",
+        "A small fast-acting carb: a banana, a piece of toast with honey, an applesauce pouch, or a handful of dates. Skip fat, protein, and fiber in this window, they slow digestion and can cause GI distress.",
     },
     {
       question: "Is it OK to work out on an empty stomach?",

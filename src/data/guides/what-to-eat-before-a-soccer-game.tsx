@@ -25,13 +25,13 @@ export const guide: Guide = {
           <p>
             A soccer match drains 60-90% of muscle glycogen by full time. The pre-game meal is the
             difference between a player who finishes strong and a player whose legs disappear at
-            the 65th minute. Carbohydrate is the dominant fuel â€” GSSI&apos;s sports science review
+            the 65th minute. Carbohydrate is the dominant fuel, GSSI&apos;s sports science review
             on football fueling by Rollo identifies pre-match carbohydrate intake as the single
             biggest modifiable performance variable<Cite id="Rollo-GSSI" />.
           </p>
           <p className="mt-3">
             Cognitive performance falls off too. Decision-making, vision, and reaction time
-            degrade when glycogen runs low â€” the same applies whether the player is 11 or 31.
+            degrade when glycogen runs low: the same applies whether the player is 11 or 31.
             Pre-game fueling protects both the legs and the brain.
           </p>
         </>
@@ -111,22 +111,19 @@ export const guide: Guide = {
             <li>
               <Link href="/recipe/pasta-marinara" className="text-primary underline hover:text-ink">
                 Pasta with marinara and lean turkey
-              </Link>{" "}
-              â€” the classic, eaten across every level from U10 to MLS
+              </Link>: the classic, eaten across every level from U10 to MLS
             </li>
             <li>
               <Link href="/recipe/chicken-rice-broccoli" className="text-primary underline hover:text-ink"
               >
                 Grilled chicken with rice and broccoli
-              </Link>{" "}
-              â€” clean carbs, lean protein, easy to digest
+              </Link>, clean carbs, lean protein, easy to digest
             </li>
             <li>
               <Link href="/recipe/hibachi-chicken" className="text-primary underline hover:text-ink"
               >
                 Hibachi chicken bowl
-              </Link>{" "}
-              â€” Sunday-cook favorite, reheats perfectly for game day
+              </Link>, Sunday-cook favorite, reheats perfectly for game day
             </li>
             <li>
               <Link href="/recipe/turkey-wrap" className="text-primary underline hover:text-ink">
@@ -155,7 +152,7 @@ export const guide: Guide = {
           </p>
           <ul className="mt-3 ml-5 flex list-disc flex-col gap-2">
             <li>1 banana</li>
-            <li>1 granola bar (under 10 g sugar â€” read the label)</li>
+            <li>1 granola bar (under 10 g sugar, read the label)</li>
             <li>1 applesauce pouch</li>
             <li>Pretzels + 4 oz juice or sports drink</li>
             <li>1/2 PB&J on white bread</li>
@@ -179,7 +176,7 @@ export const guide: Guide = {
             </li>
             <li>
               <strong>High-fiber piles.</strong> Beans, broccoli, raw cruciferous vegetables, dense
-              multi-grain breads â€” fine on training days, risky pre-game.
+              multi-grain breads, fine on training days, risky pre-game.
             </li>
             <li>
               <strong>Dairy if sensitive.</strong> For some players (especially kids), milk and
@@ -190,7 +187,7 @@ export const guide: Guide = {
               for children and adolescents<Cite id="AAP-Sports-Nutrition" />.
             </li>
             <li>
-              <strong>Sugar bombs.</strong> Candy bars, frosted pastries, soda â€” spike-and-crash
+              <strong>Sugar bombs.</strong> Candy bars, frosted pastries, soda, spike-and-crash
               before the second half.
             </li>
           </ul>
@@ -213,7 +210,7 @@ export const guide: Guide = {
           </ul>
           <p className="mt-3">
             The biggest mistake is showing up already dehydrated. Per NATA, urine should be clear
-            or light yellow 2 hours before the game â€” that&apos;s the practical
+            or light yellow 2 hours before the game, that&apos;s the practical
             check<Cite id="NATA-Fluid" />.
           </p>
         </>
@@ -251,7 +248,7 @@ export const guide: Guide = {
             <Link href="/planner" className="text-primary underline">
               planner
             </Link>{" "}
-            scales every portion by athlete weight and day type automatically â€” no math required.
+            scales every portion by athlete weight and day type automatically, no math required.
           </p>
         </>
       ),

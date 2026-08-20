@@ -57,7 +57,7 @@ export const guide: Guide = {
           </p>
           <ul className="mt-3 ml-5 flex list-disc flex-col gap-2">
             <li>
-              <strong>3 hours before:</strong> a full meal â€” 1 cup cooked oats, 1/2 cup Greek
+              <strong>3 hours before:</strong> a full meal: 1 cup cooked oats, 1/2 cup Greek
               yogurt, fruit, nuts. Gives carbohydrates time to convert to glycogen and clears the
               stomach before any high-intensity work.
             </li>
@@ -68,7 +68,7 @@ export const guide: Guide = {
               timing endorses for endurance work<Cite id="ISSN-Timing" />.
             </li>
             <li>
-              <strong>30-60 minutes before:</strong> a small portion â€” 1/4 to 1/3 cup cooked rolled
+              <strong>30-60 minutes before:</strong> a small portion: 1/4 to 1/3 cup cooked rolled
               oats with a teaspoon of honey, no fat, no fiber-bomb toppings. Light enough not to
               sit heavy.
             </li>
@@ -195,7 +195,7 @@ export const guide: Guide = {
           <p className="mt-4">
             Note: cooked rolled oats are roughly 28 grams of carbohydrate per 1/2 cup per USDA
             FoodData Central<Cite id="USDA-FoodData" />. Toppings carry the rest of the carb load
-            for larger athletes â€” that&apos;s the role of the banana, honey, or fruit.
+            for larger athletes, that&apos;s the role of the banana, honey, or fruit.
           </p>
         </>
       ),
@@ -218,7 +218,7 @@ export const guide: Guide = {
               <strong>2 egg whites or 1 whole egg:</strong> +6-7 g protein, classic athlete combo
             </li>
             <li>
-              <strong>1 scoop whey protein:</strong> +25 g protein (adults 18+ only â€” see kid
+              <strong>1 scoop whey protein:</strong> +25 g protein (adults 18+ only, see kid
               section below)
             </li>
             <li>
@@ -231,7 +231,7 @@ export const guide: Guide = {
           </ul>
           <p className="mt-3">
             Fruit toppings add fast-acting carbohydrates that complement the slow release of the
-            oats. Bananas are the classic pairing â€” they also deliver potassium that offsets
+            oats. Bananas are the classic pairing, they also deliver potassium that offsets
             sodium loss during sweaty workouts.
           </p>
         </>
@@ -265,7 +265,7 @@ export const guide: Guide = {
             <li>
               <strong>Skipping protein entirely.</strong> Carbs alone leave you hungry and protein
               synthesis lagging. The ISSN protein position stand calls for 0.4-0.55 g/kg per meal
-              for athletes<Cite id="ISSN-Protein" /> â€” at least one protein source belongs in the
+              for athletes<Cite id="ISSN-Protein" />, at least one protein source belongs in the
               bowl.
             </li>
           </ul>
@@ -278,7 +278,7 @@ export const guide: Guide = {
       body: (
         <>
           <p>
-            Oatmeal is one of the safest pre-workout meals for young athletes â€” high in complex
+            Oatmeal is one of the safest pre-workout meals for young athletes, high in complex
             carbohydrates, naturally low in saturated fat, and within the dietary patterns the
             AAP&apos;s Bright Futures Sports Nutrition guidance endorses for active children
             <Cite id="AAP-Bright-Futures" />. Some specifics for the 8-17 age band:
@@ -286,7 +286,7 @@ export const guide: Guide = {
           <ul className="mt-3 ml-5 flex list-disc flex-col gap-2">
             <li>
               <strong>Skip protein powder.</strong> Children under 13 should hit protein targets
-              with whole foods (Greek yogurt, milk, eggs, nut butter) â€” not powder. Per AAP
+              with whole foods (Greek yogurt, milk, eggs, nut butter), not powder. Per AAP
               guidance, supplement marketing aimed at youth is not appropriate without medical
               oversight<Cite id="AAP-Promotion" />.
             </li>
@@ -328,22 +328,19 @@ export const guide: Guide = {
               <Link href="/recipe/athlete-overnight-oats" className="text-primary underline hover:text-ink"
               >
                 Athlete overnight oats
-              </Link>{" "}
-              â€” make-ahead version for morning training. Rolled oats, Greek yogurt, banana, chia,
+              </Link>: make-ahead version for morning training. Rolled oats, Greek yogurt, banana, chia,
               honey.
             </li>
             <li>
               <Link href="/recipe/berry-oat-fuel" className="text-primary underline hover:text-ink">
                 Berry oat fuel smoothie
-              </Link>{" "}
-              â€” same nutrients, blender format. Drinkable, faster pre-practice.
+              </Link>: same nutrients, blender format. Drinkable, faster pre-practice.
             </li>
             <li>
               <Link href="/recipe/chocolate-cherry-recovery" className="text-primary underline hover:text-ink"
               >
                 Chocolate cherry oats
-              </Link>{" "}
-              â€” tart cherry + cocoa angle. Works as a pre-workout when light, recovery when
+              </Link>: tart cherry + cocoa angle. Works as a pre-workout when light, recovery when
               loaded.
             </li>
           </ul>
@@ -404,7 +401,7 @@ export const guide: Guide = {
     {
       question: "Can kids eat oatmeal before sports practice?",
       answer:
-        "Yes. Oatmeal is one of the safer pre-practice meals for kids 8+ â€” high in complex carbs, low in saturated fat, AAP-aligned for active children. Use a smaller portion (1/2 cup cooked) and skip protein powders. Pair with milk or yogurt for whole-food protein.",
+        "Yes. Oatmeal is one of the safer pre-practice meals for kids 8+, high in complex carbs, low in saturated fat, AAP-aligned for active children. Use a smaller portion (1/2 cup cooked) and skip protein powders. Pair with milk or yogurt for whole-food protein.",
     },
   ],
   howTo: {

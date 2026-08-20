@@ -32,7 +32,7 @@ export const guide: Guide = {
           <p className="mt-3">
             The classic build: a starch the kid actually likes (pasta, rice, bread), a lean
             protein (chicken, turkey, eggs, peanut butter), a piece of fruit, and water. Nothing
-            new on game day â€” every food the child eats pre-game should have been tested at
+            new on game day, every food the child eats pre-game should have been tested at
             practice first.
           </p>
         </>
@@ -88,8 +88,7 @@ export const guide: Guide = {
             <li>
               <Link href="/recipe/pasta-marinara" className="text-primary underline hover:text-ink">
                 Pasta with marinara and turkey
-              </Link>{" "}
-              â€” the classic carb-load
+              </Link>: the classic carb-load
             </li>
             <li>
               <Link href="/recipe/chicken-rice-broccoli" className="text-primary underline hover:text-ink"
@@ -107,8 +106,7 @@ export const guide: Guide = {
               <Link href="/recipe/hibachi-chicken" className="text-primary underline hover:text-ink"
               >
                 Hibachi chicken bowl
-              </Link>{" "}
-              â€” make Sunday, reheat anytime
+              </Link>, make Sunday, reheat anytime
             </li>
             <li>
               <Link href="/recipe/chicken-pasta-broccoli" className="text-primary underline hover:text-ink"
@@ -157,8 +155,7 @@ export const guide: Guide = {
               <Link href="/recipe/athlete-overnight-oats" className="text-primary underline hover:text-ink"
               >
                 Overnight oats
-              </Link>{" "}
-              â€” made the night before, eaten cold or warmed
+              </Link>, made the night before, eaten cold or warmed
             </li>
             <li>
               <Link href="/recipe/english-muffin-pb" className="text-primary underline hover:text-ink"
@@ -202,7 +199,7 @@ export const guide: Guide = {
               <strong>Fried foods.</strong> Sit heavy, slow digestion, common cramp trigger.
             </li>
             <li>
-              <strong>High-fiber bombs.</strong> Beans, raw broccoli, multi-grain granola â€” fine
+              <strong>High-fiber bombs.</strong> Beans, raw broccoli, multi-grain granola, fine
               other days, risky pre-game.
             </li>
             <li>
@@ -212,7 +209,7 @@ export const guide: Guide = {
               minutes in heat, a low-sugar sports drink is the right answer.
             </li>
             <li>
-              <strong>Sugar bombs.</strong> Candy bars, frosted pastries, soda â€” spike-and-crash
+              <strong>Sugar bombs.</strong> Candy bars, frosted pastries, soda, spike-and-crash
               before the second half.
             </li>
             <li>
@@ -230,7 +227,7 @@ export const guide: Guide = {
           <p>
             NATA&apos;s position statement on fluid replacement gives a clear pre-game template:
             16-20 oz of water 2-3 hours before, then another 8-10 oz 10-20 minutes before warm-up
-            <Cite id="NATA-Fluid" />. For young athletes, that scales down with body weight â€” a
+            <Cite id="NATA-Fluid" />. For young athletes, that scales down with body weight: a
             70-lb 9-year-old needs about 10-12 oz of the first dose, not 16-20.
           </p>
           <p className="mt-3">
@@ -269,7 +266,7 @@ export const guide: Guide = {
               <strong>15-30 min before each game:</strong> banana or granola bar
             </li>
             <li>
-              <strong>After the last game:</strong> full recovery meal within 60 minutes â€” see
+              <strong>After the last game:</strong> full recovery meal within 60 minutes, see
               our match-day recipes
             </li>
           </ul>
@@ -313,7 +310,7 @@ export const guide: Guide = {
     {
       question: "What if my kid won't eat before a game?",
       answer:
-        "Try liquid format (smoothies, milk, juice). Try familiar comfort foods at lower volume â€” half a peanut butter sandwich beats nothing. Try moving the meal earlier. If the kid is consistently nauseous before games, pre-game anxiety is more often the cause than the food.",
+        "Try liquid format (smoothies, milk, juice). Try familiar comfort foods at lower volume: half a peanut butter sandwich beats nothing. Try moving the meal earlier. If the kid is consistently nauseous before games, pre-game anxiety is more often the cause than the food.",
     },
   ],
   citations: citationsList(

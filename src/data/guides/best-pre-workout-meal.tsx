@@ -38,7 +38,7 @@ export const guide: Guide = {
               <strong>Low fat and moderate fiber</strong> for clean digestion
             </li>
             <li>
-              <strong>Easy to time</strong> â€” works in the 1-3 hour window most athletes have
+              <strong>Easy to time</strong>, works in the 1-3 hour window most athletes have
             </li>
           </ol>
           <p className="mt-3">
@@ -163,7 +163,7 @@ export const guide: Guide = {
               egg or second protein source
             </li>
             <li>
-              <strong>Fat loss:</strong> Greek yogurt parfait or eggs + toast â€” lower-calorie but
+              <strong>Fat loss:</strong> Greek yogurt parfait or eggs + toast, lower-calorie but
               still hitting protein and carb minimums
             </li>
             <li>
@@ -236,9 +236,9 @@ export const guide: Guide = {
             <li>Heavy / fried foods within 2 hours</li>
             <li>Multiple high-fiber sources stacked within 60 minutes</li>
             <li>Anything new on game or race day</li>
-            <li>Sugar bombs (donuts, frosted pastries) â€” spike-and-crash</li>
+            <li>Sugar bombs (donuts, frosted pastries), spike-and-crash</li>
             <li>Caffeinated pre-workout supplements for athletes under 18</li>
-            <li>Alcohol the night before â€” impairs glycogen synthesis</li>
+            <li>Alcohol the night before, impairs glycogen synthesis</li>
           </ul>
         </>
       ),

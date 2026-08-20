@@ -25,7 +25,7 @@ export const guide: Guide = {
           <p>
             For adults: it depends on the workout type and your goals. For short, easy cardio
             under 45 minutes, fasted training is a viable approach. For high-intensity work,
-            lifting, or sessions over 60 minutes, eating something â€” even small â€” improves
+            lifting, or sessions over 60 minutes, eating something, even small, improves
             performance and recovery per ISSN&apos;s nutrient timing position stand
             <Cite id="ISSN-Timing" />.
           </p>
@@ -80,8 +80,7 @@ export const guide: Guide = {
       body: (
         <>
           <p>
-            You overslept. Practice starts in 15 minutes. The right move is not skipping fuel â€”
-            it&apos;s eating the most-digestible carb you have on hand:
+            You overslept. Practice starts in 15 minutes. The right move is not skipping fuel, it&apos;s eating the most-digestible carb you have on hand:
           </p>
           <ul className="mt-3 ml-5 flex list-disc flex-col gap-2">
             <li>1 medjool date (~17 g fast carbs)</li>
@@ -127,8 +126,7 @@ export const guide: Guide = {
             <li>
               <Link href="/recipe/athlete-overnight-oats" className="text-primary underline hover:text-ink">
                 Athlete overnight oats
-              </Link>{" "}
-              â€” make it the night before
+              </Link>, make it the night before
             </li>
             <li>
               <Link href="/recipe/eggs-toast" className="text-primary underline hover:text-ink">
@@ -162,7 +160,7 @@ export const guide: Guide = {
       body: (
         <>
           <p>
-            Adult athletes can train fasted for short, low-intensity sessions â€” easy zone-2 cardio
+            Adult athletes can train fasted for short, low-intensity sessions, easy zone-2 cardio
             under 45 minutes is the textbook example. For higher intensity or longer duration,
             performance suffers and the workout produces less of the very stimulus you&apos;re
             after.
@@ -185,7 +183,7 @@ export const guide: Guide = {
         <>
           <p>
             For adults, 3-6 mg of caffeine per kg of body weight 30-60 minutes before exercise
-            modestly improves endurance and high-intensity performance â€” a standard finding across
+            modestly improves endurance and high-intensity performance, a standard finding across
             ISSN literature<Cite id="ISSN-Timing" />. Coffee, green tea, or a caffeinated
             pre-workout supplement falls in this range for most adults.
           </p>
@@ -207,7 +205,7 @@ export const guide: Guide = {
             Overnight dehydration is real. Most athletes wake at 1-2% body-mass deficit just from
             respiration and bathroom trips. NATA recommends 16-20 oz water on rising for any
             athlete training within 2 hours<Cite id="NATA-Fluid" />. Drink the water before you
-            decide what to eat â€” that alone addresses much of the morning energy slump.
+            decide what to eat, that alone addresses much of the morning energy slump.
           </p>
           <p className="mt-3">
             The FuelMyAthlete{" "}
@@ -249,7 +247,7 @@ export const guide: Guide = {
     {
       question: "Should I eat before a morning workout?",
       answer:
-        "For adult athletes, yes for anything over 45 minutes or above moderate intensity. For short easy cardio, fasted training is fine. For children and adolescents, always yes â€” AAP guidance is explicit that youth athletes should not train fasted.",
+        "For adult athletes, yes for anything over 45 minutes or above moderate intensity. For short easy cardio, fasted training is fine. For children and adolescents, always yes, AAP guidance is explicit that youth athletes should not train fasted.",
     },
     {
       question: "What should I eat 30 minutes before a morning workout?",
