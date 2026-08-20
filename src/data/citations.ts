@@ -1,6 +1,12 @@
 import type { Citation } from "@/types/domain";
 
-export const CITATIONS: Record<string, Citation> = {
+// `satisfies` rather than a type annotation, deliberately.
+//
+// As `Record<string, Citation>` the keys were just `string`, so citationsList accepted anything
+// and a wrong key returned undefined. That produced a guide whose citations array was full of
+// holes, which crashed GuideJsonLd on `.title` and rendered the whole page as "That did not
+// load". A typo in a citation key should be a compile error, not a blank page.
+export const CITATIONS = {
   ACSM_2016: {
     id: "ACSM-2016",
     authors: "Thomas DT, Erdman KA, Burke LM",
@@ -113,7 +119,7 @@ export const CITATIONS: Record<string, Citation> = {
     year: 2020,
     url: "https://academic.oup.com/nutritionreviews/article/78/Supplement_1/13/5871416",
   },
-};
+} satisfies Record<string, Citation>;
 
 export function citationsList(...keys: (keyof typeof CITATIONS)[]): Citation[] {
   return keys.map((k) => CITATIONS[k]);
