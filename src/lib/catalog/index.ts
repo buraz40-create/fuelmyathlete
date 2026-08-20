@@ -1,5 +1,8 @@
-import { MEALS, MEALS_BY_SLOT, MEALS_BY_SLUG } from "@/data/meals";
-import { INGREDIENT_BY_SLUG } from "@/data/ingredients";
+// Relative with the .ts extension, not the "@/" alias, because this module is imported by a
+// node --test suite and node resolves ESM specifiers literally: no tsconfig paths, no
+// extensionless files. Type-only imports are erased before node sees them and keep the alias.
+import { MEALS, MEALS_BY_SLOT, MEALS_BY_SLUG } from "../../data/meals.ts";
+import { INGREDIENT_BY_SLUG } from "../../data/ingredients.ts";
 import type { Ingredient, Meal, MealSlot } from "@/types/domain";
 import type { ImportedRecipe } from "@/lib/import/storage";
 

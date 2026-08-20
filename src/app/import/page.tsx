@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 export default async function ImportPage({
   searchParams,
 }: {
-  searchParams: Promise<{ title?: string; text?: string; url?: string }>;
+  searchParams: Promise<{ title?: string; text?: string; url?: string; edit?: string }>;
 }) {
   const shared = await searchParams;
 
@@ -40,6 +40,7 @@ export default async function ImportPage({
         sharedTitle={shared.title}
         sharedText={shared.text}
         sharedUrl={shared.url}
+        editId={shared.edit}
       />
     </AppShell>
   );

@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { ClipboardText, Warning, CheckCircle, Trash, Question, Link as LinkIcon, CircleNotch } from "@phosphor-icons/react/dist/ssr";
 import { parseRecipeText, type ParsedIngredient } from "@/lib/import/parse";
 import { matchIngredient, customIngredient } from "@/lib/import/match";
+import { INGREDIENT_BY_SLUG } from "@/data/ingredients";
 import {
   importedRecipes,
   newImportId,
@@ -70,6 +71,8 @@ interface ImportClientProps {
   sharedTitle?: string;
   sharedText?: string;
   sharedUrl?: string;
+  /** Set when editing a recipe already saved, rather than importing a new one. */
+  editId?: string;
 }
 
 /**
@@ -88,7 +91,7 @@ function firstUrlIn(...candidates: (string | undefined)[]): string | undefined {
   return undefined;
 }
 
-export function ImportClient({ sharedTitle, sharedText, sharedUrl }: ImportClientProps) {
+export function ImportClient({ sharedTitle, sharedText, sharedUrl, editId }: ImportClientProps) {
   // Derived straight into initial state rather than applied by an effect. A share is known at
   // first render, so seeding it in an effect would render the empty form and then immediately
   // re-render the filled one, which is a visible flash and a cascading render for no reason.
@@ -114,9 +117,71 @@ export function ImportClient({ sharedTitle, sharedText, sharedUrl }: ImportClien
   // succeeds, so a link import is not filed as if someone typed it out.
   const [sourceKind, setSourceKind] = useState<ImportSource>("text");
   const [siteName, setSiteName] = useState<string | undefined>(undefined);
+  // Set when editing, so save updates that record instead of creating a second copy.
+  const [existingId, setExistingId] = useState<string | undefined>(undefined);
+  const [editMissing, setEditMissing] = useState(false);
   const reduced = useReducedMotion();
 
   const parsed = useMemo(() => (text.trim() ? parseRecipeText(text) : null), [text]);
+
+  /**
+   * Loads a saved recipe back into the review screen for editing.
+   *
+   * This one genuinely belongs in an effect, unlike the share seeding above: the record lives
+   * in localStorage, which does not exist during the server render, so reading it at render
+   * time would either crash on the server or hydrate a different tree than it rendered.
+   */
+  /* eslint-disable react-hooks/set-state-in-effect --
+     The rule assumes the data is available at render time, which is exactly what makes it
+     right for the share seeding above. It is not true here: this record lives in localStorage,
+     which does not exist during the server render. Reading it at render time would hydrate a
+     different tree than the server produced. React batches these into one render anyway, so
+     the cascading-render concern the rule is guarding against does not apply. */
+  useEffect(() => {
+    if (!editId) return;
+    const rec = importedRecipes.get(editId);
+    if (!rec) {
+      setEditMissing(true);
+      return;
+    }
+    const byCustomSlug = new Map(rec.customIngredients.map((i) => [i.slug, i]));
+
+    setExistingId(rec.id);
+    setName(rec.name);
+    setSlot(rec.slot);
+    setSteps(rec.steps);
+    setServings(rec.servings);
+    setSourceUrl(rec.source.url ?? "");
+    setSourceKind(rec.source.kind);
+    setSiteName(rec.source.siteName);
+    setRows(
+      rec.ingredients.map((i) => {
+        const custom = byCustomSlug.get(i.ingredientSlug);
+        const catalog = custom ? undefined : INGREDIENT_BY_SLUG[i.ingredientSlug];
+        const known = custom ?? catalog;
+        return {
+          // The raw line is kept on the record precisely so an edit can still show what the
+          // source originally said.
+          parsed: {
+            raw: i.raw,
+            quantity: i.quantity,
+            unit: known?.unit ?? null,
+            name: known?.name ?? i.raw,
+            isHeader: false,
+          },
+          match: catalog ?? null,
+          alternatives: [],
+          confidence: catalog ? "strong" : "none",
+          quantity: i.quantity,
+          category: known?.category ?? "produce",
+          unit: known?.unit ?? "each",
+          include: true,
+        };
+      })
+    );
+    setStage("review");
+  }, [editId]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   /**
    * Reads a recipe off a link.
@@ -199,7 +264,9 @@ export function ImportClient({ sharedTitle, sharedText, sharedUrl }: ImportClien
   }
 
   function save() {
-    const id = newImportId();
+    // Reuse the id when editing so this replaces the recipe rather than adding a near-copy,
+    // and so any week that already plans it keeps pointing at the right thing.
+    const id = existingId ?? newImportId();
     const customs: Ingredient[] = [];
 
     const ingredients = included.map((r) => {
@@ -274,10 +341,27 @@ export function ImportClient({ sharedTitle, sharedText, sharedUrl }: ImportClien
         </p>
       </header>
 
-      {saved ? (
+      {editMissing ? (
+        <div className="rounded-3xl border border-border bg-surface p-6 text-center shadow-sm">
+          <Warning size={28} weight="duotone" aria-hidden className="mx-auto text-day-match" />
+          <h2 className="mt-3 text-xl">That recipe is not on this device</h2>
+          <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+            Imported recipes are stored per device, so a link to one from another phone or
+            browser will not find it here. Nothing has been lost on the device that has it.
+          </p>
+          <p className="mt-5">
+            <Link
+              href="/import"
+              className="rounded-full bg-primary px-5 py-2 text-sm font-medium text-primary-foreground transition hover:opacity-90"
+            >
+              Add a recipe instead
+            </Link>
+          </p>
+        </div>
+      ) : saved ? (
         <div className="rounded-3xl border border-border bg-surface p-6 text-center shadow-sm">
           <CheckCircle size={32} weight="duotone" aria-hidden className="mx-auto text-primary" />
-          <h2 className="mt-3 text-xl">Saved {saved}</h2>
+          <h2 className="mt-3 text-xl">{existingId ? "Updated" : "Saved"} {saved}</h2>
           <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
             It is stored on this device only. It does not sync yet, and clearing your browser
             data would remove it.

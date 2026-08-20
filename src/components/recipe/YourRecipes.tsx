@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { Trash, DownloadSimple, ArrowSquareOut } from "@phosphor-icons/react/dist/ssr";
+import { ArrowSquareOut, DownloadSimple, PencilSimple, Trash } from "@phosphor-icons/react/dist/ssr";
 import { FoodImage } from "@/components/food/FoodImage";
 import { useCustomMeals } from "@/hooks/useCustomMeals";
 import { importedRecipes } from "@/lib/import/storage";
@@ -133,15 +134,26 @@ export function YourRecipes() {
                       </button>
                     </p>
                   ) : (
-                    <button
-                      type="button"
-                      onClick={() => setConfirming(rec.id)}
-                      aria-label={`Delete ${rec.name}`}
-                      className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground transition hover:text-danger"
-                    >
-                      <Trash size={11} weight="bold" aria-hidden />
-                      Delete
-                    </button>
+                    <p className="mt-2 flex items-center gap-3">
+                      {/* Without this you could create a recipe and delete a recipe, but not
+                          fix a typo in one, which meant redoing the whole import. */}
+                      <Link
+                        href={`/import?edit=${rec.id}`}
+                        className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground transition hover:text-primary"
+                      >
+                        <PencilSimple size={11} weight="bold" aria-hidden />
+                        Edit
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => setConfirming(rec.id)}
+                        aria-label={`Delete ${rec.name}`}
+                        className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground transition hover:text-danger"
+                      >
+                        <Trash size={11} weight="bold" aria-hidden />
+                        Delete
+                      </button>
+                    </p>
                   )}
                 </div>
               </motion.li>
