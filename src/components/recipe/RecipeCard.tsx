@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, Users } from "@phosphor-icons/react/dist/ssr";
+import { ArrowsClockwise, Clock, Users } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { FoodImage } from "@/components/food/FoodImage";
 import type { MealSlot, Recipe } from "@/types/domain";
@@ -50,12 +50,22 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
         />
       )}
       <div className="flex flex-1 flex-col p-4 md:p-5">
-        {slot && (
-          <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-            <span className={cn("h-2 w-2 rounded-full", SLOT_DOT[slot])} />
-            {SLOT_LABEL[slot]}
-          </span>
-        )}
+        <div className="flex flex-wrap items-center gap-2">
+          {slot && (
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              <span className={cn("h-2 w-2 rounded-full", SLOT_DOT[slot])} />
+              {SLOT_LABEL[slot]}
+            </span>
+          )}
+          {/* The answer to "what do I cook on Sunday" belongs on the card, not three clicks
+              in. Until now only the hibachi recipe said it, and it said it in prose. */}
+          {recipe.prepAhead && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-primary">
+              <ArrowsClockwise size={10} weight="bold" aria-hidden />
+              Preps ahead
+            </span>
+          )}
+        </div>
         <h3 className="mt-1.5 text-base font-semibold leading-snug text-ink md:text-lg">
           {recipe.name}
         </h3>

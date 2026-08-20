@@ -590,6 +590,11 @@ export const RECIPES: Recipe[] = [
       "Reheat tip: add a splash of water before microwaving so it does not dry out.",
       "Athletes need carbs. Do not skimp on the pasta portion just because the internet told you to.",
     ],
+    prepAhead: {
+      yields: "4 servings. Good cold, which makes it a no-microwave school lunch.",
+      keepsDays: 4,
+      reheat: "Fine cold straight from the container. Warm it with a splash of water if you prefer.",
+    },
   },
 
   // ────────── SNACK ──────────
@@ -796,6 +801,11 @@ export const RECIPES: Recipe[] = [
       "Cook the rice with a pinch of salt. Otherwise it tastes flat next to the seasoned chicken.",
       "Scales: 0.9× portions on rest days, 1.2× on training days, 1.3× on match days.",
     ],
+    prepAhead: {
+      yields: "4 dinners, or 2 dinners and 2 packed lunches",
+      keepsDays: 4,
+      reheat: "Covered, with a spoon of water over the rice. Rice reheats badly dry and fine damp.",
+    },
   },
   {
     slug: "salmon-sweet-potato",
@@ -900,6 +910,12 @@ export const RECIPES: Recipe[] = [
       "Whole-grain tortillas matter. They hold up better than corn and add fiber.",
       "Plain Greek yogurt instead of sour cream adds protein and tastes the same with lime.",
     ],
+    prepAhead: {
+      yields: "Filling for 4 meals. Warm the tortillas fresh each time.",
+      keepsDays: 4,
+      freezerDays: 90,
+      reheat: "Filling in the microwave or a pan. Never store it in the tortilla, it goes to paste.",
+    },
   },
   {
     slug: "pasta-marinara",
@@ -946,6 +962,12 @@ export const RECIPES: Recipe[] = [
       "Whole-grain pasta releases energy slower than white. Better for next-day fuel.",
       "Add the pasta to the sauce, not the sauce to the pasta. The starch helps everything cling.",
     ],
+    prepAhead: {
+      yields: "4 servings, and the sauce alone freezes for later weeks",
+      keepsDays: 4,
+      freezerDays: 90,
+      reheat: "Splash of water, covered. Cooked pasta drinks the sauce overnight and needs loosening.",
+    },
   },
   {
     slug: "stirfry-chicken-rice",
@@ -992,6 +1014,11 @@ export const RECIPES: Recipe[] = [
       "Use chicken breast, not thighs. Cleaner flavor and works better for athlete portions.",
       "Edamame brings 8 grams of plant protein per cup, plus fiber.",
     ],
+    prepAhead: {
+      yields: "4 servings, reheats well in a thermos",
+      keepsDays: 3,
+      reheat: "Hot pan for a minute beats the microwave here, the vegetables stay crisp.",
+    },
   },
 
   // ────────── HIBACHI (signature recipe) ──────────
@@ -1054,6 +1081,12 @@ export const RECIPES: Recipe[] = [
       "Use chicken BREAST, not thighs. Elvis prefers breast. A little extra soy + butter keeps it juicy without thigh fat.",
       "The biggest mistake is cooking on medium. You need HIGH heat for the char. Medium just steams.",
     ],
+    prepAhead: {
+      yields: "5 school lunches plus 3 dinner reheats",
+      keepsDays: 4,
+      freezerDays: 60,
+      reheat: "Splash of water in the container, microwave covered. The water steams it back instead of drying it out.",
+    },
   },
   // ────────── ATHLETE OVERNIGHT OATS ──────────
   {
@@ -1105,6 +1138,309 @@ export const RECIPES: Recipe[] = [
       addedKcal: 120,
       note: "Adult athletes 18+ who train 90+ minutes. Skip for kids under 13. whole-food protein from Greek yogurt is enough at that age.",
     },
+    prepAhead: {
+      yields: "Make 3 jars at once on Sunday night",
+      keepsDays: 3,
+      reheat: "Eaten cold. Loosen with a splash of milk, it thickens every day it sits.",
+    },
+  },
+  {
+    slug: "hibachi-chicken-bowl",
+    name: "Hibachi chicken rice bowl",
+    slot: "lunch",
+    servings: 1,
+    totalMinutes: 5,
+    imageUrl: "/images/recipes/hibachi-chicken-bowl.jpg",
+    whenToEat: "The school lunch this whole system is built around. Five minutes on Sunday per box, nothing on a weekday.",
+    equipment: ["Meal-prep container with a lid", "Small sauce cup"],
+    prepAhead: {
+      yields: "5 school lunches from one hibachi cook session",
+      keepsDays: 4,
+      reheat: "Microwave covered with a splash of water. If there is no microwave, it is fine cold.",
+    },
+    steps: [
+      {
+        order: 1,
+        title: "Rice on the bottom, cold",
+        body: "1 cup cooked jasmine rice, spread flat and completely cool before the lid goes on. Warm rice under a lid steams itself and by Tuesday the bottom is gluey.",
+        mistake: "Building the box while anything is still warm. Everything cools on a tray first, then it gets assembled.",
+      },
+      {
+        order: 2,
+        title: "Chicken beside the rice, not on it",
+        body: "About 4 oz of the hibachi chicken alongside rather than on top. Sitting on the rice it sheds sauce downward all week and you get one soggy corner.",
+      },
+      {
+        order: 3,
+        title: "Broccoli and carrot in their own corner",
+        body: "Half a cup of broccoli and a few carrot sticks in the third corner. Cooked broccoli gives off water as it sits, which is the other thing that ruins the rice.",
+      },
+      {
+        order: 4,
+        title: "Sauce travels separately, always",
+        body: "Yum-yum or extra soy in a small lidded cup, added at the table. This is the single difference between a lunch that comes back empty and one that comes back half eaten.",
+      },
+    ],
+    notes: [
+      "Cook the hibachi chicken recipe once on Sunday and five of these take about twenty minutes total.",
+      "Pack the box with an ice pack. USDA says at or below 40F, and a school bag in Florida is not that on its own.",
+      "Sesame seeds and a squeeze of lime at the table wake it up on day four.",
+      "No microwave at school is fine. Cold hibachi rice is genuinely good, which is more than can be said for most reheated lunches.",
+    ],
+  },
+  {
+    slug: "hibachi-bowl-matchday",
+    name: "Match-day hibachi bowl (light sauce)",
+    slot: "lunch",
+    servings: 1,
+    totalMinutes: 5,
+    imageUrl: "/images/recipes/hibachi-bowl-matchday.jpg",
+    whenToEat: "2 to 3 hours before kickoff. His favourite meal, retuned so it does not sit in his stomach.",
+    equipment: ["Meal-prep container with a lid"],
+    steps: [
+      {
+        order: 1,
+        title: "More rice than usual",
+        body: "1 and a quarter cups of jasmine rice instead of one. Before a match the carbohydrate is the point, and white jasmine rice is deliberate here: low fibre, empties from the stomach quickly.",
+      },
+      {
+        order: 2,
+        title: "Less oil, and skip the sesame oil entirely",
+        body: "Roughly 5 oz of chicken, but take it from the pan before the butter and sesame go in, or rinse the extra sauce off. Fat is the slowest thing to leave the stomach and it is the usual reason a pre-match meal comes back up during warm-ups.",
+        mistake: "Serving the full-sauce version because it is his favourite. It is the right food and the wrong dressing for a match day.",
+      },
+      {
+        order: 3,
+        title: "Edamame instead of broccoli",
+        body: "A quarter cup of shelled edamame. Less fibre than broccoli and it does not give off water, so a box built in the morning still eats well at noon.",
+      },
+      {
+        order: 4,
+        title: "One tablespoon of soy, on the food, not in a cup",
+        body: "Enough to taste like the meal he likes, not enough to be a salt load. This one goes on before packing because there is no table to assemble at.",
+      },
+    ],
+    notes: [
+      "Nothing new on a game day. This works because it is a version of a meal he already eats every week.",
+      "2 to 3 hours is the window. Closer than that, cut the chicken back and lean on the rice and a banana.",
+      "If the tournament runs long, this is the meal to pack two of. It is the one he reliably finishes.",
+      "Low fibre is a match-day choice, not a general one. On a normal school day the broccoli version is the better meal.",
+    ],
+  },
+  {
+    slug: "pre-match-plain-plate",
+    name: "Chicken + rice, plain",
+    slot: "lunch",
+    servings: 1,
+    totalMinutes: 15,
+    imageUrl: "/images/recipes/pre-match-plain-plate.jpg",
+    whenToEat: "3 hours before kickoff, on a day where the stomach is already nervous. Deliberately boring.",
+    equipment: ["Small saucepan", "Skillet"],
+    steps: [
+      {
+        order: 1,
+        title: "Plain white rice, no oil, no seasoning",
+        body: "1 and a quarter cups cooked jasmine rice. Nothing on it. This plate exists because a nervous stomach and an unfamiliar flavour is a bad combination an hour before a match.",
+      },
+      {
+        order: 2,
+        title: "Chicken cooked dry, salt only",
+        body: "About 5 oz of chicken breast in a dry or barely oiled pan, salted, cooked through, sliced. No sauce, no butter, no garlic. Fat and strong flavours are the two things most likely to come back on you.",
+        timerSec: 480,
+        mistake: "Adding a sauce because it looks sad on the plate. Sad on the plate is the entire design here.",
+      },
+      {
+        order: 3,
+        title: "A banana on the side",
+        body: "Eaten with the meal or kept for 45 minutes before warm-ups. Easy carbohydrate that nobody has ever struggled to digest.",
+      },
+    ],
+    notes: [
+      "This is the plate for a first tournament, an away game, or any day he says his stomach feels funny. It is not meant to be the everyday meal.",
+      "Low fat and low fibre is the whole point. Both slow down how fast the stomach empties, and full is the worst way to start a match.",
+      "3 hours is the target. If it slips to 90 minutes, halve the chicken and keep the rice.",
+      "Boring is a feature. Every ingredient here is one he has eaten a hundred times.",
+    ],
+  },
+  {
+    slug: "tournament-sub",
+    name: "Tournament turkey sub",
+    slot: "lunch",
+    servings: 1,
+    totalMinutes: 6,
+    imageUrl: "/images/recipes/tournament-sub.jpg",
+    whenToEat: "Between games at a tournament. Built for a sideline and a cooler, not a table.",
+    equipment: ["Knife", "Foil or parchment", "Cooler with ice packs"],
+    steps: [
+      {
+        order: 1,
+        title: "Cheese against both faces of the bread",
+        body: "A slice of cheddar on the bottom slice and, if you have it, a second on the top. Cheese is the waterproof layer. Lettuce and turkey against bare bread is how a sub becomes wet paper by the second game.",
+        mistake: "Dressing it at home. Mayo, mustard and vinaigrette all soak in over four hours in a cooler. Send them in a packet or leave them out.",
+      },
+      {
+        order: 2,
+        title: "Turkey folded, not laid flat",
+        body: "3 oz of deli turkey folded into loose ruffles rather than pressed in flat sheets. Folded meat gives the sandwich height and structure so it can be eaten one-handed standing up.",
+      },
+      {
+        order: 3,
+        title: "Lettuce in the middle of the stack",
+        body: "Half a cup of romaine between the turkey layers, never touching the bread. Same rule as the wrap, and the same reason.",
+      },
+      {
+        order: 4,
+        title: "Wrap it tight in foil, then chill it hard",
+        body: "Roll it in foil and twist the ends. A tightly wrapped sub holds its shape in a bag; a loose one arrives as components. Into the cooler with two ice packs, one under and one on top.",
+      },
+    ],
+    notes: [
+      "Deli turkey is perishable. USDA guidance is at or below 40F, and a Florida sideline cooler needs real ice packs, not one thin gel sheet.",
+      "Cut it in half before wrapping. Half a sub between games digests better than a whole one, and the second half is there for later.",
+      "Whole-grain bread holds up structurally far better than soft white, quite apart from the fibre.",
+      "Lower-sodium deli turkey is worth hunting for. A tournament day already carries a lot of salt from everything else in the cooler.",
+    ],
+  },
+  {
+    slug: "chicken-quesadilla",
+    name: "Chicken quesadilla + peppers",
+    slot: "lunch",
+    servings: 2,
+    totalMinutes: 10,
+    imageUrl: "/images/recipes/chicken-quesadilla.jpg",
+    whenToEat: "Fast hot lunch on a rest day, or cut into strips for a lunchbox the next morning.",
+    equipment: ["Skillet", "Spatula", "Knife"],
+    prepAhead: {
+      yields: "2 servings. Cooked and cut, they pack cold for two more lunches.",
+      keepsDays: 3,
+      reheat: "Dry pan, two minutes a side. The microwave turns the tortilla to rubber.",
+    },
+    steps: [
+      {
+        order: 1,
+        title: "Dry pan first, no oil",
+        body: "Heat a skillet over medium with nothing in it. A whole-grain tortilla toasts better dry than oiled, and oil makes the outside greasy before the cheese has melted.",
+        mistake: "Cooking on high because it is a quick meal. High heat browns the tortilla in a minute while the middle is still cold cheese.",
+      },
+      {
+        order: 2,
+        title: "Cheese, then filling, then cheese",
+        body: "Tortilla in the pan, half a slice of cheddar over the whole surface, then about 4 oz of cooked sliced chicken and half a diced bell pepper on one half, then the rest of the cheese on top. Cheese on both sides is the glue. Filling straight onto the tortilla slides out the moment you fold it.",
+      },
+      {
+        order: 3,
+        title: "Fold, press, and wait",
+        body: "Fold the empty half over and press it flat with a spatula. Two to three minutes a side until the outside is spotted brown and the cheese has actually run. Pressing is what makes it hold together when cut.",
+        timerSec: 150,
+      },
+      {
+        order: 4,
+        title: "Rest a minute before cutting",
+        body: "Straight out of the pan the cheese is liquid and the whole thing collapses. One minute on the board and it cuts into clean wedges.",
+      },
+    ],
+    notes: [
+      "Uses leftover hibachi or roast chicken, which is the point. This is the recipe for what is already in the fridge on Wednesday.",
+      "Bell pepper adds vitamin C and crunch and is the vegetable most kids will accept inside melted cheese.",
+      "Whole-grain tortillas brown better than white and hold a fold without cracking once warm.",
+      "Cut cold into strips it packs well, and it is one of the few hot lunches that is genuinely fine at room temperature by noon.",
+    ],
+  },
+  {
+    slug: "cold-pasta-salad-chicken",
+    name: "Cold pasta salad with chicken",
+    slot: "lunch",
+    servings: 4,
+    totalMinutes: 20,
+    imageUrl: "/images/recipes/cold-pasta-salad-chicken.jpg",
+    whenToEat: "The no-microwave school lunch. Made Sunday, eaten cold Monday through Wednesday.",
+    equipment: ["Large pot", "Colander", "Large bowl", "4 containers"],
+    prepAhead: {
+      yields: "4 packed lunches from one twenty minute session",
+      keepsDays: 4,
+      reheat: "None. It is designed to be eaten cold, which is why it works where a thermos does not.",
+    },
+    steps: [
+      {
+        order: 1,
+        title: "Cook the pasta a minute past al dente, on purpose",
+        body: "Whole-grain pasta, one minute longer than the box says. Pasta firms up as it chills, so anything perfectly al dente hot is unpleasantly hard cold. This is the opposite of the rule for a hot dish.",
+        timerSec: 600,
+      },
+      {
+        order: 2,
+        title: "Rinse it cold, which you would never normally do",
+        body: "Drain and rinse under cold water until it stops steaming. Rinsing washes off surface starch, and here that is what you want: it stops the whole bowl gluing into one lump in the fridge.",
+        mistake: "Skipping the rinse because rinsing pasta is usually wrong. For a cold salad it is right, and it is the difference between four lunches and one brick.",
+      },
+      {
+        order: 3,
+        title: "Broccoli into the same water, briefly",
+        body: "Two cups of broccoli florets into the pasta water for 90 seconds before you drain it, then into the cold rinse with everything else. Same pot, no extra pan, and the broccoli stays bright green rather than grey.",
+        timerSec: 90,
+      },
+      {
+        order: 4,
+        title: "Dress it while it is cold, then let it sit",
+        body: "About 12 oz of cooked sliced chicken, 2 tbsp olive oil, the juice of a lemon, salt. Toss and leave it in the fridge an hour before portioning. Cold pasta absorbs dressing slowly, so seasoning it straight away tastes flat.",
+      },
+      {
+        order: 5,
+        title: "Portion into four, dress again on day three",
+        body: "Four containers. By the third day it will have drunk most of the oil and lemon, so a fresh squeeze at the table brings it back.",
+      },
+    ],
+    notes: [
+      "This is the answer to a school with no microwave. Most packed lunches are a compromise cold; this one is designed for it.",
+      "Whole-grain pasta holds its shape cold far better than white, which goes mushy by day two.",
+      "Add cherry tomatoes or cucumber if he will eat them, but keep them in their own container. Both leak water.",
+      "It still needs an ice pack. Cooked chicken is perishable and USDA guidance is at or below 40F.",
+    ],
+  },
+  {
+    slug: "egg-cheese-burrito",
+    name: "Egg + cheese breakfast burrito for lunch",
+    slot: "lunch",
+    servings: 4,
+    totalMinutes: 15,
+    imageUrl: "/images/recipes/egg-cheese-burrito.jpg",
+    whenToEat: "For the kid who would eat breakfast at every meal. Wrap four, freeze three.",
+    equipment: ["Non-stick skillet", "Spatula", "Foil"],
+    prepAhead: {
+      yields: "4 burritos: one now and three in the freezer",
+      keepsDays: 3,
+      freezerDays: 30,
+      reheat: "From frozen, unwrap the foil, 90 seconds in the microwave wrapped in a paper towel, turning once.",
+    },
+    steps: [
+      {
+        order: 1,
+        title: "Low heat and take them off early",
+        body: "8 eggs beaten, into a non-stick pan on LOW, stirred slowly. Pull them off while they still look slightly underdone. They keep cooking in the pan, and again when reheated, and twice-overcooked egg is rubbery and weeps water into the tortilla.",
+        mistake: "Scrambling on high to save two minutes. Fast egg is dry egg, and dry egg is what makes a reheated burrito unpleasant.",
+      },
+      {
+        order: 2,
+        title: "Cool the eggs completely before they go near a tortilla",
+        body: "Spread them on a plate and leave them ten minutes. Warm filling steams the tortilla from the inside and it will be soggy before it is even wrapped.",
+      },
+      {
+        order: 3,
+        title: "Cheese first, egg second, spinach third",
+        body: "Warm tortilla, a slice of cheddar flat against it, then a quarter of the egg, then a small handful of spinach. Cheese against the tortilla again, for the same waterproofing reason as the wrap.",
+      },
+      {
+        order: 4,
+        title: "Fold the ends in, roll tight, wrap in foil",
+        body: "Ends in first, then roll firmly from the bottom. Foil rather than plastic if they are going in the freezer, because foil goes straight into a toaster oven and does not sweat as it thaws.",
+      },
+    ],
+    notes: [
+      "Eggs are the cheapest complete protein in the shop and this is about 20 g a burrito with the cheese.",
+      "Freeze on a tray first, then bag them, or they weld into one block.",
+      "Spinach can be left out for anyone who will not have it. Everything else still works.",
+      "A frozen one packed in the morning is thawed and cool by lunch, and it doubles as the ice pack for the rest of the box.",
+    ],
   },
 ];
 

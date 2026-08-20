@@ -97,6 +97,28 @@ export interface ProteinBoost {
   note?: string;
 }
 
+/**
+ * Set on recipes worth cooking once and eating from all week.
+ *
+ * The whole system rests on one Sunday session covering the week, but only the hibachi recipe
+ * ever said so, and it said it in prose nobody sees until they open the page. This puts it on
+ * the card, so the answer to "what do I cook on Sunday" is visible from the recipe list.
+ *
+ * keepsDays is fridge life. It is a food-safety number, not a serving suggestion, so it stays
+ * conservative: USDA gives 3 to 4 days for cooked leftovers and this uses the low end of what
+ * each dish actually holds.
+ */
+export interface PrepAhead {
+  /** What one cook session covers, e.g. "5 school lunches plus 3 dinners". */
+  yields: string;
+  /** Days it keeps in the fridge, at or below 40F. */
+  keepsDays: number;
+  /** Days in the freezer, when freezing is genuinely worth it. */
+  freezerDays?: number;
+  /** How to bring it back without ruining it. */
+  reheat?: string;
+}
+
 export interface Recipe {
   slug: string;
   name: string;
@@ -109,6 +131,7 @@ export interface Recipe {
   imageUrl?: string;
   equipment?: string[];
   proteinBoost?: ProteinBoost;
+  prepAhead?: PrepAhead;
 }
 
 export interface DayTypeConfig {

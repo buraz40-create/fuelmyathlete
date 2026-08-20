@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     template: "%s · FuelMyAthlete",
   },
   description:
-    "Free weekly meal planner, 24 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up. Built for youth sports families. No signup.",
+    "Free weekly meal planner, 31 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up. Built for youth sports families. No signup.",
   applicationName: "FuelMyAthlete",
   keywords: [
     "meal planner",
@@ -97,7 +97,7 @@ export const metadata: Metadata = {
     siteName: "FuelMyAthlete",
     title: "FuelMyAthlete: Free Meal Planner & Recipes for Athletes 8+",
     description:
-      "Free weekly meal planner, 24 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up.",
+      "Free weekly meal planner, 31 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up.",
     url: SITE_URL,
     locale: "en_US",
   },
@@ -105,7 +105,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "FuelMyAthlete: Free Meal Planner & Recipes for Athletes 8+",
     description:
-      "Free weekly meal planner, 24 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up.",
+      "Free weekly meal planner, 31 athlete-tested recipes, and AAP-aligned hydration tracker for athletes 8 and up.",
   },
   robots: {
     index: true,

@@ -2,13 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  ArrowLeft,
-  ChefHat,
-  Clock,
-  CookingPot,
-  Users,
-} from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft, ArrowsClockwise, ChefHat, Clock, CookingPot, Users } from "@phosphor-icons/react/dist/ssr";
 import { AppShell } from "@/components/layout/AppShell";
 import { RecipeSteps } from "@/components/recipe/RecipeSteps";
 import { IngredientsList } from "@/components/recipe/IngredientsList";
@@ -279,6 +273,53 @@ export default async function RecipePage({
           </div>
 
           <aside className="space-y-6 md:sticky md:top-24 md:self-start">
+            {/* The Sunday cook panel. keepsDays is a food-safety number rather than a serving
+                suggestion, so it is stated as a date limit and not buried in prose. */}
+            {recipe.prepAhead && (
+              <section
+                aria-labelledby="prep-ahead-title"
+                className="rounded-3xl border border-primary/25 bg-primary-soft/50 p-5"
+              >
+                <header className="mb-3 flex items-center gap-2">
+                  <ArrowsClockwise size={18} weight="duotone" aria-hidden className="text-primary" />
+                  <h2 id="prep-ahead-title" className="text-base font-semibold text-ink">
+                    Cook once, eat all week
+                  </h2>
+                </header>
+                <p className="text-sm leading-relaxed text-ink/85">{recipe.prepAhead.yields}</p>
+                <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-2 border-t border-primary/15 pt-3 text-sm">
+                  <div>
+                    <dt className="text-[11px] uppercase tracking-wider text-muted-foreground">
+                      Keeps in the fridge
+                    </dt>
+                    <dd className="font-semibold tabular-nums text-ink">
+                      {recipe.prepAhead.keepsDays} days
+                    </dd>
+                  </div>
+                  {recipe.prepAhead.freezerDays && (
+                    <div>
+                      <dt className="text-[11px] uppercase tracking-wider text-muted-foreground">
+                        Freezer
+                      </dt>
+                      <dd className="font-semibold tabular-nums text-ink">
+                        {recipe.prepAhead.freezerDays} days
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+                {recipe.prepAhead.reheat && (
+                  <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                    <span className="font-semibold text-ink/70">Reheating. </span>
+                    {recipe.prepAhead.reheat}
+                  </p>
+                )}
+                <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">
+                  Cool it completely before the lid goes on, and keep it at or below 40F. USDA
+                  gives cooked leftovers 3 to 4 days, and these figures stay inside that.
+                </p>
+              </section>
+            )}
+
             {linkedMeal?.nutrition && <NutritionCard nutrition={linkedMeal.nutrition} />}
 
             {recipe.proteinBoost && (
