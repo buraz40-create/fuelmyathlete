@@ -65,18 +65,49 @@ function guessCategory(name: string): IngredientCategory {
   return "produce";
 }
 
-export function ImportClient() {
-  const [text, setText] = useState("");
+interface ImportClientProps {
+  /** Shared from Android's share sheet. Absent on a normal visit. */
+  sharedTitle?: string;
+  sharedText?: string;
+  sharedUrl?: string;
+}
+
+/**
+ * Pulls the first http(s) link out of a shared payload.
+ *
+ * Share sources are inconsistent about which field they fill. A browser usually populates
+ * `url`, while most social apps put everything into `text` and leave `url` empty, so the link
+ * arrives buried in a blob of caption. Looking in both beats trusting the field names.
+ */
+function firstUrlIn(...candidates: (string | undefined)[]): string | undefined {
+  for (const c of candidates) {
+    if (!c) continue;
+    const m = c.match(/https?:\/\/[^\s]+/);
+    if (m) return m[0];
+  }
+  return undefined;
+}
+
+export function ImportClient({ sharedTitle, sharedText, sharedUrl }: ImportClientProps) {
+  // Derived straight into initial state rather than applied by an effect. A share is known at
+  // first render, so seeding it in an effect would render the empty form and then immediately
+  // re-render the filled one, which is a visible flash and a cascading render for no reason.
+  const sharedLink = firstUrlIn(sharedUrl, sharedText);
+  const sharedProse = [sharedTitle, sharedText].filter(Boolean).join("\n").trim();
+  const cameFromShare = Boolean(sharedLink || sharedProse);
+
+  const [text, setText] = useState(sharedProse);
   const [stage, setStage] = useState<"paste" | "review">("paste");
   const [rows, setRows] = useState<ReviewRow[]>([]);
   const [name, setName] = useState("");
   const [slot, setSlot] = useState<MealSlot>("dinner");
   const [steps, setSteps] = useState<string[]>([]);
   const [servings, setServings] = useState<number | null>(null);
-  const [sourceUrl, setSourceUrl] = useState("");
+  const [sourceUrl, setSourceUrl] = useState(sharedLink ?? "");
   const [saved, setSaved] = useState<string | null>(null);
   const [saveFailed, setSaveFailed] = useState(false);
-  const [mode, setMode] = useState<"paste" | "link">("paste");
+  // A shared link goes to link mode, because reading the page beats parsing a caption.
+  const [mode, setMode] = useState<"paste" | "link">(sharedLink ? "link" : "paste");
   const [fetching, setFetching] = useState(false);
   const [fetchError, setFetchError] = useState<string | null>(null);
   // How this recipe actually arrived, recorded on the saved record. Set when a fetch
@@ -269,6 +300,16 @@ export function ImportClient() {
         </div>
       ) : stage === "paste" ? (
         <div className="flex flex-col gap-4">
+          {cameFromShare && (
+            <p
+              role="status"
+              className="rounded-2xl border border-primary/25 bg-primary-soft/50 px-4 py-3 text-sm text-ink"
+            >
+              Picked this up from what you shared. Check it below before saving, and edit
+              anything that came through wrong.
+            </p>
+          )}
+
           <div role="radiogroup" aria-label="How to add it" className="flex flex-wrap gap-1.5">
             {([
               { key: "paste", label: "Paste the text", icon: ClipboardText },

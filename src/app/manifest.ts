@@ -25,6 +25,27 @@ export default function manifest(): MetadataRoute.Manifest {
     shortcuts: [
       { name: "Today", url: "/today" },
       { name: "Grocery list", url: "/planner/grocery" },
+      { name: "Add a recipe", url: "/import" },
     ],
+    // Puts FuelMyAthlete in Android's share sheet, so a recipe found in a browser or a social
+    // app can be sent straight here instead of copied, app-switched and pasted. That gap is
+    // where the intention to save a recipe usually dies.
+    //
+    // GET rather than POST on purpose: a POST target needs a service worker to intercept the
+    // request and re-serve the page, which is a lot of moving parts for a text payload. GET
+    // lands on /import with the text in the query string and the page reads it.
+    //
+    // iOS does not implement Web Share Target at all, so this does nothing on an iPhone. The
+    // iOS route would be a Shortcut that opens /import, or a wrapped native app. Worth knowing
+    // before anyone concludes the feature is broken on their phone.
+    share_target: {
+      action: "/import",
+      method: "GET",
+      params: {
+        title: "title",
+        text: "text",
+        url: "url",
+      },
+    },
   };
 }
