@@ -346,7 +346,7 @@ export const MEALS: Meal[] = [
     nutrition: { kcal: 485, proteinG: 35, carbsG: 60, fatG: 10, fiberG: 7, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "pasta",          quantity: 3 },
-      { ingredientSlug: "chicken-breast", quantity: 0.3 },
+      { ingredientSlug: "chicken-breast", quantity: 0.25 },
       { ingredientSlug: "broccoli",       quantity: 0.5 },
       { ingredientSlug: "olive-oil",      quantity: 1 },
       { ingredientSlug: "garlic",         quantity: 1 },
@@ -580,7 +580,7 @@ export const MEALS: Meal[] = [
     recipeSlug: "chicken-rice-broccoli",
     nutrition: { kcal: 520, proteinG: 38, carbsG: 65, fatG: 9, fiberG: 5, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "chicken-breast", quantity: 0.4 },
+      { ingredientSlug: "chicken-breast", quantity: 0.375 },
       { ingredientSlug: "jasmine-rice",   quantity: 1 },
       { ingredientSlug: "broccoli",       quantity: 1 },
       { ingredientSlug: "olive-oil",      quantity: 1 },
@@ -603,8 +603,8 @@ export const MEALS: Meal[] = [
     recipeSlug: "salmon-sweet-potato",
     nutrition: { kcal: 525, proteinG: 35, carbsG: 50, fatG: 18, fiberG: 8, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "salmon",       quantity: 0.4 },
-      { ingredientSlug: "sweet-potato", quantity: 1 },
+      { ingredientSlug: "salmon",       quantity: 0.375 },
+      { ingredientSlug: "sweet-potato", quantity: 0.5 },
       { ingredientSlug: "green-beans",  quantity: 1 },
       { ingredientSlug: "olive-oil",    quantity: 1 },
       { ingredientSlug: "lemon",        quantity: 0.25 },
@@ -626,7 +626,7 @@ export const MEALS: Meal[] = [
     recipeSlug: "turkey-tacos",
     nutrition: { kcal: 485, proteinG: 30, carbsG: 48, fatG: 17, fiberG: 8, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "ground-turkey",       quantity: 0.4 },
+      { ingredientSlug: "ground-turkey",       quantity: 0.25 },
       { ingredientSlug: "wholegrain-tortilla", quantity: 3 },
       { ingredientSlug: "taco-seasoning",      quantity: 1 },
       { ingredientSlug: "romaine",             quantity: 1 },
@@ -647,8 +647,8 @@ export const MEALS: Meal[] = [
     nutrition: { kcal: 585, proteinG: 32, carbsG: 80, fatG: 14, fiberG: 9, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "pasta",         quantity: 4 },
-      { ingredientSlug: "ground-turkey", quantity: 0.3 },
-      { ingredientSlug: "marinara",      quantity: 1 },
+      { ingredientSlug: "ground-turkey", quantity: 0.25 },
+      { ingredientSlug: "marinara",      quantity: 0.5 },
       { ingredientSlug: "romaine",       quantity: 1 },
       { ingredientSlug: "olive-oil",     quantity: 1 },
     ],
@@ -665,7 +665,7 @@ export const MEALS: Meal[] = [
     recipeSlug: "stirfry-chicken-rice",
     nutrition: { kcal: 510, proteinG: 38, carbsG: 60, fatG: 10, fiberG: 5, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "chicken-breast", quantity: 0.4 },
+      { ingredientSlug: "chicken-breast", quantity: 0.375 },
       { ingredientSlug: "jasmine-rice",   quantity: 1 },
       { ingredientSlug: "edamame",        quantity: 0.5 },
       { ingredientSlug: "soy-sauce",      quantity: 1 },
@@ -706,7 +706,7 @@ export const MEALS: Meal[] = [
     recipeSlug: "cold-pasta-salad-chicken",
     nutrition: { kcal: 520, proteinG: 36, carbsG: 58, fatG: 15, fiberG: 8, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "pasta",          quantity: 1 },
+      { ingredientSlug: "pasta",          quantity: 4 },
       { ingredientSlug: "chicken-breast", quantity: 0.25 },
       { ingredientSlug: "broccoli",       quantity: 0.5 },
       { ingredientSlug: "olive-oil",      quantity: 0.5 },
@@ -768,8 +768,8 @@ export const MEALS: Meal[] = [
     recipeSlug: "turkey-meatballs-pasta",
     nutrition: { kcal: 545, proteinG: 38, carbsG: 62, fatG: 15, fiberG: 9, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "ground-turkey", quantity: 4 },
-      { ingredientSlug: "pasta",         quantity: 1 },
+      { ingredientSlug: "ground-turkey", quantity: 0.25 },
+      { ingredientSlug: "pasta",         quantity: 4 },
       { ingredientSlug: "marinara",      quantity: 0.5 },
       { ingredientSlug: "eggs",          quantity: 0.25 },
       { ingredientSlug: "garlic",        quantity: 0.5 },
@@ -792,7 +792,7 @@ export const MEALS: Meal[] = [
       { ingredientSlug: "chicken-breast", quantity: 0.375 },
       { ingredientSlug: "marinara",       quantity: 0.5 },
       { ingredientSlug: "cheese-slice",   quantity: 1 },
-      { ingredientSlug: "pasta",          quantity: 1 },
+      { ingredientSlug: "pasta",          quantity: 4 },
     ],
     tags: ["post-match"],
   },
@@ -832,7 +832,7 @@ export const MEALS: Meal[] = [
     recipeSlug: "turkey-burgers-sweet-potato",
     nutrition: { kcal: 555, proteinG: 36, carbsG: 48, fatG: 22, fiberG: 7, source: "USDA estimate" },
     ingredients: [
-      { ingredientSlug: "ground-turkey",  quantity: 4 },
+      { ingredientSlug: "ground-turkey",  quantity: 0.25 },
       { ingredientSlug: "wholegrain-bun", quantity: 1 },
       { ingredientSlug: "sweet-potato",   quantity: 0.5 },
       { ingredientSlug: "cheese-slice",   quantity: 1 },
