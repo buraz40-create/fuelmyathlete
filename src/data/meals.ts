@@ -498,7 +498,7 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/apple-pb.jpg",
     recipeSlug: "apple-pb",
-    nutrition: { kcal: 260, proteinG: 8, carbsG: 30, fatG: 16, fiberG: 6, source: "USDA estimate" },
+    nutrition: { kcal: 285, proteinG: 8, carbsG: 32, fatG: 16, fiberG: 6, source: "USDA estimate" },
     ingredients: [
       { ingredientSlug: "apple",        quantity: 1 },
       { ingredientSlug: "peanut-butter", quantity: 2 },
