@@ -154,3 +154,17 @@ test("an empty paste does not throw", () => {
   assert.equal(r.steps.length, 0);
   assert.equal(r.title, null);
 });
+
+test("an unmappable unit is not left glued to the ingredient name", () => {
+  // Otherwise the review row reads "2 each sprigs rosemary", showing a unit twice.
+  const r = parseIngredientLine("2 sprigs rosemary");
+  assert.equal(r.name, "rosemary");
+  assert.equal(r.unitAsWritten, "sprigs");
+});
+
+test("a first word is only a unit when an amount came before it", () => {
+  // "olive oil" has no amount, so "olive" must not be eaten as a unit.
+  const r = parseIngredientLine("olive oil");
+  assert.equal(r.unitAsWritten, undefined);
+  assert.equal(r.name, "olive oil");
+});

@@ -2,7 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Leaf } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
+import { Leaf, Plus } from "@phosphor-icons/react/dist/ssr";
 import { RecipeCard } from "@/components/recipe/RecipeCard";
 import { RECIPES } from "@/data/recipes";
 import { cn } from "@/lib/utils";
@@ -44,6 +45,15 @@ export function RecipesClient() {
         <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
           Every meal in the planner has a step-by-step recipe. Athlete-tested, family-friendly,
           free.
+        </p>
+        <p className="mt-4">
+          <Link
+            href="/import"
+            className="inline-flex items-center gap-1.5 rounded-full border border-border px-4 py-2 text-sm font-medium text-ink transition hover:border-primary/40 hover:text-primary"
+          >
+            <Plus size={14} weight="bold" aria-hidden />
+            Add your own recipe
+          </Link>
         </p>
       </header>
 

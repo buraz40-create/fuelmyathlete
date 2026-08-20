@@ -178,14 +178,20 @@ export function parseIngredientLine(line: string): ParsedIngredient {
   // Keep the unit the source wrote when we could not map it, so a line does not silently
   // become "3 each olive oil".
   const written = unit === null ? rest.match(/^([A-Za-z.]+)\.?\s+/)?.[1] : undefined;
-  const looksLikeUnit = written && !PREP_WORDS.has(written.toLowerCase());
+  // Only treat the leading word as a unit when an amount preceded it. "2 sprigs rosemary" has
+  // one; "olive oil" does not, and calling "olive" a unit would eat half the ingredient.
+  const looksLikeUnit = Boolean(written) && value !== null && !PREP_WORDS.has((written ?? "").toLowerCase());
+
+  // When the leading word was a unit we could not map, drop it from the name anyway. Otherwise
+  // the row reads "2 each sprigs rosemary", with the unit showing up twice.
+  const nameSource = looksLikeUnit ? rest.replace(/^[A-Za-z.]+\.?\s+/, "") : afterUnit;
 
   return {
     raw,
     quantity: value === null ? null : Math.round(value * factor * 1000) / 1000,
     unit,
-    unitAsWritten: unit === null && looksLikeUnit ? written : undefined,
-    name: cleanName(afterUnit) || cleanName(rest) || stripped,
+    unitAsWritten: looksLikeUnit ? written : undefined,
+    name: cleanName(nameSource) || cleanName(rest) || stripped,
     isHeader: false,
   };
 }
