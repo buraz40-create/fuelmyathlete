@@ -45,6 +45,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/cereal-banana-milk.jpg",
     recipeSlug: "cereal-banana-milk",
     nutrition: { kcal: 355, proteinG: 13, carbsG: 70, fatG: 4, fiberG: 7, source: "USDA estimate" },
@@ -66,6 +70,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/eggs-toast.jpg",
     recipeSlug: "eggs-toast",
     nutrition: { kcal: 340, proteinG: 18, carbsG: 28, fatG: 16, fiberG: 4, source: "USDA estimate" },
@@ -83,6 +91,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -111,6 +123,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/english-muffin-pb.jpg",
     recipeSlug: "english-muffin-pb",
     nutrition: { kcal: 385, proteinG: 13, carbsG: 55, fatG: 14, fiberG: 6, source: "USDA estimate" },
@@ -128,6 +144,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -180,6 +200,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/berry-oat-fuel.jpg",
     recipeSlug: "berry-oat-fuel",
     nutrition: { kcal: 365, proteinG: 16, carbsG: 62, fatG: 6, fiberG: 8, source: "USDA estimate" },
@@ -200,6 +224,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 4,
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -227,6 +255,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/tropical-pre-game.jpg",
     recipeSlug: "tropical-pre-game",
     nutrition: { kcal: 260, proteinG: 9, carbsG: 55, fatG: 1, fiberG: 4, source: "USDA estimate" },
@@ -246,6 +278,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["training", "match"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -290,6 +326,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/hibachi-chicken-bowl.jpg",
     recipeSlug: "hibachi-chicken",
     nutrition: { kcal: 465, proteinG: 35, carbsG: 55, fatG: 11, fiberG: 3, source: "USDA estimate" },
@@ -317,6 +357,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/turkey-wrap.jpg",
     recipeSlug: "turkey-wrap",
     nutrition: { kcal: 365, proteinG: 24, carbsG: 35, fatG: 13, fiberG: 5, source: "USDA estimate" },
@@ -337,6 +381,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 15,
     suitableFor: ["school", "training"],
     kidRating: 4,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -368,6 +416,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/apple-cheddar-cubes.jpg",
     nutrition: { kcal: 180, proteinG: 8, carbsG: 20, fatG: 8, fiberG: 3, source: "USDA estimate" },
     ingredients: [
@@ -384,6 +436,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 2,
     suitableFor: [...ALL_DAYS],
     kidRating: 3,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -408,6 +464,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/edamame-cup.jpg",
     nutrition: { kcal: 150, proteinG: 13, carbsG: 12, fatG: 6, fiberG: 6, source: "USDA estimate" },
     ingredients: [{ ingredientSlug: "edamame", quantity: 1 }],
@@ -427,6 +487,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 5,
     suitableFor: ["match", "training"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/hibachi-bowl-matchday.jpg",
     recipeSlug: "hibachi-chicken",
     nutrition: { kcal: 440, proteinG: 30, carbsG: 62, fatG: 6, fiberG: 2, source: "USDA estimate" },
@@ -450,6 +514,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/pre-match-plain-plate.jpg",
     recipeSlug: "chicken-rice-broccoli",
     nutrition: { kcal: 420, proteinG: 32, carbsG: 58, fatG: 5, fiberG: 2, source: "USDA estimate" },
@@ -468,6 +536,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 6,
     suitableFor: ["match", "school"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -496,6 +568,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/apple-pb.jpg",
     recipeSlug: "apple-pb",
     nutrition: { kcal: 285, proteinG: 8, carbsG: 32, fatG: 16, fiberG: 6, source: "USDA estimate" },
@@ -515,6 +591,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 1,
     suitableFor: [...ALL_DAYS],
     kidRating: 4,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -554,6 +634,10 @@ export const MEALS: Meal[] = [
     kidRating: 4,
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/banana-almonds.jpg",
     recipeSlug: "banana-almonds",
     nutrition: { kcal: 275, proteinG: 8, carbsG: 32, fatG: 15, fiberG: 6, source: "USDA estimate" },
@@ -572,6 +656,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 25,
     suitableFor: [...ALL_DAYS],
     kidRating: 4,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -599,6 +687,10 @@ export const MEALS: Meal[] = [
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/salmon-sweet-potato.jpg",
     recipeSlug: "salmon-sweet-potato",
     nutrition: { kcal: 525, proteinG: 35, carbsG: 50, fatG: 18, fiberG: 8, source: "USDA estimate" },
@@ -618,6 +710,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 20,
     suitableFor: ["school", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
     // photo libraries had nothing honest for this dish.
     // Generated to match this recipe's own ingredients, checked at card size. Stock
@@ -682,6 +778,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 10,
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-quesadilla.jpg",
     recipeSlug: "chicken-quesadilla",
     nutrition: { kcal: 470, proteinG: 38, carbsG: 38, fatG: 18, fiberG: 6, source: "USDA estimate" },
@@ -702,6 +802,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 20,
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/cold-pasta-salad-chicken.jpg",
     recipeSlug: "cold-pasta-salad-chicken",
     nutrition: { kcal: 520, proteinG: 36, carbsG: 58, fatG: 15, fiberG: 8, source: "USDA estimate" },
@@ -723,6 +827,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 15,
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/egg-cheese-burrito.jpg",
     recipeSlug: "egg-cheese-burrito",
     nutrition: { kcal: 415, proteinG: 24, carbsG: 32, fatG: 20, fiberG: 5, source: "USDA estimate" },
@@ -743,6 +851,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 35,
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/sheetpan-chicken-sweet-potato.jpg",
     recipeSlug: "sheetpan-chicken-sweet-potato",
     nutrition: { kcal: 465, proteinG: 42, carbsG: 38, fatG: 14, fiberG: 7, source: "USDA estimate" },
@@ -764,6 +876,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 30,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/turkey-meatballs-pasta.jpg",
     recipeSlug: "turkey-meatballs-pasta",
     nutrition: { kcal: 545, proteinG: 38, carbsG: 62, fatG: 15, fiberG: 9, source: "USDA estimate" },
@@ -785,6 +901,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 30,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-parm-bake.jpg",
     recipeSlug: "chicken-parm-bake",
     nutrition: { kcal: 580, proteinG: 48, carbsG: 55, fatG: 17, fiberG: 8, source: "USDA estimate" },
@@ -805,6 +925,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 15,
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/chicken-egg-fried-rice.jpg",
     recipeSlug: "chicken-egg-fried-rice",
     nutrition: { kcal: 490, proteinG: 34, carbsG: 58, fatG: 13, fiberG: 4, source: "USDA estimate" },
@@ -828,6 +952,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 30,
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
     imageUrl: "/images/recipes/turkey-burgers-sweet-potato.jpg",
     recipeSlug: "turkey-burgers-sweet-potato",
     nutrition: { kcal: 555, proteinG: 36, carbsG: 48, fatG: 22, fiberG: 7, source: "USDA estimate" },
@@ -847,6 +975,11 @@ export const MEALS: Meal[] = [
     slot: "breakfast",
     description: "Four minutes, one plate, no pan. The breakfast for a kid who is not awake yet.",
     prepMinutes: 4,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/pb-banana-toast.jpg",
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
     recipeSlug: "pb-banana-toast",
@@ -864,6 +997,9 @@ export const MEALS: Meal[] = [
     slot: "breakfast",
     description: "More protein than two eggs with no pan to wash. Season it or it tastes like nothing.",
     prepMinutes: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/cottage-cheese-toast.jpg",
     suitableFor: ["school", "training", "rest"],
     kidRating: 3,
     recipeSlug: "cottage-cheese-toast",
@@ -881,6 +1017,11 @@ export const MEALS: Meal[] = [
     slot: "breakfast",
     description: "No flour, no added sugar. Freeze a stack and they go straight in the toaster.",
     prepMinutes: 15,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/banana-oat-pancakes.jpg",
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
     recipeSlug: "banana-oat-pancakes",
@@ -899,6 +1040,9 @@ export const MEALS: Meal[] = [
     slot: "breakfast",
     description: "Fifteen minutes on Sunday turns five weekday breakfasts into ninety seconds each.",
     prepMinutes: 15,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/smoothie-freezer-packs.jpg",
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 4,
     recipeSlug: "smoothie-freezer-packs",
@@ -919,6 +1063,11 @@ export const MEALS: Meal[] = [
     slot: "breakfast",
     description: "For the kid who says he does not like oats. Cold, chocolate, nothing like porridge.",
     prepMinutes: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/overnight-oats-chocolate.jpg",
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
     recipeSlug: "overnight-oats-chocolate",
@@ -1024,6 +1173,11 @@ export const MEALS: Meal[] = [
     slot: "dinner",
     description: "Twenty minutes in the morning, dinner ready when you get back from a 7pm practice. Rice goes in last.",
     prepMinutes: 20,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/slow-cooker-chicken-rice-soup.jpg",
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
     recipeSlug: "slow-cooker-chicken-rice-soup",
@@ -1043,6 +1197,11 @@ export const MEALS: Meal[] = [
     slot: "dinner",
     description: "Twelve minutes at 400F. Take it out while the centre still looks slightly translucent.",
     prepMinutes: 25,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/baked-salmon-rice-broccoli.jpg",
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 3,
     recipeSlug: "baked-salmon-rice-broccoli",
@@ -1062,6 +1221,11 @@ export const MEALS: Meal[] = [
     slot: "dinner",
     description: "Iron in twenty minutes. Slice the beef across the grain or nothing else you do matters.",
     prepMinutes: 20,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/beef-veg-stirfry.jpg",
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
     recipeSlug: "beef-veg-stirfry",
@@ -1083,6 +1247,11 @@ export const MEALS: Meal[] = [
     slot: "dinner",
     description: "Everyone builds their own, which is the most reliable way to get vegetables into a picky eater.",
     prepMinutes: 25,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/chicken-fajita-bowls.jpg",
     suitableFor: ["school", "training", "match", "rest"],
     kidRating: 5,
     recipeSlug: "chicken-fajita-bowls",
@@ -1104,6 +1273,11 @@ export const MEALS: Meal[] = [
     slot: "dinner",
     description: "Store-cupboard dinner for the night nobody shopped. Drain the tuna properly or it goes watery.",
     prepMinutes: 30,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/tuna-pasta-bake.jpg",
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
     recipeSlug: "tuna-pasta-bake",
@@ -1123,6 +1297,11 @@ export const MEALS: Meal[] = [
     slot: "lunch",
     description: "A method rather than a recipe. Rice, a protein, a vegetable, sauce on the side.",
     prepMinutes: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/rice-bowl-leftovers.jpg",
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
     recipeSlug: "rice-bowl-leftovers",
@@ -1141,6 +1320,11 @@ export const MEALS: Meal[] = [
     slot: "lunch",
     description: "Yogurt instead of a jar of mayonnaise, which adds about 10 g of protein and loses the fat.",
     prepMinutes: 10,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/chicken-salad-pita.jpg",
     suitableFor: ["school", "training", "rest"],
     kidRating: 4,
     recipeSlug: "chicken-salad-pita",
@@ -1160,6 +1344,11 @@ export const MEALS: Meal[] = [
     slot: "lunch",
     description: "For the kid who has decided sandwiches are boring. Same food, different shape.",
     prepMinutes: 5,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/bagel-cream-cheese-turkey.jpg",
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
     recipeSlug: "bagel-cream-cheese-turkey",
@@ -1178,6 +1367,11 @@ export const MEALS: Meal[] = [
     slot: "lunch",
     description: "Dressing at the bottom, leaves at the top. That layer order is why it holds four days.",
     prepMinutes: 15,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/mason-jar-salad.jpg",
     suitableFor: ["school", "training", "rest"],
     kidRating: 3,
     recipeSlug: "mason-jar-salad",
@@ -1282,6 +1476,9 @@ export const MEALS: Meal[] = [
     slot: "breakfast",
     description: "Rest-day breakfast. Season the avocado in a bowl before it goes near the toast.",
     prepMinutes: 8,
+    // Generated to match this recipe's own ingredients, checked at card size. Stock
+    // photo libraries had nothing honest for this dish.
+    imageUrl: "/images/recipes/toast-avocado-egg.jpg",
     suitableFor: ["school", "rest"],
     kidRating: 3,
     recipeSlug: "toast-avocado-egg",
