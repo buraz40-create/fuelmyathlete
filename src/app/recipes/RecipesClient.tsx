@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import { Leaf, Plus } from "@phosphor-icons/react/dist/ssr";
 import { RecipeCard } from "@/components/recipe/RecipeCard";
+import { YourRecipes } from "@/components/recipe/YourRecipes";
 import { RECIPES } from "@/data/recipes";
 import { cn } from "@/lib/utils";
 import type { MealSlot } from "@/types/domain";
@@ -56,6 +57,8 @@ export function RecipesClient() {
           </Link>
         </p>
       </header>
+
+      <YourRecipes />
 
       <nav
         role="tablist"
