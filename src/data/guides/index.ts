@@ -46,6 +46,12 @@ export function getRelatedGuides(slug: string): Guide[] {
 // Recipe pages had no way back into the guides, so three quarters of the site's URLs were
 // link sinks. Derived from each guide's own relatedRecipes rather than hand-mapped onto the
 // recipes, so the two can never disagree.
-export function getGuidesForRecipe(recipeSlug: string): Guide[] {
-  return GUIDES.filter((g) => g.relatedRecipes.includes(recipeSlug));
+export function getGuidesForRecipe(
+  recipeSlug: string
+): { slug: string; title: string; answer: string }[] {
+  return GUIDES.filter((g) => g.relatedRecipes.includes(recipeSlug)).map((g) => ({
+    slug: g.slug,
+    title: g.title,
+    answer: g.answer,
+  }));
 }

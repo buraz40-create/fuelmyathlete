@@ -1,5 +1,12 @@
-// Skeleton rather than a spinner, so a slow connection shows the shape of the page instead
-// of a blank screen followed by a jump.
+// Scoped to the planner segment, deliberately not the app root.
+//
+// A loading.tsx at the root wraps every route in a Suspense boundary, and on this app that
+// stopped statically prerendered pages from hydrating at all: no client components ran on any
+// recipe or guide page, so the calorie gate silently fell back to its youth view for everyone
+// and nothing interactive worked. It looked fine, which is what made it dangerous.
+//
+// Skeleton rather than a spinner, so a slow connection shows the shape of the page instead of
+// a blank screen followed by a jump.
 export default function Loading() {
   return (
     <section

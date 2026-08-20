@@ -1,9 +1,16 @@
 import Link from "next/link";
 import { BookOpen, ArrowRight } from "@phosphor-icons/react/dist/ssr";
-import type { Guide } from "@/types/domain";
+// Deliberately not the whole Guide. A Guide carries sections[].body, which are React
+// elements, so passing the objects across the server boundary serialised every guide's full
+// JSX into every recipe page's payload. Three strings each is all this component needs.
+export interface GuideLink {
+  slug: string;
+  title: string;
+  answer: string;
+}
 
 interface RelatedGuidesProps {
-  guides: Guide[];
+  guides: GuideLink[];
 }
 
 export function RelatedGuides({ guides }: RelatedGuidesProps) {

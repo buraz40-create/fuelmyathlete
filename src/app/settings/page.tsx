@@ -14,6 +14,7 @@ import {
 import { AppShell } from "@/components/layout/AppShell";
 import { ProfileSetup } from "@/components/onboarding/ProfileSetup";
 import { HiddenMeals } from "@/components/planner/HiddenMeals";
+import { TeenCalorieToggle } from "@/components/planner/TeenCalorieToggle";
 import { WeeklyScheduleEditor } from "@/components/planner/WeeklyScheduleEditor";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { useAuthUser } from "@/hooks/useAuthUser";
@@ -145,6 +146,15 @@ export default function SettingsPage() {
             </div>
           </section>
         )}
+
+        {/* Teen-only calorie visibility. The component renders nothing outside that cohort,
+            so the section wrapper goes with it rather than leaving an empty card. */}
+        <section
+          aria-label="Calorie visibility"
+          className="mb-6 rounded-3xl border border-border bg-surface p-5 shadow-sm empty:hidden md:p-6"
+        >
+          <TeenCalorieToggle />
+        </section>
 
         {/* Recurring training and match pattern */}
         <section

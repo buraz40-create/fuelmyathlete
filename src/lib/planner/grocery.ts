@@ -19,7 +19,10 @@ const CATEGORY_ORDER: IngredientCategory[] = [
   "beverages",
 ];
 
-export function aggregateGrocery(plan: MealPlan): GroceryListByCategory {
+// athleteScale comes from portionScale(profile): 1.0 for children, and weight-based from 13
+// up. It was computed and shown on the landing page while the real grocery math ignored it,
+// which is how the site ended up claiming portions scale by body weight when they did not.
+export function aggregateGrocery(plan: MealPlan, athleteScale = 1): GroceryListByCategory {
   const totals = new Map<
     string,
     { quantity: number; fromMeals: Set<string> }
@@ -29,7 +32,7 @@ export function aggregateGrocery(plan: MealPlan): GroceryListByCategory {
     if (!entry.mealSlug) continue;
     const meal = MEALS_BY_SLUG[entry.mealSlug];
     if (!meal) continue;
-    const portion = DAY_TYPES[entry.dayType].portionMultiplier * entry.servings;
+    const portion = DAY_TYPES[entry.dayType].portionMultiplier * entry.servings * athleteScale;
 
     for (const mi of meal.ingredients) {
       const current = totals.get(mi.ingredientSlug) ?? {
