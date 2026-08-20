@@ -8,6 +8,7 @@ import { isSupabaseConfigured } from "@/lib/supabase/config";
 import { currentWeekStart, shiftWeek } from "@/lib/planner/isoWeek";
 import { buildCustomCatalog, mealsForSlot } from "@/lib/catalog";
 import { importedRecipes } from "@/lib/import/storage";
+import { effectiveRating, mealRatings } from "@/lib/player/ratings";
 import { mealPreferences } from "@/lib/player/preferences";
 import { weeklySchedule } from "@/lib/player/schedule";
 import { mergePlans } from "@/lib/planner/merge";
@@ -211,6 +212,9 @@ export function useMealPlan(initialWeekStart?: string) {
     // catalog only, and never once choosing their own, is the same class of surprise as
     // serving a food the athlete refuses.
     const custom = buildCustomCatalog(importedRecipes.all());
+    // The parent's own star ratings beat our built-in guess. Auto-fill repeatedly serving a
+    // meal they have rated 2 is the same failure as serving one they have hidden, just quieter.
+    const ratings = mealRatings.all();
     setPlan((prev) => {
       const next: MealPlan = {
         ...prev,
@@ -220,9 +224,24 @@ export function useMealPlan(initialWeekStart?: string) {
           const allowed = forSlot.filter((m) => !excluded.has(m.slug));
           const base = allowed.length ? allowed : forSlot;
           const candidates = base.filter((m) => m.suitableFor.includes(e.dayType));
-          const pool = candidates.length ? candidates : base;
+          const dayFit = candidates.length ? candidates : base;
+
+          // Sorting by rating alone was not enough. The variety index below deliberately
+          // spreads picks across the whole list, so a meal the parent rated 1 still turned up
+          // on some days: the order changed and the outcome did not. A one or two star rating
+          // is a parent saying "not this", so those drop out entirely unless dropping them
+          // would leave nothing to serve.
+          const liked = dayFit.filter((m) => effectiveRating(m.slug, m.kidRating, ratings) >= 3);
+          const pool = liked.length ? liked : dayFit;
           if (pool.length === 0) return e;
-          const top = [...pool].sort((a, b) => b.kidRating - a.kidRating);
+
+          // Best first, then a per-slot offset so the week has variety instead of the same
+          // top-rated breakfast seven days running.
+          const top = [...pool].sort(
+            (a, b) =>
+              effectiveRating(b.slug, b.kidRating, ratings) -
+              effectiveRating(a.slug, a.kidRating, ratings)
+          );
           const variety = top[(e.dayOfWeek + slotIndex(e.slot)) % top.length];
           return { ...e, mealSlug: variety.slug };
         }),

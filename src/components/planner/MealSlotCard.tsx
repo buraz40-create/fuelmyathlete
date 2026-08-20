@@ -5,6 +5,7 @@ import { ArrowCounterClockwise, DeviceMobile, Minus, Plus } from "@phosphor-icon
 import { cn } from "@/lib/utils";
 import { FoodImage } from "@/components/food/FoodImage";
 import { isCustomMeal, resolveMeal } from "@/lib/catalog";
+import { StarRating } from "@/components/food/StarRating";
 import { usePlan } from "@/components/planner/PlanProvider";
 import { DAY_TYPES } from "@/data/dayTypes";
 import type { DayType, MealSlot } from "@/types/domain";
@@ -101,6 +102,9 @@ export function MealSlotCard({
               </p>
             )}
             <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{meal.description}</p>
+            <div className="mt-2">
+              <StarRating slug={meal.slug} fallback={meal.kidRating} size={13} />
+            </div>
             <div className="mt-2 flex items-center gap-2">
               <button
                 type="button"

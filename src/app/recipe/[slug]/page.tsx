@@ -9,6 +9,7 @@ import { IngredientsList } from "@/components/recipe/IngredientsList";
 import { AllergenLine } from "@/components/recipe/AllergenLine";
 import { RelatedGuides } from "@/components/recipe/RelatedGuides";
 import { NutritionCard } from "@/components/recipe/NutritionCard";
+import { StarRating } from "@/components/food/StarRating";
 import { ProteinBoostCard } from "@/components/recipe/ProteinBoostCard";
 import { FoodImage } from "@/components/food/FoodImage";
 import { RECIPES, RECIPES_BY_SLUG } from "@/data/recipes";
@@ -317,6 +318,25 @@ export default async function RecipePage({
                   Cool it completely before the lid goes on, and keep it at or below 40F. USDA
                   gives cooked leftovers 3 to 4 days, and these figures stay inside that.
                 </p>
+              </section>
+            )}
+
+            {/* Rated after the meal, which is when you know. Ours is a guess and says so until
+                the parent replaces it, and their rating then reorders auto-fill. */}
+            {linkedMeal && (
+              <section
+                aria-labelledby="rating-title"
+                className="rounded-3xl border border-border bg-surface p-5 shadow-sm"
+              >
+                <h2 id="rating-title" className="text-base font-semibold text-ink">
+                  Did it go down well?
+                </h2>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Your rating decides what auto-fill picks first. It stays on this device.
+                </p>
+                <div className="mt-3">
+                  <StarRating slug={linkedMeal.slug} fallback={linkedMeal.kidRating} size={22} />
+                </div>
               </section>
             )}
 

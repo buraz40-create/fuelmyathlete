@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowCounterClockwise, Check, Prohibit, Star } from "@phosphor-icons/react/dist/ssr";
+import { ArrowCounterClockwise, Check, Prohibit } from "@phosphor-icons/react/dist/ssr";
 import {
   Sheet,
   SheetContent,
@@ -12,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { FoodImage } from "@/components/food/FoodImage";
 import { mealsForSlot } from "@/lib/catalog";
+import { StarRating } from "@/components/food/StarRating";
 import { usePlan } from "@/components/planner/PlanProvider";
 import { dayTypeLabel, dayTypeDescription } from "@/data/dayTypes";
 import { ageToCohort } from "@/lib/player/cohort";
@@ -209,7 +210,7 @@ function MealRow({
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
             <h5 className="truncate text-sm font-semibold text-ink">{meal.name}</h5>
-            <Rating value={meal.kidRating} />
+            <StarRating slug={meal.slug} fallback={meal.kidRating} size={11} readOnly />
           </div>
           <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">{meal.description}</p>
           <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
@@ -226,14 +227,3 @@ function MealRow({
   );
 }
 
-function Rating({ value }: { value: number }) {
-  return (
-    <span
-      className="flex items-center gap-0.5 text-[10px] font-medium text-warning"
-      aria-label={`Kid rating ${value} out of 5`}
-    >
-      <Star size={12} weight="fill" aria-hidden />
-      {value}/5
-    </span>
-  );
-}
