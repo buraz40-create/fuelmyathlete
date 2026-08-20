@@ -1,5 +1,5 @@
 import { Books, Heartbeat, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 
 const PILLARS = [
   {

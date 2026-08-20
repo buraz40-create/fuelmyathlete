@@ -2,7 +2,7 @@ import { CalendarPlus, Basket, Drop } from "@phosphor-icons/react/dist/ssr";
 import { MockMealCard } from "./MockMealCard";
 import { MockGroceryList } from "./MockGroceryList";
 import { MockWaterTracker } from "./MockWaterTracker";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 
 const STEPS = [
   {

@@ -1,5 +1,5 @@
 import { Quotes } from "@phosphor-icons/react/dist/ssr";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 
 export function FounderNote() {
   return (

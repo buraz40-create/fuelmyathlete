@@ -2,6 +2,7 @@ import type { Guide } from "@/types/domain";
 import Link from "next/link";
 import { citationsList } from "@/data/citations";
 import { Cite } from "@/components/guide/GuideCitations";
+import { KickoffTimeline } from "@/components/guide/KickoffTimeline";
 
 export const guide: Guide = {
   slug: "what-to-eat-before-a-soccer-game",
@@ -42,6 +43,8 @@ export const guide: Guide = {
       heading: "The pre-game timeline",
       body: (
         <>
+          <KickoffTimeline defaultKickoff="09:00" />
+
           <div className="overflow-x-auto rounded-2xl border border-border">
             <table className="w-full text-sm">
               <thead className="bg-primary-soft/40 text-ink">

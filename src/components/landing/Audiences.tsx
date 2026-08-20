@@ -1,5 +1,5 @@
 import { Baby, PersonSimpleRun, UsersThree } from "@phosphor-icons/react/dist/ssr";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 
 const AUDIENCES = [
   {

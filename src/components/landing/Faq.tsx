@@ -1,5 +1,5 @@
 import { Plus } from "@phosphor-icons/react/dist/ssr";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 
 export const LANDING_FAQ = [
   {

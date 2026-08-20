@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, CalendarBlank, Clock } from "@phosphor-icons/react/dist/ssr";
 import { GuideJsonLd } from "./GuideJsonLd";
+import { GuideProgress } from "./GuideProgress";
 import { GuideAnswerBlock } from "./GuideAnswerBlock";
 import { GuideTOC } from "./GuideTOC";
 import { GuideFAQ } from "./GuideFAQ";
@@ -28,8 +29,9 @@ export function GuideLayout({
   relatedGuideObjects: Guide[];
 }) {
   return (
-    <article className="mx-auto w-full max-w-4xl px-4 py-6 md:px-8 md:py-10">
+    <article className="mx-auto w-full max-w-5xl px-4 py-6 md:px-8 md:py-10">
       <GuideJsonLd guide={guide} />
+      <GuideProgress />
 
       <nav aria-label="Breadcrumb" className="mb-4">
         <Link
@@ -68,29 +70,39 @@ export function GuideLayout({
 
       <GuideAnswerBlock>{guide.answer}</GuideAnswerBlock>
 
-      <div className="mt-8 md:mt-10">
-        <GuideTOC sections={guide.sections} />
-      </div>
-
-      <div className="mt-10 flex flex-col gap-10">
-        {guide.sections.map((section) => (
-          <section
-            key={section.id}
-            id={section.id}
-            aria-labelledby={`${section.id}-heading`}
-            className="scroll-mt-24"
-          >
-            <h2
-              id={`${section.id}-heading`}
-              className="text-2xl font-semibold text-ink md:text-3xl"
+      <div className="mt-8 grid gap-10 md:mt-10 md:grid-cols-[1fr_260px]">
+        <div className="order-2 flex flex-col gap-10 md:order-1">
+          {/* Deliberately not wrapped in a scroll reveal. An entry animation starts at
+              opacity 0, and anything that hides prose until JavaScript runs is one failed
+              hydration, one background tab, or one blocked script away from a blank page.
+              Movement on this page belongs to the chrome, not the words. */}
+          {guide.sections.map((section) => (
+            <section
+              key={section.id}
+              id={section.id}
+              aria-labelledby={`${section.id}-heading`}
+              className="scroll-mt-24"
             >
-              {section.heading}
-            </h2>
-            <div className="prose-guide mt-4 max-w-prose text-base leading-relaxed text-ink/90">
-              {section.body}
-            </div>
-          </section>
-        ))}
+              <h2
+                id={`${section.id}-heading`}
+                className="text-2xl font-semibold text-ink md:text-3xl"
+              >
+                {section.heading}
+              </h2>
+              <div className="prose-guide mt-4 max-w-prose text-base leading-relaxed text-ink/90">
+                {section.body}
+              </div>
+            </section>
+          ))}
+        </div>
+
+        {/* Contents sits beside the prose on a desktop and above it on a phone, where a
+            sticky sidebar would eat the screen. */}
+        <div className="order-1 md:order-2">
+          <div className="md:sticky md:top-20">
+            <GuideTOC sections={guide.sections} />
+          </div>
+        </div>
       </div>
 
       <div className="mt-10 flex flex-col gap-6">

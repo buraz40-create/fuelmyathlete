@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
-import { Reveal } from "./Reveal";
+import { Reveal } from "@/components/motion/Reveal";
 import { MEALS_BY_SLUG } from "@/data/meals";
 import { DAY_TYPES } from "@/data/dayTypes";
 import { cn } from "@/lib/utils";
