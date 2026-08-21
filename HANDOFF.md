@@ -344,6 +344,18 @@ time. Reading and writing `players.preferences` needs migration 0003 applied and
 account, and the code degrades quietly if the column is missing: it warns once, naming the
 migration, and leaves the device's copy alone.
 
+**No blur placeholder on a transparent image.**  builds its hint by
+shrinking the source to a few pixels. Where the source is transparent the RGB underneath is
+usually black, and that black survives while the alpha is flattened as the thumbnail is
+stretched and blurred behind the real image. On the logo that was an 8x4 bitmap averaging
+(20, 15, 4) with pure black corners, blown up across the header on every page, and it was
+reported as the logo loading slowly with a dark flash. It was never slow: 7 KB of webp in about
+100ms, already preloaded by . It was loading behind a black box. Removed, so the
+space is reserved by width and height and the logo simply appears. Guarded by
+, which also asserts the asset still has an
+alpha channel so the rule can be revisited rather than cargo-culted if the logo is ever
+replaced.
+
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
 **Sync is proven now, and what proving it found.** There is still no `.env.local`, so local

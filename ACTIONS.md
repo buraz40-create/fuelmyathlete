@@ -145,17 +145,6 @@ Worth knowing for next time, because half a month of credits went on images toda
 If you want a bigger image pass, a consistent set across the guides or an Open Graph share card,
 say so and I will do it in one batch on the cheaper model rather than a few at a time.
 
-## A cracker recipe is still on the site
-
-`cheese-crackers`, "String cheese + whole-grain crackers", is still a snack in both `meals.ts`
-and `recipes.ts`. You have been clear that cracker plates are not what this site is for, and I
-just rejected a cheeseboard photograph specifically because it had crackers in it. Those two
-positions do not sit together.
-
-I have not touched the recipe, because removing food from the plan is your call and it is a
-whole-grain cracker rather than a beige snack aisle one. Tell me to cut it, or tell me it stays
-and I will stop treating crackers as disqualifying when I pick photographs.
-
 ## Run migration 0003 so preferences follow a parent between devices
 
 `supabase/migrations/0003_player_preferences.sql`, pasted into the Supabase SQL Editor. It adds
