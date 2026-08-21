@@ -12,6 +12,7 @@ import { MEAL_SLOTS, DAY_TYPES, DAYS_OF_WEEK } from "@/data/dayTypes";
 import { hydrationFor } from "@/data/hydration";
 import { ageToCohort } from "@/lib/player/cohort";
 import { cn } from "@/lib/utils";
+import { ProgressRing } from "@/components/ui/ProgressRing";
 
 // The kid view. Deliberately not a planner: no week grid, no grocery list, no portion
 // multipliers, and per AAP guidance on calorie counting in pre-teens, no calories or macro
@@ -76,13 +77,41 @@ export default function TodayPage() {
         aria-labelledby="water-title"
         className="mt-6 rounded-3xl border border-border bg-surface p-5 shadow-sm"
       >
-        <header className="flex items-baseline justify-between">
-          <h2 id="water-title" className="text-xl">
-            Water
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            <span className="text-2xl font-bold text-ink">{cups}</span> / {goalCups} cups
-          </p>
+        <header className="flex items-center gap-5">
+          {/*
+            The dial rather than a line of text. This is the first thing on the screen a child
+            opens, and "6 / 8 cups" in a corner is something you read; a ring you have half
+            filled is something you see.
+
+            It turns warning at the cap, which is not decoration: the ceiling exists because
+            children are more vulnerable than adults to drinking too much too quickly, so the
+            one moment this must not look like an achievement is when it is full.
+          */}
+          <ProgressRing
+            value={oz}
+            max={goalOz}
+            size={104}
+            tone={atCap ? "warning" : "primary"}
+            label={`${oz} of ${goalOz} ounces of water today`}
+          >
+            <span className="text-2xl font-bold text-ink">{cups}</span>
+            <span className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+              of {goalCups} cups
+            </span>
+          </ProgressRing>
+
+          <div className="min-w-0">
+            <h2 id="water-title" className="text-xl">
+              Water
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {atCap
+                ? "That is enough for today. More is not better."
+                : hitGoal
+                  ? `${oz} oz. Goal reached.`
+                  : `${oz} oz of ${goalOz}. Sip through the day.`}
+            </p>
+          </div>
         </header>
 
         <ol aria-label={`${cups} cups of ${goalCups}`} className="mt-4 grid grid-cols-5 gap-2">

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ProgressRing } from "@/components/ui/ProgressRing";
 import { useState } from "react";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import {
@@ -40,8 +41,24 @@ export function WeekProgress({
       className="mb-6 rounded-3xl border border-border bg-surface p-5 shadow-sm md:p-6"
     >
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        {complete && (
+        {complete ? (
           <Mascot size={72} expression="cheer" className="flex-shrink-0" />
+        ) : (
+          // The count as a dial rather than only a line of text. Twenty-eight slots is an
+          // abstract number, and "four of twenty-eight" as a quarter-filled ring is not.
+          <ProgressRing
+            value={plannedCount}
+            max={total}
+            size={92}
+            thickness={9}
+            label={`${plannedCount} of ${total} meals planned this week`}
+            className="hidden sm:block"
+          >
+            <span className="text-xl font-bold text-ink">{plannedCount}</span>
+            <span className="mt-0.5 text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+              of {total}
+            </span>
+          </ProgressRing>
         )}
         <div className="flex-1">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -74,7 +91,7 @@ export function WeekProgress({
             aria-valuemin={0}
             aria-valuemax={total}
             aria-valuenow={plannedCount}
-            className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted"
+            className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted sm:hidden"
           >
             <div
               className="h-full rounded-full bg-primary transition-all duration-500 ease-out"
