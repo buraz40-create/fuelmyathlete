@@ -380,6 +380,21 @@ the first version had exactly that hole.
 **Not runtime-verified:** the remote half, same as preferences. Local behaviour is proven in the
 browser and the sync is a complete no-op when Supabase is unconfigured.
 
+**Every recipe and guide has its own share card.** Until now the whole site shared one image,
+so a recipe forwarded into a team group chat showed a generic brand card. 
+under  and  generates one per page.
+
+Two things to know before touching them. The recipe card runs on the **nodejs** runtime, not
+edge, so it can read the photograph straight off disk: fetching it over HTTP would make the card
+depend on the site being reachable at the moment it is generated, which during a build it is
+not. And a route that uses  cannot also declare , which
+is what the guide card tried first.
+
+The recipe page used to set  explicitly, and that silently overrides the
+generated card. It is removed, with a comment saying why: the photographs are square at 800x800,
+a link preview wants 1200x630, so a square image is cropped to a band across the middle of the
+dish and carries no words at all.
+
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
 **Sync is proven now, and what proving it found.** There is still no `.env.local`, so local

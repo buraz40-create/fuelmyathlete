@@ -50,13 +50,18 @@ export async function generateMetadata({
       title,
       description,
       url,
-      images: recipe.imageUrl ? [{ url: recipe.imageUrl }] : undefined,
+      // Deliberately no images here. Setting them overrides the generated card in
+      // opengraph-image.tsx, which is what this route should be sharing.
+      //
+      // The photographs are square, 800x800. A link preview wants 1200x630, so a square image
+      // gets cropped to a band across the middle of the dish and carries no words at all. The
+      // generated card is the right shape and puts the name, the time, the servings and the
+      // protein next to the food, which is what makes a link worth forwarding into a team chat.
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: recipe.imageUrl ? [recipe.imageUrl] : undefined,
     },
   };
 }
