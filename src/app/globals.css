@@ -249,10 +249,14 @@ html[data-native="true"] [data-planner-nav] a[href="/today"] {
   display: none;
 }
 
-/* Clear the control that is now at the top of these screens. */
-html[data-native="true"] [data-planner-nav] ~ main,
-html[data-native="true"] main:has(~ [data-planner-nav]) {
-  padding-top: calc(env(safe-area-inset-top) + 4.5rem);
+/* Clear the control that is now at the top of these screens.
+
+   The bar is rendered inside main rather than beside it, so the sibling selectors this first
+   used never matched and the control sat on top of the page heading. Checked in the running app
+   rather than assumed: main:has() is the right relationship, and :has is supported in the
+   Android WebView this ships against. */
+html[data-native="true"] main:has([data-planner-nav]) {
+  padding-top: calc(env(safe-area-inset-top) + 4.75rem);
 }
 
 /* A page in an app starts at the top of the screen, not below a sticky website header, so the
