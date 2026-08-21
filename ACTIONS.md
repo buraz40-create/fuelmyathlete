@@ -145,22 +145,43 @@ Worth knowing for next time, because half a month of credits went on images toda
 If you want a bigger image pass, a consistent set across the guides or an Open Graph share card,
 say so and I will do it in one batch on the cheaper model rather than a few at a time.
 
-## Run two migrations, and then check a second device
+## Run three migrations, then check a second device
 
-Both are pasted into the Supabase SQL Editor. Neither breaks anything by waiting: the client
-handles the column or table being absent, warns once in the console naming the migration, and
-leaves the device's copy alone.
+All three are a paste into the Supabase SQL Editor. None breaks anything by waiting: the client
+handles the column, table or policy being absent, warns once in the console naming the
+migration, and leaves the device's copy alone.
 
 1. `supabase/migrations/0003_player_preferences.sql` adds one jsonb column to `players`, for
    hidden meals and the recurring weekly schedule.
-2. `supabase/migrations/0004_meal_ratings.sql` adds a `meal_ratings` table, one row per meal
-   per player. This one matters more than it sounds: auto-fill only offers meals rated three or
-   better, so without it a second device plans the week from our guesses rather than from what
-   Elvis will actually eat, and you would have to teach it all over again.
+2. `supabase/migrations/0004_meal_ratings.sql` adds a `meal_ratings` table. This one matters
+   more than it sounds: auto-fill only offers meals rated three or better, so without it a
+   second device plans the week from our guesses rather than from what Elvis will actually eat.
+3. `supabase/migrations/0005_family_members.sql` lets a household have more than one parent.
 
-Hydration history needed no migration at all. `hydration_logs` has been in the schema since the
+Run 0005 last. It is written to be safe either way, and it skips the ratings policy if 0004 has
+not been run yet, but running it last means everything it rewrites already exists.
+
+Hydration history needed no migration at all: `hydration_logs` has been in the schema since the
 first migration and nothing had ever written to it.
 
-Once both are applied, the check is the same in each case: do it on the laptop, then open the
-phone. Hide a meal, rate a meal, log a few cups of water. That is the path I cannot test myself,
-because it needs your account.
+**0005 is the one to read before running.** It rewrites every access policy in the database, so
+if it is wrong the failure is quiet and total: the app keeps working for you and shows nothing
+to anybody else. What it does is replace "is this row's family owned by me" with "am I a member
+of this row's family", backfilling membership from the existing owner. `owner_id` stays, as the
+record of who created the household and who would be billed.
+
+I cannot run or test it. It needs your database, and its effects are only visible with two real
+accounts.
+
+## Still missing: there is no way to invite the second parent
+
+0005 makes a second parent possible and deliberately does not make them addable. Nothing in the
+schema lets you add somebody to a household, on purpose: a policy permissive enough for the app
+to add a member is permissive enough for anyone who learns a family id to add themselves.
+
+That needs an invite: a code, an expiry, and a `security definer` function that redeems it and
+inserts the membership row after checking it. It is the same shape as the `join_team` function
+the roadmap already wants for coaches, and it is the next thing to build here.
+
+So after 0005: nothing changes for you today, and the schema stops being the reason a second
+parent is impossible.

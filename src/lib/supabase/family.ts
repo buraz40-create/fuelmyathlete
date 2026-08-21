@@ -16,8 +16,10 @@ import { getBrowserSupabase } from "@/lib/supabase/client";
 // which is why one page load fired the families query ten times, so it is resolved once per
 // tab and shared.
 //
-// RLS permits the insert: families_owner_all is `for all` with check owner_id = auth.uid(),
-// so a user can create their own family and nobody else's.
+// RLS permits the insert: families_self_insert checks owner_id = auth.uid(), so a user can
+// create their own family and nobody else's. Since 0005 the creator must also insert their own
+// family_members row, because every other policy authorises through membership rather than
+// through families.owner_id.
 
 let cached: Promise<string | null> | null = null;
 
@@ -48,6 +50,22 @@ async function resolve(): Promise<string | null> {
       family = reread;
     } else {
       family = created;
+      // Record the creator as a member of the family they just made.
+      //
+      // Since 0005 every other policy authorises through family_members rather than
+      // families.owner_id, so a family with no membership row is one its own creator cannot
+      // read back. Skipping this would recreate the failure this file exists to prevent:
+      // sign-in works, nothing is ever written, and the account looks fine.
+      const { error: memberError } = await supabase
+        .from("family_members")
+        .insert({ family_id: created.id, user_id: userId, role: "owner" });
+      if (memberError && memberError.code !== "23505") {
+        // 23505 is the unique violation, which just means another tab got there first. Anything
+        // else means this family is unreadable, so do not hand back a player id that will fail
+        // on every subsequent write.
+        console.warn(`[family] could not record membership: ${memberError.message}`);
+        return null;
+      }
     }
   }
 
