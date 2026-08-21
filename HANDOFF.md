@@ -356,6 +356,30 @@ space is reserved by width and height and the logo simply appears. Guarded by
 alpha channel so the rule can be revisited rather than cargo-culted if the logo is ever
 replaced.
 
+**Hydration history syncs now, and needed no migration.** `hydration_logs` has been in the
+schema since `0001`, with its unique constraint on (player_id, logged_date), its index and an
+RLS policy scoping it to the signed-in parent's own players. Nothing had ever written a row to
+it. Every cup a parent logged sat in localStorage on one device: empty history on a new phone,
+gone with a cleared browser, and a fully built table sitting unused.
+
+`hydration-merge.ts` holds the rule, import-free so the test runner can load it. The higher
+count wins for any given date. Water is logged a cup at a time on whichever device is in the
+room, so the realistic conflict is one device having the day and the other having nothing, not
+two devices disagreeing about the same afternoon; taking the higher number never loses a logged
+cup. The accepted cost is a correction: tapping minus after a sync can see the higher number
+come back. That needs two devices, a correction and a sync in between, and doing better needs a
+timestamp per day per device, which is a lot of machinery for a counter that resets at midnight.
+
+The cap is re-applied during the merge rather than trusted. Both sides clamp when they write,
+but caps are per cohort and a profile can change, so a number logged under a teen's allowance
+must not survive into a child's. The comparison for what to write back uses the raw stored
+values, not the clamped ones: comparing clamped values agrees that both sides already hold the
+cap and writes nothing, leaving a row on the server still above it. A test covers that, because
+the first version had exactly that hole.
+
+**Not runtime-verified:** the remote half, same as preferences. Local behaviour is proven in the
+browser and the sync is a complete no-op when Supabase is unconfigured.
+
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
 **Sync is proven now, and what proving it found.** There is still no `.env.local`, so local

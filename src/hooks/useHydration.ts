@@ -1,7 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { dateKey, readDay, writeDay } from "@/lib/player/hydration-history";
+import { dateKey, readDay, recentDays, writeDay } from "@/lib/player/hydration-history";
+import { mergeHydration } from "@/lib/player/hydration-merge";
+import {
+  loadHydrationRemote,
+  saveHydrationRemote,
+} from "@/lib/player/hydration-supabase";
+import { isSupabaseConfigured } from "@/lib/supabase/config";
 
 const OZ_PER_CUP = 8;
 
@@ -39,35 +45,88 @@ export function useHydration({ capOz = DEFAULT_CAP_OZ }: UseHydrationOptions = {
     };
   }, []);
 
+  // Carry the history between a parent's devices.
+  //
+  // hydration_logs has been in the schema since the first migration, with its constraint, its
+  // index and an RLS policy, and nothing had ever written a row. Every cup logged lived in
+  // localStorage on one device: empty history on a new phone, gone with a cleared browser.
+  //
+  // Runs once per mount rather than on a subscription. Water is logged by one person on one
+  // device in the moment, so the conflict worth handling is a device meeting a server that has
+  // never heard of it, not two parents tapping the same cup at once.
+  const [syncedAt, setSyncedAt] = useState(0);
+
+  useEffect(() => {
+    if (!isSupabaseConfigured) return;
+    let cancelled = false;
+
+    async function sync() {
+      // Two weeks, which comfortably covers the seven days the history shows and leaves room
+      // for a device that has been shut in a bag since last weekend's tournament.
+      const span = recentDays(14);
+      const since = span[0].date;
+      const local: Record<string, number> = {};
+      for (const day of span) local[day.date] = day.cups;
+
+      const remote = await loadHydrationRemote(since);
+      if (cancelled) return;
+
+      const { merged, toPush, toApply } = mergeHydration(local, remote, maxCups);
+
+      for (const day of toApply) writeDay(day, merged[day]);
+      if (toPush.length > 0) {
+        await saveHydrationRemote(Object.fromEntries(toPush.map((d) => [d, merged[d]])));
+      }
+      // Nudge the read below, so a day that just arrived from the server is shown rather than
+      // sitting in localStorage until the next mount.
+      if (!cancelled && toApply.length > 0) setSyncedAt((n) => n + 1);
+    }
+
+    void sync();
+    return () => {
+      cancelled = true;
+    };
+  }, [maxCups]);
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only hydration of localStorage; SSR renders empty and the client swaps in persisted state on mount.
     setCups(readDay(date));
-  }, [date]);
+  }, [date, syncedAt]);
+
+  // Fire and forget. The tap has already been written to localStorage and reflected on screen,
+  // so a failed write here costs the next sync a correction, not the parent their cup.
+  const pushDay = useCallback((day: string, value: number) => {
+    if (!isSupabaseConfigured) return;
+    void saveHydrationRemote({ [day]: value });
+  }, []);
 
   const increment = useCallback(() => {
     setCups((c) => {
       if (c >= maxCups) return c;
       const next = c + 1;
       writeDay(date, next);
+      pushDay(date, next);
       return next;
     });
-  }, [date, maxCups]);
+  }, [date, maxCups, pushDay]);
 
   const decrement = useCallback(() => {
     setCups((c) => {
       const next = Math.max(0, c - 1);
       writeDay(date, next);
+      pushDay(date, next);
       return next;
     });
-  }, [date]);
+  }, [date, pushDay]);
 
   const setExact = useCallback(
     (n: number) => {
       const clamped = Math.min(maxCups, Math.max(0, n));
       setCups(clamped);
       writeDay(date, clamped);
+      pushDay(date, clamped);
     },
-    [date, maxCups]
+    [date, maxCups, pushDay]
   );
 
   return {
