@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 import { usePlan } from "@/components/planner/PlanProvider";
@@ -184,22 +185,49 @@ export default function TodayPage() {
               const found = planned.find((p) => p.slot === slot);
               if (!found?.meal) return null;
               const meal = found.meal;
+              // The same row as the recipe list, so a meal looks like the same object wherever
+              // it appears. Without the photograph these were four lines of text, and the one
+              // screen a child opens had nothing on it to recognise the food by.
               const body = (
                 <>
-                  <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    {label}
+                  {meal.imageUrl ? (
+                    <span className="relative block aspect-square w-16 shrink-0 overflow-hidden rounded-xl bg-muted">
+                      <Image
+                        src={meal.imageUrl}
+                        alt=""
+                        fill
+                        // 64px on screen, so ask for 128 and let a dense display have the rest.
+                        sizes="128px"
+                        className="object-cover"
+                      />
+                    </span>
+                  ) : (
+                    <span className="block w-16 shrink-0" aria-hidden />
+                  )}
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      {label}
+                    </span>
+                    <span className="mt-0.5 block font-medium leading-snug text-ink">
+                      {meal.name}
+                    </span>
                   </span>
-                  <span className="mt-0.5 block font-medium text-ink">{meal.name}</span>
                 </>
               );
               return (
-                <li key={slot} className="rounded-2xl border border-border bg-background p-3">
+                <li
+                  key={slot}
+                  className="overflow-hidden rounded-2xl border border-border bg-background"
+                >
                   {meal.recipeSlug ? (
-                    <Link href={`/recipe/${meal.recipeSlug}`} className="block">
+                    <Link
+                      href={`/recipe/${meal.recipeSlug}`}
+                      className="flex items-center gap-3 p-2 pr-3 transition active:bg-muted/40"
+                    >
                       {body}
                     </Link>
                   ) : (
-                    body
+                    <span className="flex items-center gap-3 p-2 pr-3">{body}</span>
                   )}
                 </li>
               );
