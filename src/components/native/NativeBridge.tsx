@@ -35,7 +35,7 @@ export function NativeBridge() {
       try {
         const { StatusBar, Style } = await import("@capacitor/status-bar");
         await StatusBar.setStyle({ style: Style.Light });
-        await StatusBar.setBackgroundColor({ color: "#F5F4F1" });
+        await StatusBar.setBackgroundColor({ color: "#F2F0EB" });
       } catch {
         // Older device, or the plugin is unavailable. The app looks slightly different and works.
       }
