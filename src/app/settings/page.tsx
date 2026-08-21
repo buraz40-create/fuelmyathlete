@@ -16,6 +16,7 @@ import { ProfileSetup } from "@/components/onboarding/ProfileSetup";
 import { HiddenMeals } from "@/components/planner/HiddenMeals";
 import { TeenCalorieToggle } from "@/components/planner/TeenCalorieToggle";
 import { WeeklyScheduleEditor } from "@/components/planner/WeeklyScheduleEditor";
+import { HouseholdParents } from "@/components/settings/HouseholdParents";
 import { usePlayerProfile } from "@/hooks/usePlayerProfile";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { getBrowserSupabase } from "@/lib/supabase/client";
@@ -174,6 +175,11 @@ export default function SettingsPage() {
           </header>
           <WeeklyScheduleEditor />
         </section>
+
+        {/* Sharing the household with the other parent. Renders nothing when sync is off. */}
+        <div className="mb-6">
+          <HouseholdParents />
+        </div>
 
         {/* Foods the athlete refuses */}
         <section

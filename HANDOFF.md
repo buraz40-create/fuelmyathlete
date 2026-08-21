@@ -401,6 +401,34 @@ nothing on its own, so check the meta tag. It is removed now, with the reason in
 photographs are square at 800x800, a link preview wants 1200x630, so a square image is cropped
 to a band across the middle of the dish and carries no words at all.
 
+**Joining a household goes through a database function, not a policy.** 0005 made a family able
+to have more than one parent and deliberately left no way to add one. 0006 adds
+`family_invites` and `redeem_family_invite`, and that function is the only thing in the database
+that can insert a membership row for somebody who is not already the family's owner.
+
+The shape matters. There is no policy allowing a select on an invite by code, so a stranger
+cannot confirm whether a guessed code exists or learn which household it belongs to. The
+function raises the same message for wrong, expired and already used, so it cannot be used as an
+oracle. It claims the invite in the same `update ... returning` that reads it, so two people
+racing one code cannot both get in. And it refuses past six members, which is the ceiling on the
+damage if a code leaks.
+
+Codes are ten characters from a 31 letter alphabet with no O, 0, I, 1 or L, generated with
+`crypto.getRandomValues`, because these get read aloud across a kitchen and are the only thing
+between a stranger and a household's plan.
+
+**`/game-day` is the one page with no account, no onboarding and no profile.** Everything else
+asks who the athlete is before it says anything, which is right for a weekly planner and wrong
+for somebody in a car park with forty minutes. Two controls, an age band and a kickoff time, and
+it works backwards: a meal three hours before, a top-up an hour before, a fluid figure for the
+day.
+
+The age bands are not cosmetic. Their values are the youngest year in each band so the numbers
+err toward the smaller child, and 12 sits alone rather than in a 12-13 band because 13 is where
+`ageToCohort` turns a child into a teen and the hydration ceiling changes. A band straddling
+that line would quietly give a twelve year old a teenager's number. Verified in the browser:
+88 oz through the child bands, 92 oz from 13 up.
+
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
 **Sync is proven now, and what proving it found.** There is still no `.env.local`, so local

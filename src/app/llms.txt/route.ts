@@ -52,6 +52,9 @@ ${recipes}
 
 ## Tools
 
+- [Game day timeline](${SITE_URL}/game-day): answers "what should they eat before the game" from
+  an age band and a kickoff time, working backwards to a meal three hours before, a small
+  top-up an hour before, and a fluid figure for the day. No account, no profile, one screen.
 - [Weekly meal planner](${SITE_URL}/planner): builds a week of meals and an aisle-grouped
   grocery list, with portions and hydration that change by day type (school, training, match,
   rest). Runs entirely in the browser with no account.

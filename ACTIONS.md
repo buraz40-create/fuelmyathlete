@@ -173,15 +173,16 @@ record of who created the household and who would be billed.
 I cannot run or test it. It needs your database, and its effects are only visible with two real
 accounts.
 
-## Still missing: there is no way to invite the second parent
+## Migration 0006, for inviting the second parent
 
-0005 makes a second parent possible and deliberately does not make them addable. Nothing in the
-schema lets you add somebody to a household, on purpose: a policy permissive enough for the app
-to add a member is permissive enough for anyone who learns a family id to add themselves.
+`supabase/migrations/0006_family_invites.sql`, run after 0005. It adds the invite table and the
+redemption function, and it turns on the "Another parent" section in Settings: create a code,
+read it out, they type it in and both of you see the same week.
 
-That needs an invite: a code, an expiry, and a `security definer` function that redeems it and
-inserts the membership row after checking it. It is the same shape as the `join_team` function
-the roadmap already wants for coaches, and it is the next thing to build here.
+Until it is run, that section shows the same warning shape as everything else and nothing breaks.
 
-So after 0005: nothing changes for you today, and the schema stops being the reason a second
-parent is impossible.
+**Read the redemption function before running it.** It is `security definer`, which means it
+runs with the privileges of its owner and is the only thing in the database that can add a
+parent to a household. The comments in the file explain each restriction and why it is there.
+
+I cannot test it. It needs your database and two real accounts.
