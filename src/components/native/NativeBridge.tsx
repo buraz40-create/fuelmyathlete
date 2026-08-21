@@ -23,6 +23,12 @@ export function NativeBridge() {
     if (!isNativeApp()) return;
     let cancelled = false;
 
+    // Everything app-shaped hangs off this one attribute: the bottom tab bar appears, the
+    // website header and footer go away, and the page gains room for both. It is set here
+    // rather than rendered conditionally because the server cannot know it is the app, and a
+    // different tree on the client would make React throw the page away and rebuild it.
+    document.documentElement.dataset.native = "true";
+
     async function wire() {
       // The status bar and splash are cosmetic, and failing to set them should never stop the
       // app starting, so each is isolated.

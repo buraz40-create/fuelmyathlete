@@ -11,7 +11,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       {/* Renders nothing. Here rather than in PlanProvider because ratings show on the recipe
           pages and the recipes grid too, which are outside the planner. */}
       <RatingsSync />
-      <header data-print-hide className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
+      <header data-web-header data-print-hide className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-1 px-3 py-2 md:gap-4 md:px-8">
           {/*
             The logo was a flat 260px wide. On a 375px phone that is 69% of the screen, which

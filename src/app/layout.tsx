@@ -4,6 +4,7 @@ import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
 import { ServiceWorker } from "@/components/layout/ServiceWorker";
 import { NativeBridge } from "@/components/native/NativeBridge";
+import { AppTabBar } from "@/components/native/AppTabBar";
 import { IconProvider } from "@/components/IconProvider";
 import "./globals.css";
 
@@ -152,6 +153,8 @@ export default function RootLayout({
           device. Renders nothing, and does nothing at all in a browser.
         */}
         <NativeBridge />
+        {/* Present on every page, and invisible unless the document is marked native. */}
+        <AppTabBar />
         <Toaster position="top-center" richColors />
         <script
           id="ld-organization"

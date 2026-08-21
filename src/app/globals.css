@@ -193,3 +193,49 @@
     content: "";
   }
 }
+
+/* =========================================================
+   App chrome
+   =========================================================
+
+   The same site serves the website and the Android app, and the two want different furniture.
+   A website is navigated from a header with a logo and links, which is right for a page somebody
+   reached from a search. An app is navigated from a bar along the bottom, in reach of a thumb,
+   present on every screen, and it does not show you its own logo on every page.
+
+   This is done with an attribute on the document rather than by rendering different components,
+   because rendering different trees on the server and the client makes React discard the page on
+   hydration. NativeBridge sets data-native on the html element; everything below reacts to it.
+
+   Colours are the site's own: the same surface, the same green, the same ink. It should look
+   like the same product, because it is. */
+
+html[data-native="true"] [data-app-tabbar] {
+  display: block;
+}
+
+/* The website header is a logo, four links and a sign-in control. Inside the app the tab bar
+   below covers all of it, and repeating a logo at the top of every screen is the clearest
+   possible tell that you are looking at a website in a wrapper. */
+html[data-native="true"] [data-web-header],
+html[data-native="true"] [data-web-footer] {
+  display: none;
+}
+
+/* Room for the tab bar, plus the gesture area under it, so the last card on a page is not
+   trapped behind the navigation. */
+html[data-native="true"] body {
+  padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
+}
+
+/* The planner's own bar floats above the page; inside the app it would sit on top of the tab
+   bar. It moves up to clear it. */
+html[data-native="true"] [data-planner-nav] {
+  bottom: calc(4rem + env(safe-area-inset-bottom));
+}
+
+/* A page in an app starts at the top of the screen, not below a sticky website header, so the
+   first heading needs the breathing room the header used to provide. */
+html[data-native="true"] main {
+  padding-top: env(safe-area-inset-top);
+}

@@ -8,7 +8,7 @@ import { UserMenu } from "@/components/auth/UserMenu";
 export function LandingShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
+      <header data-web-header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-2 md:px-8">
           <Link href="/" aria-label="FuelMyAthlete home" className="flex shrink-0 items-center">
             <Logo width={220} className="h-auto w-[104px] md:w-[220px]" priority />
