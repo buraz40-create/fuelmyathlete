@@ -315,6 +315,35 @@ Enforced by `src/components/__tests__/radiogroup-keyboard.test.ts`, which fails 
 `role="radiogroup"` or `role="tablist"` with no `onKeyDown`, and any `role="radio"` or
 `role="tab"` with no `tabIndex`. It found seven of the nine on its first run.
 
+**Meal exclusions and the weekly schedule sync now, through `players.preferences`.** Both were
+device-local, so a parent who set the week up on a laptop opened the phone to the default
+pattern and watched auto-fill serve the meals they had told it to stop serving. They deliberately
+do not hang off the profile: the profile round-trips through Supabase and the two would overwrite
+each other.
+
+`preferences-merge.ts` holds the only decision that can lose a parent's settings, and holds it
+with no imports so the test runner can load it. Whole-record last-write-wins, biased hard toward
+the device: remote must be present, timestamped, readable and strictly newer to win. Two orderings
+in there were wrong first time and both are now tests. An unreadable remote timestamp has to be
+rejected before anything consults it, or a device with no stamp of its own accepts garbage and
+clears the list. And a device with no stamp but real settings on it is not a blank device, it is
+somebody who set exclusions before the stamp existed; treating that as blank would delete the
+settings of everyone who was already here. Those users get adopted and pushed up once.
+
+`preferences-clock.ts` is a separate module purely to avoid a cycle, since both stores write it
+and the sync layer reads it. Exclusions are now observable through `useSyncExternalStore`, the
+same shape as ratings, so a copy arriving from another device updates the planner instead of
+waiting for a reload.
+
+`usePreferencesSync` is mounted once in `PlanProvider`. It does nothing when Supabase is not
+configured, which is every local run.
+
+**Not runtime-verified:** the remote half. Local behaviour is proven in the browser, including
+that hiding a meal removes it from the picker immediately and stamps the clock for the first
+time. Reading and writing `players.preferences` needs migration 0003 applied and a signed-in
+account, and the code degrades quietly if the column is missing: it warns once, naming the
+migration, and leaves the device's copy alone.
+
 **Checking hydration quickly:** load a static page and look for the sign-in control in the header. `UserMenu` renders a bare placeholder span until `useAuthUser` resolves, so a header with no "Sign in" and no user menu means the client never took over.
 
 **Sync is proven now, and what proving it found.** There is still no `.env.local`, so local

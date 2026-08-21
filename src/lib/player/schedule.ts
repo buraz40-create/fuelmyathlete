@@ -6,8 +6,10 @@ import { defaultDayTypeFor } from "@/lib/planner/empty-plan";
 // Saturday match) and a parent whose team trains Monday and Wednesday had to correct seven
 // days by hand, every week, forever.
 //
-// Device-local for the same reason as meal exclusions: the profile round-trips through
-// Supabase and players has no column for it. See preferences.ts.
+// Synced through players.preferences alongside meal exclusions, not through the profile, so
+// the two cannot overwrite each other. See preferences-sync.ts.
+
+import { markPreferencesChanged } from "@/lib/player/preferences-clock";
 
 const STORAGE_KEY = "fma:weekly-schedule";
 
@@ -44,6 +46,7 @@ export const weeklySchedule = {
     if (typeof window === "undefined") return;
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(schedule));
+      markPreferencesChanged();
     } catch {
       // Storage blocked. The choice still applies for this session.
     }
@@ -57,5 +60,8 @@ export const weeklySchedule = {
   clear(): void {
     if (typeof window === "undefined") return;
     window.localStorage.removeItem(STORAGE_KEY);
+    // Resetting to the default pattern is a change like any other. Without this it would look
+    // like nothing happened, and a stale remote copy would put the old pattern straight back.
+    markPreferencesChanged();
   },
 };

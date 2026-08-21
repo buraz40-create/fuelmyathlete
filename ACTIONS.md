@@ -155,3 +155,17 @@ positions do not sit together.
 I have not touched the recipe, because removing food from the plan is your call and it is a
 whole-grain cracker rather than a beige snack aisle one. Tell me to cut it, or tell me it stays
 and I will stop treating crackers as disqualifying when I pick photographs.
+
+## Run migration 0003 so preferences follow a parent between devices
+
+`supabase/migrations/0003_player_preferences.sql`, pasted into the Supabase SQL Editor. It adds
+one jsonb column to `players`.
+
+Until it runs, hidden meals and the recurring weekly schedule stay on whichever device set them,
+which is the state they have always been in, so nothing breaks by waiting. The client already
+handles the column being absent: it warns once in the console naming this migration and leaves
+the device's copy alone.
+
+Once it is applied, the thing to check is a second device. Sign in on a phone, and the meals you
+hid on the laptop should be hidden there too. That is the path I cannot test myself, since it
+needs your account.
