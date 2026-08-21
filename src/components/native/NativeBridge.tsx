@@ -41,17 +41,12 @@ export function NativeBridge() {
         // If hiding fails the splash times out on its own from the config.
       }
 
-      // Android's hardware back button. Without this it closes the app from any screen, which
-      // is jarring when a parent is three taps into a recipe.
-      try {
-        const { App } = await import("@capacitor/app");
-        await App.addListener("backButton", ({ canGoBack }) => {
-          if (canGoBack) window.history.back();
-          else void App.exitApp();
-        });
-      } catch {
-        // Not fatal. The default behaviour applies.
-      }
+      // The hardware back button is handled natively in MainActivity, not here.
+      //
+      // A listener was tried first and does fire, confirmed on an emulator, but firing it does
+      // not stop Capacitor doing its default as well: back navigated the WebView and sent the
+      // app to the background in the same press. One decision in one place is the fix, and the
+      // only place that can make it is the activity.
 
       if (cancelled) return;
       await registerForPush();

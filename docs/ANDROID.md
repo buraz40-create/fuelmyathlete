@@ -93,3 +93,28 @@ Capturing a photo with nowhere for it to go would be a button that disappoints.
 - The privacy declaration has to mention the data collected. This app stores an email address, a
   child's age, and optionally a weight for teenagers. Be accurate: it is a children's product,
   and Google treats that category seriously.
+
+## The back button, and three approaches that did not work
+
+Worth reading before touching `MainActivity.java`, because two of the failures look correct.
+
+Capacitor's JavaScript `backButton` listener **fires but does not consume the press**. Confirmed
+with a listener that wrote to localStorage: the event arrived, and the native side still did its
+default as well. Back navigated the WebView and backgrounded the app in one press, so resuming
+showed a page further back than where you left it, having apparently closed for no reason.
+
+Overriding `onBackPressed` did nothing at all. On Android 13 and later with this target the
+system routes back through the predictive back dispatcher and never calls that method, which is
+why it is deprecated. Setting `enableOnBackInvokedCallback=false` in the manifest does not
+bring it back on Android 15, though it is left in place because it is still correct for older
+devices.
+
+What works is registering an `OnBackPressedCallback` with `getOnBackPressedDispatcher()`, which
+is the path predictive back actually uses. Verified on an emulator: back from `/game-day` returns
+to `/` with the history entry popped.
+
+**One thing still unconfirmed.** During those tests the app also went to the background on the
+same press. Back navigation is definitely working, so this looks like an artifact of
+`adb shell input keyevent KEYCODE_BACK`, which on Android 15 is not the same path as a real
+gesture or button. Check it on a real phone: press back from a recipe and it should return to
+the list without the app disappearing.

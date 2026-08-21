@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <!--
+      enableOnBackInvokedCallback is forced back to false, and tools:replace is what makes that
+      stick: Capacitor's own library manifest sets it to true, and the merged manifest wins
+      unless we say otherwise.
+
+      With it true and targetSdk 36 on Android 13 or later, the system routes back through the
+      predictive back callback and never calls the legacy onBackPressed that Capacitor's
+      backButton listener is built on. The effect is that pressing back leaves the app from any
+      screen and no JavaScript listener can prevent it. Found on an emulator: back from the
+      recipe list dropped straight to the launcher, and it kept happening after I had added a
+      listener by hand, which is what ruled out our own code.
+
+      Turning it off restores the legacy path, which is what the plugin expects. The cost is the
+      Android 14 predictive back animation, which this app does not use.
+    -->
     <application
+        android:enableOnBackInvokedCallback="false"
+        tools:replace="android:enableOnBackInvokedCallback"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
