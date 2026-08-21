@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { isNativeApp } from "@/lib/native/platform";
 import { Export, X, DotsThreeVertical } from "@phosphor-icons/react/dist/ssr";
 
 const DISMISSED_KEY = "fma:install-dismissed";
@@ -21,6 +22,12 @@ const HIDDEN: InstallState = { show: false, platform: "other" };
 function detect(): InstallState {
   if (typeof window === "undefined") return HIDDEN;
   if (window.localStorage.getItem(DISMISSED_KEY)) return HIDDEN;
+
+  // Inside the Android app this is already installed, and the WebView does not report
+  // display-mode: standalone, so the check below would not catch it. Coaching somebody to add
+  // to their home screen while they are looking at the app they opened from their home screen
+  // is the sort of thing that makes software feel unfinished.
+  if (isNativeApp()) return HIDDEN;
 
   const standalone =
     window.matchMedia("(display-mode: standalone)").matches ||
