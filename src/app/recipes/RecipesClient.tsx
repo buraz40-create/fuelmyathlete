@@ -141,7 +141,7 @@ export function RecipesClient() {
           This is the same mistake as the guide reveals that hid prose at opacity 0. Third time
           on this project, so the rule is written down in HANDOFF: on content that has to be
           read, animate position, not visibility. */}
-      <ol className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <ol className="grid gap-2.5 md:grid-cols-2 md:gap-4 lg:grid-cols-3">
         {filtered.map((recipe, i) => (
           <motion.li
             key={recipe.slug}
