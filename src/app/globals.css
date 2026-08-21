@@ -229,9 +229,13 @@ html[data-native="true"] body {
 }
 
 /* The planner's own bar floats above the page; inside the app it would sit on top of the tab
-   bar. It moves up to clear it. */
+   bar. It moves up to clear it.
+
+   5rem, not 4. The tab bar is 3.5rem of content plus the gesture inset, which measured 69px on
+   a Pixel 6, and 4rem left the planner bar overlapping it by five pixels: enough to clip the
+   icons, not enough to notice in a screenshot. Measured rather than guessed the second time. */
 html[data-native="true"] [data-planner-nav] {
-  bottom: calc(4rem + env(safe-area-inset-bottom));
+  bottom: calc(5rem + env(safe-area-inset-bottom));
 }
 
 /* A page in an app starts at the top of the screen, not below a sticky website header, so the
