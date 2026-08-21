@@ -228,14 +228,31 @@ html[data-native="true"] body {
   padding-bottom: calc(3.5rem + env(safe-area-inset-bottom));
 }
 
-/* The planner's own bar floats above the page; inside the app it would sit on top of the tab
-   bar. It moves up to clear it.
+/* The planner's own bar becomes a segmented control at the top.
+   
+   Left at the bottom it made two stacked bottom bars, both containing a tab called Today, which
+   is worse than the website header it replaced. The convention every phone user already knows
+   is sections along the bottom and sub-views along the top, so that is what this does: the tab
+   bar owns Today, Plan, Recipes and Profile, and this owns the four views of the plan.
 
-   5rem, not 4. The tab bar is 3.5rem of content plus the gesture inset, which measured 69px on
-   a Pixel 6, and 4rem left the planner bar overlapping it by five pixels: enough to clip the
-   icons, not enough to notice in a screenshot. Measured rather than guessed the second time. */
+   Moved rather than hidden, because /planner/week is reachable from nowhere else in the app and
+   hiding this would have stranded it. */
 html[data-native="true"] [data-planner-nav] {
-  bottom: calc(5rem + env(safe-area-inset-bottom));
+  top: calc(env(safe-area-inset-top) + 0.5rem);
+  bottom: auto;
+}
+
+/* Today lives in the tab bar now, and a control offering it twice invites the question of
+   whether the two are different. Selected by href rather than by position, so reordering the
+   bar cannot silently hide the wrong one. */
+html[data-native="true"] [data-planner-nav] a[href="/today"] {
+  display: none;
+}
+
+/* Clear the control that is now at the top of these screens. */
+html[data-native="true"] [data-planner-nav] ~ main,
+html[data-native="true"] main:has(~ [data-planner-nav]) {
+  padding-top: calc(env(safe-area-inset-top) + 4.5rem);
 }
 
 /* A page in an app starts at the top of the screen, not below a sticky website header, so the
