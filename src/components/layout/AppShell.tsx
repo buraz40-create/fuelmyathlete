@@ -3,10 +3,14 @@ import type { ReactNode } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { AppFooter } from "@/components/layout/AppFooter";
 import { UserMenu } from "@/components/auth/UserMenu";
+import { RatingsSync } from "@/components/auth/RatingsSync";
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      {/* Renders nothing. Here rather than in PlanProvider because ratings show on the recipe
+          pages and the recipes grid too, which are outside the planner. */}
+      <RatingsSync />
       <header data-print-hide className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-1 px-3 py-2 md:gap-4 md:px-8">
           {/*

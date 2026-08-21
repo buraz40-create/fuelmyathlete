@@ -145,16 +145,22 @@ Worth knowing for next time, because half a month of credits went on images toda
 If you want a bigger image pass, a consistent set across the guides or an Open Graph share card,
 say so and I will do it in one batch on the cheaper model rather than a few at a time.
 
-## Run migration 0003 so preferences follow a parent between devices
+## Run two migrations, and then check a second device
 
-`supabase/migrations/0003_player_preferences.sql`, pasted into the Supabase SQL Editor. It adds
-one jsonb column to `players`.
+Both are pasted into the Supabase SQL Editor. Neither breaks anything by waiting: the client
+handles the column or table being absent, warns once in the console naming the migration, and
+leaves the device's copy alone.
 
-Until it runs, hidden meals and the recurring weekly schedule stay on whichever device set them,
-which is the state they have always been in, so nothing breaks by waiting. The client already
-handles the column being absent: it warns once in the console naming this migration and leaves
-the device's copy alone.
+1. `supabase/migrations/0003_player_preferences.sql` adds one jsonb column to `players`, for
+   hidden meals and the recurring weekly schedule.
+2. `supabase/migrations/0004_meal_ratings.sql` adds a `meal_ratings` table, one row per meal
+   per player. This one matters more than it sounds: auto-fill only offers meals rated three or
+   better, so without it a second device plans the week from our guesses rather than from what
+   Elvis will actually eat, and you would have to teach it all over again.
 
-Once it is applied, the thing to check is a second device. Sign in on a phone, and the meals you
-hid on the laptop should be hidden there too. That is the path I cannot test myself, since it
-needs your account.
+Hydration history needed no migration at all. `hydration_logs` has been in the schema since the
+first migration and nothing had ever written to it.
+
+Once both are applied, the check is the same in each case: do it on the laptop, then open the
+phone. Hide a meal, rate a meal, log a few cups of water. That is the path I cannot test myself,
+because it needs your account.

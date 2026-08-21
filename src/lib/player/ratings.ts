@@ -7,12 +7,51 @@
 // The hidden-meals list already handles outright refusal, but that is a blunt instrument: most
 // food is not banned, it is just liked more or less than the alternative.
 //
-// A parent's own rating overrides ours wherever ordering matters. Device-local, in its own key,
-// for the same reason the exclusions are: the profile round-trips through Supabase and the
-// players table has no column for this, so hanging it off the profile would mean ratings
-// vanishing the first time a signed-in device loaded the remote copy.
+// A parent's own rating overrides ours wherever ordering matters. Kept in its own key rather
+// than on the profile, which round-trips through Supabase and would have wiped them.
+//
+// They sync through the meal_ratings table now, one row per slug rather than a blob, so rating
+// one meal on a phone does not discard what was rated on the laptop. See ratings-merge.ts.
 
 const STORAGE_KEY = "fma:meal-ratings";
+
+// When each slug was last touched, kept beside the ratings rather than inside them so the
+// existing key keeps its shape and nobody's stored ratings need migrating.
+//
+// A clear records a time too. Without that, removing a rating on a phone would be undone by the
+// next sync with a laptop that still held the old star, and it would look like the app was
+// arguing back.
+const TIMES_KEY = "fma:meal-ratings-at";
+
+function readTimes(): Record<string, string> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = window.localStorage.getItem(TIMES_KEY);
+    const parsed: unknown = raw ? JSON.parse(raw) : null;
+    if (typeof parsed !== "object" || parsed === null) return {};
+    const out: Record<string, string> = {};
+    for (const [slug, value] of Object.entries(parsed as Record<string, unknown>)) {
+      if (typeof value === "string") out[slug] = value;
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+export function ratingTimes(): Record<string, string> {
+  return readTimes();
+}
+
+/** Records when a slug changed. Exported so the sync can stamp what it adopts. */
+export function touchRating(slug: string, when: string = new Date().toISOString()): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(TIMES_KEY, JSON.stringify({ ...readTimes(), [slug]: when }));
+  } catch {
+    // Storage blocked. The rating itself still applies on this device.
+  }
+}
 
 export type Stars = 1 | 2 | 3 | 4 | 5;
 
@@ -101,6 +140,23 @@ export const mealRatings = {
   set(slug: string, stars: Stars): Record<string, Stars> {
     const next = { ...read(), [slug]: stars };
     write(next);
+    touchRating(slug);
+    emit();
+    return next;
+  },
+
+  /**
+   * Apply a value without stamping the time, for a copy arriving from another device.
+   *
+   * Stamping here would make this device look like the most recent editor of a rating it just
+   * received, and it would push the same value straight back.
+   */
+  adopt(slug: string, stars: Stars | undefined, at: string): Record<string, Stars> {
+    const next = { ...read() };
+    if (stars === undefined) delete next[slug];
+    else next[slug] = stars;
+    write(next);
+    touchRating(slug, at);
     emit();
     return next;
   },
@@ -110,6 +166,9 @@ export const mealRatings = {
     const next = { ...read() };
     delete next[slug];
     write(next);
+    // Stamped even though the value is gone: clearing is an edit, and the sync has to know it
+    // happened after whatever the server still holds.
+    touchRating(slug);
     emit();
     return next;
   },
