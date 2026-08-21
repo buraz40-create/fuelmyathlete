@@ -3,6 +3,8 @@ import Link from "next/link";
 import { ArrowsClockwise, Clock, Users } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { FoodImage } from "@/components/food/FoodImage";
+import { StarRating } from "@/components/food/StarRating";
+import { MEALS } from "@/data/meals";
 import type { MealSlot, Recipe } from "@/types/domain";
 
 const SLOT_DOT: Record<MealSlot, string> = {
@@ -35,6 +37,17 @@ export function RecipeCard({
 }) {
   const slot = recipe.slot;
   const aboveTheFold = index < 6;
+
+  // The rating lives on the meal, not the recipe. Same lookup as the recipe page, including the
+  // fallback for the seven where the meal and the recipe share a slug and nothing points one at
+  // the other.
+  //
+  // This grid is where you actually browse all 64, and it was the one surface with no rating on
+  // it at all: the stars existed on the recipe page, in the meal picker and on the planner slot,
+  // but not here. Read-only, because the whole card is a link and a tappable star inside it
+  // would fight the navigation.
+  const meal =
+    MEALS.find((m) => m.recipeSlug === recipe.slug) ?? MEALS.find((m) => m.slug === recipe.slug);
   return (
     <Link
       href={`/recipe/${recipe.slug}`}
@@ -85,6 +98,11 @@ export function RecipeCard({
         <h3 className="mt-1.5 text-base font-semibold leading-snug text-ink md:text-lg">
           {recipe.name}
         </h3>
+        {meal && (
+          <div className="mt-1.5">
+            <StarRating slug={meal.slug} fallback={meal.kidRating} size={13} readOnly />
+          </div>
+        )}
         {recipe.whenToEat && (
           <p className="mt-2 text-xs leading-snug text-muted-foreground line-clamp-2">
             {recipe.whenToEat}

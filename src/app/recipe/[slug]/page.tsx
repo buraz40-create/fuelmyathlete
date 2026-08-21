@@ -85,7 +85,17 @@ export default async function RecipePage({
   if (!recipe) notFound();
 
   // The meal whose ingredients + nutrition belong to this recipe (matched by recipeSlug).
-  const linkedMeal = MEALS.find((m) => m.recipeSlug === recipe.slug);
+  // Most meals name their recipe through recipeSlug. Seven do not, because the meal and the
+  // recipe share a slug and nothing ever pointed one at the other: hibachi-chicken-bowl,
+  // hibachi-bowl-matchday, pre-match-plain-plate, tournament-sub, apple-cheddar-cubes,
+  // cottage-berries and edamame-cup.
+  //
+  // Everything on this page that describes the food comes from the meal, so those seven were
+  // rendering with no ingredients list, no nutrition block, no rating, and, worst of the four,
+  // a Recipe structured-data object carrying "recipeIngredient": []. An empty ingredient list
+  // is not a thin recipe, it is an invalid one, and Google was being handed seven of them.
+  const linkedMeal =
+    MEALS.find((m) => m.recipeSlug === recipe.slug) ?? MEALS.find((m) => m.slug === recipe.slug);
   const url = `${SITE_URL}/recipe/${recipe.slug}`;
   const orgId = `${SITE_URL}/#organization`;
   const personId = `${SITE_URL}/#editorial-team`;
