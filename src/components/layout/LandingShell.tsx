@@ -10,8 +10,8 @@ export function LandingShell({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen flex-col bg-background">
       <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-2 md:px-8">
-          <Link href="/" aria-label="FuelMyAthlete home" className="flex items-center">
-            <Logo width={220} priority />
+          <Link href="/" aria-label="FuelMyAthlete home" className="flex shrink-0 items-center">
+            <Logo width={220} className="h-auto w-[104px] md:w-[220px]" priority />
           </Link>
           <nav className="flex items-center gap-3 text-sm font-medium">
             <Link
@@ -26,7 +26,7 @@ export function LandingShell({ children }: { children: ReactNode }) {
             >
               Guides
             </Link>
-            <UserMenu className="hidden sm:inline-flex" />
+            <UserMenu />
             <Link
               href="/onboarding"
               className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition hover:opacity-90"

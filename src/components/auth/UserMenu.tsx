@@ -28,7 +28,7 @@ export function UserMenu({ className }: { className?: string }) {
 
   // While we don't know auth state yet, reserve space but show nothing.
   if (!hydrated) {
-    return <span className={cn("inline-block h-8 w-20", className)} aria-hidden />;
+    return <span className={cn("inline-block h-11 w-20", className)} aria-hidden />;
   }
 
   if (!user) {
@@ -36,7 +36,7 @@ export function UserMenu({ className }: { className?: string }) {
       <Link
         href="/sign-in"
         className={cn(
-          "rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary",
+          "inline-flex min-h-11 items-center rounded-full border border-border bg-surface px-3 text-xs font-semibold text-ink transition hover:border-primary hover:text-primary",
           className
         )}
       >
@@ -53,7 +53,7 @@ export function UserMenu({ className }: { className?: string }) {
       disabled={signingOut}
       title={user.email ?? undefined}
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1.5 text-xs font-semibold text-muted-foreground transition hover:border-danger hover:text-danger disabled:opacity-50",
+        "inline-flex min-h-11 items-center gap-1.5 rounded-full border border-border bg-surface px-3 text-xs font-semibold text-muted-foreground transition hover:border-danger hover:text-danger disabled:opacity-50",
         className
       )}
     >
