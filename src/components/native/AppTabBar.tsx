@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sun, CalendarBlank, BookOpen, User } from "@phosphor-icons/react/dist/ssr";
+import { Sun, CalendarBlank, BookOpen, Lightbulb, User } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 
 /**
@@ -17,20 +17,29 @@ import { cn } from "@/lib/utils";
  * than being conditionally rendered. Conditional rendering would mean the server produces one
  * tree and the client another, and React would replace the page on hydration.
  *
- * Four destinations, deliberately. The existing planner bar carries Today, Planner, Week and
- * Grocery, which are four views of one thing; those stay where they are, inside the planner.
- * These four are the parts of the product.
+ * Five destinations. The planner bar carries Planner, Week and Grocery, which are three views
+ * of one thing and stay inside the planner.
+ *
+ * Guides is here because hiding the website header stranded it. The header was the only way to
+ * reach the guides index, and the footer that also linked it is hidden in the app too, so the
+ * only route left was a related link at the bottom of a recipe. Checked in the running app: the
+ * visible links on Today were three recipes and the four tabs, and nothing else.
+ *
+ * A tab rather than a menu button. A hamburger at the top would have hidden the same content
+ * behind a tap and a guess, and on a five item bar there is no need to hide anything.
  */
 const TABS = [
   { href: "/today", label: "Today", icon: Sun },
   { href: "/planner", label: "Plan", icon: CalendarBlank },
   { href: "/recipes", label: "Recipes", icon: BookOpen },
+  { href: "/guides", label: "Guides", icon: Lightbulb },
   { href: "/settings", label: "Profile", icon: User },
 ] as const;
 
 function isActive(pathname: string, href: string): boolean {
   if (href === "/planner") return pathname.startsWith("/planner");
   if (href === "/recipes") return pathname.startsWith("/recipe");
+  if (href === "/guides") return pathname.startsWith("/guides");
   return pathname === href;
 }
 
@@ -72,7 +81,7 @@ export function AppTabBar() {
                   className={cn(
                     // The active pill is what makes the current tab readable at a glance
                     // without relying on colour alone.
-                    "flex h-8 w-14 items-center justify-center rounded-full transition",
+                    "flex h-8 w-12 items-center justify-center rounded-full transition",
                     active ? "bg-primary-soft" : "bg-transparent"
                   )}
                 >
