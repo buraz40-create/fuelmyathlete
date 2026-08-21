@@ -61,6 +61,26 @@
   --color-day-match: var(--day-match);
   --color-day-rest: var(--day-rest);
 
+  /* Elevation.
+     
+     There were no shadow tokens here, so every card fell back to Tailwind's default, which is a
+     single 1px line of black at five percent. On a warm off-white background that is invisible,
+     and the cards read as flat rectangles separated by a hairline border rather than as objects
+     sitting on a surface.
+     
+     Each of these is two shadows: a tight one that gives the edge its contact with the page, and
+     a wide, soft, offset one that is the actual lift. One shadow can do either job but not both,
+     which is why a single large blur looks like fog and a single small one looks stuck down.
+     
+     The colour is the site's ink rather than black. Black on a warm background greys it; the
+     ink carries the same warmth, so the shadow reads as shade rather than as dirt. */
+  --shadow-2xs: 0 1px 2px -1px rgb(31 36 34 / 0.06);
+  --shadow-xs: 0 1px 2px -1px rgb(31 36 34 / 0.08), 0 2px 6px -2px rgb(31 36 34 / 0.05);
+  --shadow-sm: 0 1px 2px -1px rgb(31 36 34 / 0.08), 0 6px 16px -6px rgb(31 36 34 / 0.10);
+  --shadow-md: 0 2px 4px -2px rgb(31 36 34 / 0.08), 0 12px 28px -8px rgb(31 36 34 / 0.14);
+  --shadow-lg: 0 4px 8px -3px rgb(31 36 34 / 0.09), 0 20px 44px -12px rgb(31 36 34 / 0.18);
+  --shadow-xl: 0 8px 16px -6px rgb(31 36 34 / 0.10), 0 32px 64px -16px rgb(31 36 34 / 0.22);
+
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -98,7 +118,7 @@
   --warning: #f4a942;
   --danger: #e25c5c;
 
-  --border: #ebe7df;
+  --border: #f0ece5;
   --input: #ebe7df;
   --ring: #6b9148;
 
