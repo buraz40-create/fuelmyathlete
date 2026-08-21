@@ -3,6 +3,7 @@ import { Manrope } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "@/components/ui/sonner";
 import { ServiceWorker } from "@/components/layout/ServiceWorker";
+import { NativeBridge } from "@/components/native/NativeBridge";
 import { IconProvider } from "@/components/IconProvider";
 import "./globals.css";
 
@@ -143,6 +144,14 @@ export default function RootLayout({
         </a>
         <IconProvider>{children}</IconProvider>
         <ServiceWorker />
+        {/*
+          Root layout, not AppShell. AppShell wraps most routes but not the landing page, which
+          uses LandingShell, so mounting it there left "/" with no status bar, no splash hide
+          and no back button handling. Pressing back on the landing page exited the app to the
+          launcher instead of going back, which only showed up running the real thing on a
+          device. Renders nothing, and does nothing at all in a browser.
+        */}
+        <NativeBridge />
         <Toaster position="top-center" richColors />
         <script
           id="ld-organization"
