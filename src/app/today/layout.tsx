@@ -22,7 +22,7 @@ export default function TodayLayout({ children }: { children: ReactNode }) {
           <TabBar />
           <InstallPrompt />
           {children}
-          <BottomNav />
+          <BottomNav surface="today" />
         </ProfileGate>
       </PlanProvider>
     </AppShell>

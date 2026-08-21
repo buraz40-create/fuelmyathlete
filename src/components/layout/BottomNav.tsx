@@ -12,11 +12,17 @@ const TABS = [
   { href: "/planner/grocery", label: "Grocery", icon: Basket },
 ] as const;
 
-export function BottomNav() {
+/**
+ * @param surface Which screen this bar is serving. Inside the app the planner's copy becomes a
+ * segmented control at the top of the plan, and the copy on Today is hidden entirely: Today is
+ * a destination in the app's own tab bar, so a control here would offer three planner views
+ * with none of them selected, which reads as a broken control rather than a menu.
+ */
+export function BottomNav({ surface = "planner" }: { surface?: "planner" | "today" }) {
   const pathname = usePathname();
 
   return (
-    <nav data-planner-nav data-print-hide
+    <nav data-planner-nav={surface} data-print-hide
       aria-label="Primary"
       className="fixed inset-x-0 bottom-4 z-40 mx-auto flex w-[min(420px,92vw)] items-center justify-around rounded-full border border-border bg-surface px-2 py-2 shadow-lg md:hidden"
     >
