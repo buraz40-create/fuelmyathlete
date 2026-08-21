@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRovingGroup } from "@/hooks/useRovingGroup";
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
@@ -32,6 +32,32 @@ export function RecipesClient() {
         : RECIPES.filter((r) => r.slot === filter),
     [filter]
   );
+
+  // Keep the chosen filter fully on screen.
+  //
+  // The row scrolls sideways, and Dinner is the last of five, so on a phone it sits half off the
+  // edge. Tapping it selected it and left it there, cut in half, which reads as a broken control
+  // rather than a scrolled one.
+  //
+  // The container is scrolled directly rather than with scrollIntoView, because that also scrolls
+  // the nearest scrollable ancestor: this row is sticky, so the page would jump underneath it.
+  const filterRowRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const row = filterRowRef.current;
+    const chip = row?.querySelector<HTMLElement>('[aria-selected="true"]');
+    if (!row || !chip) return;
+
+    const pad = 16; // matches the row's own inline padding, so the chip never touches the edge
+    const left = chip.offsetLeft - pad;
+    const right = chip.offsetLeft + chip.offsetWidth + pad;
+
+    if (left < row.scrollLeft) {
+      row.scrollTo({ left, behavior: "smooth" });
+    } else if (right > row.scrollLeft + row.clientWidth) {
+      row.scrollTo({ left: right - row.clientWidth, behavior: "smooth" });
+    }
+  }, [filter]);
 
   const filterKeys = useRovingGroup({
     items: FILTERS.map((f) => f.key),
@@ -82,6 +108,7 @@ export function RecipesClient() {
       <YourRecipes />
 
       <nav
+        ref={filterRowRef}
         role="tablist"
         aria-label="Filter recipes by meal type"
         onKeyDown={filterKeys.onKeyDown}
