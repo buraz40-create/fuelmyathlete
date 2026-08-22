@@ -4,6 +4,16 @@ import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeSlash } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
+import type { Icon } from "@phosphor-icons/react";
+import {
+  Carrot,
+  Fish,
+  Drop,
+  Bread,
+  Jar,
+  Snowflake,
+  Coffee,
+} from "@phosphor-icons/react/dist/ssr";
 import {
   GROCERY_CATEGORY_LABEL,
   GROCERY_CATEGORY_ORDER,
@@ -11,13 +21,35 @@ import {
   isPantryCheck,
   totalGroceryItems,
 } from "@/lib/planner/grocery";
-import type { GroceryListByCategory } from "@/types/domain";
+import type { GroceryListByCategory, IngredientCategory } from "@/types/domain";
 
 interface GroceryListProps {
   grouped: GroceryListByCategory;
   checked: Record<string, boolean>;
   onToggle: (ingredientSlug: string) => void;
 }
+
+
+/**
+ * An icon and a tint per aisle.
+ *
+ * The list has always been grouped by aisle, but every heading was the same grey uppercase
+ * text, so finding the dairy block in a shop meant reading each one. A colour and a shape are
+ * findable at arm's length while pushing a trolley, which is the actual situation this screen
+ * is used in.
+ *
+ * Tints come from the existing meal palette rather than new colours, so the list still looks
+ * like the rest of the app.
+ */
+const AISLE: Record<IngredientCategory, { icon: Icon; tint: string }> = {
+  produce: { icon: Carrot, tint: "bg-meal-lunch" },
+  protein: { icon: Fish, tint: "bg-meal-dinner" },
+  dairy: { icon: Drop, tint: "bg-day-rest" },
+  bakery: { icon: Bread, tint: "bg-meal-breakfast" },
+  pantry: { icon: Jar, tint: "bg-meal-snack" },
+  frozen: { icon: Snowflake, tint: "bg-day-school" },
+  beverages: { icon: Coffee, tint: "bg-day-training" },
+};
 
 export function GroceryList({ grouped, checked, onToggle }: GroceryListProps) {
   const [hideChecked, setHideChecked] = useState(false);
@@ -86,11 +118,26 @@ export function GroceryList({ grouped, checked, onToggle }: GroceryListProps) {
             aria-labelledby={`cat-${cat}`}
             className="rounded-3xl border border-border bg-surface p-4 md:p-5"
           >
-            <h2
-              id={`cat-${cat}`}
-              className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted-foreground"
-            >
-              {GROCERY_CATEGORY_LABEL[cat]}
+            <h2 id={`cat-${cat}`} className="mb-3 flex items-center gap-2.5">
+              <span
+                aria-hidden
+                className={cn(
+                  "grid h-8 w-8 flex-shrink-0 place-items-center rounded-full text-ink",
+                  AISLE[cat].tint
+                )}
+              >
+                {(() => {
+                  const AisleIcon = AISLE[cat].icon;
+                  return <AisleIcon size={17} weight="duotone" />;
+                })()}
+              </span>
+              <span className="text-sm font-semibold text-ink">
+                {GROCERY_CATEGORY_LABEL[cat]}
+              </span>
+              {/* How much of this aisle is done, so a glance answers "can I leave dairy yet". */}
+              <span className="ml-auto text-xs font-medium tabular-nums text-muted-foreground">
+                {items.filter((line) => checked[line.ingredient.slug]).length}/{items.length}
+              </span>
             </h2>
             <ul className="flex flex-col gap-1.5">
               {items.map(({ ingredient, totalQuantity, fromMeals }) => {
@@ -102,7 +149,7 @@ export function GroceryList({ grouped, checked, onToggle }: GroceryListProps) {
                       onClick={() => onToggle(ingredient.slug)}
                       aria-pressed={isChecked}
                       className={cn(
-                        "flex w-full items-start gap-3 rounded-2xl border bg-surface px-3 py-2.5 text-left transition",
+                        "flex min-h-12 w-full items-start gap-3 rounded-2xl border bg-surface px-3 py-3 text-left transition",
                         isChecked
                           ? "border-success/40 bg-success/5"
                           : "border-border hover:border-primary/30"
@@ -129,10 +176,10 @@ export function GroceryList({ grouped, checked, onToggle }: GroceryListProps) {
                           <span className="truncate text-ink">{ingredient.name}</span>
                           <span
                             className={cn(
-                              "flex-shrink-0",
+                              "flex-shrink-0 tabular-nums",
                               isPantryCheck(ingredient.unit)
                                 ? "text-[11px] uppercase tracking-wider text-muted-foreground/70"
-                                : "text-muted-foreground"
+                                : "font-semibold text-ink"
                             )}
                           >
                             {formatShoppingQuantity(totalQuantity, ingredient.unit)}
