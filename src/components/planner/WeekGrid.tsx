@@ -84,8 +84,11 @@ export function WeekGrid({ plan }: { plan: MealPlan }) {
                       meal ? SLOT_TINT[slot] : "bg-muted/40"
                     )}
                   >
-                    <span className="w-10 flex-shrink-0 text-[10px] font-semibold uppercase tracking-wider text-ink/55">
-                      {label.slice(0, 4)}
+                    {/* The whole word. Slicing to four characters to save space produced BREA
+                        and SNAC, which reads as a rendering fault rather than an abbreviation.
+                        A wider column costs less than looking broken. */}
+                    <span className="w-[4.25rem] flex-shrink-0 text-[10px] font-semibold uppercase tracking-wide text-ink/55">
+                      {label}
                     </span>
                     <span
                       className={cn(
