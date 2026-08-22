@@ -107,7 +107,10 @@ export function StarRating({
             size={size}
             weight={s <= shown ? "fill" : "regular"}
             aria-hidden
-            className={isMine ? "text-warning" : "text-muted-foreground/45"}
+            // Ours in soft amber rather than grey. Filled grey stars read as unrated, so a
+            // meal we scored four looked the same as one nobody has touched. Softer than a
+            // parent's own rating, which stays full strength, so the two are still distinct.
+            className={isMine ? "text-warning" : "text-warning/45"}
           />
         ))}
       </span>
@@ -143,7 +146,7 @@ export function StarRating({
               weight={s <= shown ? "fill" : "regular"}
               aria-hidden
               className={
-                isMine || hover !== undefined ? "text-warning" : "text-muted-foreground/45"
+                isMine || hover !== undefined ? "text-warning" : "text-warning/45"
               }
             />
           </button>

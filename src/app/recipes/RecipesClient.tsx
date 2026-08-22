@@ -71,8 +71,10 @@ export function RecipesClient() {
       aria-labelledby="recipes-title"
       className="mx-auto flex w-full max-w-6xl flex-col px-4 py-6 md:px-8 md:py-12"
     >
-      <header className="mb-5 md:mb-8 md:text-center">
-        <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+      <header className="-mx-4 mb-5 rounded-b-[2rem] bg-gradient-to-b from-primary-soft/70 to-background px-4 pb-6 pt-[calc(env(safe-area-inset-top)+1rem)] md:mx-0 md:mb-8 md:rounded-none md:bg-none md:px-0 md:pt-0 md:text-center">
+        {/* Hidden on a phone. The tab bar already says Recipes, and this plus the blurb cost
+            about 150px before the first card on the screen whose job is showing cards. */}
+        <p className="hidden text-xs font-semibold uppercase tracking-wider text-primary md:block">
           Recipe library
         </p>
         {/* The title and the add button share a row on a phone. They were stacked, which cost a
@@ -90,7 +92,7 @@ export function RecipesClient() {
             Add
           </Link>
         </div>
-        <p className="mx-auto mt-2 max-w-2xl text-sm text-muted-foreground md:mt-3 md:text-base">
+        <p className="mx-auto mt-2 hidden max-w-2xl text-sm text-muted-foreground md:mt-3 md:block md:text-base">
           Every meal in the planner has a step-by-step recipe. Athlete-tested, family-friendly,
           free.
         </p>

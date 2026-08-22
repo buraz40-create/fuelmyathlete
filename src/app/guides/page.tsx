@@ -76,19 +76,27 @@ export default function GuidesIndexPage() {
       />
       <section
         aria-labelledby="guides-title"
-        className="mx-auto w-full max-w-5xl px-4 py-8 md:px-8 md:py-12"
+        className="mx-auto w-full max-w-5xl px-4 pb-8 md:px-8 md:py-12"
       >
-        <header className="mb-8 text-center md:mb-10">
-          <p className="text-xs font-semibold uppercase tracking-wider text-primary">
+        {/* The same band as Today and Recipes, so the three screens a parent moves between are
+            recognisably one app rather than three pages. */}
+        <header className="-mx-4 mb-6 rounded-b-[2rem] bg-gradient-to-b from-primary-soft/70 to-background px-4 pb-6 pt-[calc(env(safe-area-inset-top)+1rem)] md:mx-0 md:mb-10 md:rounded-none md:bg-none md:px-0 md:pt-0 md:text-center">
+          <p className="hidden text-xs font-semibold uppercase tracking-wider text-primary md:block">
             <BookOpen size={14} weight="duotone" aria-hidden className="-mt-0.5 mr-1 inline" />
             Guides
           </p>
-          <h1 id="guides-title" className="mt-2">
+          <h1 id="guides-title" className="md:mt-2">
             Athlete nutrition guides
           </h1>
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-muted-foreground md:text-base">
-            Evidence-based guides on pre-workout meals, pre-game fueling, hydration, and recovery.
-            Reviewed against AAP, NATA, and ACSM position stands. Pediatric-safe.
+          {/* Trimmed to one line on a phone. The full version names the three position stands,
+              which is worth saying to somebody arriving from a search and not to somebody who
+              just tapped Guides in the tab bar. */}
+          <p className="mx-auto mt-2 max-w-2xl text-sm text-muted-foreground md:mt-3 md:text-base">
+            <span className="md:hidden">Evidence-based, and pediatric-safe.</span>
+            <span className="hidden md:inline">
+              Evidence-based guides on pre-workout meals, pre-game fueling, hydration, and
+              recovery. Reviewed against AAP, NATA, and ACSM position stands. Pediatric-safe.
+            </span>
           </p>
         </header>
 
