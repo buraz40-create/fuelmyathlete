@@ -38,8 +38,14 @@ export function RelatedRecipes({ slugs }: { slugs: string[] }) {
                   alt=""
                   width={64}
                   height={64}
+                  // Optimised, not raw.
+                  //
+                  // unoptimized dates from when these were Pexels URLs that arrived already sized. Every
+                  // photograph is a local 800x800 file now, so passing it through untouched means sending
+                  // roughly 80 KB to fill a a 64px box, four or more times on a screen. The optimiser resizes
+                  // and serves webp instead.
                   className="h-16 w-16 flex-shrink-0 rounded-xl object-cover"
-                  unoptimized
+                  sizes="128px"
                 />
               )}
               <div className="min-w-0">

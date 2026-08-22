@@ -66,7 +66,7 @@ export function RecipeCard({
             className="object-cover transition duration-500 group-hover:scale-105"
             priority={aboveTheFold}
             loading={aboveTheFold ? "eager" : "lazy"}
-            // Deliberately NOT unoptimized here, unlike the other image call sites. This grid
+            // Optimised, like every other image call site now. This grid
             // shows two dozen cards at once, and the images it now serves are locally hosted
             // 800px files rather than Pexels URLs that arrive pre-sized. Letting Next resize
             // and serve webp turns roughly 2 MB of index page into a fraction of it, which

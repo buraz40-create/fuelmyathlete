@@ -76,8 +76,14 @@ export function MealSlotCard({
               alt=""
               width={88}
               height={88}
+              // Optimised, not raw.
+              //
+              // unoptimized dates from when these were Pexels URLs that arrived already sized. Every
+              // photograph is a local 800x800 file now, so passing it through untouched means sending
+              // roughly 80 KB to fill a an 80px box, four or more times on a screen. The optimiser resizes
+              // and serves webp instead.
               className="h-20 w-20 flex-shrink-0 rounded-2xl object-cover"
-              unoptimized
+              sizes="160px"
             />
           ) : (
             <FoodImage

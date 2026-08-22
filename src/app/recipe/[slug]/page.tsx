@@ -199,7 +199,9 @@ export default async function RecipePage({
                 sizes="(max-width: 768px) 100vw, 1024px"
                 className="object-cover"
                 priority
-                unoptimized
+                // Optimised now that this is a local file rather than a pre-sized Pexels URL.
+                // It is the largest image on the site, full width at 16:9, so serving the raw
+                // 800px original was the most expensive instance of the same mistake.
               />
             </div>
           ) : (
