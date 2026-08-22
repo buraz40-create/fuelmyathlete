@@ -58,7 +58,7 @@ export default function TodayPage() {
         The mascot stays out of hiding though: it was suppressed below the sm breakpoint, so the
         character never appeared on the one screen built for the child.
       */}
-      <header className="flex items-center justify-between gap-4 px-4 pb-2 pt-[calc(env(safe-area-inset-top)+1.25rem)] md:px-0 md:pb-0 md:pt-0">
+      <header className="flex items-center justify-between gap-4 px-4 pb-2 pt-[calc(env(safe-area-inset-top)+0.75rem)] md:px-0 md:pb-0 md:pt-0">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {DAYS_OF_WEEK[today].long}

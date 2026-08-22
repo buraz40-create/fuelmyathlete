@@ -69,9 +69,9 @@ export function RecipesClient() {
   return (
     <section
       aria-labelledby="recipes-title"
-      className="mx-auto flex w-full max-w-6xl flex-col px-4 py-6 md:px-8 md:py-12"
+      className="mx-auto flex w-full max-w-6xl flex-col px-4 pb-6 md:px-8 md:py-12"
     >
-      <header className="mb-5 pt-[calc(env(safe-area-inset-top)+1.25rem)] md:mb-8 md:pt-0 md:text-center">
+      <header className="mb-5 pt-[calc(env(safe-area-inset-top)+0.75rem)] md:mb-8 md:pt-0 md:text-center">
         {/* Hidden on a phone. The tab bar already says Recipes, and this plus the blurb cost
             about 150px before the first card on the screen whose job is showing cards. */}
         <p className="hidden text-xs font-semibold uppercase tracking-wider text-primary md:block">

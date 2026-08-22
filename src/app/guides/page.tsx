@@ -78,7 +78,7 @@ export default function GuidesIndexPage() {
         aria-labelledby="guides-title"
         className="mx-auto w-full max-w-5xl px-4 pb-8 md:px-8 md:py-12"
       >
-        <header className="mb-6 pt-[calc(env(safe-area-inset-top)+1.25rem)] md:mb-10 md:pt-0 md:text-center">
+        <header className="mb-6 pt-[calc(env(safe-area-inset-top)+0.75rem)] md:mb-10 md:pt-0 md:text-center">
           <p className="hidden text-xs font-semibold uppercase tracking-wider text-primary md:block">
             <BookOpen size={14} weight="duotone" aria-hidden className="-mt-0.5 mr-1 inline" />
             Guides
