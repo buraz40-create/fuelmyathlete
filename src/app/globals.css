@@ -286,6 +286,15 @@ html[data-native="true"] main:has([data-planner-nav="planner"]) {
   padding-top: calc(env(safe-area-inset-top) + 4.75rem);
 }
 
+/* Sticky rows stick to the top of the screen, not to 68px down it.
+
+   That offset is the height of the website header they have to clear. The app has no header, so
+   a filter row was pinning itself a header's height below the top with content scrolling
+   through the gap above it. */
+html[data-native="true"] [data-filter-nav] {
+  top: env(safe-area-inset-top);
+}
+
 /* A page in an app starts at the top of the screen, not below a sticky website header, so the
    first heading needs the breathing room the header used to provide. */
 html[data-native="true"] main {

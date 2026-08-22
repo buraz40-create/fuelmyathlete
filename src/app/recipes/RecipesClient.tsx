@@ -114,7 +114,13 @@ export function RecipesClient() {
         role="tablist"
         aria-label="Filter recipes by meal type"
         onKeyDown={filterKeys.onKeyDown}
-        className="sticky top-[68px] z-10 -mx-4 mb-6 flex snap-x gap-1 overflow-x-auto scroll-px-4 px-4 py-1.5 [scrollbar-width:none] md:top-[76px] md:mx-0 md:mb-8 md:flex-wrap md:justify-center md:gap-2 md:rounded-full md:border md:border-border md:bg-background/85 md:px-1.5 md:backdrop-blur [&::-webkit-scrollbar]:hidden"
+        data-filter-nav
+        // Opaque on a phone. The pill container that gives this a background from md up was
+        // dropped on mobile so the chips could use the full width, which left the row sticking
+        // with nothing behind it: recipe cards scrolled straight under the labels and the two
+        // fought each other. A background and a hairline underneath make it a bar rather than
+        // floating text.
+        className="sticky top-[68px] z-10 -mx-4 mb-6 flex snap-x gap-1 overflow-x-auto border-b border-border bg-background/95 px-4 py-2 backdrop-blur scroll-px-4 [scrollbar-width:none] md:top-[76px] md:mx-0 md:mb-8 md:flex-wrap md:justify-center md:gap-2 md:rounded-full md:border md:border-border md:bg-background/85 md:px-1.5 md:py-1.5 [&::-webkit-scrollbar]:hidden"
       >
         {FILTERS.map(({ key, label }) => {
           const active = filter === key;
