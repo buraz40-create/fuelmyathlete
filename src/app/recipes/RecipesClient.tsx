@@ -114,7 +114,7 @@ export function RecipesClient() {
         role="tablist"
         aria-label="Filter recipes by meal type"
         onKeyDown={filterKeys.onKeyDown}
-        className="sticky top-[68px] z-10 -mx-4 mb-6 flex snap-x gap-1.5 overflow-x-auto scroll-px-4 px-4 py-1.5 [scrollbar-width:none] md:top-[76px] md:mx-0 md:mb-8 md:flex-wrap md:justify-center md:gap-2 md:rounded-full md:border md:border-border md:bg-background/85 md:px-1.5 md:backdrop-blur [&::-webkit-scrollbar]:hidden"
+        className="sticky top-[68px] z-10 -mx-4 mb-6 flex snap-x gap-1 overflow-x-auto scroll-px-4 px-4 py-1.5 [scrollbar-width:none] md:top-[76px] md:mx-0 md:mb-8 md:flex-wrap md:justify-center md:gap-2 md:rounded-full md:border md:border-border md:bg-background/85 md:px-1.5 md:backdrop-blur [&::-webkit-scrollbar]:hidden"
       >
         {FILTERS.map(({ key, label }) => {
           const active = filter === key;
@@ -128,7 +128,7 @@ export function RecipesClient() {
               tabIndex={filterKeys.tabIndexFor(key)}
               onClick={() => setFilter(key)}
               className={cn(
-                "min-h-11 shrink-0 snap-start rounded-full px-3 text-[13px] font-semibold transition md:px-4 md:text-sm",
+                "min-h-11 shrink-0 snap-start rounded-full px-2.5 text-[13px] font-semibold transition md:px-4 md:text-sm",
                 active
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "border border-border bg-surface text-muted-foreground md:border-0 md:bg-transparent"
