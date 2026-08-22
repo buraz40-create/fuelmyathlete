@@ -78,9 +78,7 @@ export default function GuidesIndexPage() {
         aria-labelledby="guides-title"
         className="mx-auto w-full max-w-5xl px-4 pb-8 md:px-8 md:py-12"
       >
-        {/* The same band as Today and Recipes, so the three screens a parent moves between are
-            recognisably one app rather than three pages. */}
-        <header className="-mx-4 mb-6 rounded-b-[2rem] bg-gradient-to-b from-primary-soft/70 to-background px-4 pb-6 pt-[calc(env(safe-area-inset-top)+1rem)] md:mx-0 md:mb-10 md:rounded-none md:bg-none md:px-0 md:pt-0 md:text-center">
+        <header className="mb-6 pt-[calc(env(safe-area-inset-top)+1.25rem)] md:mb-10 md:pt-0 md:text-center">
           <p className="hidden text-xs font-semibold uppercase tracking-wider text-primary md:block">
             <BookOpen size={14} weight="duotone" aria-hidden className="-mt-0.5 mr-1 inline" />
             Guides

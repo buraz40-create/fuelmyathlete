@@ -71,7 +71,7 @@ export function RecipesClient() {
       aria-labelledby="recipes-title"
       className="mx-auto flex w-full max-w-6xl flex-col px-4 py-6 md:px-8 md:py-12"
     >
-      <header className="-mx-4 mb-5 rounded-b-[2rem] bg-gradient-to-b from-primary-soft/70 to-background px-4 pb-6 pt-[calc(env(safe-area-inset-top)+1rem)] md:mx-0 md:mb-8 md:rounded-none md:bg-none md:px-0 md:pt-0 md:text-center">
+      <header className="mb-5 pt-[calc(env(safe-area-inset-top)+1.25rem)] md:mb-8 md:pt-0 md:text-center">
         {/* Hidden on a phone. The tab bar already says Recipes, and this plus the blurb cost
             about 150px before the first card on the screen whose job is showing cards. */}
         <p className="hidden text-xs font-semibold uppercase tracking-wider text-primary md:block">
@@ -114,7 +114,7 @@ export function RecipesClient() {
         role="tablist"
         aria-label="Filter recipes by meal type"
         onKeyDown={filterKeys.onKeyDown}
-        className="sticky top-[68px] z-10 mb-6 -mx-4 flex snap-x gap-2 overflow-x-auto scroll-px-4 px-4 py-1.5 [scrollbar-width:none] md:top-[76px] md:mx-0 md:mb-8 md:flex-wrap md:justify-center md:rounded-full md:border md:border-border md:bg-background/85 md:px-1.5 md:backdrop-blur [&::-webkit-scrollbar]:hidden"
+        className="sticky top-[68px] z-10 -mx-4 mb-6 flex snap-x gap-1.5 overflow-x-auto scroll-px-4 px-4 py-1.5 [scrollbar-width:none] md:top-[76px] md:mx-0 md:mb-8 md:flex-wrap md:justify-center md:gap-2 md:rounded-full md:border md:border-border md:bg-background/85 md:px-1.5 md:backdrop-blur [&::-webkit-scrollbar]:hidden"
       >
         {FILTERS.map(({ key, label }) => {
           const active = filter === key;
@@ -128,7 +128,7 @@ export function RecipesClient() {
               tabIndex={filterKeys.tabIndexFor(key)}
               onClick={() => setFilter(key)}
               className={cn(
-                "min-h-11 shrink-0 snap-start rounded-full px-4 text-sm font-semibold transition",
+                "min-h-11 shrink-0 snap-start rounded-full px-3 text-[13px] font-semibold transition md:px-4 md:text-sm",
                 active
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "border border-border bg-surface text-muted-foreground md:border-0 md:bg-transparent"

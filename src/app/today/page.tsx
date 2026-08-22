@@ -51,17 +51,14 @@ export default function TodayPage() {
       className="mx-auto w-full max-w-2xl pb-6 md:px-8 md:py-10"
     >
       {/*
-        A panel rather than a heading.
+        No tint. A coloured band was tried and read as a strip stuck to the top of the screen
+        rather than as part of it, and it pushed the title uncomfortably close to the status bar.
+        Space does the same job more quietly.
 
-        This was three lines of text sitting on the page background, which reads as the top of a
-        document. On a phone the top of the screen is the one place an app says what it is, so
-        it is now a tinted band that runs to both edges and tucks under the content below.
-
-        The tint is the site's own soft green fading into the page, so the join is a gradient
-        rather than a line, and the mascot comes out of hiding: it was suppressed below the sm
-        breakpoint, which meant the character never appeared on the screen built for the child.
+        The mascot stays out of hiding though: it was suppressed below the sm breakpoint, so the
+        character never appeared on the one screen built for the child.
       */}
-      <header className="relative -mt-[env(safe-area-inset-top)] flex items-center justify-between gap-4 rounded-b-[2rem] bg-gradient-to-b from-primary-soft/70 to-background px-4 pb-7 pt-[calc(env(safe-area-inset-top)+1.5rem)] md:mt-0 md:rounded-none md:bg-none md:px-0 md:pb-0 md:pt-0">
+      <header className="flex items-center justify-between gap-4 px-4 pb-2 pt-[calc(env(safe-area-inset-top)+1.25rem)] md:px-0 md:pb-0 md:pt-0">
         <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {DAYS_OF_WEEK[today].long}
