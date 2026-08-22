@@ -35,7 +35,12 @@ export function WeekGrid({ plan }: { plan: MealPlan }) {
         return (
           <li
             key={day.idx}
-            className="rounded-2xl border border-border bg-surface p-3 shadow-sm"
+            // min-w-0 is load bearing. A grid item defaults to min-width:auto, so it refuses
+            // to shrink below the widest thing inside it, and one long meal name pushed the
+            // whole card past the right edge of the screen: 415px of card in a 380px column.
+            // The truncate on the meal name below cannot help until the card itself is allowed
+            // to be narrower than its contents.
+            className="min-w-0 rounded-2xl border border-border bg-surface p-3 shadow-sm"
           >
             {/*
               One day label, not two.
@@ -45,7 +50,7 @@ export function WeekGrid({ plan }: { plan: MealPlan }) {
               missing: a week view where no card says which date it is makes you count forwards
               from the header to work out whether Wednesday is the 19th.
             */}
-            <header className="mb-2 flex items-center gap-2">
+            <header className="mb-2 flex min-w-0 items-center gap-2">
               <p className="min-w-0 text-base font-semibold text-ink">
                 {day.long.slice(0, 3)}{" "}
                 <span className="text-muted-foreground tabular-nums">{date}</span>
