@@ -48,10 +48,21 @@ export default function TodayPage() {
   return (
     <section
       aria-labelledby="today-title"
-      className="mx-auto w-full max-w-2xl px-4 py-6 md:px-8 md:py-10"
+      className="mx-auto w-full max-w-2xl pb-6 md:px-8 md:py-10"
     >
-      <header className="flex items-center justify-between gap-4">
-        <div>
+      {/*
+        A panel rather than a heading.
+
+        This was three lines of text sitting on the page background, which reads as the top of a
+        document. On a phone the top of the screen is the one place an app says what it is, so
+        it is now a tinted band that runs to both edges and tucks under the content below.
+
+        The tint is the site's own soft green fading into the page, so the join is a gradient
+        rather than a line, and the mascot comes out of hiding: it was suppressed below the sm
+        breakpoint, which meant the character never appeared on the screen built for the child.
+      */}
+      <header className="relative -mt-[env(safe-area-inset-top)] flex items-center justify-between gap-4 rounded-b-[2rem] bg-gradient-to-b from-primary-soft/70 to-background px-4 pb-7 pt-[calc(env(safe-area-inset-top)+1.5rem)] md:mt-0 md:rounded-none md:bg-none md:px-0 md:pb-0 md:pt-0">
+        <div className="min-w-0">
           <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {DAYS_OF_WEEK[today].long}
           </p>
@@ -60,7 +71,7 @@ export default function TodayPage() {
           </h1>
           <p
             className={cn(
-              "mt-2 inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold text-ink",
+              "mt-2 inline-flex items-center rounded-full px-3 py-1 text-sm font-semibold text-ink shadow-xs",
               dayMeta.tokenClass
             )}
           >
@@ -70,13 +81,13 @@ export default function TodayPage() {
         <Mascot
           size={80}
           expression={hitGoal ? "cheer" : "happy"}
-          className="hidden flex-shrink-0 sm:block"
+          className="hidden flex-shrink-0 min-[380px]:block"
         />
       </header>
 
       <article
         aria-labelledby="water-title"
-        className="mt-6 rounded-3xl border border-border bg-surface p-5 shadow-sm"
+        className="mx-4 mt-5 rounded-3xl border border-border bg-surface p-5 shadow-sm md:mx-0 md:mt-6"
       >
         <header className="flex items-center gap-5">
           {/*
@@ -155,7 +166,7 @@ export default function TodayPage() {
 
       <article
         aria-labelledby="food-title"
-        className="mt-4 rounded-3xl border border-border bg-surface p-5 shadow-sm"
+        className="mx-4 mt-4 rounded-3xl border border-border bg-surface p-5 shadow-sm md:mx-0"
       >
         <header className="flex items-baseline justify-between">
           <h2 id="food-title" className="text-xl">
@@ -236,7 +247,7 @@ export default function TodayPage() {
         )}
       </article>
 
-      <p className="mt-6 text-center text-xs text-muted-foreground">
+      <p className="mx-4 mt-6 text-center text-xs text-muted-foreground md:mx-0">
         {isKid
           ? "Food and water only. Numbers like calories are a grown-up thing, and they are not on this screen on purpose."
           : "A simplified daily view. The full week lives in the planner."}{" "}
