@@ -128,7 +128,10 @@ export function RecipesClient() {
               tabIndex={filterKeys.tabIndexFor(key)}
               onClick={() => setFilter(key)}
               className={cn(
-                "min-h-11 shrink-0 snap-start rounded-full px-2.5 text-[13px] font-semibold transition md:px-4 md:text-sm",
+                // A floor on the width, because the padding that lets five chips fit turns a short
+                // label into a squashed circle. All is three characters; without this it renders
+                // as a blob next to four proper pills.
+                "min-h-11 min-w-[3.5rem] shrink-0 snap-start rounded-full px-2.5 text-[13px] font-semibold transition md:min-w-0 md:px-4 md:text-sm",
                 active
                   ? "bg-primary text-primary-foreground shadow-sm"
                   : "border border-border bg-surface text-muted-foreground md:border-0 md:bg-transparent"
