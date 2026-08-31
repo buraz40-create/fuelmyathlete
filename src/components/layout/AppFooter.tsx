@@ -19,6 +19,9 @@ export function AppFooter() {
           <Link href="/methodology" className="transition hover:text-ink">
             Methodology
           </Link>
+          <Link href="/privacy" className="transition hover:text-ink">
+            Privacy
+          </Link>
           <Link href="/sign-in" className="transition hover:text-ink">
             Sign in
           </Link>

@@ -186,12 +186,28 @@ export default function RootLayout({
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
         />
+        {/*
+          Analytics with the advertising half switched off.
+
+          This is a product for children. Google Play's Families policy does not allow an app
+          whose audience includes under 13s to collect an advertising identifier from them, and
+          COPPA is the same answer from the other direction. Left at its defaults, gtag is
+          allowed to hand measurement over to Google Signals and to build an advertising profile
+          from it, which is a thing nobody signed up for by opening a meal planner.
+
+          So: page counts stay, the advertising path goes. These two flags are the documented
+          way to say that, and they have to be set on config rather than after it, because by
+          the time the first page_view fires the decision has already been made.
+        */}
         <Script id="ga-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}');
+            gtag('config', '${GA_MEASUREMENT_ID}', {
+              allow_google_signals: false,
+              allow_ad_personalization_signals: false
+            });
           `}
         </Script>
       </body>

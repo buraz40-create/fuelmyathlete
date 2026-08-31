@@ -54,3 +54,8 @@ android/capacitor-cordova-android-plugins/
 # The Firebase config carries project identifiers. It is not a secret in the password sense, but
 # it belongs to whoever owns the Firebase project rather than to the repository.
 android/app/google-services.json
+
+# Play signing key and its passwords. Never commit.
+android/keystore.properties
+*.jks
+*.keystore
