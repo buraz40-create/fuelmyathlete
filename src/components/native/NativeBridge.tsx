@@ -71,16 +71,27 @@ async function registerForPush(): Promise<void> {
   try {
     const { PushNotifications } = await import("@capacitor/push-notifications");
 
-    // Ask, and take no for an answer. A parent who declines is not asked again by this code;
-    // Android will not re-prompt, and nagging through a custom dialog is exactly the behaviour
-    // that gets an app deleted.
     const existing = await PushNotifications.checkPermissions();
-    const status =
-      existing.receive === "prompt"
-        ? (await PushNotifications.requestPermissions()).receive
-        : existing.receive;
 
-    if (status !== "granted") return;
+    if (existing.receive === "denied") return;
+
+    if (existing.receive === "prompt") {
+      // Do not ask on a cold first launch.
+      //
+      // The app opened on the landing page and put an Android permission dialog over it before
+      // the parent had read a sentence, which is the moment people say no to everything. Worse,
+      // it was asking for nothing: storeToken below needs a signed-in user and an active player,
+      // so a yes on that screen registered a device the app could not attach to a household.
+      //
+      // Waiting until both exist means the question arrives after they have made an account and
+      // set up a child, when it is obvious what a notification would be about.
+      if (!(await hasHousehold())) return;
+      const asked = await PushNotifications.requestPermissions();
+      // Ask, and take no for an answer. A parent who declines is not asked again by this code;
+      // Android will not re-prompt, and nagging through a custom dialog is exactly the behaviour
+      // that gets an app deleted.
+      if (asked.receive !== "granted") return;
+    }
 
     await PushNotifications.addListener("registration", (token) => {
       void storeToken(token.value);
@@ -97,10 +108,22 @@ async function registerForPush(): Promise<void> {
       );
     });
 
+    // Already granted from an earlier run: register anyway, without a dialog. Tokens rotate, and
+    // this is what picks up the new one.
     await PushNotifications.register();
   } catch {
     // The plugin is not present, which means this is a browser. Nothing to do.
   }
+}
+
+/** Whether there is a signed-in parent with a child set up, which is what a token attaches to. */
+async function hasHousehold(): Promise<boolean> {
+  if (!isSupabaseConfigured) return false;
+  const supabase = getBrowserSupabase();
+  if (!supabase) return false;
+  const { data: auth } = await supabase.auth.getUser();
+  if (!auth?.user?.id) return false;
+  return Boolean(await getActivePlayerId());
 }
 
 /**

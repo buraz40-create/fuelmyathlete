@@ -135,7 +135,18 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${manrope.variable} h-full`}>
+    // suppressHydrationWarning covers this element's own attributes, nothing inside it.
+    //
+    // The Android WebView writes --safe-area-inset-* onto the document element before the page
+    // hydrates, so React saw a style attribute the server never rendered and reported a
+    // mismatch on every app launch. Confirmed it is the shell and not us: loaded in a plain
+    // browser, html carries no style attribute at all, and the only safe-area references in
+    // this codebase are env() calls in CSS.
+    //
+    // The warning is dev-only but the mismatch is not: a difference on the root is the sort
+    // React can decide to recover from by rebuilding the tree on the client, which is a flash
+    // of blank on a phone at the moment the app opens.
+    <html lang="en" className={`${manrope.variable} h-full`} suppressHydrationWarning>
       <body className="min-h-full bg-background text-foreground">
         <a
           href="#main"
