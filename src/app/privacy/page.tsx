@@ -158,7 +158,14 @@ export default function PrivacyPage() {
                 hi@fuelmyathlete.com
               </a>{" "}
               and it will be done. Deleting the account removes the household and every row
-              attached to it.
+              attached to it. The steps, and the full list of what goes and what stays, are on{" "}
+              <Link
+                href="/delete-account"
+                className="font-medium text-primary underline underline-offset-2"
+              >
+                the account deletion page
+              </Link>
+              .
             </li>
           </ul>
         </section>
