@@ -58,26 +58,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!--
-      Camera, for importing a recipe by photographing a cookbook page or a screenshot.
+      No camera or photo permissions.
 
-      The Capacitor camera plugin brings its own code but declares nothing, so without these
-      three a capture fails at runtime with a permission error rather than at build time. That
-      is the sort of thing that is only discovered on a real phone, so it is declared here now.
-
-      READ_MEDIA_IMAGES is the Android 13 and later way to reach the gallery.
-      READ_EXTERNAL_STORAGE is kept for older devices and capped at 32, because from 33 it is
-      ignored and leaving it uncapped makes the Play Console ask why an app that only needs one
-      photo wants the whole filesystem.
+      These were declared ahead of a recipe-by-photo import that was never built, and Play
+      blocks a release that asks for photo and video access without declaring why. An app for
+      children asking for the gallery it never opens is worse than a missing feature, so the
+      plugin and the permissions came out together. They go back when the feature ships.
     -->
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-
-    <!--
-      A phone with no camera should still be able to install this. The camera is one optional
-      route into the import screen, not the reason the app exists.
-    -->
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
 </manifest>
