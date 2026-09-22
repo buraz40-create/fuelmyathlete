@@ -9,6 +9,7 @@ import { Credibility } from "@/components/landing/Credibility";
 import { FounderNote } from "@/components/landing/FounderNote";
 import { Faq, LANDING_FAQ } from "@/components/landing/Faq";
 import { FinalCta } from "@/components/landing/FinalCta";
+import { GetTheApp } from "@/components/landing/GetTheApp";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ??
@@ -117,6 +118,7 @@ export default async function Home({ searchParams }: HomeProps) {
         <FounderNote />
         <Faq />
         <FinalCta />
+        <GetTheApp />
       </LandingShell>
     </>
   );

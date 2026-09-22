@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PLAY_STORE_URL, PLAY_LISTING_LIVE } from "@/lib/app-store";
 
 export function AppFooter() {
   return (
@@ -25,6 +26,11 @@ export function AppFooter() {
           <Link href="/sign-in" className="transition hover:text-ink">
             Sign in
           </Link>
+          {PLAY_LISTING_LIVE ? (
+            <a href={PLAY_STORE_URL} className="transition hover:text-ink">
+              Android app
+            </a>
+          ) : null}
           <a href="mailto:hi@fuelmyathlete.com" className="transition hover:text-ink">
             Contact
           </a>
