@@ -2882,73 +2882,77 @@ export const RECIPES: Recipe[] = [
     ],
   },
 
-  // Medium well, which is where Haris cooks it for Elvis. That happens to be USDA's own
-  // number for a whole cut, 145F plus a three minute rest, so the safety line and the taste
-  // line are the same line here. A thermometer is the difference between medium well and
-  // grey, and at this doneness there is not much room either side.
+  // Grilled, because that is how Haris actually cooks steak: every steak in his photos is
+  // over fire. The card uses his own photograph of two strips off the grill, which is why the
+  // method had to be the grill rather than the skillet it was first written for. A picture and
+  // a method that disagree is the thing this catalog keeps away from.
+  //
+  // Medium well for Elvis, which lands on 145F plus a three minute rest. That is also USDA's
+  // number for a whole cut, so the safe temperature and the target temperature are the same
+  // one here.
   {
-    slug: "pan-seared-steak",
-    name: "Pan-seared New York strip",
+    slug: "grilled-ny-strip",
+    name: "Grilled New York strip",
     slot: "dinner",
     servings: 4,
-    totalMinutes: 25,
-    imageUrl: "/images/recipes/pan-seared-steak.jpg",
-    whenToEat: "After training or on a rest day. 46g of protein, which is most of a day's repair in one plate.",
-    equipment: ["Cast iron skillet", "Tongs", "Instant-read thermometer", "Board with a lip for the juices"],
+    totalMinutes: 30,
+    imageUrl: "/images/recipes/grilled-ny-strip.jpg",
+    whenToEat: "After training or on a rest day. 46g of protein, which is most of a day's repair on one plate.",
+    equipment: ["Grill, charcoal or gas", "Tongs", "Instant-read thermometer", "Board with a lip for the juices"],
     steps: [
       {
         order: 1,
-        title: "Salt it and let it sit out",
-        body: "Take 1.5 lb of New York strip out of the fridge 30 to 40 minutes before cooking and salt it on both sides now. A cold steak cooks unevenly: the outside is done while the middle is still catching up. Salting early also dries the surface, which is what lets it brown.",
-        mistake: "Cooking it straight from the fridge. The crust burns before the centre reaches 145F, which is exactly the problem at this doneness.",
+        title: "Salt it and let it come up",
+        body: "Take 1.5 lb of New York strip out of the fridge 30 to 40 minutes before it goes on, and salt both sides now. Cold meat over fire cooks unevenly: the outside is done while the middle is still catching up. The salt also dries the surface, which is what lets it mark properly.",
+        mistake: "Straight from the fridge onto the grill. At medium well there is very little room between cooked through and dried out, and a cold centre uses all of it.",
       },
       {
         order: 2,
-        title: "Dry the surface",
-        body: "Just before it goes in the pan, pat both sides hard with paper towel until the meat looks matte rather than wet. Water on the surface has to boil off before browning can start, and while it boils the steak is steaming.",
+        title: "Build two zones",
+        body: "Bank the coals to one side, or leave half the burners off. You want one side hot enough to sear and one side with no fire under it at all. Everything that follows depends on having somewhere to move the steak to.",
+        mistake: "A single even bed of coals. With nowhere cool to go, the outside is black before 145F arrives in the middle.",
       },
       {
         order: 3,
-        title: "Heat the pan until it smokes",
-        body: "Cast iron on high for 4 to 5 minutes with 1 tbsp of oil. Wait for the oil to shimmer and the first wisp of smoke. A pan that is merely hot gives you a grey band around the outside instead of a crust.",
-        timerSec: 270,
+        title: "Dry the surface, oil the meat",
+        body: "Pat both sides dry with paper towel until the meat looks matte. Then rub a little oil onto the steak rather than the grate: oil on the bars burns off before the meat arrives and does nothing.",
       },
       {
         order: 4,
-        title: "Sear, and leave it",
-        body: "Lay the steaks away from you. Do not move them for 3 minutes. Flip once and give the second side 3 minutes. If they are thicker than about an inch and a quarter, add a minute per side.",
-        timerSec: 180,
-        mistake: "Nudging the steak to check it. Every time you lift it you break the contact that is building the crust.",
+        title: "Sear over the fire",
+        body: "Straight over the hot side. Two to three minutes a side with the lid open, turning once. That is where the marks and the crust come from. If fat drips and the flames jump up, move the steak off the fire for a moment rather than trying to cook through a flare-up.",
+        timerSec: 150,
+        mistake: "Shuffling it around to check. Every lift breaks the contact that is making the crust.",
       },
       {
         order: 5,
-        title: "Butter, baste",
-        body: "Drop the heat to medium and add 2 tbsp of butter. It will foam. Tilt the pan and spoon the foaming butter over the steaks for about a minute, keeping it moving so the milk solids brown rather than burn. This is where the flavour that tastes like a restaurant comes from.",
-        timerSec: 60,
+        title: "Move it off the fire and close the lid",
+        body: "Over to the side with no fire under it, lid down. Now it cooks with heat rather than flame, which is the only way to reach the middle without burning the outside. Six to ten minutes depending on thickness.",
+        timerSec: 480,
       },
       {
         order: 6,
         title: "Check the temperature, do not guess",
-        body: "Thermometer into the thickest part, not touching fat or the pan. Pull the steaks at 145F for medium well. They carry on cooking off the heat and will settle around 150F, which is just past pink. Poking it with a finger is not a method at this doneness.",
+        body: "Thermometer into the thickest part, away from fat. Pull it at 145F for medium well. It keeps cooking off the grill and settles around 150F, which is just past pink. Pressing it with a finger is not a method at this doneness.",
       },
       {
         order: 7,
         title: "Rest it, properly",
-        body: "Onto a board for 5 to 10 minutes. USDA asks for at least 3 minutes after 145F for a whole cut, and the resting also lets the juice settle back through the meat instead of running out on the first cut.",
+        body: "Onto a board for 5 to 10 minutes. USDA asks for at least 3 minutes after 145F on a whole cut, and resting also lets the juice settle back through the meat instead of running out at the first cut.",
         timerSec: 300,
-        mistake: "Cutting straight away. You lose the juice onto the board and the steak you worked on goes dry.",
+        mistake: "Cutting it straight off the grill. The juice ends up on the board and the steak goes dry.",
       },
       {
         order: 8,
         title: "Slice across the grain",
-        body: "Find the direction the muscle fibres run and cut across them, in half inch slices. Same steak, much easier chewing, which matters more for a kid than it does for you. Spoon the butter and juices from the board back over the slices.",
+        body: "Find the direction the fibres run and cut across them in half inch slices. Same steak, much easier chewing, which matters more for a kid than it does for you. Pour the juices from the board back over the slices.",
       },
     ],
     notes: [
-      "145F with a 3 minute rest is USDA's guidance for whole cuts of beef, and it is also medium well. Worth knowing that the safe number and the target number are the same here.",
-      "Buy the steak between 1 and 1.25 inches thick. Thinner than that and it is cooked through before a crust forms, which is the one thing you cannot fix with technique.",
-      "Open a window. Cast iron on high with butter in it sets off smoke alarms.",
-      "Leftovers go cold into a sandwich rather than back in a pan. Reheating takes it past well done, and sliced cold steak is genuinely good.",
+      "145F with a 3 minute rest is USDA's guidance for whole cuts of beef, and it is also medium well. The safe number and the target number are the same here, which is not true at rarer doneness.",
+      "Buy the steak between 1 and 1.25 inches thick. Thinner and it is cooked through before it has any marks on it, which is the one problem technique cannot fix.",
+      "A knob of butter on the steak while it rests is worth it if you want it, and it is not in the ingredients because it is not in the photograph.",
+      "Leftovers go cold into a sandwich rather than back over heat. Reheating takes it past well done, and cold sliced steak is genuinely good.",
     ],
   },
 
