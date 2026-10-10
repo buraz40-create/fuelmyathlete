@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { DeviceMobile, WifiSlash, BellRinging } from "@phosphor-icons/react/dist/ssr";
 import { Reveal } from "@/components/motion/Reveal";
 import { PLAY_STORE_URL, PLAY_LISTING_LIVE } from "@/lib/app-store";
@@ -46,16 +47,33 @@ export function GetTheApp() {
           </li>
         </ul>
 
+        {/* Google's own badge rather than a button of our own.
+            It is the control people already recognise as "this installs from the store", and
+            Google's brand guidelines require the artwork be used unmodified, so it is served
+            exactly as downloaded. The file is self hosted instead of hotlinked from Google:
+            their CDN path has changed before, and a broken image is a worse call to action
+            than no image. The built in transparent margin is the badge's required clear
+            space, which is why the frame below looks generously padded. */}
         <a
           href={PLAY_STORE_URL}
-          className="mt-7 inline-flex items-center gap-2 rounded-full bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          className="mt-6 inline-block transition hover:-translate-y-0.5"
         >
-          Get it on Google Play
+          <Image
+            src="/images/google-play-badge.png"
+            alt="Get it on Google Play"
+            width={646}
+            height={250}
+            className="h-[60px] w-auto md:h-[68px]"
+            unoptimized
+          />
         </a>
 
-        <p className="mt-4 text-xs text-muted-foreground">
+        <p className="mt-3 text-xs text-muted-foreground">
           Android only for now. On an iPhone, use Share then Add to Home Screen and it behaves the
           same way.
+        </p>
+        <p className="mt-3 text-[11px] text-muted-foreground/80">
+          Google Play and the Google Play logo are trademarks of Google LLC.
         </p>
       </Reveal>
     </section>
