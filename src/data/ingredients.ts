@@ -26,6 +26,10 @@ export const INGREDIENTS: Ingredient[] = [
 
   // PROTEIN
   { slug: "chicken-breast", name: "Chicken breast",        category: "protein", unit: "lb" },
+  // Thighs and drums are what riza sa piletinom is cooked with: they take 400F for half an
+  // hour without drying, which breast does not. Drums are bought by the piece, not by weight.
+  { slug: "chicken-thighs", name: "Boneless chicken thighs", category: "protein", unit: "lb" },
+  { slug: "chicken-drumsticks", name: "Chicken drumsticks", category: "protein", unit: "each" },
   { slug: "ground-turkey",  name: "Ground turkey (lean)",  category: "protein", unit: "lb" },
   { slug: "salmon",         name: "Salmon fillet",         category: "protein", unit: "lb" },
   { slug: "eggs",           name: "Eggs",                  category: "protein", unit: "each" },
@@ -46,6 +50,11 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "soy-sauce",      name: "Low-sodium soy sauce",  category: "pantry",  unit: "tbsp" },
   { slug: "sesame-oil",     name: "Toasted sesame oil",    category: "pantry",  unit: "tsp" },
   { slug: "olive-oil",      name: "Olive oil",             category: "pantry",  unit: "tbsp" },
+  { slug: "yellow-rice",    name: "Yellow saffron rice (dry)", category: "pantry", unit: "cup" },
+  { slug: "paprika",        name: "Sweet paprika",         category: "pantry",  unit: "tsp" },
+  // Vegeta is the Balkan all-purpose seasoning this dish is built on. Mostly salt, so the
+  // recipe says so rather than hiding it behind a spoon measure.
+  { slug: "vegeta",         name: "Vegeta seasoning",      category: "pantry",  unit: "tsp" },
   { slug: "rice-vinegar",   name: "Rice vinegar",          category: "pantry",  unit: "tbsp" },
   { slug: "sesame-seeds",   name: "Sesame seeds",          category: "pantry",  unit: "tsp" },
   { slug: "crackers-wg",    name: "Whole-grain crackers",  category: "pantry",  unit: "oz" },

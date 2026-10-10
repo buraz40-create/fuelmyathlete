@@ -1328,6 +1328,31 @@ export const MEALS: Meal[] = [
     ],
     tags: ["rest-day"],
   },
+
+  // Haris's own dish, written from how he cooks it rather than from a recipe site. Elvis
+  // eats it, which is the only rating that matters here.
+  {
+    slug: "riza-sa-piletinom",
+    name: "Riza sa piletinom (chicken and yellow rice)",
+    slot: "dinner",
+    description: "One tava, chicken on top, rice underneath. Feeds six and the oven does the work.",
+    prepMinutes: 10,
+    suitableFor: ["school", "training", "match"],
+    kidRating: 5,
+    recipeSlug: "riza-sa-piletinom",
+    nutrition: { kcal: 430, proteinG: 24, carbsG: 48, fatG: 14, fiberG: 1, source: "USDA estimate" },
+    ingredients: [
+      // Six servings from 6 to 7 pieces, so one each with a spare.
+      { ingredientSlug: "chicken-drumsticks", quantity: 1 },
+      // Dry rice, as purchased. 0.33 cup per serving is 2 cups for the tava, the same
+      // portion the hibachi bowl uses. Traditional versions call for three cups at this
+      // size and the comments under them say three is too much for six people.
+      { ingredientSlug: "yellow-rice",        quantity: 0.33 },
+      { ingredientSlug: "olive-oil",          quantity: 0.33 },
+      { ingredientSlug: "vegeta",             quantity: 0.5 },
+      { ingredientSlug: "paprika",            quantity: 0.5 },
+    ],
+  },
 ];
 
 export const MEALS_BY_SLUG: Record<string, Meal> = Object.fromEntries(

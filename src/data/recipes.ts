@@ -2813,6 +2813,68 @@ export const RECIPES: Recipe[] = [
       "Chilli flakes for an older athlete, left off for a younger one.",
     ],
   },
+
+  // Haris's dish, in his own method. Nothing here came from a recipe site: the sequence,
+  // the seasoning and the 1:1 water are how he cooks it. The one number he did not give is
+  // how much rice, so it is set at the same per-serving portion as the hibachi bowl and
+  // flagged in the notes rather than guessed at silently.
+  {
+    slug: "riza-sa-piletinom",
+    name: "Riza sa piletinom (chicken and yellow rice)",
+    slot: "dinner",
+    servings: 6,
+    totalMinutes: 60,
+    whenToEat: "A good dinner the night before a match. Rice-heavy, and it reheats for the next day.",
+    equipment: ["Tava or deep baking dish", "Tongs", "Foil"],
+    steps: [
+      {
+        order: 1,
+        title: "Heat the oven and oil the tava",
+        body: "Oven to 400F. Pour enough oil into the tava to coat the bottom, about 2 tbsp. The oil matters more than it looks: it is what stops the rice welding itself to the dish in the second half.",
+      },
+      {
+        order: 2,
+        title: "Season the chicken",
+        body: "Season 6 to 7 pieces of chicken all over with Vegeta and sweet paprika. Drumsticks or boneless thighs both work and both cook faster than breast. Lay them in the tava in one layer, skin side up if they have skin.",
+        mistake: "Going heavy on the Vegeta. It is mostly salt, so season as if you had already salted the dish, because you have.",
+      },
+      {
+        order: 3,
+        title: "Roast the chicken, both sides",
+        body: "Roast 10 to 15 minutes, turn each piece, then another 10 to 15 minutes on the second side. You want colour on the outside. The chicken does not need to be finished here, it goes back in with the rice.",
+        timerSec: 900,
+      },
+      {
+        order: 4,
+        title: "Rice goes in around the chicken",
+        body: "Leave the chicken where it is. Pour 2 cups of dry yellow rice into the gaps and spread it evenly around the pieces, so the rice is in one layer and the chicken is sitting on top of it.",
+        mistake: "Lifting the chicken out first. It stays in. The fat and the seasoning that came off it are what flavour the rice.",
+      },
+      {
+        order: 5,
+        title: "Add the water, one to one",
+        body: "Add water at the same ratio as the rice, so 2 cups of water for 2 cups of rice, or whatever the bag tells you. Pour it at the edge rather than over the chicken so you do not wash the seasoning off. The rice should be submerged.",
+      },
+      {
+        order: 6,
+        title: "Back in the oven until the water is gone",
+        body: "Return it to the oven at 400F and leave it until the water has been taken up and the rice is tender, usually 25 to 35 minutes. Check at 25. If the top is colouring faster than the rice is cooking, lay foil over it.",
+        timerSec: 1500,
+      },
+      {
+        order: 7,
+        title: "Rest it",
+        body: "Out of the oven, foil over the top, 5 minutes. The last of the steam finishes the rice at the surface. Then serve, a piece of chicken per person with the rice under it.",
+        timerSec: 300,
+      },
+    ],
+    notes: [
+      "Rice quantity is the one number to check against your own tava. 2 cups dry feeds six at the portion this app uses elsewhere. Traditional recipes at this size call for three.",
+      "Vigo saffron yellow rice is what this was written around, but any yellow rice works. Follow the bag if its water ratio differs from one to one.",
+      "Vegeta is a salt-forward seasoning. Read the packet once for wheat or soy, because the allergen line on this card is built from the ingredients and cannot see inside a blend.",
+      "Boneless thighs cook faster than drumsticks and are easier for a younger kid to eat. Breast works but dries out at this length in the oven.",
+    ],
+  },
 ];
 
 export const RECIPES_BY_SLUG: Record<string, Recipe> = Object.fromEntries(

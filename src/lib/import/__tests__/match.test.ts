@@ -96,6 +96,18 @@ test("staple seasonings do not match a different food", () => {
 
 test("a different cut is not silently swapped for the one we stock", () => {
   // Thighs and breast cook differently and are not interchangeable on a shopping list.
-  const m = matchIngredient("chicken thighs");
-  assert.notEqual(m.confidence, "strong");
+  //
+  // This used to assert that "chicken thighs" matched nothing strongly, because the catalog
+  // carried only breast and a strong match meant the wrong cut in the cart. The catalog now
+  // stocks thighs and drumsticks for riza sa piletinom, so a strong match is correct and the
+  // assertion that still matters is which slug it lands on.
+  const thighs = matchIngredient("chicken thighs");
+  assert.equal(thighs.ingredient?.slug, "chicken-thighs");
+
+  const drums = matchIngredient("chicken drumsticks");
+  assert.notEqual(drums.ingredient?.slug, "chicken-breast");
+
+  // Breast still has to resolve to breast rather than being pulled to a neighbouring cut.
+  const breast = matchIngredient("chicken breast");
+  assert.equal(breast.ingredient?.slug, "chicken-breast");
 });
