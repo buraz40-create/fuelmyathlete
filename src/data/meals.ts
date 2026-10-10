@@ -1367,6 +1367,10 @@ export const MEALS: Meal[] = [
     prepMinutes: 10,
     suitableFor: ["school", "training", "match"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients and checked at card size: six
+    // drumsticks on yellow rice in a round dish, paprika colour on the skin, nothing else
+    // in the pan.
+    imageUrl: "/images/recipes/chicken-yellow-rice.jpg",
     recipeSlug: "chicken-yellow-rice",
     nutrition: { kcal: 430, proteinG: 24, carbsG: 48, fatG: 14, fiberG: 1, source: "USDA estimate" },
     ingredients: [
@@ -1377,7 +1381,6 @@ export const MEALS: Meal[] = [
       // size and the comments under them say three is too much for six people.
       { ingredientSlug: "yellow-rice",        quantity: 0.33 },
       { ingredientSlug: "olive-oil",          quantity: 0.33 },
-      { ingredientSlug: "vegeta",             quantity: 0.5 },
       { ingredientSlug: "paprika",            quantity: 0.5 },
     ],
   },

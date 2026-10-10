@@ -60,9 +60,6 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "pickles",        name: "Pickle slices",         category: "pantry",  unit: "each" },
   { slug: "yellow-rice",    name: "Yellow saffron rice (dry)", category: "pantry", unit: "cup" },
   { slug: "paprika",        name: "Sweet paprika",         category: "pantry",  unit: "tsp" },
-  // Vegeta is the Balkan all-purpose seasoning this dish is built on. Mostly salt, so the
-  // recipe says so rather than hiding it behind a spoon measure.
-  { slug: "vegeta",         name: "Vegeta seasoning",      category: "pantry",  unit: "tsp" },
   { slug: "rice-vinegar",   name: "Rice vinegar",          category: "pantry",  unit: "tbsp" },
   { slug: "sesame-seeds",   name: "Sesame seeds",          category: "pantry",  unit: "tsp" },
   { slug: "crackers-wg",    name: "Whole-grain crackers",  category: "pantry",  unit: "oz" },

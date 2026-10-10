@@ -2888,6 +2888,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 6,
     totalMinutes: 60,
+    imageUrl: "/images/recipes/chicken-yellow-rice.jpg",
     whenToEat: "A good dinner the night before a match. Rice-heavy, and it reheats for the next day.",
     equipment: ["Deep roasting pan or baking dish", "Tongs", "Foil"],
     steps: [
@@ -2899,8 +2900,8 @@ export const RECIPES: Recipe[] = [
       {
         order: 2,
         title: "Season the chicken",
-        body: "Season 6 to 7 pieces of chicken all over with Vegeta and sweet paprika. Drumsticks or boneless thighs both work and both cook faster than breast. Lay them in the pan in one layer, skin side up if they have skin.",
-        mistake: "Going heavy on the Vegeta. It is mostly salt, so season as if you had already salted the dish, because you have.",
+        body: "Season 6 to 7 pieces of chicken all over with sweet paprika, salt and pepper. Drumsticks or boneless thighs both work and both cook faster than breast. Lay them in the pan in one layer, skin side up if they have skin.",
+        mistake: "Heavy salting. The yellow rice is seasoned already and it will season the chicken sitting on it, so salt the meat lightly and taste at the end.",
       },
       {
         order: 3,
@@ -2916,17 +2917,22 @@ export const RECIPES: Recipe[] = [
       },
       {
         order: 5,
+        title: "Vegetables, if you want them",
+        body: "Optional, and Haris's own addition. Carrots cut small go in with the rice, a chopped onion with them for more flavour, and green beans if you have them. Cut the carrot small enough to cook in the time the rice takes, around a quarter inch, or it stays hard while everything else is done.",
+      },
+      {
+        order: 6,
         title: "Add the water, one to one",
         body: "Add water at the same ratio as the rice, so 2 cups of water for 2 cups of rice, or whatever the bag tells you. Pour it at the edge rather than over the chicken so you do not wash the seasoning off. The rice should be submerged.",
       },
       {
-        order: 6,
+        order: 7,
         title: "Back in the oven until the water is gone",
         body: "Return it to the oven at 400F and leave it until the water has been taken up and the rice is tender, usually 25 to 35 minutes. Check at 25. If the top is colouring faster than the rice is cooking, lay foil over it.",
         timerSec: 1500,
       },
       {
-        order: 7,
+        order: 8,
         title: "Rest it",
         body: "Out of the oven, foil over the top, 5 minutes. The last of the steam finishes the rice at the surface. Then serve, a piece of chicken per person with the rice under it.",
         timerSec: 300,
@@ -2934,8 +2940,8 @@ export const RECIPES: Recipe[] = [
     ],
     notes: [
       "Rice quantity is the one number to check against your own pan. 2 cups dry feeds six at the portion this app uses elsewhere. Traditional recipes at this size call for three.",
-      "Vigo saffron yellow rice is what this was written around, but any yellow rice works. Follow the bag if its water ratio differs from one to one.",
-      "Vegeta is a salt-forward seasoning. Read the packet once for wheat or soy, because the allergen line on this card is built from the ingredients and cannot see inside a blend.",
+      "Vigo saffron yellow rice, the 2 lb bag, is what this was written around. Its label states no allergens contained, which is why this card shows none. Any yellow rice works, but follow the bag if its water ratio differs from one to one.",
+      "Carrots, onion and green beans are optional, so they are not on the shopping list. Add them to the list yourself if they are part of how you make it every time.",
       "Boneless thighs cook faster than drumsticks and are easier for a younger kid to eat. Breast works but dries out at this length in the oven.",
     ],
   },

@@ -25,7 +25,12 @@ function formatQty(qty: number, unit: string): string {
 
 export function IngredientsList({ baseServings, ingredients }: IngredientsListProps) {
   const [targetServings, setTargetServings] = useState(baseServings);
-  const multiplier = targetServings / baseServings;
+
+  // Quantities in the catalog are PER SERVING, which is how the grocery list reads them
+  // (grocery.ts multiplies by entry.servings). This divided by baseServings instead, so the
+  // panel showed one portion while the heading above it said "8 servings": hibachi asked for
+  // 0.25 lb of chicken to feed eight, against the 2 lb its own steps call for. Anyone who
+  // shopped from the recipe page rather than the grocery list bought a fraction of the food.
 
   const items = useMemo(
     () =>
@@ -36,11 +41,11 @@ export function IngredientsList({ baseServings, ingredients }: IngredientsListPr
           name: ing?.name ?? mi.ingredientSlug,
           unit: ing?.unit ?? "",
           category: ing?.category ?? "pantry",
-          qty: mi.quantity * multiplier,
+          qty: mi.quantity * targetServings,
           notes: mi.notes,
         };
       }),
-    [ingredients, multiplier]
+    [ingredients, targetServings]
   );
 
   // A radiogroup promises arrow keys, and this one had a tab stop on every preset and no
