@@ -17,6 +17,7 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "broccoli",      name: "Broccoli",        category: "produce",   unit: "cup" },
   { slug: "carrot",        name: "Baby carrots",    category: "produce",   unit: "cup" },
   { slug: "bell-pepper",   name: "Bell pepper",     category: "produce",   unit: "each" },
+  { slug: "yellow-onion",  name: "Yellow onion",    category: "produce",   unit: "each" },
   { slug: "sweet-potato",  name: "Sweet potato",    category: "produce",   unit: "each" },
   { slug: "green-beans",   name: "Green beans",     category: "produce",   unit: "cup" },
   { slug: "garlic",        name: "Garlic cloves",   category: "produce",   unit: "each" },
@@ -30,6 +31,9 @@ export const INGREDIENTS: Ingredient[] = [
   // hour without drying, which breast does not. Drums are bought by the piece, not by weight.
   { slug: "chicken-thighs", name: "Boneless chicken thighs", category: "protein", unit: "lb" },
   { slug: "chicken-drumsticks", name: "Chicken drumsticks", category: "protein", unit: "each" },
+  // 80/20 on purpose. Leaner mince gives no fat to fry the crust in, which is the entire
+  // point of a smash burger, and it goes grey and dry on a hot pan.
+  { slug: "ground-beef",    name: "Ground beef, 80/20",    category: "protein", unit: "lb" },
   { slug: "ground-turkey",  name: "Ground turkey (lean)",  category: "protein", unit: "lb" },
   { slug: "salmon",         name: "Salmon fillet",         category: "protein", unit: "lb" },
   { slug: "eggs",           name: "Eggs",                  category: "protein", unit: "each" },
@@ -50,6 +54,7 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "soy-sauce",      name: "Low-sodium soy sauce",  category: "pantry",  unit: "tbsp" },
   { slug: "sesame-oil",     name: "Toasted sesame oil",    category: "pantry",  unit: "tsp" },
   { slug: "olive-oil",      name: "Olive oil",             category: "pantry",  unit: "tbsp" },
+  { slug: "pickles",        name: "Dill pickle slices",    category: "pantry",  unit: "each" },
   { slug: "yellow-rice",    name: "Yellow saffron rice (dry)", category: "pantry", unit: "cup" },
   { slug: "paprika",        name: "Sweet paprika",         category: "pantry",  unit: "tsp" },
   // Vegeta is the Balkan all-purpose seasoning this dish is built on. Mostly salt, so the

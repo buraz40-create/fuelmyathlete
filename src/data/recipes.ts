@@ -2818,6 +2818,69 @@ export const RECIPES: Recipe[] = [
   // the seasoning and the 1:1 water are how he cooks it. The one number he did not give is
   // how much rice, so it is set at the same per-serving portion as the hibachi bowl and
   // flagged in the notes rather than guessed at silently.
+  // Smash burgers live or die on two things: a pan hot enough to scare you, and not touching
+  // them afterwards. Every step below exists to protect one of those.
+  {
+    slug: "smash-burgers",
+    name: "Smash burgers",
+    slot: "dinner",
+    servings: 4,
+    totalMinutes: 20,
+    whenToEat: "After a match or on a rest day. Too much fat to sit comfortably before one.",
+    equipment: ["Cast iron skillet or flat griddle", "Stiff metal spatula", "Square of parchment paper"],
+    steps: [
+      {
+        order: 1,
+        title: "Roll the meat, do not work it",
+        body: "Divide 1 lb of 80/20 ground beef into eight loose 2 oz balls. Roll just enough to hold together. Squeezing the meat tight makes the burger bouncy, and nothing you do later undoes it. Leave them on a plate at room temperature while the pan heats.",
+        mistake: "Salting now. Salt on raw mince draws out water and starts curing it. It goes on after the smash.",
+      },
+      {
+        order: 2,
+        title: "Get the pan properly hot",
+        body: "Cast iron on high for 4 to 5 minutes, dry. No oil. You want it hot enough that a drop of water skates across the surface rather than sitting and hissing. This is hotter than feels sensible, and it is the whole recipe.",
+        timerSec: 270,
+      },
+      {
+        order: 3,
+        title: "Smash, hard, once",
+        body: "Lay two balls in the pan with space between them. Put the parchment square on top of one and lean on it with the spatula until the patty is about a quarter inch thick, roughly 4 inches across. Hold for 10 seconds, then peel the paper off. Repeat on the second.",
+        timerSec: 10,
+        mistake: "Smashing again a minute later. The crust is already forming by then, and pressing a second time squeezes the juice out through it.",
+      },
+      {
+        order: 4,
+        title: "Leave them alone",
+        body: "Season the tops with salt and pepper. Now do not touch them for about 2 minutes. The edges will go lacy and dark brown. That brown is the flavour you came for, and it only forms on meat that is sitting still on hot metal.",
+        timerSec: 120,
+      },
+      {
+        order: 5,
+        title: "Scrape, flip, cheese",
+        body: "Get the spatula flat against the pan and scrape under the patty rather than lifting it. The crust is stuck to the metal and you want all of it to come with the burger. Flip, lay a slice of cheese on each, and give it 45 seconds more.",
+        timerSec: 45,
+        mistake: "Lifting instead of scraping. The crust stays in the pan and you have made an ordinary burger.",
+      },
+      {
+        order: 6,
+        title: "Toast the buns in the fat",
+        body: "Patties out onto a plate. Put the cut buns face down in the beef fat left behind and give them 30 seconds until golden. A toasted bun is also a waterproof bun, which is why it does not go soggy.",
+        timerSec: 30,
+      },
+      {
+        order: 7,
+        title: "Stack two per person",
+        body: "Two patties per bun, cheese between them so it melts into both. Pickles and thin raw onion on top. Serve straight away: a smash burger is at its best about 60 seconds after it leaves the pan.",
+      },
+    ],
+    notes: [
+      "80/20 beef, not lean. The fat is what fries the crust and what keeps a quarter inch patty from turning to leather.",
+      "Open a window and turn the extractor on before you start. A dry cast iron pan on high smokes, and that is normal rather than a sign something is wrong.",
+      "Two thin patties beat one thick one for a kid: more crust, faster cooking, and easier to eat.",
+      "This one does not keep. Reheated smash burgers are steamed burgers. Cook what you will eat.",
+    ],
+  },
+
   {
     slug: "chicken-yellow-rice",
     name: "Chicken and yellow rice",

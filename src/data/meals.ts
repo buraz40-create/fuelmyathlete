@@ -1331,6 +1331,30 @@ export const MEALS: Meal[] = [
 
   // Haris's own dish, written from how he cooks it rather than from a recipe site. Elvis
   // eats it, which is the only rating that matters here.
+  // Standard smash technique, not a family recipe. Haris asked for it by name, so it is
+  // written the way it actually works rather than as a thin burger on a hot pan.
+  {
+    slug: "smash-burgers",
+    name: "Smash burgers",
+    slot: "dinner",
+    description: "Two thin patties per person, hard crust, cheese melted on in the pan. Twenty minutes start to finish.",
+    prepMinutes: 10,
+    // No match day. Not fussiness: 29g of fat sits in the stomach for hours and this is the
+    // meal you want after the game, not before it.
+    suitableFor: ["school", "training", "rest"],
+    kidRating: 5,
+    recipeSlug: "smash-burgers",
+    nutrition: { kcal: 510, proteinG: 30, carbsG: 30, fatG: 29, fiberG: 3, source: "USDA estimate" },
+    ingredients: [
+      // 0.25 lb per person, which is two 2 oz balls. One thick patty is a different food.
+      { ingredientSlug: "ground-beef",     quantity: 0.25 },
+      { ingredientSlug: "wholegrain-bun",  quantity: 1 },
+      { ingredientSlug: "cheese-slice",    quantity: 2 },
+      { ingredientSlug: "yellow-onion",    quantity: 0.25 },
+      { ingredientSlug: "pickles",         quantity: 3 },
+    ],
+  },
+
   {
     slug: "chicken-yellow-rice",
     name: "Chicken and yellow rice",
