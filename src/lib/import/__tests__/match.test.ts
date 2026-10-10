@@ -99,7 +99,7 @@ test("a different cut is not silently swapped for the one we stock", () => {
   //
   // This used to assert that "chicken thighs" matched nothing strongly, because the catalog
   // carried only breast and a strong match meant the wrong cut in the cart. The catalog now
-  // stocks thighs and drumsticks for riza sa piletinom, so a strong match is correct and the
+  // stocks thighs and drumsticks for the chicken and yellow rice, so a strong match is correct and the
   // assertion that still matters is which slug it lands on.
   const thighs = matchIngredient("chicken thighs");
   assert.equal(thighs.ingredient?.slug, "chicken-thighs");

@@ -26,7 +26,7 @@ export const INGREDIENTS: Ingredient[] = [
 
   // PROTEIN
   { slug: "chicken-breast", name: "Chicken breast",        category: "protein", unit: "lb" },
-  // Thighs and drums are what riza sa piletinom is cooked with: they take 400F for half an
+  // Thighs and drums are what the chicken and yellow rice is cooked with: they take 400F for half an
   // hour without drying, which breast does not. Drums are bought by the piece, not by weight.
   { slug: "chicken-thighs", name: "Boneless chicken thighs", category: "protein", unit: "lb" },
   { slug: "chicken-drumsticks", name: "Chicken drumsticks", category: "protein", unit: "each" },
