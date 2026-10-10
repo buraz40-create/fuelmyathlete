@@ -1329,6 +1329,31 @@ export const MEALS: Meal[] = [
     tags: ["rest-day"],
   },
 
+  {
+    slug: "pan-seared-steak",
+    name: "Pan-seared New York strip",
+    slot: "dinner",
+    description: "Cast iron, butter basted, cooked to 145F and rested. Fifteen minutes and most of that is the pan heating.",
+    prepMinutes: 5,
+    // Not before a match. Protein this dense sits heavy, and the point of it is recovery.
+    suitableFor: ["school", "training", "rest"],
+    kidRating: 5,
+    // Whole steaks in the pan rather than sliced on a board. The sliced version showed the
+    // medium well interior honestly and looked grey and unappetising doing it, which is a
+    // real tension on a card whose job is to make someone want to cook. Shot in the skillet
+    // the recipe actually uses, so the photo still agrees with the method.
+    imageUrl: "/images/recipes/pan-seared-steak.jpg",
+    recipeSlug: "pan-seared-steak",
+    nutrition: { kcal: 400, proteinG: 46, carbsG: 1, fatG: 24, source: "USDA estimate" },
+    ingredients: [
+      // 0.375 lb each, so 6 oz raw per person and 1.5 lb for four. A 6 oz portion is the
+      // adult serving; a younger athlete will leave some and that is fine.
+      { ingredientSlug: "ny-strip",  quantity: 0.375 },
+      { ingredientSlug: "butter",    quantity: 0.5 },
+      { ingredientSlug: "olive-oil", quantity: 0.25 },
+    ],
+  },
+
   // Haris's own dish, written from how he cooks it rather than from a recipe site. Elvis
   // eats it, which is the only rating that matters here.
   // Standard smash technique, not a family recipe. Haris asked for it by name, so it is

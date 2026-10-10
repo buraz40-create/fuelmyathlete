@@ -34,6 +34,7 @@ export const INGREDIENTS: Ingredient[] = [
   // 80/20 on purpose. Leaner mince gives no fat to fry the crust in, which is the entire
   // point of a smash burger, and it goes grey and dry on a hot pan.
   { slug: "ground-beef",    name: "Ground beef, 80/20",    category: "protein", unit: "lb" },
+  { slug: "ny-strip",       name: "New York strip steak", category: "protein", unit: "lb" },
   { slug: "ground-turkey",  name: "Ground turkey (lean)",  category: "protein", unit: "lb" },
   { slug: "salmon",         name: "Salmon fillet",         category: "protein", unit: "lb" },
   { slug: "eggs",           name: "Eggs",                  category: "protein", unit: "each" },
