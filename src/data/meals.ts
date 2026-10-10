@@ -1343,13 +1343,17 @@ export const MEALS: Meal[] = [
     // meal you want after the game, not before it.
     suitableFor: ["school", "training", "rest"],
     kidRating: 5,
+    // Generated to match this recipe's own ingredients and checked at card size: two patties,
+    // American cheese, pickles, raw onion, whole-grain bun. Nothing in the photo that is not
+    // on the shopping list.
+    imageUrl: "/images/recipes/smash-burgers.jpg",
     recipeSlug: "smash-burgers",
     nutrition: { kcal: 510, proteinG: 30, carbsG: 30, fatG: 29, fiberG: 3, source: "USDA estimate" },
     ingredients: [
       // 0.25 lb per person, which is two 2 oz balls. One thick patty is a different food.
       { ingredientSlug: "ground-beef",     quantity: 0.25 },
       { ingredientSlug: "wholegrain-bun",  quantity: 1 },
-      { ingredientSlug: "cheese-slice",    quantity: 2 },
+      { ingredientSlug: "american-cheese", quantity: 2 },
       { ingredientSlug: "yellow-onion",    quantity: 0.25 },
       { ingredientSlug: "pickles",         quantity: 3 },
     ],

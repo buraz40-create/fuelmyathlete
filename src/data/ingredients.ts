@@ -41,6 +41,9 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "deli-turkey",    name: "Sliced deli turkey",    category: "protein", unit: "oz" },
   { slug: "cheese-stick",   name: "String cheese",         category: "protein", unit: "each" },
   { slug: "cheese-slice",   name: "Cheddar slices",        category: "protein", unit: "each" },
+  // Separate from cheddar rather than a rename: the wrap and the others still want cheddar.
+  // American is here because it melts into the patty instead of sitting on it in a slab.
+  { slug: "american-cheese", name: "American cheese slices", category: "protein", unit: "each" },
   { slug: "almonds",        name: "Raw almonds",           category: "protein", unit: "cup" },
 
   // PANTRY
@@ -54,7 +57,7 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "soy-sauce",      name: "Low-sodium soy sauce",  category: "pantry",  unit: "tbsp" },
   { slug: "sesame-oil",     name: "Toasted sesame oil",    category: "pantry",  unit: "tsp" },
   { slug: "olive-oil",      name: "Olive oil",             category: "pantry",  unit: "tbsp" },
-  { slug: "pickles",        name: "Dill pickle slices",    category: "pantry",  unit: "each" },
+  { slug: "pickles",        name: "Pickle slices",         category: "pantry",  unit: "each" },
   { slug: "yellow-rice",    name: "Yellow saffron rice (dry)", category: "pantry", unit: "cup" },
   { slug: "paprika",        name: "Sweet paprika",         category: "pantry",  unit: "tsp" },
   // Vegeta is the Balkan all-purpose seasoning this dish is built on. Mostly salt, so the

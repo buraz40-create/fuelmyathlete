@@ -2826,6 +2826,7 @@ export const RECIPES: Recipe[] = [
     slot: "dinner",
     servings: 4,
     totalMinutes: 20,
+    imageUrl: "/images/recipes/smash-burgers.jpg",
     whenToEat: "After a match or on a rest day. Too much fat to sit comfortably before one.",
     equipment: ["Cast iron skillet or flat griddle", "Stiff metal spatula", "Square of parchment paper"],
     steps: [
@@ -2857,7 +2858,7 @@ export const RECIPES: Recipe[] = [
       {
         order: 5,
         title: "Scrape, flip, cheese",
-        body: "Get the spatula flat against the pan and scrape under the patty rather than lifting it. The crust is stuck to the metal and you want all of it to come with the burger. Flip, lay a slice of cheese on each, and give it 45 seconds more.",
+        body: "Get the spatula flat against the pan and scrape under the patty rather than lifting it. The crust is stuck to the metal and you want all of it to come with the burger. Flip, lay a slice of American cheese on each, and give it 45 seconds more.",
         timerSec: 45,
         mistake: "Lifting instead of scraping. The crust stays in the pan and you have made an ordinary burger.",
       },

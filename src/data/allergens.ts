@@ -13,6 +13,7 @@ const INGREDIENT_ALLERGENS: Record<string, Allergen[]> = {
   "greek-yogurt": ["dairy"],
   "cottage-cheese": ["dairy"],
   "cheese-slice": ["dairy"],
+  "american-cheese": ["dairy"],
   "cheese-stick": ["dairy"],
   milk: ["dairy"],
   butter: ["dairy"],
