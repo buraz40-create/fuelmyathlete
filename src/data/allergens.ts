@@ -18,6 +18,9 @@ const INGREDIENT_ALLERGENS: Record<string, Allergen[]> = {
   milk: ["dairy"],
   butter: ["dairy"],
   eggs: ["egg"],
+  // Fant lists wheat flour on the packet, checked against the published ingredients rather
+  // than assumed. Without this line the stew would read as having no allergens at all.
+  "fant-grah": ["gluten"],
   "wholegrain-bread": ["gluten"],
   "wholegrain-tortilla": ["gluten"],
   "english-muffin": ["gluten"],

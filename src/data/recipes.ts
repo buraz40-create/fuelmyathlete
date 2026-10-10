@@ -2882,6 +2882,77 @@ export const RECIPES: Recipe[] = [
     ],
   },
 
+  // Haris's grah: beans, smoked meat, two packets of Fant. No onion and no zaprska in the
+  // steps, because he did not put them there and the Fant already carries the seasoning,
+  // the paprika and the flour that thickens it.
+  //
+  // The one number he did not give is how long the beans need, so it is written as a range
+  // with a doneness test instead, which is the honest way to say "it depends on the beans".
+  {
+    slug: "grah",
+    name: "Bosnian bean stew with smoked meat",
+    slot: "dinner",
+    servings: 6,
+    totalMinutes: 150,
+    imageUrl: "/images/recipes/grah.jpg",
+    whenToEat: "Cook it the day before you want it. Grah is better on the second day and this is not folklore: the starch keeps thickening and the smoke works through the beans overnight.",
+    equipment: ["Large heavy pot with a lid", "Colander"],
+    steps: [
+      {
+        order: 1,
+        title: "Soak the beans overnight",
+        body: "Put 2.25 cups of dried white beans in a bowl, cover with cold water by a good two inches, and leave them overnight. They roughly double. Skipping the soak does not ruin the dish but it adds an hour of simmering and the skins tend to split.",
+      },
+      {
+        order: 2,
+        title: "Drain, and start again with clean water",
+        body: "Tip the soaking water away and rinse the beans. That water holds the sugars that make beans hard on a stomach, and throwing it out is the single easiest thing you can do about it.",
+      },
+      {
+        order: 3,
+        title: "Beans and smoked meat into the pot",
+        body: "Beans and 2 lb of smoked ribs or stew beef into a heavy pot. Cover with cold water by about two inches. Bring it up to a boil, then drop it to a bare simmer with the lid tilted.",
+        mistake: "Salting now. Salt early toughens bean skins, and between the smoked meat and the Fant there is plenty coming later.",
+      },
+      {
+        order: 4,
+        title: "Simmer until the beans give",
+        body: "An hour and a half to two hours. Old beans take longer than fresh ones and no clock can tell you which you bought, so test rather than time it: a bean should squash against the roof of your mouth with no bite left in the middle. Top up with hot water if the level drops below the beans.",
+        timerSec: 5400,
+      },
+      {
+        order: 5,
+        title: "Stir in two packets of Fant",
+        body: "Mix the two packets into a cup of cold water first until there are no lumps, then stir that into the pot. Adding the powder straight to hot liquid gives you lumps you will not get out. Simmer another 10 minutes and it thickens as it goes.",
+        timerSec: 600,
+        mistake: "Tipping the dry packets into the boiling pot. The flour seizes on contact and you end up chasing lumps around with a spoon.",
+      },
+      {
+        order: 6,
+        title: "Taste before you reach for salt",
+        body: "The smoked meat and the Fant have both salted this already. Taste it first. If the meat was on the bone, pull it off now and put the meat back in the pot in rough pieces.",
+      },
+      {
+        order: 7,
+        title: "Let it sit",
+        body: "Off the heat for 15 minutes before serving, or better, into the fridge overnight. Tomorrow it will be thicker and it will taste more of smoke than it does right now.",
+        timerSec: 900,
+      },
+    ],
+    notes: [
+      "The gluten on this card comes from the Fant: its published ingredients list wheat flour. Without the packets the dish has no top-9 allergen in it.",
+      "It is a salty dish by design. Between smoked meat and two seasoning packets, there is no need to add salt at the table, and a young athlete does not need it.",
+      "Beans and smoked meat in one bowl is 37g of protein with 11g of fibre, which is why this is an evening meal rather than something to eat before running.",
+      "Smoked ribs give a better broth, stew beef gives more meat per pound. Both work, and the shopping list says either.",
+      "Serve it with something pickled: pickles, pickled salad, whatever is in the jar. The sharpness cuts the fat and the salt, and it is how the dish is eaten at home rather than a garnish added for the photograph, which is why it is here and not in the ingredients.",
+    ],
+    prepAhead: {
+      yields: "a dinner for six, or a dinner and two lunches for a smaller table",
+      keepsDays: 3,
+      reheat: "Gently in a pot with a splash of water, since it thickens in the fridge. It freezes well too, in portions, for up to 3 months.",
+    },
+  },
+
   // Grilled, because that is how Haris actually cooks steak: every steak in his photos is
   // over fire. The card uses his own photograph of two strips off the grill, which is why the
   // method had to be the grill rather than the skillet it was first written for. A picture and

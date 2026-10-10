@@ -35,6 +35,7 @@ export const INGREDIENTS: Ingredient[] = [
   // point of a smash burger, and it goes grey and dry on a hot pan.
   { slug: "ground-beef",    name: "Ground beef, 80/20",    category: "protein", unit: "lb" },
   { slug: "ny-strip",       name: "New York strip steak", category: "protein", unit: "lb" },
+  { slug: "smoked-ribs",    name: "Smoked ribs or stew beef", category: "protein", unit: "lb" },
   { slug: "ground-turkey",  name: "Ground turkey (lean)",  category: "protein", unit: "lb" },
   { slug: "salmon",         name: "Salmon fillet",         category: "protein", unit: "lb" },
   { slug: "eggs",           name: "Eggs",                  category: "protein", unit: "each" },
@@ -59,6 +60,10 @@ export const INGREDIENTS: Ingredient[] = [
   { slug: "sesame-oil",     name: "Toasted sesame oil",    category: "pantry",  unit: "tsp" },
   { slug: "olive-oil",      name: "Olive oil",             category: "pantry",  unit: "tbsp" },
   { slug: "pickles",        name: "Pickle slices",         category: "pantry",  unit: "each" },
+  { slug: "white-beans",    name: "Dried white beans",     category: "pantry",  unit: "cup" },
+  // Podravka's packet mix. Named rather than broken into its parts because that is what goes
+  // in the trolley, and because its wheat flour is what puts gluten on this dish's card.
+  { slug: "fant-grah",      name: "Fant for grah, 60g packet", category: "pantry", unit: "each" },
   { slug: "yellow-rice",    name: "Yellow saffron rice (dry)", category: "pantry", unit: "cup" },
   { slug: "paprika",        name: "Sweet paprika",         category: "pantry",  unit: "tsp" },
   { slug: "rice-vinegar",   name: "Rice vinegar",          category: "pantry",  unit: "tbsp" },
