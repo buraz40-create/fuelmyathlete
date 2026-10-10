@@ -1329,13 +1329,13 @@ export const MEALS: Meal[] = [
     tags: ["rest-day"],
   },
 
-  // Grah, Haris's way: beans, smoked meat and two packets of Fant. Written from what he
+  // Grah, named in English. Beans, smoked meat and two packets of Fant. Written from what he
   // said rather than from a recipe, which is why there is no onion or zaprska in it. The
   // Fant carries the seasoning and the thickening, and the wheat flour in it is where the
   // gluten flag comes from.
   {
-    slug: "grah",
-    name: "Bosnian bean stew with smoked meat",
+    slug: "bean-soup",
+    name: "Bean soup",
     slot: "dinner",
     description: "Beans and smoked ribs cooked down slow, finished with Fant. Better the next day, which is the point of making a pot.",
     prepMinutes: 15,
@@ -1345,8 +1345,8 @@ export const MEALS: Meal[] = [
     kidRating: 4,
     // Generated to match: white beans, smoked meat, paprika broth and nothing else in the
     // bowl. His own photo of this dish is of the Fant packet in his hand rather than the pot.
-    imageUrl: "/images/recipes/grah.jpg",
-    recipeSlug: "grah",
+    imageUrl: "/images/recipes/bean-soup.jpg",
+    recipeSlug: "bean-soup",
     nutrition: { kcal: 520, proteinG: 37, carbsG: 44, fatG: 21, fiberG: 11, source: "USDA estimate" },
     ingredients: [
       // Dried, as purchased. 0.375 cup each is 2.25 cups across six, a little over a pound.

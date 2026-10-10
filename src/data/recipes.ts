@@ -2882,20 +2882,21 @@ export const RECIPES: Recipe[] = [
     ],
   },
 
-  // Haris's grah: beans, smoked meat, two packets of Fant. No onion and no zaprska in the
+  // Grah, called bean soup here because the site is in English. Beans, smoked meat, two
+  // packets of Fant. No onion and no zaprska in the
   // steps, because he did not put them there and the Fant already carries the seasoning,
   // the paprika and the flour that thickens it.
   //
   // The one number he did not give is how long the beans need, so it is written as a range
   // with a doneness test instead, which is the honest way to say "it depends on the beans".
   {
-    slug: "grah",
-    name: "Bosnian bean stew with smoked meat",
+    slug: "bean-soup",
+    name: "Bean soup",
     slot: "dinner",
     servings: 6,
     totalMinutes: 150,
-    imageUrl: "/images/recipes/grah.jpg",
-    whenToEat: "Cook it the day before you want it. Grah is better on the second day and this is not folklore: the starch keeps thickening and the smoke works through the beans overnight.",
+    imageUrl: "/images/recipes/bean-soup.jpg",
+    whenToEat: "Cook it the day before you want it. It is better on the second day and this is not folklore: the starch keeps thickening and the smoke works through the beans overnight.",
     equipment: ["Large heavy pot with a lid", "Colander"],
     steps: [
       {
